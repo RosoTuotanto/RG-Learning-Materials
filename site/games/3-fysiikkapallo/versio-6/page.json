@@ -1,0 +1,15 @@
+{
+  "title": "Versio 6",
+  "description": "Lisätään peliin esteitä ja pisteytys.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/3-fysiikkapallo/versio-6",
+  "lessons": [
+    {
+      "title": "Lisätään esteitä",
+      "url": "https://www.rosogames.fi/lms/3-pelisuunnittelu-ja-prototyypittaminen/lessons/lisataan-esteita-ja-pisteytys/"
+    },
+    {
+      "title": "Luvattomat liikkeet ja pisteytys",
+      "url": "https://www.rosogames.fi/lms/3-pelisuunnittelu-ja-prototyypittaminen/lessons/luvattomat-liikkeet-ja-pisteytys/"
+    }
+  ]
+}

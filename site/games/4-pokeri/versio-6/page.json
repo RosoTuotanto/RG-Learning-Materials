@@ -1,0 +1,15 @@
+{
+  "title": "Versio 6",
+  "description": "Lisätään pelin käyttöliittymään korttien näyttäminen.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-6",
+  "lessons": [
+    {
+      "title": "Pelin UI - Kortit",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/pelin-ui-kortit/"
+    },
+    {
+      "title": "Korttien painaminen ja valinta",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/korttien-painaminen-ja-valinta/"
+    }
+  ]
+}

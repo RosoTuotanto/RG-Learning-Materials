@@ -1,0 +1,11 @@
+{
+  "title": "Versio 6",
+  "description": "Luodaan game-scene template-pohjasta ja ladataan siihen weaver-, screen- ja ui-moduulit tarinan näyttämistä varten.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-6",
+  "lessons": [
+    {
+      "title": "Luodaan game scene",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/luodaan-game-scene/"
+    }
+  ]
+}

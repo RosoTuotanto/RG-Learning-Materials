@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0C0E">
+    <meta name="description" content="{{metaDescription}}">
+    <meta name="generator" content="RG-Learning-Materials site builder">
+    <title>{{pageTitle}}</title>
+    <link rel="icon" href="{{basePath}}favicon.ico" sizes="48x48">
+    <link rel="icon" href="{{basePath}}favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{basePath}}apple-touch-icon.png">
+    <link rel="manifest" href="{{basePath}}site.webmanifest">
+    {{seoHead}}
+    {{inlineStyles}}
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="{{basePath}}" aria-label="Roso Games - Etusivu">
+                <img class="brand-mark" src="{{basePath}}favicon.svg" alt="Roso Games">
+            </a>
+            {{breadcrumb}}
+        </div>
+    </header>
+    <main class="content">
+{{bodyContent}}
+    </main>
+    {{footer}}
+    <script>
+    (() => {
+        const toggles = document.querySelectorAll(".crumb-toggle");
+
+        const closeAll = () => {
+            toggles.forEach((toggle) => {
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.parentNode.classList.remove("open");
+            });
+        };
+
+        toggles.forEach((toggle) => {
+            toggle.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const open = toggle.getAttribute("aria-expanded") === "true";
+                closeAll();
+                if (!open) {
+                    toggle.setAttribute("aria-expanded", "true");
+                    toggle.parentNode.classList.add("open");
+                }
+            });
+        });
+
+        document.querySelectorAll(".cat-toggle").forEach((cat) => {
+            cat.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const menu = cat.closest(".crumb-cat-menu");
+                menu.querySelectorAll(".cat-toggle").forEach((other) => {
+                    other.setAttribute("aria-expanded", other === cat ? "true" : "false");
+                });
+            });
+        });
+
+        document.addEventListener("click", closeAll);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeAll();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

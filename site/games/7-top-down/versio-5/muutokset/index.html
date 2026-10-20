@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0C0E">
+    <meta name="description" content="Top-down-seikkailu: muutokset versio 4 -&gt; versio 5.">
+    <meta name="generator" content="RG-Learning-Materials site builder">
+    <title>Top-down-seikkailu - versio 5: muutokset</title>
+    <link rel="icon" href="../../../../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../../../../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../../../apple-touch-icon.png">
+    <link rel="manifest" href="../../../../site.webmanifest">
+    <meta name="author" content="Eetu Rantanen">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Roso Games opetuspelit ja demot">
+    <meta property="og:title" content="Top-down-seikkailu - versio 5: muutokset">
+    <meta property="og:description" content="Top-down-seikkailu: muutokset versio 4 -&gt; versio 5.">
+    <meta property="og:url" content="https://rosotuotanto.github.io/RG-Learning-Materials/games/7-top-down/versio-5/muutokset/">
+    <meta property="og:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-7-top-down.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta property="og:locale" content="fi_FI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Top-down-seikkailu - versio 5: muutokset">
+    <meta name="twitter:description" content="Top-down-seikkailu: muutokset versio 4 -&gt; versio 5.">
+    <meta name="twitter:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-7-top-down.png">
+    <meta name="twitter:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta name="apple-mobile-web-app-title" content="Roso Games">
+    <style>
+@font-face {
+    font-family: "Archivo";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/archivo-700.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Archivo";
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/archivo-800.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-700.woff2") format("woff2");
+}
+
+:root {
+    --color-bg: #0B0C0E;
+    --color-surface: #15171B;
+    --color-surface-hover: #1C1F25;
+    --color-text: #F4F5F7;
+    --color-muted: #9AA0AB;
+    --color-accent: #C6F04B;
+    --color-accent-hover: #D6FF6E;
+    --color-accent-ink: #0B0C0E;
+    --color-border: #33383F;
+    --color-line: #4A505A;
+    --font-head: "Archivo", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radius: 4px;
+    --shadow-hard: 5px 5px 0 rgba(0, 0, 0, 0.55);
+    --shadow-hard-lg: 8px 8px 0 rgba(0, 0, 0, 0.6);
+    --space: 1rem;
+    --max-width: 72rem;
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --diff-del-bg: #3B1B20;
+    --diff-del-mark: #7D2A33;
+    --diff-del-text: #FF9A9A;
+    --diff-add-bg: #17331D;
+    --diff-add-mark: #2E6A31;
+    --diff-add-text: #A6EE7A;
+    --diff-moved-text: #9CC2FF;
+    --diff-num-text: #B4BAC4;
+    --diff-empty-bg: #101114;
+    --diff-gap-bg: #1C1F25;
+    --diff-checker-dark: #1C1F25;
+    --diff-checker-light: #2C3038;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.6;
+}
+
+h1,
+h2 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+main.content {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem var(--space) 3.5rem;
+}
+
+h1 {
+    margin: 0.25rem 0 1rem;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+h1 mark {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    padding: 0 0.15em;
+}
+
+h2 {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin: 0 0 0.75rem;
+    font-weight: 800;
+    border-bottom: 5px solid var(--color-accent);
+    padding-bottom: 0.15rem;
+}
+
+.lead {
+    font-size: 1.12rem;
+    color: var(--color-muted);
+    max-width: 46rem;
+}
+
+/* Header / navbar */
+
+.site-header {
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-line);
+}
+
+.site-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.4rem var(--space);
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.brand:hover,
+.brand:focus-visible {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.brand-mark {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+}
+
+.breadcrumb {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.crumb-trail {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.crumb a {
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.crumb a:hover,
+.crumb a:focus-visible {
+    color: var(--color-accent);
+}
+
+.crumb-trail > li.crumb + li.crumb::before {
+    content: ">";
+    margin-right: 0.35rem;
+    color: var(--color-line);
+    font-weight: 700;
+}
+
+.crumb.current {
+    color: var(--color-muted);
+}
+
+.crumb-dropdown {
+    position: relative;
+}
+
+.crumb-toggle {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0.15rem 0.25rem;
+    cursor: pointer;
+}
+
+.crumb-toggle:hover,
+.crumb-toggle:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.crumb-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+    margin: 0.5rem 0 0;
+    padding: 0.35rem 0;
+    min-width: 13rem;
+    list-style: none;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+.crumb-dropdown.open .crumb-menu {
+    display: block;
+}
+
+.crumb-menu li {
+    margin: 0;
+}
+
+.crumb-menu a {
+    display: block;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.crumb-menu a:hover,
+.crumb-menu a:focus-visible {
+    background: var(--color-surface-hover);
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.crumb-menu a.current {
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+/* Cascading Peli/Demo category menu */
+
+.cat-toggle {
+    font: inherit;
+    font-weight: 700;
+    width: 100%;
+    text-align: left;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.cat-toggle::after {
+    content: "\203A";
+    color: var(--color-accent);
+    transition: transform 0.15s ease;
+}
+
+.cat-toggle[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+}
+
+.cat-toggle:hover,
+.cat-toggle:focus-visible {
+    background: var(--color-surface-hover);
+}
+
+.cat-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0.15rem 0 0.35rem;
+}
+
+.cat-toggle[aria-expanded="true"] + .cat-list {
+    display: block;
+}
+
+.cat-list a {
+    padding-left: 1.75rem;
+}
+
+.cat-empty {
+    padding: 0.4rem 1rem 0.4rem 1.75rem;
+    color: var(--color-muted);
+    font-style: italic;
+    white-space: nowrap;
+}
+
+/* Hero */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.hero-text .lead {
+    max-width: 40rem;
+}
+
+.lang-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.lang-flags {
+    display: inline-flex;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+}
+
+.lang-flags img {
+    height: 1.1em;
+    width: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-line);
+}
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background: var(--color-line);
+    margin: 3rem 0;
+}
+
+.hero-media {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-logo {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+}
+
+.hero-shot {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+/* Sections and card lists */
+
+.section {
+    margin: 2.75rem 0 0;
+}
+
+.section-lead {
+    color: var(--color-muted);
+    max-width: 46rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.empty-note {
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.card-list a {
+    display: block;
+    padding: 1.15rem 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.card-list a:hover,
+.card-list a:focus-visible {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--color-accent);
+}
+
+/* Game / demo stage */
+
+.game-stage {
+    display: flex;
+    justify-content: center;
+    margin: 1.75rem 0;
+    overflow-x: auto;
+}
+
+.game-frame {
+    max-width: 100%;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: #000000;
+    box-shadow: var(--shadow-hard);
+}
+
+.page-meta {
+    margin: 1.25rem 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.page-meta p {
+    margin: 0.4rem 0;
+}
+
+.source {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.source-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.gh-logo {
+    height: 1.4rem;
+    width: auto;
+    display: block;
+    transition: opacity 0.15s ease;
+}
+
+.source-link:hover .gh-logo,
+.source-link:focus-visible .gh-logo {
+    opacity: 0.8;
+}
+
+.version-nav {
+    display: flex;
+    gap: 1.25rem;
+    margin: 2rem 0 0;
+}
+
+.button-link,
+.version-nav a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: 2px solid var(--color-accent-ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible,
+.version-nav a:hover,
+.version-nav a:focus-visible {
+    background: var(--color-accent-hover);
+    color: var(--color-accent-ink);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.version-nav .nav-next {
+    margin-left: auto;
+}
+
+/* Version diff pages */
+
+.diff-summary {
+    margin: 0 0 0.4rem;
+    font-weight: 600;
+}
+
+.back-link {
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle[hidden] {
+    display: none;
+}
+
+.diff-toggle button {
+    font: inherit;
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 1.1rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.diff-toggle button:hover,
+.diff-toggle button:focus-visible {
+    border-color: var(--color-accent);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.diff-toggle button[aria-pressed="true"] {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    border-color: var(--color-accent-ink);
+}
+
+.diff-files[data-view="unified"] .diff-split,
+.diff-files[data-view="split"] .diff-unified {
+    display: none;
+}
+
+.diff-file {
+    margin: 0 0 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    scroll-margin-top: 1rem;
+}
+
+.diff-file > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.diff-file > summary::-webkit-details-marker {
+    display: none;
+}
+
+.diff-file > summary::before {
+    content: "\203A";
+    color: var(--color-accent);
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.15s ease;
+}
+
+.diff-file[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.diff-file > summary:hover {
+    background: var(--color-surface-hover);
+}
+
+.diff-path {
+    flex: 1 1 12rem;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.diff-tag,
+.diff-status {
+    padding: 0.05rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border: 2px solid currentColor;
+    border-radius: var(--radius);
+}
+
+.diff-tag {
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.diff-status {
+    color: var(--color-text);
+}
+
+.diff-status[data-status="added"] {
+    color: var(--diff-add-text);
+}
+
+.diff-status[data-status="removed"] {
+    color: var(--diff-del-text);
+}
+
+.diff-status[data-status="moved"] {
+    color: var(--diff-moved-text);
+}
+
+.diff-stat {
+    display: inline-flex;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.diff-plus {
+    color: var(--diff-add-text);
+}
+
+.diff-minus {
+    color: var(--diff-del-text);
+}
+
+.diff-body {
+    border-top: 2px solid var(--color-line);
+}
+
+.diff-note {
+    margin: 0;
+    padding: 0.75rem 1rem;
+}
+
+.diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.diff-table td {
+    padding: 0 0.3rem;
+    vertical-align: top;
+}
+
+.diff-num,
+.diff-sign {
+    width: 4ch;
+    color: var(--diff-num-text);
+    text-align: right;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.diff-sign {
+    width: 2ch;
+    text-align: center;
+    font-weight: 700;
+}
+
+.diff-num::before {
+    content: attr(data-line);
+}
+
+.diff-sign::before {
+    content: attr(data-sign);
+}
+
+.diff-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 4;
+    color: var(--color-text);
+}
+
+.diff-split .diff-code {
+    width: 50%;
+}
+
+.diff-split .diff-code:nth-child(3) {
+    border-right: 2px solid var(--color-line);
+}
+
+.diff-table .diff-del {
+    background: var(--diff-del-bg);
+}
+
+.diff-table .diff-add {
+    background: var(--diff-add-bg);
+}
+
+.diff-table .diff-empty {
+    background: var(--diff-empty-bg);
+}
+
+.diff-del .diff-sign,
+.diff-sign.diff-del {
+    color: var(--diff-del-text);
+}
+
+.diff-add .diff-sign,
+.diff-sign.diff-add {
+    color: var(--diff-add-text);
+}
+
+.diff-code mark {
+    color: var(--color-text);
+    border-radius: 2px;
+}
+
+.diff-del mark {
+    background: var(--diff-del-mark);
+}
+
+.diff-add mark {
+    background: var(--diff-add-mark);
+}
+
+.diff-code[tabindex="-1"]:focus-visible {
+    outline-offset: -3px;
+}
+
+.diff-gap td {
+    padding: 0.3rem 0.75rem;
+    background: var(--diff-gap-bg);
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    border-top: 1px dashed var(--color-line);
+    border-bottom: 1px dashed var(--color-line);
+}
+
+.diff-expand {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: 0.15rem 0.75rem;
+    cursor: pointer;
+}
+
+.diff-expand:hover,
+.diff-expand:focus-visible {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent);
+}
+
+.diff-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.diff-figure {
+    flex: 1 1 14rem;
+    min-width: 0;
+    margin: 0;
+}
+
+.diff-figure figcaption {
+    margin-top: 0.4rem;
+    font-weight: 700;
+}
+
+/* Pixel art is drawn at native size, so scale it up without smoothing. */
+.diff-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 22rem;
+    object-fit: contain;
+    image-rendering: pixelated;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: repeating-conic-gradient(var(--diff-checker-light) 0% 25%, var(--diff-checker-dark) 0% 50%) 0 0 / 16px 16px;
+}
+
+.diff-sounds .diff-figure {
+    max-width: 28rem;
+}
+
+.diff-audio {
+    display: block;
+    width: 100%;
+}
+
+/* 404 */
+
+.error-page {
+    text-align: center;
+    padding-top: 4rem;
+}
+
+.error-code {
+    font-family: var(--font-head);
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+}
+
+.error-page .lead {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+
+.site-footer {
+    flex-shrink: 0;
+    background: var(--color-surface);
+    border-top: 2px solid var(--color-line);
+    padding: 1.5rem var(--space);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.site-footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+@media (min-width: 48rem) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero {
+        grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .diff-table {
+        font-size: 0.85rem;
+    }
+
+    .diff-table td {
+        padding: 0 0.5rem;
+    }
+
+    .diff-num {
+        width: 5ch;
+    }
+
+    .diff-sign {
+        width: 2.5ch;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+
+    .card-list a:hover,
+    .card-list a:focus-visible,
+    .button-link:hover,
+    .button-link:focus-visible,
+    .version-nav a:hover,
+    .version-nav a:focus-visible,
+    .diff-toggle button:hover,
+    .diff-toggle button:focus-visible {
+        transform: none;
+    }
+}
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../../../../" aria-label="Roso Games - Etusivu">
+                <img class="brand-mark" src="../../../../favicon.svg" alt="Roso Games">
+            </a>
+            <nav class="breadcrumb" aria-label="Murupolku">
+<ol class="crumb-trail">
+<li class="crumb"><a href="../../../../">Etusivu</a></li>
+<li class="crumb crumb-dropdown crumb-category">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Peli</button>
+  <ul class="crumb-menu crumb-cat-menu">
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="true">Peli</button>
+      <ul class="cat-list">
+        <li><a href="../../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+        <li><a href="../../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+        <li><a href="../../../../games/4-pokeri/">Pokeri</a></li>
+        <li><a href="../../../../games/5-visual-novel/">Visual novel</a></li>
+        <li><a href="../../../../games/6-platformer/">Platformer</a></li>
+        <li><a class="current" href="../../../../games/7-top-down/">Top-down-seikkailu</a></li>
+      </ul>
+    </li>
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="false">Demo</button>
+      <ul class="cat-list">
+        <li><a href="../../../../demos/animations/">Frame-by-frame ja skeletal animation</a></li>
+        <li><a href="../../../../demos/feedback/">Palaute ja game feel</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="crumb crumb-dropdown">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Top-down-seikkailu</button>
+  <ul class="crumb-menu">
+    <li><a href="../../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+    <li><a href="../../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+    <li><a href="../../../../games/4-pokeri/">Pokeri</a></li>
+    <li><a href="../../../../games/5-visual-novel/">Visual novel</a></li>
+    <li><a href="../../../../games/6-platformer/">Platformer</a></li>
+    <li><a class="current" href="../../../../games/7-top-down/">Top-down-seikkailu</a></li>
+  </ul>
+</li>
+<li class="crumb"><a href="../../../../games/7-top-down/versio-5/">Versio 5</a></li>
+<li class="crumb current">Muutokset</li>
+</ol>
+</nav>
+        </div>
+    </header>
+    <main class="content">
+<h1>Top-down-seikkailu - versio 5: muutokset</h1>
+<p class="diff-summary">Versio 4 -&gt; versio 5 | 5 tiedostoa, +113 -7</p>
+<p class="back-link"><a href="../">Takaisin: Versio 5</a></p>
+<div class="diff-toggle" role="group" aria-label="Näkymä" hidden>
+  <button type="button" data-view="unified" aria-pressed="true">Yksi sarake</button>
+  <button type="button" data-view="split" aria-pressed="false">Rinnakkain</button>
+</div>
+<div class="diff-files" data-view="unified">
+<details class="diff-file" id="tiedosto-1" data-kind="code" open>
+<summary><span class="diff-path">data/defaultSettings.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+1</span> <span class="diff-minus">-1</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-gap" data-gap="f1-g0" data-old-start="1" data-new-start="1" data-count="9"><td colspan="4"><button type="button" class="diff-expand">Näytä 9 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="10"></td><td class="diff-num" data-line="10"></td><td class="diff-sign"></td><td class="diff-code">		["up"] = { "w", "up" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="11"></td><td class="diff-num" data-line="11"></td><td class="diff-sign"></td><td class="diff-code">		["down"] = { "s", "down" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="12"></td><td class="diff-num" data-line="12"></td><td class="diff-sign"></td><td class="diff-code">		["menu"] = { "escape" },</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="13"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">		<mark>-- </mark>["<mark>attack</mark>"] = { "<mark>ctrl</mark>" },</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="13"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		["<mark>interact</mark>"] = { "<mark>space", "e</mark>" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="14"></td><td class="diff-num" data-line="14"></td><td class="diff-sign"></td><td class="diff-code">	}</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="15"></td><td class="diff-num" data-line="15"></td><td class="diff-sign"></td><td class="diff-code">}</td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-gap" data-gap="f1-g0" data-old-start="1" data-new-start="1" data-count="9"><td colspan="6"><button type="button" class="diff-expand">Näytä 9 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="10"></td><td class="diff-sign"></td><td class="diff-code">		["up"] = { "w", "up" },</td><td class="diff-num" data-line="10"></td><td class="diff-sign"></td><td class="diff-code">		["up"] = { "w", "up" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="11"></td><td class="diff-sign"></td><td class="diff-code">		["down"] = { "s", "down" },</td><td class="diff-num" data-line="11"></td><td class="diff-sign"></td><td class="diff-code">		["down"] = { "s", "down" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="12"></td><td class="diff-sign"></td><td class="diff-code">		["menu"] = { "escape" },</td><td class="diff-num" data-line="12"></td><td class="diff-sign"></td><td class="diff-code">		["menu"] = { "escape" },</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="13"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">		<mark>-- </mark>["<mark>attack</mark>"] = { "<mark>ctrl</mark>" },</td><td class="diff-num diff-add" data-line="13"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		["<mark>interact</mark>"] = { "<mark>space", "e</mark>" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="14"></td><td class="diff-sign"></td><td class="diff-code">	}</td><td class="diff-num" data-line="14"></td><td class="diff-sign"></td><td class="diff-code">	}</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="15"></td><td class="diff-sign"></td><td class="diff-code">}</td><td class="diff-num" data-line="15"></td><td class="diff-sign"></td><td class="diff-code">}</td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["return {", "\tmasterVolume = 50,", "\tmusicVolume = 50,", "\tsfxVolume = 50,", "\tfullscreen = false,", "\tcoinsCollected = 0,", "\tcontrols = {", "\t\t[\"left\"] = { \"a\", \"left\" },", "\t\t[\"right\"] = { \"d\", \"right\" },", "\t\t[\"up\"] = { \"w\", \"up\" },", "\t\t[\"down\"] = { \"s\", \"down\" },", "\t\t[\"menu\"] = { \"escape\" },", "\t\t[\"interact\"] = { \"space\", \"e\" },", "\t}", "}"]</script>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-2" data-kind="code" open>
+<summary><span class="diff-path">maps/extensions/hero.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+30</span> <span class="diff-minus">-1</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-gap" data-gap="f2-g0" data-old-start="1" data-new-start="1" data-count="5"><td colspan="4"><button type="button" class="diff-expand">Näytä 5 piilotettua riviä</button></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="6"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="7"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="8"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="9"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Päätellään katsomissuunta liikevektorista. Suunta lukitaan neljään pääilmansuuntaan</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="10"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- (oikea, vasen, alas, ylös), jotta vuorovaikutussäde osoittaa aina selkeästi yhteen</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="11"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- suuntaan. Jos hahmo ei liiku, säilytetään edellinen katsomissuunta.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="12"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local function resolveFacing( directionX, directionY, currentFacingX, currentFacingY )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="13"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if directionX == 0 and directionY == 0 then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="14"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		return currentFacingX, currentFacingY</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="15"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="16"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="17"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Valitaan akseli, jolla liike on voimakkaampaa. Tasapelissä valitaan vaakasuunta.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="18"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if math.abs( directionX ) &gt;= math.abs( directionY ) then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="19"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		return directionX &lt; 0 and -1 or 1, 0</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="20"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	else</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="21"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		return 0, directionY &lt; 0 and -1 or 1</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="22"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="23"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="6"></td><td class="diff-num" data-line="24"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="7"></td><td class="diff-num" data-line="25"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="8"></td><td class="diff-num" data-line="26"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f2-g1" data-old-start="9" data-new-start="27" data-count="26"><td colspan="4"><button type="button" class="diff-expand">Näytä 26 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="35"></td><td class="diff-num" data-line="53"></td><td class="diff-sign"></td><td class="diff-code">	hero.type = "hero"</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="36"></td><td class="diff-num" data-line="54"></td><td class="diff-sign"></td><td class="diff-code">	hero.speed = 160</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="37"></td><td class="diff-num" data-line="55"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="56"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Katsomissuunta vuorovaikutusta varten. Aloitetaan katse alaspäin.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="57"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	hero.facingX = 0</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="58"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	hero.facingY = 1</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="59"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="38"></td><td class="diff-num" data-line="60"></td><td class="diff-sign"></td><td class="diff-code">	-- Tehdään hahmosta dynaaminen fysiikkaobjekti, jotta seinät pysäyttävät sen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="39"></td><td class="diff-num" data-line="61"></td><td class="diff-sign"></td><td class="diff-code">	-- Pyöreä fysiikkaobjekti liukuu seinien kulmia pitkin luontevasti.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="40"></td><td class="diff-num" data-line="62"></td><td class="diff-sign"></td><td class="diff-code">	physics.addBody( hero, "dynamic", { radius = 12, density = 1, friction = 0, bounce = 0 } )</td></tr>
+<tr class="diff-gap" data-gap="f2-g2" data-old-start="41" data-new-start="63" data-count="5"><td colspan="4"><button type="button" class="diff-expand">Näytä 5 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="46"></td><td class="diff-num" data-line="68"></td><td class="diff-sign"></td><td class="diff-code">	function hero:move( directionX, directionY )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="47"></td><td class="diff-num" data-line="69"></td><td class="diff-sign"></td><td class="diff-code">		self.directionX = directionX</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="48"></td><td class="diff-num" data-line="70"></td><td class="diff-sign"></td><td class="diff-code">		self.directionY = directionY</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="71"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		-- Päivitetään katsomissuunta vain, kun hahmo tosiasiassa liikkuu.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="72"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		self.facingX, self.facingY = resolveFacing( directionX, directionY, self.facingX, self.facingY )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="49"></td><td class="diff-num" data-line="73"></td><td class="diff-sign"></td><td class="diff-code">		self:setLinearVelocity( directionX * self.speed, directionY * self.speed )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="50"></td><td class="diff-num" data-line="74"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="51"></td><td class="diff-num" data-line="75"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="52"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	-- Pysäytetään hahmo kokonaan.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="76"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Pysäytetään hahmo kokonaan.<mark> Katsomissuunta säilyy ennallaan.</mark></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="53"></td><td class="diff-num" data-line="77"></td><td class="diff-sign"></td><td class="diff-code">	function hero:stop()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="54"></td><td class="diff-num" data-line="78"></td><td class="diff-sign"></td><td class="diff-code">		self.directionX = 0</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="55"></td><td class="diff-num" data-line="79"></td><td class="diff-sign"></td><td class="diff-code">		self.directionY = 0</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="56"></td><td class="diff-num" data-line="80"></td><td class="diff-sign"></td><td class="diff-code">		self:setLinearVelocity( 0, 0 )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="57"></td><td class="diff-num" data-line="81"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="58"></td><td class="diff-num" data-line="82"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="83"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Palautetaan hahmon nykyinen katsomissuunta yksikkövektorina.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="84"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	function hero:getFacing()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="85"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		return self.facingX, self.facingY</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="86"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="87"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="59"></td><td class="diff-num" data-line="88"></td><td class="diff-sign"></td><td class="diff-code">	-- Kevyt liikkeen tuntu ilman kävelyanimaation frameja: hahmo kääntyy</td></tr>
+<tr class="diff-gap" data-gap="f2-g3" data-old-start="60" data-new-start="89" data-count="48"><td colspan="4"><button type="button" class="diff-expand">Näytä 48 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-gap" data-gap="f2-g0" data-old-start="1" data-new-start="1" data-count="5"><td colspan="6"><button type="button" class="diff-expand">Näytä 5 piilotettua riviä</button></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="6"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="7"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="8"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="9"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Päätellään katsomissuunta liikevektorista. Suunta lukitaan neljään pääilmansuuntaan</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="10"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- (oikea, vasen, alas, ylös), jotta vuorovaikutussäde osoittaa aina selkeästi yhteen</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="11"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- suuntaan. Jos hahmo ei liiku, säilytetään edellinen katsomissuunta.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="12"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local function resolveFacing( directionX, directionY, currentFacingX, currentFacingY )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="13"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if directionX == 0 and directionY == 0 then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="14"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		return currentFacingX, currentFacingY</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="15"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="16"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="17"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Valitaan akseli, jolla liike on voimakkaampaa. Tasapelissä valitaan vaakasuunta.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="18"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if math.abs( directionX ) &gt;= math.abs( directionY ) then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="19"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		return directionX &lt; 0 and -1 or 1, 0</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="20"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	else</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="21"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		return 0, directionY &lt; 0 and -1 or 1</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="22"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="23"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="6"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="24"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="7"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td><td class="diff-num" data-line="25"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="8"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="26"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f2-g1" data-old-start="9" data-new-start="27" data-count="26"><td colspan="6"><button type="button" class="diff-expand">Näytä 26 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="35"></td><td class="diff-sign"></td><td class="diff-code">	hero.type = "hero"</td><td class="diff-num" data-line="53"></td><td class="diff-sign"></td><td class="diff-code">	hero.type = "hero"</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="36"></td><td class="diff-sign"></td><td class="diff-code">	hero.speed = 160</td><td class="diff-num" data-line="54"></td><td class="diff-sign"></td><td class="diff-code">	hero.speed = 160</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="37"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="55"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="56"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Katsomissuunta vuorovaikutusta varten. Aloitetaan katse alaspäin.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="57"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	hero.facingX = 0</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="58"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	hero.facingY = 1</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="59"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="38"></td><td class="diff-sign"></td><td class="diff-code">	-- Tehdään hahmosta dynaaminen fysiikkaobjekti, jotta seinät pysäyttävät sen.</td><td class="diff-num" data-line="60"></td><td class="diff-sign"></td><td class="diff-code">	-- Tehdään hahmosta dynaaminen fysiikkaobjekti, jotta seinät pysäyttävät sen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="39"></td><td class="diff-sign"></td><td class="diff-code">	-- Pyöreä fysiikkaobjekti liukuu seinien kulmia pitkin luontevasti.</td><td class="diff-num" data-line="61"></td><td class="diff-sign"></td><td class="diff-code">	-- Pyöreä fysiikkaobjekti liukuu seinien kulmia pitkin luontevasti.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="40"></td><td class="diff-sign"></td><td class="diff-code">	physics.addBody( hero, "dynamic", { radius = 12, density = 1, friction = 0, bounce = 0 } )</td><td class="diff-num" data-line="62"></td><td class="diff-sign"></td><td class="diff-code">	physics.addBody( hero, "dynamic", { radius = 12, density = 1, friction = 0, bounce = 0 } )</td></tr>
+<tr class="diff-gap" data-gap="f2-g2" data-old-start="41" data-new-start="63" data-count="5"><td colspan="6"><button type="button" class="diff-expand">Näytä 5 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="46"></td><td class="diff-sign"></td><td class="diff-code">	function hero:move( directionX, directionY )</td><td class="diff-num" data-line="68"></td><td class="diff-sign"></td><td class="diff-code">	function hero:move( directionX, directionY )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="47"></td><td class="diff-sign"></td><td class="diff-code">		self.directionX = directionX</td><td class="diff-num" data-line="69"></td><td class="diff-sign"></td><td class="diff-code">		self.directionX = directionX</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="48"></td><td class="diff-sign"></td><td class="diff-code">		self.directionY = directionY</td><td class="diff-num" data-line="70"></td><td class="diff-sign"></td><td class="diff-code">		self.directionY = directionY</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="71"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		-- Päivitetään katsomissuunta vain, kun hahmo tosiasiassa liikkuu.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="72"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		self.facingX, self.facingY = resolveFacing( directionX, directionY, self.facingX, self.facingY )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="49"></td><td class="diff-sign"></td><td class="diff-code">		self:setLinearVelocity( directionX * self.speed, directionY * self.speed )</td><td class="diff-num" data-line="73"></td><td class="diff-sign"></td><td class="diff-code">		self:setLinearVelocity( directionX * self.speed, directionY * self.speed )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="50"></td><td class="diff-sign"></td><td class="diff-code">	end</td><td class="diff-num" data-line="74"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="51"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="75"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="52"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	-- Pysäytetään hahmo kokonaan.</td><td class="diff-num diff-add" data-line="76"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Pysäytetään hahmo kokonaan.<mark> Katsomissuunta säilyy ennallaan.</mark></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="53"></td><td class="diff-sign"></td><td class="diff-code">	function hero:stop()</td><td class="diff-num" data-line="77"></td><td class="diff-sign"></td><td class="diff-code">	function hero:stop()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="54"></td><td class="diff-sign"></td><td class="diff-code">		self.directionX = 0</td><td class="diff-num" data-line="78"></td><td class="diff-sign"></td><td class="diff-code">		self.directionX = 0</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="55"></td><td class="diff-sign"></td><td class="diff-code">		self.directionY = 0</td><td class="diff-num" data-line="79"></td><td class="diff-sign"></td><td class="diff-code">		self.directionY = 0</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="56"></td><td class="diff-sign"></td><td class="diff-code">		self:setLinearVelocity( 0, 0 )</td><td class="diff-num" data-line="80"></td><td class="diff-sign"></td><td class="diff-code">		self:setLinearVelocity( 0, 0 )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="57"></td><td class="diff-sign"></td><td class="diff-code">	end</td><td class="diff-num" data-line="81"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="58"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="82"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="83"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Palautetaan hahmon nykyinen katsomissuunta yksikkövektorina.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="84"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	function hero:getFacing()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="85"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		return self.facingX, self.facingY</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="86"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="87"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="59"></td><td class="diff-sign"></td><td class="diff-code">	-- Kevyt liikkeen tuntu ilman kävelyanimaation frameja: hahmo kääntyy</td><td class="diff-num" data-line="88"></td><td class="diff-sign"></td><td class="diff-code">	-- Kevyt liikkeen tuntu ilman kävelyanimaation frameja: hahmo kääntyy</td></tr>
+<tr class="diff-gap" data-gap="f2-g3" data-old-start="60" data-new-start="89" data-count="48"><td colspan="6"><button type="button" class="diff-expand">Näytä 48 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["-- Pelaajahahmon extension ponytiled-kartalle.", "-- ponytiled kutsuu M.new-funktiota jokaiselle kartan \"hero\"-tyyppiselle objektille", "-- ja korvaa alkuperäisen Tiled-objektin tämän funktion palauttamalla objektilla.", "", "local M = {}", "", "--------------------------------------------------------------------------------------", "", "-- Päätellään katsomissuunta liikevektorista. Suunta lukitaan neljään pääilmansuuntaan", "-- (oikea, vasen, alas, ylös), jotta vuorovaikutussäde osoittaa aina selkeästi yhteen", "-- suuntaan. Jos hahmo ei liiku, säilytetään edellinen katsomissuunta.", "local function resolveFacing( directionX, directionY, currentFacingX, currentFacingY )", "\tif directionX == 0 and directionY == 0 then", "\t\treturn currentFacingX, currentFacingY", "\tend", "", "\t-- Valitaan akseli, jolla liike on voimakkaampaa. Tasapelissä valitaan vaakasuunta.", "\tif math.abs( directionX ) \u003e= math.abs( directionY ) then", "\t\treturn directionX \u003c 0 and -1 or 1, 0", "\telse", "\t\treturn 0, directionY \u003c 0 and -1 or 1", "\tend", "end", "", "--------------------------------------------------------------------------------------", "", "function M.new( instance )", "\t-- Otetaan talteen sijainti ja layer, joihin ponytiled asetti hahmon.", "\tlocal parentLayer = instance.parent", "\tlocal x, y = instance.x, instance.y", "", "\t-- Poistetaan Tiledin luoma placeholder-objekti. Rakennamme tilalle oman.", "\tdisplay.remove( instance )", "", "\t-- Ladataan hahmojen image sheet. Frame 1 on pelaajahahmo.", "\tlocal sheetOptions = {", "\t\twidth = 32,", "\t\theight = 32,", "\t\tnumFrames = 6,", "\t\tsheetContentWidth = 192,", "\t\tsheetContentHeight = 32,", "\t}", "\tlocal characterSheet = graphics.newImageSheet( \"maps/characters-2x.png\", sheetOptions )", "", "\t-- Rakennetaan hahmo omaan ryhmäänsä. Ryhmän sisällä oleva sprite voidaan", "\t-- myöhemmin esimerkiksi peilata tai pompauttaa liikkeen tuntua varten.", "\tlocal hero = display.newGroup()", "\thero.sprite = display.newImageRect( hero, characterSheet, 1, 32, 32 )", "\tparentLayer:insert( hero )", "\thero.x, hero.y = x, y", "", "\thero.name = \"hero\"", "\thero.type = \"hero\"", "\thero.speed = 160", "", "\t-- Katsomissuunta vuorovaikutusta varten. Aloitetaan katse alaspäin.", "\thero.facingX = 0", "\thero.facingY = 1", "", "\t-- Tehdään hahmosta dynaaminen fysiikkaobjekti, jotta seinät pysäyttävät sen.", "\t-- Pyöreä fysiikkaobjekti liukuu seinien kulmia pitkin luontevasti.", "\tphysics.addBody( hero, \"dynamic\", { radius = 12, density = 1, friction = 0, bounce = 0 } )", "\t-- Estetään hahmoa pyörähtämästä, kun se törmää seinään.", "\thero.isFixedRotation = true", "", "\t-- Liikutetaan hahmoa ohjaimelta saadulla suuntavektorilla. Suuntavektori", "\t-- on jo normalisoitu, joten kerromme sen vain hahmon nopeudella.", "\tfunction hero:move( directionX, directionY )", "\t\tself.directionX = directionX", "\t\tself.directionY = directionY", "\t\t-- Päivitetään katsomissuunta vain, kun hahmo tosiasiassa liikkuu.", "\t\tself.facingX, self.facingY = resolveFacing( directionX, directionY, self.facingX, self.facingY )", "\t\tself:setLinearVelocity( directionX * self.speed, directionY * self.speed )", "\tend", "", "\t-- Pysäytetään hahmo kokonaan. Katsomissuunta säilyy ennallaan.", "\tfunction hero:stop()", "\t\tself.directionX = 0", "\t\tself.directionY = 0", "\t\tself:setLinearVelocity( 0, 0 )", "\tend", "", "\t-- Palautetaan hahmon nykyinen katsomissuunta yksikkövektorina.", "\tfunction hero:getFacing()", "\t\treturn self.facingX, self.facingY", "\tend", "", "\t-- Kevyt liikkeen tuntu ilman kävelyanimaation frameja: hahmo kääntyy", "\t-- vaakasuunnassa liikkeen mukaan ja pomppii kahden asennon välillä.", "\tlocal bobHeight = 3", "\tlocal bobInterval = 6", "\tlocal bobCounter = 0", "\tlocal isBobbingUp = false", "", "\tlocal function animate()", "\t\tlocal directionX = hero.directionX or 0", "\t\tlocal directionY = hero.directionY or 0", "\t\tlocal isMoving = directionX ~= 0 or directionY ~= 0", "", "\t\t-- Käännetään hahmo katsomaan liikkeen suuntaan vaakatasossa.", "\t\t-- Pystysuora liike säilyttää edellisen katsomissuunnan.", "\t\tif directionX \u003c 0 then", "\t\t\thero.sprite.xScale = -1", "\t\telseif directionX \u003e 0 then", "\t\t\thero.sprite.xScale = 1", "\t\tend", "", "\t\tif isMoving then", "\t\t\t-- Vaihdetaan pompun asentoa tasaisin väliajoin.", "\t\t\tbobCounter = bobCounter + 1", "\t\t\tif bobCounter \u003e= bobInterval then", "\t\t\t\tbobCounter = 0", "\t\t\t\tisBobbingUp = not isBobbingUp", "\t\t\t\thero.sprite.y = isBobbingUp and -bobHeight or 0", "\t\t\tend", "\t\telse", "\t\t\t-- Paikallaan hahmo palautetaan perusasentoon.", "\t\t\tbobCounter = 0", "\t\t\tisBobbingUp = false", "\t\t\thero.sprite.y = 0", "\t\tend", "\tend", "\tRuntime:addEventListener( \"enterFrame\", animate )", "", "\t-- Siivotaan enterFrame-kuuntelija, kun hahmo poistetaan.", "\tfunction hero:finalize()", "\t\tRuntime:removeEventListener( \"enterFrame\", animate )", "\tend", "\thero:addEventListener( \"finalize\" )", "", "\treturn hero", "end", "", "--------------------------------------------------------------------------------------", "", "return M"]</script>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-3" data-kind="code" open>
+<summary><span class="diff-path">maps/extensions/npc.lua</span> <span class="diff-status" data-status="added">lisätty</span> <span class="diff-stat"><span class="diff-plus">+51</span> <span class="diff-minus">-0</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="1"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- NPC-hahmon extension ponytiled-kartalle.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="2"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- ponytiled kutsuu M.new-funktiota jokaiselle kartan "npc"-tyyppiselle objektille</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="3"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- ja korvaa alkuperäisen Tiled-objektin tämän funktion palauttamalla hahmolla.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="4"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="5"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local M = {}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="6"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="7"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="8"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="9"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">function M.new( instance )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="10"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Otetaan talteen tiedot, jotka ponytiled asetti Tiled-objektista.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="11"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local parentLayer = instance.parent</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="12"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local x, y = instance.x, instance.y</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="13"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- frame kertoo, mikä image sheetin frame piirretään. node on dialogin passagen</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="14"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- nimi, jota käytämme myöhemmin keskusteluissa (taustahahmoilla ei ole nodea).</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="15"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local frame = instance.frame or 1</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="16"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local name = instance.name</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="17"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local node = instance.node</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="18"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="19"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Poistetaan Tiledin luoma placeholder-objekti. Rakennamme tilalle oman.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="20"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	display.remove( instance )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="21"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="22"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Ladataan sama hahmojen image sheet kuin pelaajalla. Jokainen NPC käyttää eri framea.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="23"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local sheetOptions = {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="24"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		width = 32,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="25"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		height = 32,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="26"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		numFrames = 6,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="27"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		sheetContentWidth = 192,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="28"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		sheetContentHeight = 32,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="29"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="30"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local characterSheet = graphics.newImageSheet( "maps/characters-2x.png", sheetOptions )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="31"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="32"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Rakennetaan NPC image sheetin oikeasta framesta ja asetetaan se samaan layeriin,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="33"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- jossa Tiled-objekti oli.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="34"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local npc = display.newImageRect( parentLayer, characterSheet, frame, 32, 32 )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="35"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	npc.x, npc.y = x, y</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="36"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="37"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	npc.name = name</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="38"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	npc.type = "npc"</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="39"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Säilytetään dialogin passagen nimi, jotta puhekoodi löytää sen myöhemmin.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="40"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	npc.node = node</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="41"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="42"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Staattinen fysiikkaobjekti estää pelaajaa kävelemästä hahmon läpi ja antaa</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="43"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- vuorovaikutussäteelle (rayCast) kohteen, johon osua.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="44"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	physics.addBody( npc, "static", { radius = 14 } )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="45"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="46"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	return npc</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="47"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="48"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="49"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="50"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="51"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">return M</td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="1"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- NPC-hahmon extension ponytiled-kartalle.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="2"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- ponytiled kutsuu M.new-funktiota jokaiselle kartan "npc"-tyyppiselle objektille</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="3"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- ja korvaa alkuperäisen Tiled-objektin tämän funktion palauttamalla hahmolla.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="4"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="5"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local M = {}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="6"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="7"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="8"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="9"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">function M.new( instance )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="10"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Otetaan talteen tiedot, jotka ponytiled asetti Tiled-objektista.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="11"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local parentLayer = instance.parent</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="12"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local x, y = instance.x, instance.y</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="13"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- frame kertoo, mikä image sheetin frame piirretään. node on dialogin passagen</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="14"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- nimi, jota käytämme myöhemmin keskusteluissa (taustahahmoilla ei ole nodea).</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="15"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local frame = instance.frame or 1</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="16"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local name = instance.name</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="17"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local node = instance.node</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="18"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="19"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Poistetaan Tiledin luoma placeholder-objekti. Rakennamme tilalle oman.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="20"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	display.remove( instance )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="21"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="22"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Ladataan sama hahmojen image sheet kuin pelaajalla. Jokainen NPC käyttää eri framea.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="23"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local sheetOptions = {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="24"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		width = 32,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="25"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		height = 32,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="26"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		numFrames = 6,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="27"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		sheetContentWidth = 192,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="28"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		sheetContentHeight = 32,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="29"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="30"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local characterSheet = graphics.newImageSheet( "maps/characters-2x.png", sheetOptions )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="31"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="32"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Rakennetaan NPC image sheetin oikeasta framesta ja asetetaan se samaan layeriin,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="33"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- jossa Tiled-objekti oli.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="34"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local npc = display.newImageRect( parentLayer, characterSheet, frame, 32, 32 )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="35"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	npc.x, npc.y = x, y</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="36"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="37"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	npc.name = name</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="38"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	npc.type = "npc"</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="39"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Säilytetään dialogin passagen nimi, jotta puhekoodi löytää sen myöhemmin.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="40"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	npc.node = node</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="41"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="42"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Staattinen fysiikkaobjekti estää pelaajaa kävelemästä hahmon läpi ja antaa</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="43"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- vuorovaikutussäteelle (rayCast) kohteen, johon osua.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="44"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	physics.addBody( npc, "static", { radius = 14 } )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="45"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="46"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	return npc</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="47"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="48"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="49"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="50"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="51"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">return M</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-4" data-kind="code" open>
+<summary><span class="diff-path">scenes/game.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+30</span> <span class="diff-minus">-5</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-del"><td class="diff-num" data-line="1"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- Pelinäkymä. Tällä oppitunnilla <mark>saamme</mark> <mark>pelaajahahmon</mark> <mark>liikkumaan</mark>.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="1"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Pelinäkymä. Tällä oppitunnilla <mark>lisäämme</mark> <mark>vuorovaikutuksen</mark> <mark>ja NPC-hahmot</mark>.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="2"></td><td class="diff-num" data-line="2"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code">-- Ladataan Composer, jotta voimme käyttää sen funktioita.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">local composer = require( "composer" )</td></tr>
+<tr class="diff-gap" data-gap="f4-g0" data-old-start="5" data-new-start="5" data-count="26"><td colspan="4"><button type="button" class="diff-expand">Näytä 26 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="31"></td><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code">local function onMovementEvent( directionX, directionY )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="32"></td><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">	if player and player.move then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="33"></td><td class="diff-num" data-line="33"></td><td class="diff-sign"></td><td class="diff-code">		player:move( directionX, directionY )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="34"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="35"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="36"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="37"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="38"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- controls kutsuu tätä, kun pelaaja painaa tai vapauttaa toimintonäppäimen.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="39"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Ammutaan lyhyt säde hahmon katsomissuuntaan ja katsotaan, osuuko se NPC-hahmoon.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="40"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local function onKeyEvent( action, phase )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="41"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if action == "interact" and phase == "down" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="42"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		if player and player.getFacing then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="43"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			local facingX, facingY = player:getFacing()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="44"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="45"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			-- Säde alkaa hahmon keskeltä. rayCast ei ilmoita objektia, jonka sisältä</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="46"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			-- säde lähtee, joten hahmo ei osu itseensä.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="47"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			local reach = 34</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="48"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			local toX = player.x + facingX * reach</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="49"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			local toY = player.y + facingY * reach</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="50"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="51"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			local hits = physics.rayCast( player.x, player.y, toX, toY, "closest" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="52"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			if hits and hits[1] and hits[1].object.type == "npc" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="53"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				print( "Talking to: " .. tostring( hits[1].object.name ) )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="54"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			else</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="55"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				print( "There is nobody ahead to talk to." )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="56"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="57"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="34"></td><td class="diff-num" data-line="58"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="35"></td><td class="diff-num" data-line="59"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="36"></td><td class="diff-num" data-line="60"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f4-g1" data-old-start="37" data-new-start="61" data-count="30"><td colspan="4"><button type="button" class="diff-expand">Näytä 30 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="67"></td><td class="diff-num" data-line="91"></td><td class="diff-sign"></td><td class="diff-code">	-- ponytilediä voidaan laajentaa lisäosilla (extensions); kerrotaan, mistä kansiosta ne löytyvät.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="68"></td><td class="diff-num" data-line="92"></td><td class="diff-sign"></td><td class="diff-code">	map.extensions = "maps.extensions."</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="69"></td><td class="diff-num" data-line="93"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="70"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	-- Ajetaan <mark>hero-extension</mark>: <mark>se</mark> korvaa<mark> kartan</mark> "hero"-objektin <mark>pelaajahahmolla.</mark></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="71"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	map:extend( "hero" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="94"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Ajetaan <mark>extensionit</mark>: <mark>hero</mark> korvaa "hero"-objektin <mark>pelaajalla ja npc rakentaa</mark></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="95"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- jokaisesta "npc"-objektista oman hahmonsa.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="96"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	map:extend( "hero", "npc" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="72"></td><td class="diff-num" data-line="97"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="73"></td><td class="diff-num" data-line="98"></td><td class="diff-sign"></td><td class="diff-code">	-- Haetaan valmis pelaajahahmo talteen. Jos kartalta puuttuu hero-objekti,</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="74"></td><td class="diff-num" data-line="99"></td><td class="diff-sign"></td><td class="diff-code">	-- kerromme siitä heti, jotta virhe huomataan kehityksen aikana.</td></tr>
+<tr class="diff-gap" data-gap="f4-g2" data-old-start="75" data-new-start="100" data-count="23"><td colspan="4"><button type="button" class="diff-expand">Näytä 23 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="98"></td><td class="diff-num" data-line="123"></td><td class="diff-sign"></td><td class="diff-code">	elseif ( phase == "did" ) then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="99"></td><td class="diff-num" data-line="124"></td><td class="diff-sign"></td><td class="diff-code">		-- Ajetaan heti kun scene näkyy pelaajalle.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="100"></td><td class="diff-num" data-line="125"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="101"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">		-- Aletaan kuunnella liikkumisnäppäimiä.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="102"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">		controls.start( onMovementEvent )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="126"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		-- Aletaan kuunnella liikkumisnäppäimiä<mark> ja toimintonäppäintä</mark>.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="127"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		controls.start( onMovementEvent<mark>, onKeyEvent</mark> )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="103"></td><td class="diff-num" data-line="128"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="104"></td><td class="diff-num" data-line="129"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="105"></td><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-gap" data-gap="f4-g3" data-old-start="106" data-new-start="131" data-count="47"><td colspan="4"><button type="button" class="diff-expand">Näytä 47 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="1"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- Pelinäkymä. Tällä oppitunnilla <mark>saamme</mark> <mark>pelaajahahmon</mark> <mark>liikkumaan</mark>.</td><td class="diff-num diff-add" data-line="1"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Pelinäkymä. Tällä oppitunnilla <mark>lisäämme</mark> <mark>vuorovaikutuksen</mark> <mark>ja NPC-hahmot</mark>.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="2"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="2"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code">-- Ladataan Composer, jotta voimme käyttää sen funktioita.</td><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code">-- Ladataan Composer, jotta voimme käyttää sen funktioita.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">local composer = require( "composer" )</td><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">local composer = require( "composer" )</td></tr>
+<tr class="diff-gap" data-gap="f4-g0" data-old-start="5" data-new-start="5" data-count="26"><td colspan="6"><button type="button" class="diff-expand">Näytä 26 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code">local function onMovementEvent( directionX, directionY )</td><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code">local function onMovementEvent( directionX, directionY )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">	if player and player.move then</td><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">	if player and player.move then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="33"></td><td class="diff-sign"></td><td class="diff-code">		player:move( directionX, directionY )</td><td class="diff-num" data-line="33"></td><td class="diff-sign"></td><td class="diff-code">		player:move( directionX, directionY )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="34"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="35"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="36"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="37"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="38"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- controls kutsuu tätä, kun pelaaja painaa tai vapauttaa toimintonäppäimen.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="39"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Ammutaan lyhyt säde hahmon katsomissuuntaan ja katsotaan, osuuko se NPC-hahmoon.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="40"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local function onKeyEvent( action, phase )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="41"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if action == "interact" and phase == "down" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="42"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		if player and player.getFacing then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="43"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			local facingX, facingY = player:getFacing()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="44"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="45"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			-- Säde alkaa hahmon keskeltä. rayCast ei ilmoita objektia, jonka sisältä</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="46"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			-- säde lähtee, joten hahmo ei osu itseensä.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="47"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			local reach = 34</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="48"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			local toX = player.x + facingX * reach</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="49"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			local toY = player.y + facingY * reach</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="50"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="51"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			local hits = physics.rayCast( player.x, player.y, toX, toY, "closest" )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="52"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			if hits and hits[1] and hits[1].object.type == "npc" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="53"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				print( "Talking to: " .. tostring( hits[1].object.name ) )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="54"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			else</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="55"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				print( "There is nobody ahead to talk to." )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="56"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="57"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="34"></td><td class="diff-sign"></td><td class="diff-code">	end</td><td class="diff-num" data-line="58"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="35"></td><td class="diff-sign"></td><td class="diff-code">end</td><td class="diff-num" data-line="59"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="36"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="60"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f4-g1" data-old-start="37" data-new-start="61" data-count="30"><td colspan="6"><button type="button" class="diff-expand">Näytä 30 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="67"></td><td class="diff-sign"></td><td class="diff-code">	-- ponytilediä voidaan laajentaa lisäosilla (extensions); kerrotaan, mistä kansiosta ne löytyvät.</td><td class="diff-num" data-line="91"></td><td class="diff-sign"></td><td class="diff-code">	-- ponytilediä voidaan laajentaa lisäosilla (extensions); kerrotaan, mistä kansiosta ne löytyvät.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="68"></td><td class="diff-sign"></td><td class="diff-code">	map.extensions = "maps.extensions."</td><td class="diff-num" data-line="92"></td><td class="diff-sign"></td><td class="diff-code">	map.extensions = "maps.extensions."</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="69"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="93"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="70"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	-- Ajetaan <mark>hero-extension</mark>: <mark>se</mark> korvaa<mark> kartan</mark> "hero"-objektin <mark>pelaajahahmolla.</mark></td><td class="diff-num diff-add" data-line="94"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Ajetaan <mark>extensionit</mark>: <mark>hero</mark> korvaa "hero"-objektin <mark>pelaajalla ja npc rakentaa</mark></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="71"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	map:extend( "hero" )</td><td class="diff-num diff-add" data-line="95"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- jokaisesta "npc"-objektista oman hahmonsa.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="96"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	map:extend( "hero", "npc" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="72"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="97"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="73"></td><td class="diff-sign"></td><td class="diff-code">	-- Haetaan valmis pelaajahahmo talteen. Jos kartalta puuttuu hero-objekti,</td><td class="diff-num" data-line="98"></td><td class="diff-sign"></td><td class="diff-code">	-- Haetaan valmis pelaajahahmo talteen. Jos kartalta puuttuu hero-objekti,</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="74"></td><td class="diff-sign"></td><td class="diff-code">	-- kerromme siitä heti, jotta virhe huomataan kehityksen aikana.</td><td class="diff-num" data-line="99"></td><td class="diff-sign"></td><td class="diff-code">	-- kerromme siitä heti, jotta virhe huomataan kehityksen aikana.</td></tr>
+<tr class="diff-gap" data-gap="f4-g2" data-old-start="75" data-new-start="100" data-count="23"><td colspan="6"><button type="button" class="diff-expand">Näytä 23 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="98"></td><td class="diff-sign"></td><td class="diff-code">	elseif ( phase == "did" ) then</td><td class="diff-num" data-line="123"></td><td class="diff-sign"></td><td class="diff-code">	elseif ( phase == "did" ) then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="99"></td><td class="diff-sign"></td><td class="diff-code">		-- Ajetaan heti kun scene näkyy pelaajalle.</td><td class="diff-num" data-line="124"></td><td class="diff-sign"></td><td class="diff-code">		-- Ajetaan heti kun scene näkyy pelaajalle.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="100"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="125"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="101"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">		-- Aletaan kuunnella liikkumisnäppäimiä.</td><td class="diff-num diff-add" data-line="126"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		-- Aletaan kuunnella liikkumisnäppäimiä<mark> ja toimintonäppäintä</mark>.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="102"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">		controls.start( onMovementEvent )</td><td class="diff-num diff-add" data-line="127"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		controls.start( onMovementEvent<mark>, onKeyEvent</mark> )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="103"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="128"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="104"></td><td class="diff-sign"></td><td class="diff-code">	end</td><td class="diff-num" data-line="129"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="105"></td><td class="diff-sign"></td><td class="diff-code">end</td><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-gap" data-gap="f4-g3" data-old-start="106" data-new-start="131" data-count="47"><td colspan="6"><button type="button" class="diff-expand">Näytä 47 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["-- Pelinäkymä. Tällä oppitunnilla lisäämme vuorovaikutuksen ja NPC-hahmot.", "", "-- Ladataan Composer, jotta voimme käyttää sen funktioita.", "local composer = require( \"composer\" )", "", "-- json lukee Tiled-editorista viedyn kenttätiedoston Lua-taulukoksi.", "local json = require( \"json\" )", "-- ponytiled rakentaa Tiled-kartasta valmiin display-objektin.", "local ponytiled = require( \"com.ponywolf.ponytiled\" )", "-- physics tarvitaan hahmon ja seinien fysiikkaobjekteihin.", "local physics = require( \"physics\" )", "-- controls kuuntelee näppäimistöä ja antaa liikkeen suunnan.", "local controls = require( \"scripts.controls\" )", "", "-- hints näyttää pelin ohjausvinkit ruudun alakulmassa.", "local hints = require( \"scripts.hints\" )", "", "-- Luodaan uusi scene-objekti.", "local scene = composer.newScene()", "", "-- Kartta ja pelaajahahmo, joita käytämme useassa scene-funktiossa.", "local map", "local player", "", "--------------------------------------------------------------------------------------", "-- Muut funktiot:", "--------------------------------------------------------------------------------------", "", "-- controls kutsuu tätä joka framella ja antaa normalisoidun liikevektorin.", "-- Välitetään vektori pelaajahahmolle, joka hoitaa varsinaisen liikkeen.", "local function onMovementEvent( directionX, directionY )", "\tif player and player.move then", "\t\tplayer:move( directionX, directionY )", "\tend", "end", "", "", "-- controls kutsuu tätä, kun pelaaja painaa tai vapauttaa toimintonäppäimen.", "-- Ammutaan lyhyt säde hahmon katsomissuuntaan ja katsotaan, osuuko se NPC-hahmoon.", "local function onKeyEvent( action, phase )", "\tif action == \"interact\" and phase == \"down\" then", "\t\tif player and player.getFacing then", "\t\t\tlocal facingX, facingY = player:getFacing()", "", "\t\t\t-- Säde alkaa hahmon keskeltä. rayCast ei ilmoita objektia, jonka sisältä", "\t\t\t-- säde lähtee, joten hahmo ei osu itseensä.", "\t\t\tlocal reach = 34", "\t\t\tlocal toX = player.x + facingX * reach", "\t\t\tlocal toY = player.y + facingY * reach", "", "\t\t\tlocal hits = physics.rayCast( player.x, player.y, toX, toY, \"closest\" )", "\t\t\tif hits and hits[1] and hits[1].object.type == \"npc\" then", "\t\t\t\tprint( \"Talking to: \" .. tostring( hits[1].object.name ) )", "\t\t\telse", "\t\t\t\tprint( \"There is nobody ahead to talk to.\" )", "\t\t\tend", "\t\tend", "\tend", "end", "", "--------------------------------------------------------------------------------------", "-- scene event -funktiot:", "--------------------------------------------------------------------------------------", "", "-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,", "-- tai jos se on poistettu ja sitä luodaan uudelleen.", "function scene:create( event )", "\tlocal sceneGroup = self.view", "", "\t-- Käynnistetään fysiikka ennen kartan rakentamista, sillä kartan physics-layer", "\t-- luo seinien fysiikkaobjektit heti kun kartta rakennetaan. Top-down-pelissä", "\t-- ei ole painovoimaa, joten asetamme sen nollaan molemmilla akseleilla.", "\tphysics.start()", "\tphysics.setGravity( 0, 0 )", "", "\t-- Luetaan kyläkartta JSON-tiedostosta Lua-taulukoksi.", "\tlocal mapData = json.decodeFile( system.pathForFile( \"maps/village.json\", system.ResourceDirectory ) )", "", "\t-- Rakennetaan kartasta display-objekti. Toinen argumentti kertoo, mistä", "\t-- kansiosta kartan kuvatiedostot löytyvät.", "\tmap = ponytiled.new( mapData, \"maps\" )", "", "\t-- Piilotetaan physics-layer, jolla ovat näkymättömät seinät ja siirtymät.", "\t-- Kartassa layer on jo merkitty piilotetuksi, mutta piilotamme sen myös", "\t-- koodissa, jotta näet miten yksittäisen layerin saa haettua ja kätkettyä.", "\tlocal physicsLayer = map:findLayer( \"physics\" )", "\tif physicsLayer then", "\t\tphysicsLayer.isVisible = false", "\tend", "", "\t-- ponytilediä voidaan laajentaa lisäosilla (extensions); kerrotaan, mistä kansiosta ne löytyvät.", "\tmap.extensions = \"maps.extensions.\"", "", "\t-- Ajetaan extensionit: hero korvaa \"hero\"-objektin pelaajalla ja npc rakentaa", "\t-- jokaisesta \"npc\"-objektista oman hahmonsa.", "\tmap:extend( \"hero\", \"npc\" )", "", "\t-- Haetaan valmis pelaajahahmo talteen. Jos kartalta puuttuu hero-objekti,", "\t-- kerromme siitä heti, jotta virhe huomataan kehityksen aikana.", "\tplayer = map:findObject( \"hero\" )", "\tif not player then", "\t\tprint( \"WARNING: the map is missing the hero object.\" )", "\tend", "", "\t-- Lisätään kartta scenen ryhmään, jotta se piirtyy ruudulle.", "\tsceneGroup:insert( map )", "", "\t-- Luodaan ohjausvinkit ruudun alakulmaan. Ne ovat scene-ryhmässä, joten ne", "\t-- pysyvät paikallaan eivätkä liiku kameran mukana.", "\thints.create( sceneGroup )", "end", "", "", "-- show: kutsutaan kun scene on luotu mutta ei vielä näytetty.", "function scene:show( event )", "\tlocal sceneGroup = self.view", "\tlocal phase = event.phase", "", "\tif ( phase == \"will\" ) then", "\t\t-- Ajetaan ennen kuin scene tulee näkyviin.", "", "", "\telseif ( phase == \"did\" ) then", "\t\t-- Ajetaan heti kun scene näkyy pelaajalle.", "", "\t\t-- Aletaan kuunnella liikkumisnäppäimiä ja toimintonäppäintä.", "\t\tcontrols.start( onMovementEvent, onKeyEvent )", "", "\tend", "end", "", "", "-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.", "function scene:hide( event )", "\tlocal sceneGroup = self.view", "\tlocal phase = event.phase", "", "\tif ( phase == \"will\" ) then", "\t\t-- Ajetaan ennen kuin scene katoaa näkyvistä.", "\t\t-- Lopetetaan näppäinten kuuntelu ja pysäytetään hahmo.", "\t\tcontrols.stop()", "\t\tif player and player.stop then", "\t\t\tplayer:stop()", "\t\tend", "", "\telseif ( phase == \"did\" ) then", "\t\t-- Ajetaan heti kun scene on piilotettu.", "", "", "\tend", "end", "", "", "-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.", "-- Täällä siivotaan kaikki objektit ja resurssit.", "function scene:destroy( event )", "\t-- Poistetaan kartta ja nollataan viittaukset, jotta muistista ei jää roskaa.", "\t-- Pelaajahahmo on kartan sisällä, joten se poistuu kartan mukana.", "\tdisplay.remove( map )", "\tmap = nil", "\tplayer = nil", "end", "", "", "--------------------------------------------------------------------------------------", "-- Scene event -kuuntelijat:", "-- Voit valita mitä tapahtumia haluat kuunnella. Jos et esimerkiksi koskaan", "-- poista sceneä, niin silloin \"destroy\" ei välttämättä ole tarpeellinen.", "--------------------------------------------------------------------------------------", "scene:addEventListener( \"create\", scene )", "scene:addEventListener( \"show\", scene )", "scene:addEventListener( \"hide\", scene )", "scene:addEventListener( \"destroy\", scene )", "--------------------------------------------------------------------------------------", "", "-- Lopuksi palautetaan scene, jolloin tiedosto toimii Lua-moduulina.", "return scene"]</script>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-5" data-kind="code" open>
+<summary><span class="diff-path">scripts/hints.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+1</span> <span class="diff-minus">-0</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-gap" data-gap="f5-g0" data-old-start="1" data-new-start="1" data-count="39"><td colspan="4"><button type="button" class="diff-expand">Näytä 39 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="40"></td><td class="diff-num" data-line="40"></td><td class="diff-sign"></td><td class="diff-code">-- selitteen. Rivejä lisätään sitä mukaa kun peliin tulee uusia toimintoja.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="41"></td><td class="diff-num" data-line="41"></td><td class="diff-sign"></td><td class="diff-code">local rows = {</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="42"></td><td class="diff-num" data-line="42"></td><td class="diff-sign"></td><td class="diff-code">	{ actions = { "up", "left", "down", "right" }, label = "Move" },</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="43"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	{ actions = { "interact" }, label = "Talk" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="43"></td><td class="diff-num" data-line="44"></td><td class="diff-sign"></td><td class="diff-code">}</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="44"></td><td class="diff-num" data-line="45"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="45"></td><td class="diff-num" data-line="46"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-gap" data-gap="f5-g1" data-old-start="46" data-new-start="47" data-count="101"><td colspan="4"><button type="button" class="diff-expand">Näytä 101 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-gap" data-gap="f5-g0" data-old-start="1" data-new-start="1" data-count="39"><td colspan="6"><button type="button" class="diff-expand">Näytä 39 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="40"></td><td class="diff-sign"></td><td class="diff-code">-- selitteen. Rivejä lisätään sitä mukaa kun peliin tulee uusia toimintoja.</td><td class="diff-num" data-line="40"></td><td class="diff-sign"></td><td class="diff-code">-- selitteen. Rivejä lisätään sitä mukaa kun peliin tulee uusia toimintoja.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="41"></td><td class="diff-sign"></td><td class="diff-code">local rows = {</td><td class="diff-num" data-line="41"></td><td class="diff-sign"></td><td class="diff-code">local rows = {</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="42"></td><td class="diff-sign"></td><td class="diff-code">	{ actions = { "up", "left", "down", "right" }, label = "Move" },</td><td class="diff-num" data-line="42"></td><td class="diff-sign"></td><td class="diff-code">	{ actions = { "up", "left", "down", "right" }, label = "Move" },</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="43"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	{ actions = { "interact" }, label = "Talk" },</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="43"></td><td class="diff-sign"></td><td class="diff-code">}</td><td class="diff-num" data-line="44"></td><td class="diff-sign"></td><td class="diff-code">}</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="44"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="45"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="45"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td><td class="diff-num" data-line="46"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-gap" data-gap="f5-g1" data-old-start="46" data-new-start="47" data-count="101"><td colspan="6"><button type="button" class="diff-expand">Näytä 101 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["-- Ohjausvinkit. Piirtää ruudun alakulmaan pienen, läpikuultavan laatikon, joka", "-- kertoo pelaajalle mitä näppäimet tekevät. Näppäimet luetaan pelin sidonnoista,", "-- joten uudelleensidotut näppäimet näkyvät vinkeissä oikein.", "", "local hints = {}", "", "--------------------------------------------------------------------------------------", "-- Kirjastot, moduulit ja asetukset", "", "-- screen auttaa sijoittamaan laatikon ruudun reunaan.", "local screen = require( \"scripts.screen\" )", "", "-- Sidonnat luetaan ensisijaisesti käyttäjän asetuksista (loadsave.userdata) ja", "-- oletusasetukset (data.defaultSettings) toimivat varmuuskopiona.", "local loadsave = require( \"scripts.loadsave\" )", "local defaultSettings = require( \"data.defaultSettings\" )", "", "--------------------------------------------------------------------------------------", "-- Forward declarations \u0026 variables", "", "-- Vinkkilaatikon ulkoasu.", "local font = \"assets/fonts/munro.ttf\"", "local fontSize = 16", "local padding = 10", "local margin = 12", "", "-- Näppäinten näyttönimet. Sidonta käyttää Solar2D:n näppäinnimiä (esim. \"escape\"),", "-- jotka muunnetaan tässä pelaajalle selkeämpään muotoon. Nuolinäppäimet niputetaan", "-- yhteen \"Arrows\"-sanan alle.", "local keyDisplayNames = {", "\tescape = \"Esc\",", "\tspace = \"Space\",", "\tup = \"Arrows\",", "\tdown = \"Arrows\",", "\tleft = \"Arrows\",", "\tright = \"Arrows\",", "}", "", "-- Vinkkirivit. Jokainen rivi kokoaa yhden toiminnon näppäimet ja englanninkielisen", "-- selitteen. Rivejä lisätään sitä mukaa kun peliin tulee uusia toimintoja.", "local rows = {", "\t{ actions = { \"up\", \"left\", \"down\", \"right\" }, label = \"Move\" },", "\t{ actions = { \"interact\" }, label = \"Talk\" },", "}", "", "--------------------------------------------------------------------------------------", "-- Private functions", "", "-- Palautetaan käytössä olevat näppäinsidonnat. Peli kopioi asetukset", "-- loadsave.userdata-tauluun käynnistyksessä; jos sitä ei ole, käytetään oletuksia.", "local function getControlBindings()", "\tif loadsave.userdata and loadsave.userdata.controls then", "\t\treturn loadsave.userdata.controls", "\tend", "\treturn defaultSettings.controls", "end", "", "", "-- Muodostetaan yhden rivin näppäinteksti sidonnoista. Yksittäiset kirjainnäppäimet", "-- (esim. w, a, s, d) yhdistetään yhdeksi jonoksi (\"WASD\") ja nimetyt näppäimet", "-- (Space, Arrows, Esc) listataan erikseen. Näin liikkuminen näkyy muodossa", "-- \"WASD / Arrows\" ja vuorovaikutus muodossa \"E / Space\".", "local function formatKeys( actions )", "\tlocal controlBindings = getControlBindings()", "", "\tlocal letters = \"\"", "\tlocal named = {}", "\tlocal seen = {}", "", "\tfor actionIndex = 1, #actions do", "\t\tlocal boundKeys = controlBindings[actions[actionIndex]]", "\t\tif boundKeys then", "\t\t\tfor keyIndex = 1, #boundKeys do", "\t\t\t\tlocal keyName = boundKeys[keyIndex]", "\t\t\t\tlocal displayName = keyDisplayNames[keyName]", "\t\t\t\tif displayName then", "\t\t\t\t\tif not seen[displayName] then", "\t\t\t\t\t\tseen[displayName] = true", "\t\t\t\t\t\tnamed[#named+1] = displayName", "\t\t\t\t\tend", "\t\t\t\telse", "\t\t\t\t\tletters = letters .. keyName:upper()", "\t\t\t\tend", "\t\t\tend", "\t\tend", "\tend", "", "\tlocal parts = {}", "\tif letters ~= \"\" then", "\t\tparts[#parts+1] = letters", "\tend", "\tfor i = 1, #named do", "\t\tparts[#parts+1] = named[i]", "\tend", "", "\treturn table.concat( parts, \" / \" )", "end", "", "", "-- Kootaan kaikki vinkkirivit yhdeksi monirivistekstiksi.", "local function buildText()", "\tlocal lines = {}", "\tfor i = 1, #rows do", "\t\tlines[i] = formatKeys( rows[i].actions ) .. \" - \" .. rows[i].label", "\tend", "\treturn table.concat( lines, \"\\n\" )", "end", "", "--------------------------------------------------------------------------------------", "-- Public functions", "", "-- Luodaan vinkkilaatikko ja lisätään se annettuun scene-ryhmään. Ryhmä ei liiku", "-- kameran mukana, joten vinkit pysyvät paikallaan ruudun vasemmassa alakulmassa.", "-- Laatikko siivoutuu itsestään scenen mukana, joten erillistä poistoa ei tarvita.", "function hints.create( sceneGroup )", "\tlocal group = display.newGroup()", "\tsceneGroup:insert( group )", "", "\tlocal label = display.newText({", "\t\tparent = group,", "\t\ttext = buildText(),", "\t\tfont = font,", "\t\tfontSize = fontSize,", "\t\talign = \"left\",", "\t} )", "\tlabel.anchorX = 0", "\tlabel.anchorY = 1", "", "\t-- Läpikuultava tausta tekstin taakse, jotta vinkit erottuvat kartasta.", "\tlocal background = display.newRoundedRect( group, 0, 0, label.width + padding * 2, label.height + padding * 2, 6 )", "\tbackground.anchorX = 0", "\tbackground.anchorY = 1", "\tbackground:setFillColor( 0, 0.55 )", "\tbackground:toBack()", "", "\t-- Sijoitetaan laatikko ruudun vasempaan alakulmaan ja teksti reunuksen sisään.", "\tgroup.x = screen.minX + margin", "\tgroup.y = screen.maxY - margin", "\tlabel.x = padding", "\tlabel.y = -padding", "", "\treturn group", "end", "", "--------------------------------------------------------------------------------------", "", "return hints"]</script>
+</div>
+</details>
+</div>
+<nav class="version-nav" aria-label="Muutosnavigointi">
+  <a class="nav-prev" href="../../../../games/7-top-down/versio-4/muutokset/">Edelliset muutokset</a>
+  <a class="nav-next" href="../../../../games/7-top-down/versio-6/muutokset/">Seuraavat muutokset</a>
+</nav>
+<script>
+// Diff page behaviour: view toggle, saved view choice, and gap expansion.
+(() => {
+    const STORAGE_KEY = "rg-diff-view";
+    const DEFAULT_VIEW = "unified";
+    const VIEWS = ["unified", "split"];
+
+    const toggle = document.querySelector(".diff-toggle");
+    const viewButtons = toggle ? toggle.querySelectorAll("button[data-view]") : [];
+    const parsedSources = new WeakMap();
+
+    // Chromium throws from the localStorage getter itself when storage is blocked.
+    const withStorage = (action, fallback) => {
+        try {
+            return action(window.localStorage);
+        } catch (error) {
+            // Without storage only the remembered view is lost; the page works on the fallback.
+            return fallback;
+        }
+    };
+
+    const readView = () => {
+        const stored = withStorage((storage) => storage.getItem(STORAGE_KEY), null);
+        return VIEWS.includes(stored) ? stored : DEFAULT_VIEW;
+    };
+
+    const saveView = (view) => withStorage((storage) => storage.setItem(STORAGE_KEY, view), null);
+
+    const applyView = (view) => {
+        document.querySelectorAll(".diff-files[data-view]").forEach((files) => {
+            files.dataset.view = view;
+        });
+
+        viewButtons.forEach((button) => {
+            button.setAttribute("aria-pressed", button.dataset.view === view ? "true" : "false");
+        });
+    };
+
+    if (toggle) {
+        toggle.hidden = false;
+        applyView(readView());
+
+        viewButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applyView(button.dataset.view);
+                saveView(button.dataset.view);
+            });
+        });
+    }
+
+    const sourceLines = (file) => {
+        if (!parsedSources.has(file)) {
+            parsedSources.set(file, JSON.parse(file.querySelector("script.diff-source").textContent));
+        }
+
+        return parsedSources.get(file);
+    };
+
+    const createCell = (className) => {
+        const cell = document.createElement("td");
+        cell.className = className;
+        return cell;
+    };
+
+    const numberCell = (line) => {
+        const cell = createCell("diff-num");
+        cell.dataset.line = String(line);
+        return cell;
+    };
+
+    const codeCell = (text) => {
+        const cell = createCell("diff-code");
+        cell.textContent = text;
+        return cell;
+    };
+
+    const contextRow = (isSplit, oldLine, newLine, text) => {
+        const row = document.createElement("tr");
+        row.className = "diff-ctx";
+
+        if (isSplit) {
+            row.append(
+                numberCell(oldLine), createCell("diff-sign"), codeCell(text),
+                numberCell(newLine), createCell("diff-sign"), codeCell(text)
+            );
+        } else {
+            row.append(numberCell(oldLine), numberCell(newLine), createCell("diff-sign"), codeCell(text));
+        }
+
+        return row;
+    };
+
+    const expandGap = (button) => {
+        const clickedRow = button.closest("tr.diff-gap");
+        const file = button.closest(".diff-file");
+        const oldStart = Number(clickedRow.dataset.oldStart);
+        const newStart = Number(clickedRow.dataset.newStart);
+        const count = Number(clickedRow.dataset.count);
+        const lines = sourceLines(file).slice(newStart - 1, newStart - 1 + count);
+        const selector = `tr.diff-gap[data-gap="${CSS.escape(clickedRow.dataset.gap)}"]`;
+        let focusTarget;
+
+        file.querySelectorAll(selector).forEach((gapRow) => {
+            const isSplit = gapRow.closest("table").classList.contains("diff-split");
+            const rows = lines.map((text, index) => contextRow(isSplit, oldStart + index, newStart + index, text));
+
+            if (gapRow === clickedRow) {
+                focusTarget = rows[0].querySelector(".diff-code");
+            }
+
+            gapRow.replaceWith(...rows);
+        });
+
+        // The button is gone, so keep focus at the same spot in the reading order.
+        focusTarget.tabIndex = -1;
+        focusTarget.focus({ preventScroll: true });
+    };
+
+    document.addEventListener("click", (event) => {
+        const button = event.target.closest("button.diff-expand");
+
+        if (button) {
+            expandGap(button);
+        }
+    });
+})();
+</script>
+    </main>
+    <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://www.rosogames.fi">Roso Games</a> &amp; <a href="https://erantanen.com">Eetu Rantanen</a></p>
+</footer>
+    <script>
+    (() => {
+        const toggles = document.querySelectorAll(".crumb-toggle");
+
+        const closeAll = () => {
+            toggles.forEach((toggle) => {
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.parentNode.classList.remove("open");
+            });
+        };
+
+        toggles.forEach((toggle) => {
+            toggle.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const open = toggle.getAttribute("aria-expanded") === "true";
+                closeAll();
+                if (!open) {
+                    toggle.setAttribute("aria-expanded", "true");
+                    toggle.parentNode.classList.add("open");
+                }
+            });
+        });
+
+        document.querySelectorAll(".cat-toggle").forEach((cat) => {
+            cat.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const menu = cat.closest(".crumb-cat-menu");
+                menu.querySelectorAll(".cat-toggle").forEach((other) => {
+                    other.setAttribute("aria-expanded", other === cat ? "true" : "false");
+                });
+            });
+        });
+
+        document.addEventListener("click", closeAll);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeAll();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

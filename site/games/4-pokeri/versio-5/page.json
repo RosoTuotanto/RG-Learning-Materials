@@ -1,0 +1,15 @@
+{
+  "title": "Versio 5",
+  "description": "Jaetaan pelin koodi erillisiin moduuleihin selkeyden vuoksi.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-5",
+  "lessons": [
+    {
+      "title": "Jaetaan koodi moduuleihin",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/jaetaan-koodi-moduuleihin/"
+    },
+    {
+      "title": "Luodaan deck-moduuli",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/luodaan-deck-moduuli/"
+    }
+  ]
+}

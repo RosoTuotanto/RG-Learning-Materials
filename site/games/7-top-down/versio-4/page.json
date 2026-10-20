@@ -1,0 +1,11 @@
+{
+  "title": "Versio 4",
+  "description": "Lisätään kylän aukiolle kaivo, joka on yksittäinen kuva eikä tile. Kuva tuodaan Tiledissä Collection of Images -tilesetinä ja asetetaan object layeriin, ja sen ominaisuudet tekevät siitä fysiikkaobjektin, johon pelaaja törmää.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-4",
+  "lessons": [
+    {
+      "title": "Kuvan lisääminen kylään",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/kuvan-lisaaminen-kylaan/"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Versio 5",
+  "description": "Lisätään level select -scene taustoineen, otsikoineen ja back-nappeineen kenttien valintaa varten.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-5",
+  "lessons": [
+    {
+      "title": "Luodaan level select scene",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/luodaan-level-select-scene/"
+    }
+  ]
+}

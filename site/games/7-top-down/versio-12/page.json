@@ -1,0 +1,11 @@
+{
+  "title": "Versio 12",
+  "description": "Parannellaan loadsave-moduulia: lisätään pcall-suojattu json.decode, joka palauttaa nil-arvon vioittuneesta tiedostosta, käsitellään puuttuva tiedosto ja lisätään loadsave.delete uuden pelin aloitusta varten.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-12",
+  "lessons": [
+    {
+      "title": "Parannellaan loadsave-moduulia",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/parannellaan-loadsave-moduulia/"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+display.setStatusBar( display.HiddenStatusBar )
+
+
+
+
+
+
+
+

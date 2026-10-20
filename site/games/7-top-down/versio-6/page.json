@@ -1,0 +1,11 @@
+{
+  "title": "Versio 6",
+  "description": "Lisätään kameramoduuli: kameran rajat lasketaan kartan koosta, kamera seuraa pelaajaa deadzonen ja smoothingin kanssa, ja seuranta pysähtyy, kun scenestä poistutaan. Näin pelaaja ei enää kävele ruudun ulkopuolelle.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-6",
+  "lessons": [
+    {
+      "title": "Kameran lisääminen peliin",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/kameran-lisaaminen-peliin/"
+    }
+  ]
+}

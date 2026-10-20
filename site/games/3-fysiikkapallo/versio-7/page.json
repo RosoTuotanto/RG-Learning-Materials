@@ -1,0 +1,11 @@
+{
+  "title": "Versio 7",
+  "description": "Tehdään käyttöliittymästä dynaaminen, jotta se mukautuu eri ruutukokoihin ja näyttää selkeästi pelialueen rajan.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/3-fysiikkapallo/versio-7",
+  "lessons": [
+    {
+      "title": "Dynaaminen UI",
+      "url": "https://www.rosogames.fi/lms/3-pelisuunnittelu-ja-prototyypittaminen/lessons/dynaaminen-ui/"
+    }
+  ]
+}

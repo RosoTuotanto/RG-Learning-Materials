@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0C0E">
+    <meta name="description" content="Lisätään inventaario ja esineiden poimiminen: esine-extension, poiminta vuorovaikutuksella ja ruudukkoinventaario (i-näppäin), joka alustetaan kahdella aloitusesineellä. Marlow antaa viestin omalla tarinakomennolla, ja vanhin ottaa sen vastaan.">
+    <meta name="generator" content="RG-Learning-Materials site builder">
+    <title>Top-down-seikkailu - versio 10</title>
+    <link rel="icon" href="../../../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+    <link rel="manifest" href="../../../site.webmanifest">
+    <meta name="author" content="Eetu Rantanen">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://rosotuotanto.github.io/RG-Learning-Materials/games/7-top-down/versio-10/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Roso Games opetuspelit ja demot">
+    <meta property="og:title" content="Top-down-seikkailu - versio 10">
+    <meta property="og:description" content="Lisätään inventaario ja esineiden poimiminen: esine-extension, poiminta vuorovaikutuksella ja ruudukkoinventaario (i-näppäin), joka alustetaan kahdella aloitusesineellä. Marlow antaa viestin omalla tarinakomennolla, ja vanhin ottaa sen vastaan.">
+    <meta property="og:url" content="https://rosotuotanto.github.io/RG-Learning-Materials/games/7-top-down/versio-10/">
+    <meta property="og:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-7-top-down.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta property="og:locale" content="fi_FI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Top-down-seikkailu - versio 10">
+    <meta name="twitter:description" content="Lisätään inventaario ja esineiden poimiminen: esine-extension, poiminta vuorovaikutuksella ja ruudukkoinventaario (i-näppäin), joka alustetaan kahdella aloitusesineellä. Marlow antaa viestin omalla tarinakomennolla, ja vanhin ottaa sen vastaan.">
+    <meta name="twitter:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-7-top-down.png">
+    <meta name="twitter:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta name="apple-mobile-web-app-title" content="Roso Games">
+    <style>
+@font-face {
+    font-family: "Archivo";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../assets/fonts/archivo-700.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Archivo";
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../assets/fonts/archivo-800.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../assets/fonts/inter-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../assets/fonts/inter-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../assets/fonts/inter-700.woff2") format("woff2");
+}
+
+:root {
+    --color-bg: #0B0C0E;
+    --color-surface: #15171B;
+    --color-surface-hover: #1C1F25;
+    --color-text: #F4F5F7;
+    --color-muted: #9AA0AB;
+    --color-accent: #C6F04B;
+    --color-accent-hover: #D6FF6E;
+    --color-accent-ink: #0B0C0E;
+    --color-border: #33383F;
+    --color-line: #4A505A;
+    --font-head: "Archivo", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radius: 4px;
+    --shadow-hard: 5px 5px 0 rgba(0, 0, 0, 0.55);
+    --shadow-hard-lg: 8px 8px 0 rgba(0, 0, 0, 0.6);
+    --space: 1rem;
+    --max-width: 72rem;
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --diff-del-bg: #3B1B20;
+    --diff-del-mark: #7D2A33;
+    --diff-del-text: #FF9A9A;
+    --diff-add-bg: #17331D;
+    --diff-add-mark: #2E6A31;
+    --diff-add-text: #A6EE7A;
+    --diff-moved-text: #9CC2FF;
+    --diff-num-text: #B4BAC4;
+    --diff-empty-bg: #101114;
+    --diff-gap-bg: #1C1F25;
+    --diff-checker-dark: #1C1F25;
+    --diff-checker-light: #2C3038;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.6;
+}
+
+h1,
+h2 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+main.content {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem var(--space) 3.5rem;
+}
+
+h1 {
+    margin: 0.25rem 0 1rem;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+h1 mark {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    padding: 0 0.15em;
+}
+
+h2 {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin: 0 0 0.75rem;
+    font-weight: 800;
+    border-bottom: 5px solid var(--color-accent);
+    padding-bottom: 0.15rem;
+}
+
+.lead {
+    font-size: 1.12rem;
+    color: var(--color-muted);
+    max-width: 46rem;
+}
+
+/* Header / navbar */
+
+.site-header {
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-line);
+}
+
+.site-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.4rem var(--space);
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.brand:hover,
+.brand:focus-visible {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.brand-mark {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+}
+
+.breadcrumb {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.crumb-trail {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.crumb a {
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.crumb a:hover,
+.crumb a:focus-visible {
+    color: var(--color-accent);
+}
+
+.crumb-trail > li.crumb + li.crumb::before {
+    content: ">";
+    margin-right: 0.35rem;
+    color: var(--color-line);
+    font-weight: 700;
+}
+
+.crumb.current {
+    color: var(--color-muted);
+}
+
+.crumb-dropdown {
+    position: relative;
+}
+
+.crumb-toggle {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0.15rem 0.25rem;
+    cursor: pointer;
+}
+
+.crumb-toggle:hover,
+.crumb-toggle:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.crumb-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+    margin: 0.5rem 0 0;
+    padding: 0.35rem 0;
+    min-width: 13rem;
+    list-style: none;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+.crumb-dropdown.open .crumb-menu {
+    display: block;
+}
+
+.crumb-menu li {
+    margin: 0;
+}
+
+.crumb-menu a {
+    display: block;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.crumb-menu a:hover,
+.crumb-menu a:focus-visible {
+    background: var(--color-surface-hover);
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.crumb-menu a.current {
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+/* Cascading Peli/Demo category menu */
+
+.cat-toggle {
+    font: inherit;
+    font-weight: 700;
+    width: 100%;
+    text-align: left;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.cat-toggle::after {
+    content: "\203A";
+    color: var(--color-accent);
+    transition: transform 0.15s ease;
+}
+
+.cat-toggle[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+}
+
+.cat-toggle:hover,
+.cat-toggle:focus-visible {
+    background: var(--color-surface-hover);
+}
+
+.cat-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0.15rem 0 0.35rem;
+}
+
+.cat-toggle[aria-expanded="true"] + .cat-list {
+    display: block;
+}
+
+.cat-list a {
+    padding-left: 1.75rem;
+}
+
+.cat-empty {
+    padding: 0.4rem 1rem 0.4rem 1.75rem;
+    color: var(--color-muted);
+    font-style: italic;
+    white-space: nowrap;
+}
+
+/* Hero */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.hero-text .lead {
+    max-width: 40rem;
+}
+
+.lang-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.lang-flags {
+    display: inline-flex;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+}
+
+.lang-flags img {
+    height: 1.1em;
+    width: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-line);
+}
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background: var(--color-line);
+    margin: 3rem 0;
+}
+
+.hero-media {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-logo {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+}
+
+.hero-shot {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+/* Sections and card lists */
+
+.section {
+    margin: 2.75rem 0 0;
+}
+
+.section-lead {
+    color: var(--color-muted);
+    max-width: 46rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.empty-note {
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.card-list a {
+    display: block;
+    padding: 1.15rem 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.card-list a:hover,
+.card-list a:focus-visible {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--color-accent);
+}
+
+/* Game / demo stage */
+
+.game-stage {
+    display: flex;
+    justify-content: center;
+    margin: 1.75rem 0;
+    overflow-x: auto;
+}
+
+.game-frame {
+    max-width: 100%;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: #000000;
+    box-shadow: var(--shadow-hard);
+}
+
+.page-meta {
+    margin: 1.25rem 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.page-meta p {
+    margin: 0.4rem 0;
+}
+
+.source {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.source-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.gh-logo {
+    height: 1.4rem;
+    width: auto;
+    display: block;
+    transition: opacity 0.15s ease;
+}
+
+.source-link:hover .gh-logo,
+.source-link:focus-visible .gh-logo {
+    opacity: 0.8;
+}
+
+.version-nav {
+    display: flex;
+    gap: 1.25rem;
+    margin: 2rem 0 0;
+}
+
+.button-link,
+.version-nav a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: 2px solid var(--color-accent-ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible,
+.version-nav a:hover,
+.version-nav a:focus-visible {
+    background: var(--color-accent-hover);
+    color: var(--color-accent-ink);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.version-nav .nav-next {
+    margin-left: auto;
+}
+
+/* Version diff pages */
+
+.diff-summary {
+    margin: 0 0 0.4rem;
+    font-weight: 600;
+}
+
+.back-link {
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle[hidden] {
+    display: none;
+}
+
+.diff-toggle button {
+    font: inherit;
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 1.1rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.diff-toggle button:hover,
+.diff-toggle button:focus-visible {
+    border-color: var(--color-accent);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.diff-toggle button[aria-pressed="true"] {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    border-color: var(--color-accent-ink);
+}
+
+.diff-files[data-view="unified"] .diff-split,
+.diff-files[data-view="split"] .diff-unified {
+    display: none;
+}
+
+.diff-file {
+    margin: 0 0 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    scroll-margin-top: 1rem;
+}
+
+.diff-file > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.diff-file > summary::-webkit-details-marker {
+    display: none;
+}
+
+.diff-file > summary::before {
+    content: "\203A";
+    color: var(--color-accent);
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.15s ease;
+}
+
+.diff-file[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.diff-file > summary:hover {
+    background: var(--color-surface-hover);
+}
+
+.diff-path {
+    flex: 1 1 12rem;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.diff-tag,
+.diff-status {
+    padding: 0.05rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border: 2px solid currentColor;
+    border-radius: var(--radius);
+}
+
+.diff-tag {
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.diff-status {
+    color: var(--color-text);
+}
+
+.diff-status[data-status="added"] {
+    color: var(--diff-add-text);
+}
+
+.diff-status[data-status="removed"] {
+    color: var(--diff-del-text);
+}
+
+.diff-status[data-status="moved"] {
+    color: var(--diff-moved-text);
+}
+
+.diff-stat {
+    display: inline-flex;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.diff-plus {
+    color: var(--diff-add-text);
+}
+
+.diff-minus {
+    color: var(--diff-del-text);
+}
+
+.diff-body {
+    border-top: 2px solid var(--color-line);
+}
+
+.diff-note {
+    margin: 0;
+    padding: 0.75rem 1rem;
+}
+
+.diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.diff-table td {
+    padding: 0 0.3rem;
+    vertical-align: top;
+}
+
+.diff-num,
+.diff-sign {
+    width: 4ch;
+    color: var(--diff-num-text);
+    text-align: right;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.diff-sign {
+    width: 2ch;
+    text-align: center;
+    font-weight: 700;
+}
+
+.diff-num::before {
+    content: attr(data-line);
+}
+
+.diff-sign::before {
+    content: attr(data-sign);
+}
+
+.diff-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 4;
+    color: var(--color-text);
+}
+
+.diff-split .diff-code {
+    width: 50%;
+}
+
+.diff-split .diff-code:nth-child(3) {
+    border-right: 2px solid var(--color-line);
+}
+
+.diff-table .diff-del {
+    background: var(--diff-del-bg);
+}
+
+.diff-table .diff-add {
+    background: var(--diff-add-bg);
+}
+
+.diff-table .diff-empty {
+    background: var(--diff-empty-bg);
+}
+
+.diff-del .diff-sign,
+.diff-sign.diff-del {
+    color: var(--diff-del-text);
+}
+
+.diff-add .diff-sign,
+.diff-sign.diff-add {
+    color: var(--diff-add-text);
+}
+
+.diff-code mark {
+    color: var(--color-text);
+    border-radius: 2px;
+}
+
+.diff-del mark {
+    background: var(--diff-del-mark);
+}
+
+.diff-add mark {
+    background: var(--diff-add-mark);
+}
+
+.diff-code[tabindex="-1"]:focus-visible {
+    outline-offset: -3px;
+}
+
+.diff-gap td {
+    padding: 0.3rem 0.75rem;
+    background: var(--diff-gap-bg);
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    border-top: 1px dashed var(--color-line);
+    border-bottom: 1px dashed var(--color-line);
+}
+
+.diff-expand {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: 0.15rem 0.75rem;
+    cursor: pointer;
+}
+
+.diff-expand:hover,
+.diff-expand:focus-visible {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent);
+}
+
+.diff-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.diff-figure {
+    flex: 1 1 14rem;
+    min-width: 0;
+    margin: 0;
+}
+
+.diff-figure figcaption {
+    margin-top: 0.4rem;
+    font-weight: 700;
+}
+
+/* Pixel art is drawn at native size, so scale it up without smoothing. */
+.diff-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 22rem;
+    object-fit: contain;
+    image-rendering: pixelated;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: repeating-conic-gradient(var(--diff-checker-light) 0% 25%, var(--diff-checker-dark) 0% 50%) 0 0 / 16px 16px;
+}
+
+.diff-sounds .diff-figure {
+    max-width: 28rem;
+}
+
+.diff-audio {
+    display: block;
+    width: 100%;
+}
+
+/* 404 */
+
+.error-page {
+    text-align: center;
+    padding-top: 4rem;
+}
+
+.error-code {
+    font-family: var(--font-head);
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+}
+
+.error-page .lead {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+
+.site-footer {
+    flex-shrink: 0;
+    background: var(--color-surface);
+    border-top: 2px solid var(--color-line);
+    padding: 1.5rem var(--space);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.site-footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+@media (min-width: 48rem) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero {
+        grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .diff-table {
+        font-size: 0.85rem;
+    }
+
+    .diff-table td {
+        padding: 0 0.5rem;
+    }
+
+    .diff-num {
+        width: 5ch;
+    }
+
+    .diff-sign {
+        width: 2.5ch;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+
+    .card-list a:hover,
+    .card-list a:focus-visible,
+    .button-link:hover,
+    .button-link:focus-visible,
+    .version-nav a:hover,
+    .version-nav a:focus-visible,
+    .diff-toggle button:hover,
+    .diff-toggle button:focus-visible {
+        transform: none;
+    }
+}
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../../../" aria-label="Roso Games - Etusivu">
+                <img class="brand-mark" src="../../../favicon.svg" alt="Roso Games">
+            </a>
+            <nav class="breadcrumb" aria-label="Murupolku">
+<ol class="crumb-trail">
+<li class="crumb"><a href="../../../">Etusivu</a></li>
+<li class="crumb crumb-dropdown crumb-category">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Peli</button>
+  <ul class="crumb-menu crumb-cat-menu">
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="true">Peli</button>
+      <ul class="cat-list">
+        <li><a href="../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+        <li><a href="../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+        <li><a href="../../../games/4-pokeri/">Pokeri</a></li>
+        <li><a href="../../../games/5-visual-novel/">Visual novel</a></li>
+        <li><a href="../../../games/6-platformer/">Platformer</a></li>
+        <li><a class="current" href="../../../games/7-top-down/">Top-down-seikkailu</a></li>
+      </ul>
+    </li>
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="false">Demo</button>
+      <ul class="cat-list">
+        <li><a href="../../../demos/animations/">Frame-by-frame ja skeletal animation</a></li>
+        <li><a href="../../../demos/feedback/">Palaute ja game feel</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="crumb crumb-dropdown">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Top-down-seikkailu</button>
+  <ul class="crumb-menu">
+    <li><a href="../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+    <li><a href="../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+    <li><a href="../../../games/4-pokeri/">Pokeri</a></li>
+    <li><a href="../../../games/5-visual-novel/">Visual novel</a></li>
+    <li><a href="../../../games/6-platformer/">Platformer</a></li>
+    <li><a class="current" href="../../../games/7-top-down/">Top-down-seikkailu</a></li>
+  </ul>
+</li>
+<li class="crumb crumb-dropdown">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Versio 10</button>
+  <ul class="crumb-menu">
+    <li><a href="../../../games/7-top-down/versio-1/">Versio 1</a></li>
+    <li><a href="../../../games/7-top-down/versio-2/">Versio 2</a></li>
+    <li><a href="../../../games/7-top-down/versio-3/">Versio 3</a></li>
+    <li><a href="../../../games/7-top-down/versio-4/">Versio 4</a></li>
+    <li><a href="../../../games/7-top-down/versio-5/">Versio 5</a></li>
+    <li><a href="../../../games/7-top-down/versio-6/">Versio 6</a></li>
+    <li><a href="../../../games/7-top-down/versio-7/">Versio 7</a></li>
+    <li><a href="../../../games/7-top-down/versio-8/">Versio 8</a></li>
+    <li><a href="../../../games/7-top-down/versio-9/">Versio 9</a></li>
+    <li><a class="current" href="../../../games/7-top-down/versio-10/">Versio 10</a></li>
+    <li><a href="../../../games/7-top-down/versio-11/">Versio 11</a></li>
+    <li><a href="../../../games/7-top-down/versio-12/">Versio 12</a></li>
+    <li><a href="../../../games/7-top-down/versio-13/">Versio 13</a></li>
+    <li><a href="../../../games/7-top-down/versio-14/">Versio 14</a></li>
+    <li><a href="../../../games/7-top-down/versio-15/">Versio 15</a></li>
+  </ul>
+</li>
+</ol>
+</nav>
+        </div>
+    </header>
+    <main class="content">
+<h1>Top-down-seikkailu - versio 10</h1>
+<div class="page-meta">
+  <p class="lesson">Oppitunti: <a href="https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/inventaario-ja-esineiden-poimiminen/" target="_blank" rel="noopener">Inventaario ja esineiden poimiminen</a></p>
+  <p class="source">Lähdekoodi: <a class="source-link" href="https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-10" target="_blank" rel="noopener"><img class="gh-logo" src="../../../assets/github-lockup-white.svg" alt="Lähdekoodi GitHubissa"></a></p>
+  <p class="changes">Muutokset: <a href="./muutokset/">versio 9 -&gt; versio 10</a></p>
+</div>
+<div class="game-stage">
+  <iframe class="game-frame" src="./app/index.html" title="Top-down-seikkailu - versio 10" width="960" height="640"></iframe>
+</div>
+<nav class="version-nav" aria-label="Versionavigointi">
+  <a class="nav-prev" href="../../../games/7-top-down/versio-9/">Edellinen versio</a>
+  <a class="nav-next" href="../../../games/7-top-down/versio-11/">Seuraava versio</a>
+</nav>
+    </main>
+    <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://www.rosogames.fi">Roso Games</a> &amp; <a href="https://erantanen.com">Eetu Rantanen</a></p>
+</footer>
+    <script>
+    (() => {
+        const toggles = document.querySelectorAll(".crumb-toggle");
+
+        const closeAll = () => {
+            toggles.forEach((toggle) => {
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.parentNode.classList.remove("open");
+            });
+        };
+
+        toggles.forEach((toggle) => {
+            toggle.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const open = toggle.getAttribute("aria-expanded") === "true";
+                closeAll();
+                if (!open) {
+                    toggle.setAttribute("aria-expanded", "true");
+                    toggle.parentNode.classList.add("open");
+                }
+            });
+        });
+
+        document.querySelectorAll(".cat-toggle").forEach((cat) => {
+            cat.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const menu = cat.closest(".crumb-cat-menu");
+                menu.querySelectorAll(".cat-toggle").forEach((other) => {
+                    other.setAttribute("aria-expanded", other === cat ? "true" : "false");
+                });
+            });
+        });
+
+        document.addEventListener("click", closeAll);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeAll();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

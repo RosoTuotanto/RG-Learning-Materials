@@ -1,0 +1,18 @@
+[
+	{
+		"title": "npcHouse",
+		"body": "Elder Wren: Welcome to Saltford, traveller. I'm Wren, the elder of this village.\n\n[[Ask about the village|npcHouseKyla]]\n[[Say goodbye|npcHouseHyvasti]]"
+	},
+	{
+		"title": "npcHouseKyla",
+		"body": "Elder Wren: Saltford is a quiet fishing village. Most of us have lived by the sea all our lives.\nElder Wren: The road through the south gate leads down to the beach.\n\n[[Say goodbye|npcHouseHyvasti]]"
+	},
+	{
+		"title": "npcHouseHyvasti",
+		"body": "Elder Wren: Safe travels."
+	},
+	{
+		"title": "npcBeach",
+		"body": "Stranger: Hello there. The sea breeze is lovely today."
+	}
+]

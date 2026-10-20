@@ -1,0 +1,54 @@
+
+	This folder holds artwork from two sources:
+
+	- tiles/ and characters/: Kenney's Pixel Platformer (1.2) pack.
+	- backgrounds/menu.png: drawn by Eetu Rantanen.
+
+	Note: tiles/ and characters/ hold stripped down versions of Kenney's original tilesheets.
+	      You can find the original artwork by following the links.
+
+	-----
+
+
+	Pixel Platformer (1.2)
+
+	Created/distributed by Kenney (www.kenney.nl)
+	Creation date: 07-10-2023
+
+			------------------------------
+
+	License: (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	You can use this content for personal, educational, and commercial purposes.
+
+	Support by crediting 'Kenney' or 'www.kenney.nl' (this is not a requirement)
+
+			------------------------------
+
+	• Website : www.kenney.nl
+	• Donate  : www.kenney.nl/donate
+
+	• Patreon : patreon.com/kenney
+	
+	Follow on social media for updates:
+
+	• Twitter:	twitter.com/KenneyNL
+	• Instagram: 	instagram.com/kenney_nl
+	• Mastodon:	mastodon.gamedev.place/@kenney
+
+
+	-----
+
+
+	backgrounds/menu.png
+
+	Created by Eetu Rantanen
+	Creation date: 16-10-2026
+
+			------------------------------
+
+	License: (Creative Commons Zero, CC0)
+	http://creativecommons.org/publicdomain/zero/1.0/
+
+	You can use this content for personal, educational, and commercial purposes.

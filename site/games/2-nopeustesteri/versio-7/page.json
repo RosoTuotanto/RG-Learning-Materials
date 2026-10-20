@@ -1,0 +1,15 @@
+{
+  "title": "Versio 7",
+  "description": "Tehdään pelistä uudelleenpelattava, jotta sen voi aloittaa alusta ilman uudelleenkäynnistystä.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-7",
+  "lessons": [
+    {
+      "title": "New Game -tila ja pelitilat",
+      "url": "https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/tehdaan-pelista-uudelleenpelattava/"
+    },
+    {
+      "title": "Indikaattorin hallinta ja Game Over",
+      "url": "https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/indikaattorin-hallinta-ja-game-over/"
+    }
+  ]
+}

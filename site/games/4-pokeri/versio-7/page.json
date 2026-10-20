@@ -1,0 +1,15 @@
+{
+  "title": "Versio 7",
+  "description": "Lisätään käyttöliittymään pakan näyttäminen.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-7",
+  "lessons": [
+    {
+      "title": "Pelin UI - Pakka",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/pelin-ui-pakka/"
+    },
+    {
+      "title": "Pakan koodin jäsentely",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/pakan-koodin-jasentely/"
+    }
+  ]
+}

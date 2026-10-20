@@ -1,0 +1,11 @@
+{
+  "title": "Versio 2",
+  "description": "Tehdään pallosta pelaajan liikuteltava.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/3-fysiikkapallo/versio-2",
+  "lessons": [
+    {
+      "title": "Tehdään pallosta liikuteltava",
+      "url": "https://www.rosogames.fi/lms/3-pelisuunnittelu-ja-prototyypittaminen/lessons/tehdaan-pallosta-liikuteltava/"
+    }
+  ]
+}

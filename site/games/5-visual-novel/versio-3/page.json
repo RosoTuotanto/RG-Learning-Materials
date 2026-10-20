@@ -1,0 +1,15 @@
+{
+  "title": "Versio 3",
+  "description": "Rakennetaan menu-scene: gradienttitausta, pelin nimi ja logo sekä Start- ja Quit-napit.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-3",
+  "lessons": [
+    {
+      "title": "Luodaan menu scene",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/luodaan-menu-scene/"
+    },
+    {
+      "title": "Pelin nimi, logo ja napit",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/pelin-nimi-logo-ja-napit/"
+    }
+  ]
+}

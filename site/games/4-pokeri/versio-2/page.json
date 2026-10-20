@@ -1,0 +1,11 @@
+{
+  "title": "Versio 2",
+  "description": "Lisätään toiminnallisuus, joka sekoittaa korttipakan.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-2",
+  "lessons": [
+    {
+      "title": "Sekoitetaan pakka",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/sekoitetaan-pakka/"
+    }
+  ]
+}

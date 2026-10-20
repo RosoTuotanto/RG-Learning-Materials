@@ -1,0 +1,11 @@
+{
+  "title": "Versio 2",
+  "description": "Lisätään pelaajahahmo: yksi staattinen frame Kenneyn hahmojen image sheetistä ja pyöreä dynaaminen fysiikkaobjekti. Kartan fysiikkaseinät pysäyttävät pelaajan, mutta liikkumista ei vielä ole.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-2",
+  "lessons": [
+    {
+      "title": "Lisätään pelaajahahmo seikkailuun",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/lisataan-pelaajahahmo-2/"
+    }
+  ]
+}

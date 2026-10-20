@@ -1,0 +1,23 @@
+{
+  "baseUrl": "https://rosotuotanto.github.io/RG-Learning-Materials/",
+  "siteName": "Roso Games opetuspelit ja demot",
+  "inLanguage": "fi",
+  "ogLocale": "fi_FI",
+  "ogImage": "assets/og-image.png",
+  "appleTitle": "Roso Games",
+
+  "author": {
+    "id": "https://www.erantanen.com/#eetu-rantanen",
+    "name": "Eetu Rantanen",
+    "alternateName": "XeduR",
+    "url": "https://www.erantanen.com/",
+    "sameAs": ["https://github.com/XeduR/", "https://www.erantanen.com/", "https://www.xedur.com/"]
+  },
+
+  "publisher": {
+    "idFragment": "#roso-games",
+    "name": "Roso Games",
+    "url": "https://www.rosogames.fi",
+    "sameAs": ["https://www.rosogames.fi", "https://rosogames.itch.io/"]
+  }
+}

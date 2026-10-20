@@ -1,0 +1,11 @@
+{
+  "title": "Versio 9",
+  "description": "Määritetään pelin vaiheet, jotka ohjaavat pelin etenemistä.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-9",
+  "lessons": [
+    {
+      "title": "Määritetään pelin vaiheet",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/maaritetaan-pelin-vaiheet/"
+    }
+  ]
+}

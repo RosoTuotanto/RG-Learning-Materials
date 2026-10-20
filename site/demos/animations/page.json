@@ -1,0 +1,5 @@
+{
+  "title": "Frame-by-frame ja skeletal animation",
+  "description": "Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu \"change style\" -napista. Kolmella napilla valitaan animaatio (idle, walk tai jump), ja skeletal-puolella jokaisesta animaatiosta toistetaan vuorotellen kolmea eri varianttia.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/demos/animations"
+}

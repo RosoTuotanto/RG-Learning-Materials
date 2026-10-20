@@ -1,0 +1,11 @@
+{
+  "title": "Versio 2",
+  "description": "Lisätään näytölle useita pelinappuloita yhden sijaan.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-2",
+  "lessons": [
+    {
+      "title": "Luodaan useita pelinappuloita",
+      "url": "https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/luodaan-useita-pelinappuloita/"
+    }
+  ]
+}

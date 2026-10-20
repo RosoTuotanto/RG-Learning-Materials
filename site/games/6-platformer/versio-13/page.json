@@ -1,0 +1,15 @@
+{
+  "title": "Versio 13",
+  "description": "Lisätään kenttään esteet (piikit), keräiltävät esineet ja maali.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-13",
+  "lessons": [
+    {
+      "title": "Lisätään esteet ja trampoliinit",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/lisataan-esteet-ja-trampoliinit/"
+    },
+    {
+      "title": "Lisätään keräiltävät esineet ja maali",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/lisataan-kerailtavat-esineet-ja-maali/"
+    }
+  ]
+}

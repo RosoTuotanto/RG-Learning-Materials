@@ -1,0 +1,10 @@
+[
+	{
+		"title": "Exterior",
+		"body": "<<img, \"assets/images/levels/office_exterior.png\">>\n\nAnother day, another crime.\n\nI guess the city never sleeps.\n\n[[Go inside|Office]]"
+	},
+	{
+		"title": "Office",
+		"body": "<<img, \"assets/images/levels/office_interior.png\">>\n\n[[I forgot something outside|Exterior]]"
+	}
+]

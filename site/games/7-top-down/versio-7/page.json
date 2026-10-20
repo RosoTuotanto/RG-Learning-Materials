@@ -1,0 +1,11 @@
+{
+  "title": "Versio 7",
+  "description": "Toteutetaan kenttien väliset siirtymät: uloskäyntisensorit, tuplasiirtymien esto, scenen uudelleenlataus ja jokaisen kulkuyhteyden oma spawn-piste. Jos nimettyä spawn-pistettä ei löydy, pelaaja jää tarkoituksella kohtaan 0,0. Kaikki kolme karttaa ovat nyt saavutettavissa.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-7",
+  "lessons": [
+    {
+      "title": "Kenttien välinen siirtymä",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/kenttien-valinen-siirtyma/"
+    }
+  ]
+}

@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0C0E">
+    <meta name="description" content="Platformer: muutokset versio 15 -&gt; versio 16.">
+    <meta name="generator" content="RG-Learning-Materials site builder">
+    <title>Platformer - versio 16: muutokset</title>
+    <link rel="icon" href="../../../../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../../../../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../../../apple-touch-icon.png">
+    <link rel="manifest" href="../../../../site.webmanifest">
+    <meta name="author" content="Eetu Rantanen">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Roso Games opetuspelit ja demot">
+    <meta property="og:title" content="Platformer - versio 16: muutokset">
+    <meta property="og:description" content="Platformer: muutokset versio 15 -&gt; versio 16.">
+    <meta property="og:url" content="https://rosotuotanto.github.io/RG-Learning-Materials/games/6-platformer/versio-16/muutokset/">
+    <meta property="og:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-6-platformer.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta property="og:locale" content="fi_FI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Platformer - versio 16: muutokset">
+    <meta name="twitter:description" content="Platformer: muutokset versio 15 -&gt; versio 16.">
+    <meta name="twitter:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-6-platformer.png">
+    <meta name="twitter:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta name="apple-mobile-web-app-title" content="Roso Games">
+    <style>
+@font-face {
+    font-family: "Archivo";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/archivo-700.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Archivo";
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/archivo-800.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-700.woff2") format("woff2");
+}
+
+:root {
+    --color-bg: #0B0C0E;
+    --color-surface: #15171B;
+    --color-surface-hover: #1C1F25;
+    --color-text: #F4F5F7;
+    --color-muted: #9AA0AB;
+    --color-accent: #C6F04B;
+    --color-accent-hover: #D6FF6E;
+    --color-accent-ink: #0B0C0E;
+    --color-border: #33383F;
+    --color-line: #4A505A;
+    --font-head: "Archivo", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radius: 4px;
+    --shadow-hard: 5px 5px 0 rgba(0, 0, 0, 0.55);
+    --shadow-hard-lg: 8px 8px 0 rgba(0, 0, 0, 0.6);
+    --space: 1rem;
+    --max-width: 72rem;
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --diff-del-bg: #3B1B20;
+    --diff-del-mark: #7D2A33;
+    --diff-del-text: #FF9A9A;
+    --diff-add-bg: #17331D;
+    --diff-add-mark: #2E6A31;
+    --diff-add-text: #A6EE7A;
+    --diff-moved-text: #9CC2FF;
+    --diff-num-text: #B4BAC4;
+    --diff-empty-bg: #101114;
+    --diff-gap-bg: #1C1F25;
+    --diff-checker-dark: #1C1F25;
+    --diff-checker-light: #2C3038;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.6;
+}
+
+h1,
+h2 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+main.content {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem var(--space) 3.5rem;
+}
+
+h1 {
+    margin: 0.25rem 0 1rem;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+h1 mark {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    padding: 0 0.15em;
+}
+
+h2 {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin: 0 0 0.75rem;
+    font-weight: 800;
+    border-bottom: 5px solid var(--color-accent);
+    padding-bottom: 0.15rem;
+}
+
+.lead {
+    font-size: 1.12rem;
+    color: var(--color-muted);
+    max-width: 46rem;
+}
+
+/* Header / navbar */
+
+.site-header {
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-line);
+}
+
+.site-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.4rem var(--space);
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.brand:hover,
+.brand:focus-visible {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.brand-mark {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+}
+
+.breadcrumb {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.crumb-trail {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.crumb a {
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.crumb a:hover,
+.crumb a:focus-visible {
+    color: var(--color-accent);
+}
+
+.crumb-trail > li.crumb + li.crumb::before {
+    content: ">";
+    margin-right: 0.35rem;
+    color: var(--color-line);
+    font-weight: 700;
+}
+
+.crumb.current {
+    color: var(--color-muted);
+}
+
+.crumb-dropdown {
+    position: relative;
+}
+
+.crumb-toggle {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0.15rem 0.25rem;
+    cursor: pointer;
+}
+
+.crumb-toggle:hover,
+.crumb-toggle:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.crumb-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+    margin: 0.5rem 0 0;
+    padding: 0.35rem 0;
+    min-width: 13rem;
+    list-style: none;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+.crumb-dropdown.open .crumb-menu {
+    display: block;
+}
+
+.crumb-menu li {
+    margin: 0;
+}
+
+.crumb-menu a {
+    display: block;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.crumb-menu a:hover,
+.crumb-menu a:focus-visible {
+    background: var(--color-surface-hover);
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.crumb-menu a.current {
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+/* Cascading Peli/Demo category menu */
+
+.cat-toggle {
+    font: inherit;
+    font-weight: 700;
+    width: 100%;
+    text-align: left;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.cat-toggle::after {
+    content: "\203A";
+    color: var(--color-accent);
+    transition: transform 0.15s ease;
+}
+
+.cat-toggle[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+}
+
+.cat-toggle:hover,
+.cat-toggle:focus-visible {
+    background: var(--color-surface-hover);
+}
+
+.cat-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0.15rem 0 0.35rem;
+}
+
+.cat-toggle[aria-expanded="true"] + .cat-list {
+    display: block;
+}
+
+.cat-list a {
+    padding-left: 1.75rem;
+}
+
+.cat-empty {
+    padding: 0.4rem 1rem 0.4rem 1.75rem;
+    color: var(--color-muted);
+    font-style: italic;
+    white-space: nowrap;
+}
+
+/* Hero */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.hero-text .lead {
+    max-width: 40rem;
+}
+
+.lang-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.lang-flags {
+    display: inline-flex;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+}
+
+.lang-flags img {
+    height: 1.1em;
+    width: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-line);
+}
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background: var(--color-line);
+    margin: 3rem 0;
+}
+
+.hero-media {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-logo {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+}
+
+.hero-shot {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+/* Sections and card lists */
+
+.section {
+    margin: 2.75rem 0 0;
+}
+
+.section-lead {
+    color: var(--color-muted);
+    max-width: 46rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.empty-note {
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.card-list a {
+    display: block;
+    padding: 1.15rem 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.card-list a:hover,
+.card-list a:focus-visible {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--color-accent);
+}
+
+/* Game / demo stage */
+
+.game-stage {
+    display: flex;
+    justify-content: center;
+    margin: 1.75rem 0;
+    overflow-x: auto;
+}
+
+.game-frame {
+    max-width: 100%;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: #000000;
+    box-shadow: var(--shadow-hard);
+}
+
+.page-meta {
+    margin: 1.25rem 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.page-meta p {
+    margin: 0.4rem 0;
+}
+
+.source {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.source-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.gh-logo {
+    height: 1.4rem;
+    width: auto;
+    display: block;
+    transition: opacity 0.15s ease;
+}
+
+.source-link:hover .gh-logo,
+.source-link:focus-visible .gh-logo {
+    opacity: 0.8;
+}
+
+.version-nav {
+    display: flex;
+    gap: 1.25rem;
+    margin: 2rem 0 0;
+}
+
+.button-link,
+.version-nav a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: 2px solid var(--color-accent-ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible,
+.version-nav a:hover,
+.version-nav a:focus-visible {
+    background: var(--color-accent-hover);
+    color: var(--color-accent-ink);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.version-nav .nav-next {
+    margin-left: auto;
+}
+
+/* Version diff pages */
+
+.diff-summary {
+    margin: 0 0 0.4rem;
+    font-weight: 600;
+}
+
+.back-link {
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle[hidden] {
+    display: none;
+}
+
+.diff-toggle button {
+    font: inherit;
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 1.1rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.diff-toggle button:hover,
+.diff-toggle button:focus-visible {
+    border-color: var(--color-accent);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.diff-toggle button[aria-pressed="true"] {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    border-color: var(--color-accent-ink);
+}
+
+.diff-files[data-view="unified"] .diff-split,
+.diff-files[data-view="split"] .diff-unified {
+    display: none;
+}
+
+.diff-file {
+    margin: 0 0 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    scroll-margin-top: 1rem;
+}
+
+.diff-file > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.diff-file > summary::-webkit-details-marker {
+    display: none;
+}
+
+.diff-file > summary::before {
+    content: "\203A";
+    color: var(--color-accent);
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.15s ease;
+}
+
+.diff-file[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.diff-file > summary:hover {
+    background: var(--color-surface-hover);
+}
+
+.diff-path {
+    flex: 1 1 12rem;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.diff-tag,
+.diff-status {
+    padding: 0.05rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border: 2px solid currentColor;
+    border-radius: var(--radius);
+}
+
+.diff-tag {
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.diff-status {
+    color: var(--color-text);
+}
+
+.diff-status[data-status="added"] {
+    color: var(--diff-add-text);
+}
+
+.diff-status[data-status="removed"] {
+    color: var(--diff-del-text);
+}
+
+.diff-status[data-status="moved"] {
+    color: var(--diff-moved-text);
+}
+
+.diff-stat {
+    display: inline-flex;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.diff-plus {
+    color: var(--diff-add-text);
+}
+
+.diff-minus {
+    color: var(--diff-del-text);
+}
+
+.diff-body {
+    border-top: 2px solid var(--color-line);
+}
+
+.diff-note {
+    margin: 0;
+    padding: 0.75rem 1rem;
+}
+
+.diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.diff-table td {
+    padding: 0 0.3rem;
+    vertical-align: top;
+}
+
+.diff-num,
+.diff-sign {
+    width: 4ch;
+    color: var(--diff-num-text);
+    text-align: right;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.diff-sign {
+    width: 2ch;
+    text-align: center;
+    font-weight: 700;
+}
+
+.diff-num::before {
+    content: attr(data-line);
+}
+
+.diff-sign::before {
+    content: attr(data-sign);
+}
+
+.diff-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 4;
+    color: var(--color-text);
+}
+
+.diff-split .diff-code {
+    width: 50%;
+}
+
+.diff-split .diff-code:nth-child(3) {
+    border-right: 2px solid var(--color-line);
+}
+
+.diff-table .diff-del {
+    background: var(--diff-del-bg);
+}
+
+.diff-table .diff-add {
+    background: var(--diff-add-bg);
+}
+
+.diff-table .diff-empty {
+    background: var(--diff-empty-bg);
+}
+
+.diff-del .diff-sign,
+.diff-sign.diff-del {
+    color: var(--diff-del-text);
+}
+
+.diff-add .diff-sign,
+.diff-sign.diff-add {
+    color: var(--diff-add-text);
+}
+
+.diff-code mark {
+    color: var(--color-text);
+    border-radius: 2px;
+}
+
+.diff-del mark {
+    background: var(--diff-del-mark);
+}
+
+.diff-add mark {
+    background: var(--diff-add-mark);
+}
+
+.diff-code[tabindex="-1"]:focus-visible {
+    outline-offset: -3px;
+}
+
+.diff-gap td {
+    padding: 0.3rem 0.75rem;
+    background: var(--diff-gap-bg);
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    border-top: 1px dashed var(--color-line);
+    border-bottom: 1px dashed var(--color-line);
+}
+
+.diff-expand {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: 0.15rem 0.75rem;
+    cursor: pointer;
+}
+
+.diff-expand:hover,
+.diff-expand:focus-visible {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent);
+}
+
+.diff-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.diff-figure {
+    flex: 1 1 14rem;
+    min-width: 0;
+    margin: 0;
+}
+
+.diff-figure figcaption {
+    margin-top: 0.4rem;
+    font-weight: 700;
+}
+
+/* Pixel art is drawn at native size, so scale it up without smoothing. */
+.diff-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 22rem;
+    object-fit: contain;
+    image-rendering: pixelated;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: repeating-conic-gradient(var(--diff-checker-light) 0% 25%, var(--diff-checker-dark) 0% 50%) 0 0 / 16px 16px;
+}
+
+.diff-sounds .diff-figure {
+    max-width: 28rem;
+}
+
+.diff-audio {
+    display: block;
+    width: 100%;
+}
+
+/* 404 */
+
+.error-page {
+    text-align: center;
+    padding-top: 4rem;
+}
+
+.error-code {
+    font-family: var(--font-head);
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+}
+
+.error-page .lead {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+
+.site-footer {
+    flex-shrink: 0;
+    background: var(--color-surface);
+    border-top: 2px solid var(--color-line);
+    padding: 1.5rem var(--space);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.site-footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+@media (min-width: 48rem) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero {
+        grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .diff-table {
+        font-size: 0.85rem;
+    }
+
+    .diff-table td {
+        padding: 0 0.5rem;
+    }
+
+    .diff-num {
+        width: 5ch;
+    }
+
+    .diff-sign {
+        width: 2.5ch;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+
+    .card-list a:hover,
+    .card-list a:focus-visible,
+    .button-link:hover,
+    .button-link:focus-visible,
+    .version-nav a:hover,
+    .version-nav a:focus-visible,
+    .diff-toggle button:hover,
+    .diff-toggle button:focus-visible {
+        transform: none;
+    }
+}
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../../../../" aria-label="Roso Games - Etusivu">
+                <img class="brand-mark" src="../../../../favicon.svg" alt="Roso Games">
+            </a>
+            <nav class="breadcrumb" aria-label="Murupolku">
+<ol class="crumb-trail">
+<li class="crumb"><a href="../../../../">Etusivu</a></li>
+<li class="crumb crumb-dropdown crumb-category">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Peli</button>
+  <ul class="crumb-menu crumb-cat-menu">
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="true">Peli</button>
+      <ul class="cat-list">
+        <li><a href="../../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+        <li><a href="../../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+        <li><a href="../../../../games/4-pokeri/">Pokeri</a></li>
+        <li><a href="../../../../games/5-visual-novel/">Visual novel</a></li>
+        <li><a class="current" href="../../../../games/6-platformer/">Platformer</a></li>
+        <li><a href="../../../../games/7-top-down/">Top-down-seikkailu</a></li>
+      </ul>
+    </li>
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="false">Demo</button>
+      <ul class="cat-list">
+        <li><a href="../../../../demos/animations/">Frame-by-frame ja skeletal animation</a></li>
+        <li><a href="../../../../demos/feedback/">Palaute ja game feel</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="crumb crumb-dropdown">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Platformer</button>
+  <ul class="crumb-menu">
+    <li><a href="../../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+    <li><a href="../../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+    <li><a href="../../../../games/4-pokeri/">Pokeri</a></li>
+    <li><a href="../../../../games/5-visual-novel/">Visual novel</a></li>
+    <li><a class="current" href="../../../../games/6-platformer/">Platformer</a></li>
+    <li><a href="../../../../games/7-top-down/">Top-down-seikkailu</a></li>
+  </ul>
+</li>
+<li class="crumb"><a href="../../../../games/6-platformer/versio-16/">Versio 16</a></li>
+<li class="crumb current">Muutokset</li>
+</ol>
+</nav>
+        </div>
+    </header>
+    <main class="content">
+<h1>Platformer - versio 16: muutokset</h1>
+<p class="diff-summary">Versio 15 -&gt; versio 16 | 3 tiedostoa, +157 -63</p>
+<p class="back-link"><a href="../">Takaisin: Versio 16</a></p>
+<div class="diff-toggle" role="group" aria-label="Näkymä" hidden>
+  <button type="button" data-view="unified" aria-pressed="true">Yksi sarake</button>
+  <button type="button" data-view="split" aria-pressed="false">Rinnakkain</button>
+</div>
+<div class="diff-files" data-view="unified">
+<details class="diff-file" id="tiedosto-1" data-kind="code" open>
+<summary><span class="diff-path">scenes/game.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+43</span> <span class="diff-minus">-5</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-gap" data-gap="f1-g0" data-old-start="1" data-new-start="1" data-count="27"><td colspan="4"><button type="button" class="diff-expand">Näytä 27 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="28"></td><td class="diff-num" data-line="28"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="29"></td><td class="diff-num" data-line="29"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="30"></td><td class="diff-num" data-line="30"></td><td class="diff-sign"></td><td class="diff-code">local player, counterHP, levelBorder</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="31"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local sceneGroup</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="32"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="33"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local function menuClose()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="34"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	display.remove( ui.menuGroup )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="35"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	ui.menuGroup = nil</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="36"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	composer.hideOverlay( 0 )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="37"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="38"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	physics.start()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="39"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	transition.resumeAll()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="40"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	timer.resumeAll()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="41"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="42"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="43"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local function menuOpen( menuType )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="44"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	physics.pause()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="45"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	transition.pauseAll()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="46"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	timer.pauseAll()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="47"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="48"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Lisätään viittauksia menun tilaan.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="49"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	ui.menuType = menuType</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="50"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	ui.callback = menuClose</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="51"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="52"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	ui.newMenu( sceneGroup, menuType )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="53"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="31"></td><td class="diff-num" data-line="54"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="32"></td><td class="diff-num" data-line="55"></td><td class="diff-sign"></td><td class="diff-code">local function movePlayer( vx, vy )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="33"></td><td class="diff-num" data-line="56"></td><td class="diff-sign"></td><td class="diff-code">	player:move( vx, vy )</td></tr>
+<tr class="diff-gap" data-gap="f1-g1" data-old-start="34" data-new-start="57" data-count="4"><td colspan="4"><button type="button" class="diff-expand">Näytä 4 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="38"></td><td class="diff-num" data-line="61"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="39"></td><td class="diff-num" data-line="62"></td><td class="diff-sign"></td><td class="diff-code">	if action == "jump" then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="40"></td><td class="diff-num" data-line="63"></td><td class="diff-sign"></td><td class="diff-code">		player:jump( phase == "down" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="64"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="65"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	elseif action == "menu" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="66"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		if phase == "down" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="67"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			if ui.menuGroup then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="68"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				if ui.menuType == "pause" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="69"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">					menuClose()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="70"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="71"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			else</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="72"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				menuOpen( "pause" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="73"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="74"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="41"></td><td class="diff-num" data-line="75"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="42"></td><td class="diff-num" data-line="76"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="43"></td><td class="diff-num" data-line="77"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g2" data-old-start="44" data-new-start="78" data-count="37"><td colspan="4"><button type="button" class="diff-expand">Näytä 37 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="81"></td><td class="diff-num" data-line="115"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="82"></td><td class="diff-num" data-line="116"></td><td class="diff-sign"></td><td class="diff-code">		elseif id == "goal" then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="83"></td><td class="diff-num" data-line="117"></td><td class="diff-sign"></td><td class="diff-code">			event.other:complete()</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="84"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">			print( "gameover - player won" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="118"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			player.isDead = true</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="119"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			controls.stop()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="120"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			menuOpen( "complete" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="85"></td><td class="diff-num" data-line="121"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="86"></td><td class="diff-num" data-line="122"></td><td class="diff-sign"></td><td class="diff-code">		elseif id == "spikes" or id == "levelBorder" or event.other.isEnemy then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="87"></td><td class="diff-num" data-line="123"></td><td class="diff-sign"></td><td class="diff-code">			local isBorder = (id == "levelBorder")</td></tr>
+<tr class="diff-gap" data-gap="f1-g3" data-old-start="88" data-new-start="124" data-count="6"><td colspan="4"><button type="button" class="diff-expand">Näytä 6 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="94"></td><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="95"></td><td class="diff-num" data-line="131"></td><td class="diff-sign"></td><td class="diff-code">			if player.isDead then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="96"></td><td class="diff-num" data-line="132"></td><td class="diff-sign"></td><td class="diff-code">				controls.stop()</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="97"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">				<mark>print</mark>( "gameover<mark> - player died</mark>" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="133"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				<mark>menuOpen</mark>( "gameover" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="98"></td><td class="diff-num" data-line="134"></td><td class="diff-sign"></td><td class="diff-code">			end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="99"></td><td class="diff-num" data-line="135"></td><td class="diff-sign"></td><td class="diff-code">		end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="100"></td><td class="diff-num" data-line="136"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g4" data-old-start="101" data-new-start="137" data-count="19"><td colspan="4"><button type="button" class="diff-expand">Näytä 19 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="120"></td><td class="diff-num" data-line="156"></td><td class="diff-sign"></td><td class="diff-code">-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="121"></td><td class="diff-num" data-line="157"></td><td class="diff-sign"></td><td class="diff-code">-- tai jos se on poistettu ja sitä luodaan uudelleen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="122"></td><td class="diff-num" data-line="158"></td><td class="diff-sign"></td><td class="diff-code">function scene:create( event )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="123"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	<mark>local </mark>sceneGroup = self.view</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="159"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="124"></td><td class="diff-num" data-line="160"></td><td class="diff-sign"></td><td class="diff-code">	-- Tämä koodi ajetaan kun scene on luotu,</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="125"></td><td class="diff-num" data-line="161"></td><td class="diff-sign"></td><td class="diff-code">	-- mutta sitä ei vielä näytetä ruudulla.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="126"></td><td class="diff-num" data-line="162"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="127"></td><td class="diff-num" data-line="163"></td><td class="diff-sign"></td><td class="diff-code">	-- Haetaan ladattava kenttä event.params.level muuttujasta.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="128"></td><td class="diff-num" data-line="164"></td><td class="diff-sign"></td><td class="diff-code">	-- Jos kenttää ei ole määritetty, asetetaan oletukseksi "tutorial.json".</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="129"></td><td class="diff-num" data-line="165"></td><td class="diff-sign"></td><td class="diff-code">	local level = event.params and event.params.level or "tutorial.json"</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="166"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	ui.currentLevel = level</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="130"></td><td class="diff-num" data-line="167"></td><td class="diff-sign"></td><td class="diff-code">	print( "Ladataan kenttä: " .. level )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="131"></td><td class="diff-num" data-line="168"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="132"></td><td class="diff-num" data-line="169"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g5" data-old-start="133" data-new-start="170" data-count="90"><td colspan="4"><button type="button" class="diff-expand">Näytä 90 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="223"></td><td class="diff-num" data-line="260"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="224"></td><td class="diff-num" data-line="261"></td><td class="diff-sign"></td><td class="diff-code">-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="225"></td><td class="diff-num" data-line="262"></td><td class="diff-sign"></td><td class="diff-code">function scene:hide( event )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="226"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	<mark>local </mark>sceneGroup = self.view</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="263"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="227"></td><td class="diff-num" data-line="264"></td><td class="diff-sign"></td><td class="diff-code">	local phase = event.phase</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="228"></td><td class="diff-num" data-line="265"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="229"></td><td class="diff-num" data-line="266"></td><td class="diff-sign"></td><td class="diff-code">	if ( phase == "will" ) then</td></tr>
+<tr class="diff-gap" data-gap="f1-g6" data-old-start="230" data-new-start="267" data-count="11"><td colspan="4"><button type="button" class="diff-expand">Näytä 11 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="241"></td><td class="diff-num" data-line="278"></td><td class="diff-sign"></td><td class="diff-code">-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="242"></td><td class="diff-num" data-line="279"></td><td class="diff-sign"></td><td class="diff-code">-- Täällä siivotaan kaikki objektit ja resurssit.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="243"></td><td class="diff-num" data-line="280"></td><td class="diff-sign"></td><td class="diff-code">function scene:destroy( event )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="244"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	<mark>local </mark>sceneGroup = self.view</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="281"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="245"></td><td class="diff-num" data-line="282"></td><td class="diff-sign"></td><td class="diff-code">	-- Ajetaan juuri ennen kuin scene tuhotaan.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="283"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	ui.menuGroup = nil</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="246"></td><td class="diff-num" data-line="284"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="247"></td><td class="diff-num" data-line="285"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="248"></td><td class="diff-num" data-line="286"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g7" data-old-start="249" data-new-start="287" data-count="13"><td colspan="4"><button type="button" class="diff-expand">Näytä 13 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-gap" data-gap="f1-g0" data-old-start="1" data-new-start="1" data-count="27"><td colspan="6"><button type="button" class="diff-expand">Näytä 27 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="28"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td><td class="diff-num" data-line="28"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="29"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="29"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="30"></td><td class="diff-sign"></td><td class="diff-code">local player, counterHP, levelBorder</td><td class="diff-num" data-line="30"></td><td class="diff-sign"></td><td class="diff-code">local player, counterHP, levelBorder</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="31"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local sceneGroup</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="32"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="33"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local function menuClose()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="34"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	display.remove( ui.menuGroup )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="35"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	ui.menuGroup = nil</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="36"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	composer.hideOverlay( 0 )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="37"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="38"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	physics.start()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="39"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	transition.resumeAll()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="40"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	timer.resumeAll()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="41"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="42"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="43"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local function menuOpen( menuType )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="44"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	physics.pause()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="45"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	transition.pauseAll()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="46"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	timer.pauseAll()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="47"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="48"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Lisätään viittauksia menun tilaan.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="49"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	ui.menuType = menuType</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="50"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	ui.callback = menuClose</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="51"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="52"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	ui.newMenu( sceneGroup, menuType )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="53"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="54"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">local function movePlayer( vx, vy )</td><td class="diff-num" data-line="55"></td><td class="diff-sign"></td><td class="diff-code">local function movePlayer( vx, vy )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="33"></td><td class="diff-sign"></td><td class="diff-code">	player:move( vx, vy )</td><td class="diff-num" data-line="56"></td><td class="diff-sign"></td><td class="diff-code">	player:move( vx, vy )</td></tr>
+<tr class="diff-gap" data-gap="f1-g1" data-old-start="34" data-new-start="57" data-count="4"><td colspan="6"><button type="button" class="diff-expand">Näytä 4 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="38"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="61"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="39"></td><td class="diff-sign"></td><td class="diff-code">	if action == "jump" then</td><td class="diff-num" data-line="62"></td><td class="diff-sign"></td><td class="diff-code">	if action == "jump" then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="40"></td><td class="diff-sign"></td><td class="diff-code">		player:jump( phase == "down" )</td><td class="diff-num" data-line="63"></td><td class="diff-sign"></td><td class="diff-code">		player:jump( phase == "down" )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="64"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="65"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	elseif action == "menu" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="66"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		if phase == "down" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="67"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			if ui.menuGroup then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="68"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				if ui.menuType == "pause" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="69"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">					menuClose()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="70"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="71"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			else</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="72"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				menuOpen( "pause" )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="73"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="74"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="41"></td><td class="diff-sign"></td><td class="diff-code">	end</td><td class="diff-num" data-line="75"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="42"></td><td class="diff-sign"></td><td class="diff-code">end</td><td class="diff-num" data-line="76"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="43"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="77"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g2" data-old-start="44" data-new-start="78" data-count="37"><td colspan="6"><button type="button" class="diff-expand">Näytä 37 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="81"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="115"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="82"></td><td class="diff-sign"></td><td class="diff-code">		elseif id == "goal" then</td><td class="diff-num" data-line="116"></td><td class="diff-sign"></td><td class="diff-code">		elseif id == "goal" then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="83"></td><td class="diff-sign"></td><td class="diff-code">			event.other:complete()</td><td class="diff-num" data-line="117"></td><td class="diff-sign"></td><td class="diff-code">			event.other:complete()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="84"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">			print( "gameover - player won" )</td><td class="diff-num diff-add" data-line="118"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			player.isDead = true</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="119"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			controls.stop()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="120"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			menuOpen( "complete" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="85"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="121"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="86"></td><td class="diff-sign"></td><td class="diff-code">		elseif id == "spikes" or id == "levelBorder" or event.other.isEnemy then</td><td class="diff-num" data-line="122"></td><td class="diff-sign"></td><td class="diff-code">		elseif id == "spikes" or id == "levelBorder" or event.other.isEnemy then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="87"></td><td class="diff-sign"></td><td class="diff-code">			local isBorder = (id == "levelBorder")</td><td class="diff-num" data-line="123"></td><td class="diff-sign"></td><td class="diff-code">			local isBorder = (id == "levelBorder")</td></tr>
+<tr class="diff-gap" data-gap="f1-g3" data-old-start="88" data-new-start="124" data-count="6"><td colspan="6"><button type="button" class="diff-expand">Näytä 6 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="94"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="95"></td><td class="diff-sign"></td><td class="diff-code">			if player.isDead then</td><td class="diff-num" data-line="131"></td><td class="diff-sign"></td><td class="diff-code">			if player.isDead then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="96"></td><td class="diff-sign"></td><td class="diff-code">				controls.stop()</td><td class="diff-num" data-line="132"></td><td class="diff-sign"></td><td class="diff-code">				controls.stop()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="97"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">				<mark>print</mark>( "gameover<mark> - player died</mark>" )</td><td class="diff-num diff-add" data-line="133"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				<mark>menuOpen</mark>( "gameover" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="98"></td><td class="diff-sign"></td><td class="diff-code">			end</td><td class="diff-num" data-line="134"></td><td class="diff-sign"></td><td class="diff-code">			end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="99"></td><td class="diff-sign"></td><td class="diff-code">		end</td><td class="diff-num" data-line="135"></td><td class="diff-sign"></td><td class="diff-code">		end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="100"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="136"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g4" data-old-start="101" data-new-start="137" data-count="19"><td colspan="6"><button type="button" class="diff-expand">Näytä 19 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="120"></td><td class="diff-sign"></td><td class="diff-code">-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,</td><td class="diff-num" data-line="156"></td><td class="diff-sign"></td><td class="diff-code">-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="121"></td><td class="diff-sign"></td><td class="diff-code">-- tai jos se on poistettu ja sitä luodaan uudelleen.</td><td class="diff-num" data-line="157"></td><td class="diff-sign"></td><td class="diff-code">-- tai jos se on poistettu ja sitä luodaan uudelleen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="122"></td><td class="diff-sign"></td><td class="diff-code">function scene:create( event )</td><td class="diff-num" data-line="158"></td><td class="diff-sign"></td><td class="diff-code">function scene:create( event )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="123"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	<mark>local </mark>sceneGroup = self.view</td><td class="diff-num diff-add" data-line="159"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="124"></td><td class="diff-sign"></td><td class="diff-code">	-- Tämä koodi ajetaan kun scene on luotu,</td><td class="diff-num" data-line="160"></td><td class="diff-sign"></td><td class="diff-code">	-- Tämä koodi ajetaan kun scene on luotu,</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="125"></td><td class="diff-sign"></td><td class="diff-code">	-- mutta sitä ei vielä näytetä ruudulla.</td><td class="diff-num" data-line="161"></td><td class="diff-sign"></td><td class="diff-code">	-- mutta sitä ei vielä näytetä ruudulla.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="126"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="162"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="127"></td><td class="diff-sign"></td><td class="diff-code">	-- Haetaan ladattava kenttä event.params.level muuttujasta.</td><td class="diff-num" data-line="163"></td><td class="diff-sign"></td><td class="diff-code">	-- Haetaan ladattava kenttä event.params.level muuttujasta.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="128"></td><td class="diff-sign"></td><td class="diff-code">	-- Jos kenttää ei ole määritetty, asetetaan oletukseksi "tutorial.json".</td><td class="diff-num" data-line="164"></td><td class="diff-sign"></td><td class="diff-code">	-- Jos kenttää ei ole määritetty, asetetaan oletukseksi "tutorial.json".</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="129"></td><td class="diff-sign"></td><td class="diff-code">	local level = event.params and event.params.level or "tutorial.json"</td><td class="diff-num" data-line="165"></td><td class="diff-sign"></td><td class="diff-code">	local level = event.params and event.params.level or "tutorial.json"</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="166"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	ui.currentLevel = level</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code">	print( "Ladataan kenttä: " .. level )</td><td class="diff-num" data-line="167"></td><td class="diff-sign"></td><td class="diff-code">	print( "Ladataan kenttä: " .. level )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="131"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="168"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="132"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="169"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g5" data-old-start="133" data-new-start="170" data-count="90"><td colspan="6"><button type="button" class="diff-expand">Näytä 90 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="223"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="260"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="224"></td><td class="diff-sign"></td><td class="diff-code">-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.</td><td class="diff-num" data-line="261"></td><td class="diff-sign"></td><td class="diff-code">-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="225"></td><td class="diff-sign"></td><td class="diff-code">function scene:hide( event )</td><td class="diff-num" data-line="262"></td><td class="diff-sign"></td><td class="diff-code">function scene:hide( event )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="226"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	<mark>local </mark>sceneGroup = self.view</td><td class="diff-num diff-add" data-line="263"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="227"></td><td class="diff-sign"></td><td class="diff-code">	local phase = event.phase</td><td class="diff-num" data-line="264"></td><td class="diff-sign"></td><td class="diff-code">	local phase = event.phase</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="228"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="265"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="229"></td><td class="diff-sign"></td><td class="diff-code">	if ( phase == "will" ) then</td><td class="diff-num" data-line="266"></td><td class="diff-sign"></td><td class="diff-code">	if ( phase == "will" ) then</td></tr>
+<tr class="diff-gap" data-gap="f1-g6" data-old-start="230" data-new-start="267" data-count="11"><td colspan="6"><button type="button" class="diff-expand">Näytä 11 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="241"></td><td class="diff-sign"></td><td class="diff-code">-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.</td><td class="diff-num" data-line="278"></td><td class="diff-sign"></td><td class="diff-code">-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="242"></td><td class="diff-sign"></td><td class="diff-code">-- Täällä siivotaan kaikki objektit ja resurssit.</td><td class="diff-num" data-line="279"></td><td class="diff-sign"></td><td class="diff-code">-- Täällä siivotaan kaikki objektit ja resurssit.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="243"></td><td class="diff-sign"></td><td class="diff-code">function scene:destroy( event )</td><td class="diff-num" data-line="280"></td><td class="diff-sign"></td><td class="diff-code">function scene:destroy( event )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="244"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	<mark>local </mark>sceneGroup = self.view</td><td class="diff-num diff-add" data-line="281"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="245"></td><td class="diff-sign"></td><td class="diff-code">	-- Ajetaan juuri ennen kuin scene tuhotaan.</td><td class="diff-num" data-line="282"></td><td class="diff-sign"></td><td class="diff-code">	-- Ajetaan juuri ennen kuin scene tuhotaan.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="283"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	ui.menuGroup = nil</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="246"></td><td class="diff-sign"></td><td class="diff-code">end</td><td class="diff-num" data-line="284"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="247"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="285"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="248"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="286"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f1-g7" data-old-start="249" data-new-start="287" data-count="13"><td colspan="6"><button type="button" class="diff-expand">Näytä 13 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["-- Ladataan Composer, jotta voimme käyttää sen funktioita.", "local composer = require( \"composer\" )", "", "-- Luodaan uusi scene-objekti.", "local scene = composer.newScene()", "local screen = require( \"scripts.screen\" )", "local ui = require( \"scripts.ui\" )", "local ponytiled = require( \"com.ponywolf.ponytiled\" )", "local json = require( \"json\" )", "local playerModule = require( \"scripts.player\" )", "local spikesModule = require( \"scripts.spikes\" )", "local trampolineModule = require( \"scripts.trampoline\" )", "local heartModule = require( \"scripts.heart\" )", "local coinModule = require( \"scripts.coin\" )", "local goalModule = require( \"scripts.goal\" )", "local controls = require( \"scripts.controls\" )", "local loadsave = require( \"scripts.loadsave\" )", "", "local physics = require( \"physics\" )", "physics.start()", "physics.setGravity( 0, 9.8 )", "-- physics.setDrawMode( \"hybrid\" )  -- Vaihtoehdot: \"normal\", \"debug\", \"hybrid\"", "", "--------------------------------------------------------------------------------------", "-- scene event -funktioiden ulkopuolella oleva koodi suoritetaan vain kerran, ellei", "-- sceneä poisteta kokonaan omposer.removeScene() avulla. Täällä kannattaa määrittää", "-- yleiset muuttujat, jotta ne ovat käytettävissä kaikissa scene-funktioissa.", "--------------------------------------------------------------------------------------", "", "local player, counterHP, levelBorder", "local sceneGroup", "", "local function menuClose()", "\tdisplay.remove( ui.menuGroup )", "\tui.menuGroup = nil", "\tcomposer.hideOverlay( 0 )", "", "\tphysics.start()", "\ttransition.resumeAll()", "\ttimer.resumeAll()", "end", "", "local function menuOpen( menuType )", "\tphysics.pause()", "\ttransition.pauseAll()", "\ttimer.pauseAll()", "", "\t-- Lisätään viittauksia menun tilaan.", "\tui.menuType = menuType", "\tui.callback = menuClose", "", "\tui.newMenu( sceneGroup, menuType )", "end", "", "local function movePlayer( vx, vy )", "\tplayer:move( vx, vy )", "end", "", "local function keyPressed( action, phase )", "\t-- print( \"action\", action, \"phase\", phase )", "", "\tif action == \"jump\" then", "\t\tplayer:jump( phase == \"down\" )", "", "\telseif action == \"menu\" then", "\t\tif phase == \"down\" then", "\t\t\tif ui.menuGroup then", "\t\t\t\tif ui.menuType == \"pause\" then", "\t\t\t\t\tmenuClose()", "\t\t\t\tend", "\t\t\telse", "\t\t\t\tmenuOpen( \"pause\" )", "\t\t\tend", "\t\tend", "\tend", "end", "", "local function onCollision( self, event )", "\t-- print( \"collided with\", event.other.id, \"phase\", event.phase )", "\tlocal phase = event.phase", "\tlocal id = event.other.id", "", "\t-- Jos pelaaja on kuollut, ei käsitellä muita törmäyksiä.", "\tif player.isDead then", "\t\treturn", "\tend", "", "\tif phase == \"began\" then", "\t\tif id == \"platform\" or id == \"rope\" then", "\t\t\tplayer:resetJumpCount()", "", "\t\t\tif id == \"rope\" then", "\t\t\t\tplayer:touchRope( true )", "\t\t\tend", "", "\t\telseif id == \"trampoline\" then", "\t\t\t-- Tallennetaan viittaus viimeksi kosketettuun trampoliiniin.", "\t\t\tplayer.nearbyTrampoline = event.other", "", "\t\telseif id == \"heart\" or id == \"coin\" then", "\t\t\tevent.other:collect()", "", "\t\t\tif id == \"heart\" then", "\t\t\t\tplayer:addHP( 1 )", "\t\t\t\tcounterHP:update( player.currentHP )", "", "\t\t\telseif id == \"coin\" then", "\t\t\t\t-- Kasvatetaan kerättyjen kolikoiden määrää ja tallennetaan se.", "\t\t\t\tloadsave.userdata.coinsCollected = loadsave.userdata.coinsCollected + 1", "\t\t\t\tloadsave.save( loadsave.userdata, \"userdata.json\" )", "", "\t\t\t\t-- TODO: Päivitä mahdollinen kolikkojen näyttö käyttöliittymässä.", "", "\t\t\tend", "", "\t\telseif id == \"goal\" then", "\t\t\tevent.other:complete()", "\t\t\tplayer.isDead = true", "\t\t\tcontrols.stop()", "\t\t\tmenuOpen( \"complete\" )", "", "\t\telseif id == \"spikes\" or id == \"levelBorder\" or event.other.isEnemy then", "\t\t\tlocal isBorder = (id == \"levelBorder\")", "\t\t\tlocal damage = 1", "\t\t\tif isBorder then", "\t\t\t\tdamage = player.maxHP", "\t\t\tend", "\t\t\tplayer:takeDamage( damage, isBorder )", "\t\t\tcounterHP:update( player.currentHP )", "", "\t\t\tif player.isDead then", "\t\t\t\tcontrols.stop()", "\t\t\t\tmenuOpen( \"gameover\" )", "\t\t\tend", "\t\tend", "", "\telseif phase == \"ended\" then", "\t\tif id == \"rope\" then", "\t\t\tplayer:touchRope( false )", "", "\t\telseif id == \"trampoline\" then", "\t\t\t-- Poistetaan viittaus vain, jos kyseessä on sama trampoliini.", "\t\t\tif player.nearbyTrampoline and player.nearbyTrampoline == event.other then", "\t\t\t\tplayer.nearbyTrampoline = nil", "\t\t\tend", "", "\t\tend", "", "\tend", "end", "", "--------------------------------------------------------------------------------------", "-- scene event -funktiot:", "--------------------------------------------------------------------------------------", "", "-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,", "-- tai jos se on poistettu ja sitä luodaan uudelleen.", "function scene:create( event )", "\tsceneGroup = self.view", "\t-- Tämä koodi ajetaan kun scene on luotu,", "\t-- mutta sitä ei vielä näytetä ruudulla.", "", "\t-- Haetaan ladattava kenttä event.params.level muuttujasta.", "\t-- Jos kenttää ei ole määritetty, asetetaan oletukseksi \"tutorial.json\".", "\tlocal level = event.params and event.params.level or \"tutorial.json\"", "\tui.currentLevel = level", "\tprint( \"Ladataan kenttä: \" .. level )", "", "", "\t-- Ladataan kentän data JSON-tiedostosta.", "\tlocal mapData = json.decodeFile(system.pathForFile(\"assets/\" .. level, system.ResourceDirectory))", "\t-- Kerrotaan ponytiled-kirjastolle, mistä kenttä tulee ladata.", "\tlocal map = ponytiled.new(mapData, \"assets\")", "\tsceneGroup:insert( map )", "\tmap.x = display.contentCenterX - map.designedWidth/2", "\tmap.y = display.contentCenterY - map.designedHeight/2", "", "\t------------------------------------------------------------------------------", "\t-- Luodaan dynaamiset hahmot ja objektit:", "", "\t-- Haetaan kentästä \"level\" layeri, eli display group, josta löydämme peliobjektit.", "\tlocal levelGroup = map:findLayer( \"level\" )", "", "\tplayer = map:getFirstTile( \"id\", \"player\" )", "\tplayer = playerModule.new( levelGroup, player )", "\tplayer.collision = onCollision", "\tplayer:addEventListener( \"collision\" )", "", "\tlocal spikes = map:getAllTiles( \"id\", \"spikes\" )", "\tfor i = 1, #spikes do", "\t\tspikesModule.new( levelGroup, spikes[i] )", "\tend", "", "\tlocal trampolines = map:getAllTiles( \"id\", \"trampoline\" )", "\tfor i = 1, #trampolines do", "\t\ttrampolineModule.new( levelGroup, trampolines[i] )", "\tend", "", "\tlocal hearts = map:getAllTiles( \"id\", \"heart\" )", "\tfor i = 1, #hearts do", "\t\theartModule.new( levelGroup, hearts[i] )", "\tend", "", "\tlocal coins = map:getAllTiles( \"id\", \"coin\" )", "\tfor i = 1, #coins do", "\t\tcoinModule.new( levelGroup, coins[i] )", "\tend", "", "\tlocal flag = map:getFirstTile( \"id\", \"goal\" )", "\tgoalModule.new( levelGroup, flag )", "", "\tcounterHP = ui.newCounterHP({", "\t\tparent = sceneGroup,", "\t\tx = screen.minX + 40,", "\t\ty = screen.minY + 24,", "\t\tfontSize = 24,", "\t} )", "", "\tlevelBorder = display.newRect(", "\t\tmap,", "\t\tscreen.centerX - map.x,", "\t\tscreen.centerY - map.y,", "\t\tmap.designedWidth,", "\t\tmap.designedHeight", "\t)", "", "\tlevelBorder.fill = { 0, 0 }", "\tlevelBorder.strokeWidth = 4", "\tlevelBorder:setStrokeColor( 1, 0, 0 )", "\tlevelBorder.id = \"levelBorder\"", "", "\tphysics.addBody( levelBorder, \"static\", {", "\t\tisSensor = true,", "\t\tchain = {", "\t\t\t-map.designedWidth/2, -map.designedHeight/2,", "\t\t\tmap.designedWidth/2, -map.designedHeight/2,", "\t\t\tmap.designedWidth/2, map.designedHeight/2,", "\t\t\t-map.designedWidth/2, map.designedHeight/2", "\t\t},", "\t\tconnectFirstAndLastChainVertex = true", "\t} )", "end", "", "-- show: kutsutaan kun scene on luotu mutta ei vielä näytetty.", "function scene:show( event )", "\tlocal sceneGroup = self.view", "\tlocal phase = event.phase", "", "\tif ( phase == \"will\" ) then", "\t\t-- Ajetaan ennen kuin scene tulee näkyviin.", "", "", "\telseif ( phase == \"did\" ) then", "\t\t-- Ajetaan heti kun scene näkyy pelaajalle.", "\t\tcontrols.start( movePlayer, keyPressed )", "", "\tend", "end", "", "", "-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.", "function scene:hide( event )", "\tsceneGroup = self.view", "\tlocal phase = event.phase", "", "\tif ( phase == \"will\" ) then", "\t\t-- Ajetaan ennen kuin scene katoaa näkyvistä.", "\t\tcontrols.stop()", "", "\telseif ( phase == \"did\" ) then", "\t\t-- Ajetaan heti kun scene on piilotettu.", "", "", "\tend", "end", "", "", "-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.", "-- Täällä siivotaan kaikki objektit ja resurssit.", "function scene:destroy( event )", "\tsceneGroup = self.view", "\t-- Ajetaan juuri ennen kuin scene tuhotaan.", "\tui.menuGroup = nil", "end", "", "", "--------------------------------------------------------------------------------------", "-- Scene event -kuuntelijat:", "-- Voit valita mitä tapahtumia haluat kuunnella. Jos et esimerkiksi koskaan", "-- poista sceneä, niin silloin \"destroy\" ei välttämättä ole tarpeellinen.", "--------------------------------------------------------------------------------------", "scene:addEventListener( \"create\", scene )", "scene:addEventListener( \"show\", scene )", "scene:addEventListener( \"hide\", scene )", "scene:addEventListener( \"destroy\", scene )", "--------------------------------------------------------------------------------------", "", "-- Lopuksi palautetaan scene, jolloin tiedosto toimii Lua-moduulina.", "return scene"]</script>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-2" data-kind="code" open>
+<summary><span class="diff-path">scenes/reloadScene.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+5</span> <span class="diff-minus">-58</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-gap" data-gap="f2-g0" data-old-start="1" data-new-start="1" data-count="2"><td colspan="4"><button type="button" class="diff-expand">Näytä 2 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">-- Luodaan uusi scene-objekti.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="5"></td><td class="diff-num" data-line="5"></td><td class="diff-sign"></td><td class="diff-code">local scene = composer.newScene()</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="6"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">local screen = require( "scripts.screen" )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="7"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">local ui = require( "scripts.ui" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="8"></td><td class="diff-num" data-line="6"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="9"></td><td class="diff-num" data-line="7"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="10"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- scene event -funktioiden ulkopuolella oleva koodi suoritetaan vain kerran, ellei</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="11"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- sceneä poisteta kokonaan omposer.removeScene() avulla. Täällä kannattaa määrittää</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="12"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- yleiset muuttujat, jotta ne ovat käytettävissä kaikissa scene-funktioissa.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="13"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="14"></td><td class="diff-num" data-line="8"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="15"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="16"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="17"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="18"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- scene event -funktiot:</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="19"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="20"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="21"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="22"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- tai jos se on poistettu ja sitä luodaan uudelleen.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="23"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">function scene:create( event )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="24"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	local sceneGroup = self.view</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="25"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	-- Tämä koodi ajetaan kun scene on luotu,</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="26"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	-- mutta sitä ei vielä näytetä ruudulla.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="27"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="28"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="29"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">end</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="30"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="31"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="32"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- show: kutsutaan kun scene on luotu mutta ei vielä näytetty.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="33"></td><td class="diff-num" data-line="9"></td><td class="diff-sign"></td><td class="diff-code">function scene:show( event )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="34"></td><td class="diff-num" data-line="10"></td><td class="diff-sign"></td><td class="diff-code">	local sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="35"></td><td class="diff-num" data-line="11"></td><td class="diff-sign"></td><td class="diff-code">	local phase = event.phase</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="36"></td><td class="diff-num" data-line="12"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="37"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	if ( phase == "<mark>will</mark>" ) then</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="38"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">		-- Ajetaan ennen kuin scene tulee näkyviin.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="39"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="40"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="41"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	elseif ( phase == "did" ) then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="13"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if ( phase == "<mark>did</mark>" ) then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="42"></td><td class="diff-num" data-line="14"></td><td class="diff-sign"></td><td class="diff-code">		-- Ajetaan heti kun scene näkyy pelaajalle.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="43"></td><td class="diff-num" data-line="15"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="16"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		composer.removeScene( "scenes.game" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="44"></td><td class="diff-num" data-line="17"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="18"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		composer.gotoScene( "scenes.game", { effect = "fade", time = 200, params = {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="19"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			level = event.params.level</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="20"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		} } )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="45"></td><td class="diff-num" data-line="21"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="46"></td><td class="diff-num" data-line="22"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="47"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="48"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="49"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="50"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">function scene:hide( event )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="51"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	local sceneGroup = self.view</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="52"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	local phase = event.phase</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="53"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="54"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	if ( phase == "will" ) then</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="55"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">		-- Ajetaan ennen kuin scene katoaa näkyvistä.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="56"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="57"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="58"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	elseif ( phase == "did" ) then</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="59"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">		-- Ajetaan heti kun scene on piilotettu.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="60"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="61"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="62"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="63"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">end</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="64"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="65"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="66"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="67"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- Täällä siivotaan kaikki objektit ja resurssit.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="68"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">function scene:destroy( event )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="69"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	local sceneGroup = self.view</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="70"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">	-- Ajetaan juuri ennen kuin scene tuhotaan.</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="71"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">end</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="72"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="73"></td><td class="diff-num" data-line="23"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="74"></td><td class="diff-num" data-line="24"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="75"></td><td class="diff-num" data-line="25"></td><td class="diff-sign"></td><td class="diff-code">-- Scene event -kuuntelijat:</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="76"></td><td class="diff-num" data-line="26"></td><td class="diff-sign"></td><td class="diff-code">-- Voit valita mitä tapahtumia haluat kuunnella. Jos et esimerkiksi koskaan</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="77"></td><td class="diff-num" data-line="27"></td><td class="diff-sign"></td><td class="diff-code">-- poista sceneä, niin silloin "destroy" ei välttämättä ole tarpeellinen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="78"></td><td class="diff-num" data-line="28"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="79"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">scene:addEventListener( "create", scene )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="80"></td><td class="diff-num" data-line="29"></td><td class="diff-sign"></td><td class="diff-code">scene:addEventListener( "show", scene )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="81"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">scene:addEventListener( "hide", scene )</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="82"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">scene:addEventListener( "destroy", scene )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="83"></td><td class="diff-num" data-line="30"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="84"></td><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="85"></td><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">-- Lopuksi palautetaan scene, jolloin tiedosto toimii Lua-moduulina.</td></tr>
+<tr class="diff-gap" data-gap="f2-g1" data-old-start="86" data-new-start="33" data-count="1"><td colspan="4"><button type="button" class="diff-expand">Näytä 1 piilotettu rivi</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-gap" data-gap="f2-g0" data-old-start="1" data-new-start="1" data-count="2"><td colspan="6"><button type="button" class="diff-expand">Näytä 2 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">-- Luodaan uusi scene-objekti.</td><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">-- Luodaan uusi scene-objekti.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="5"></td><td class="diff-sign"></td><td class="diff-code">local scene = composer.newScene()</td><td class="diff-num" data-line="5"></td><td class="diff-sign"></td><td class="diff-code">local scene = composer.newScene()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="6"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">local screen = require( "scripts.screen" )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="7"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">local ui = require( "scripts.ui" )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="8"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="6"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="9"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td><td class="diff-num" data-line="7"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="10"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- scene event -funktioiden ulkopuolella oleva koodi suoritetaan vain kerran, ellei</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="11"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- sceneä poisteta kokonaan omposer.removeScene() avulla. Täällä kannattaa määrittää</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="12"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- yleiset muuttujat, jotta ne ovat käytettävissä kaikissa scene-funktioissa.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="13"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">--------------------------------------------------------------------------------------</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="14"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="8"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="15"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="16"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="17"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">--------------------------------------------------------------------------------------</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="18"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- scene event -funktiot:</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="19"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">--------------------------------------------------------------------------------------</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="20"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="21"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="22"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- tai jos se on poistettu ja sitä luodaan uudelleen.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="23"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">function scene:create( event )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="24"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	local sceneGroup = self.view</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="25"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	-- Tämä koodi ajetaan kun scene on luotu,</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="26"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	-- mutta sitä ei vielä näytetä ruudulla.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="27"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="28"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="29"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">end</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="30"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="31"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="32"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- show: kutsutaan kun scene on luotu mutta ei vielä näytetty.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="33"></td><td class="diff-sign"></td><td class="diff-code">function scene:show( event )</td><td class="diff-num" data-line="9"></td><td class="diff-sign"></td><td class="diff-code">function scene:show( event )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="34"></td><td class="diff-sign"></td><td class="diff-code">	local sceneGroup = self.view</td><td class="diff-num" data-line="10"></td><td class="diff-sign"></td><td class="diff-code">	local sceneGroup = self.view</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="35"></td><td class="diff-sign"></td><td class="diff-code">	local phase = event.phase</td><td class="diff-num" data-line="11"></td><td class="diff-sign"></td><td class="diff-code">	local phase = event.phase</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="36"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="12"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="37"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	if ( phase == "<mark>will</mark>" ) then</td><td class="diff-num diff-add" data-line="13"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if ( phase == "<mark>did</mark>" ) then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="38"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">		-- Ajetaan ennen kuin scene tulee näkyviin.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="39"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="40"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="41"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	elseif ( phase == "did" ) then</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="42"></td><td class="diff-sign"></td><td class="diff-code">		-- Ajetaan heti kun scene näkyy pelaajalle.</td><td class="diff-num" data-line="14"></td><td class="diff-sign"></td><td class="diff-code">		-- Ajetaan heti kun scene näkyy pelaajalle.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="43"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="15"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="16"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		composer.removeScene( "scenes.game" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="44"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="17"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="18"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		composer.gotoScene( "scenes.game", { effect = "fade", time = 200, params = {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="19"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			level = event.params.level</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="20"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		} } )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="45"></td><td class="diff-sign"></td><td class="diff-code">	end</td><td class="diff-num" data-line="21"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="46"></td><td class="diff-sign"></td><td class="diff-code">end</td><td class="diff-num" data-line="22"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="47"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="48"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="49"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="50"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">function scene:hide( event )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="51"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	local sceneGroup = self.view</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="52"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	local phase = event.phase</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="53"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="54"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	if ( phase == "will" ) then</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="55"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">		-- Ajetaan ennen kuin scene katoaa näkyvistä.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="56"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="57"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="58"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	elseif ( phase == "did" ) then</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="59"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">		-- Ajetaan heti kun scene on piilotettu.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="60"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="61"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="62"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	end</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="63"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">end</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="64"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="65"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="66"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="67"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- Täällä siivotaan kaikki objektit ja resurssit.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="68"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">function scene:destroy( event )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="69"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	local sceneGroup = self.view</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="70"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">	-- Ajetaan juuri ennen kuin scene tuhotaan.</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="71"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">end</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="72"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del"></td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="73"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="23"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="74"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td><td class="diff-num" data-line="24"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="75"></td><td class="diff-sign"></td><td class="diff-code">-- Scene event -kuuntelijat:</td><td class="diff-num" data-line="25"></td><td class="diff-sign"></td><td class="diff-code">-- Scene event -kuuntelijat:</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="76"></td><td class="diff-sign"></td><td class="diff-code">-- Voit valita mitä tapahtumia haluat kuunnella. Jos et esimerkiksi koskaan</td><td class="diff-num" data-line="26"></td><td class="diff-sign"></td><td class="diff-code">-- Voit valita mitä tapahtumia haluat kuunnella. Jos et esimerkiksi koskaan</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="77"></td><td class="diff-sign"></td><td class="diff-code">-- poista sceneä, niin silloin "destroy" ei välttämättä ole tarpeellinen.</td><td class="diff-num" data-line="27"></td><td class="diff-sign"></td><td class="diff-code">-- poista sceneä, niin silloin "destroy" ei välttämättä ole tarpeellinen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="78"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td><td class="diff-num" data-line="28"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="79"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">scene:addEventListener( "create", scene )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="80"></td><td class="diff-sign"></td><td class="diff-code">scene:addEventListener( "show", scene )</td><td class="diff-num" data-line="29"></td><td class="diff-sign"></td><td class="diff-code">scene:addEventListener( "show", scene )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="81"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">scene:addEventListener( "hide", scene )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="82"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">scene:addEventListener( "destroy", scene )</td><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="83"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td><td class="diff-num" data-line="30"></td><td class="diff-sign"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="84"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="85"></td><td class="diff-sign"></td><td class="diff-code">-- Lopuksi palautetaan scene, jolloin tiedosto toimii Lua-moduulina.</td><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">-- Lopuksi palautetaan scene, jolloin tiedosto toimii Lua-moduulina.</td></tr>
+<tr class="diff-gap" data-gap="f2-g1" data-old-start="86" data-new-start="33" data-count="1"><td colspan="6"><button type="button" class="diff-expand">Näytä 1 piilotettu rivi</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["-- Ladataan Composer, jotta voimme käyttää sen funktioita.", "local composer = require( \"composer\" )", "", "-- Luodaan uusi scene-objekti.", "local scene = composer.newScene()", "", "--------------------------------------------------------------------------------------", "", "function scene:show( event )", "\tlocal sceneGroup = self.view", "\tlocal phase = event.phase", "", "\tif ( phase == \"did\" ) then", "\t\t-- Ajetaan heti kun scene näkyy pelaajalle.", "", "\t\tcomposer.removeScene( \"scenes.game\" )", "", "\t\tcomposer.gotoScene( \"scenes.game\", { effect = \"fade\", time = 200, params = {", "\t\t\tlevel = event.params.level", "\t\t} } )", "\tend", "end", "", "--------------------------------------------------------------------------------------", "-- Scene event -kuuntelijat:", "-- Voit valita mitä tapahtumia haluat kuunnella. Jos et esimerkiksi koskaan", "-- poista sceneä, niin silloin \"destroy\" ei välttämättä ole tarpeellinen.", "--------------------------------------------------------------------------------------", "scene:addEventListener( \"show\", scene )", "--------------------------------------------------------------------------------------", "", "-- Lopuksi palautetaan scene, jolloin tiedosto toimii Lua-moduulina.", "return scene"]</script>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-3" data-kind="code" open>
+<summary><span class="diff-path">scripts/ui.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+109</span> <span class="diff-minus">-0</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-ctx"><td class="diff-num" data-line="1"></td><td class="diff-num" data-line="1"></td><td class="diff-sign"></td><td class="diff-code">local ui = {}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="2"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="3"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local screen = require( "scripts.screen" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="4"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local composer = require( "composer" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="5"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="6"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local function menuEvent( event )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="7"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if event.phase == "ended" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="8"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		local id = event.target.id</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="9"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		print( id )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="10"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="11"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		if id == "continue" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="12"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			ui.callback()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="13"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="14"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		elseif id == "restart" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="15"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			composer.gotoScene( "scenes.reloadScene", {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="16"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				effect = "fade",</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="17"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				time = 250,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="18"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				params = {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="19"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">					level = ui.currentLevel</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="20"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="21"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			} )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="22"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="23"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		elseif id == "levelSelect" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="24"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			composer.gotoScene( "scenes.levelSelect", { effect = "fade", time = 500 } )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="25"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="26"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		elseif id == "options" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="27"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			composer.showOverlay( "scenes.options", {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="28"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				isModal = true,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="29"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				effect = "fade",</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="30"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				time = 250</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="31"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			} )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="32"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="33"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="34"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="35"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	return true</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="36"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="37"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="38"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">function ui.newMenu( parent, menuType )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="39"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="40"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Jos menu on jo auki, ei avata uutta.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="41"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if ui.menuGroup then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="42"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		return</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="43"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="44"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="45"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Lisäämällä menuGroup muuttujan ui-taulukkoon, pystymme</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="46"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- tarkistamaan myös game scenestä käsin onko menu auki.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="47"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	ui.menuGroup = display.newGroup()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="48"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	parent:insert( ui.menuGroup )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="49"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="50"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local background = display.newRect( ui.menuGroup, screen.centerX, screen.centerY, screen.width, screen.height )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="51"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	background:setFillColor( 0, 0.75 )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="52"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="53"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local windowTitle, windowHeight</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="54"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="55"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local buttonList = {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="56"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		{ label = "Restart Level", id = "restart" },</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="57"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		{ label = "Back to Level Select", id = "levelSelect" },</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="58"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		{ label = "Options", id = "options" }</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="59"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="60"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="61"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Muutetaan menun visuaalisia asetuksia menun tyypin mukaan.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="62"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if menuType == "pause" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="63"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		windowTitle = "Game Paused."</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="64"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		windowHeight = 480</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="65"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		-- Pause-menuun lisätään yksi ylimääräinen nappi.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="66"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		buttonList[#buttonList+1] = { label = "Continue", id = "continue" }</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="67"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="68"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	else</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="69"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		windowHeight = 400</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="70"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="71"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		if menuType == "gameover" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="72"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			windowTitle = "Gameover!"</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="73"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		elseif menuType == "complete" then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="74"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			windowTitle = "Level Complete!"</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="75"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="76"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="77"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="78"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local window = display.newRect( ui.menuGroup, screen.centerX, screen.centerY, 600, windowHeight )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="79"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	window:setFillColor( 0, 0.85 )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="80"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="81"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local heading = display.newText({</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="82"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		parent = ui.menuGroup,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="83"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		text = windowTitle,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="84"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		x = window.x,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="85"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		y = window.y - window.height*0.5 + 30,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="86"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		font = "assets/fonts/munro.ttf",</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="87"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		fontSize = 60,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="88"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		align = "left"</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="89"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	})</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="90"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	heading.anchorY = 0</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="91"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="92"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Luodaan napit käänteisesti loopissa, jolloin taulukon viimeinen nappi luodaan</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="93"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- ikkunan pohjalle ensimmäisenä. Näin napit sijoittuvat ikkunaan dynaamisesti.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="94"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	for i = #buttonList, 1, -1 do</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="95"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="96"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		local button = display.newText({</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="97"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			parent = ui.menuGroup,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="98"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			text = buttonList[i].label,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="99"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			x = window.x,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="100"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			y = window.y + window.height*0.5 - 60*(#buttonList-i) - 40,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="101"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			font = "assets/fonts/munro.ttf",</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="102"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			fontSize = 46,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="103"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">			align = "left"</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="104"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		})</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="105"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		button.id = buttonList[i].id</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="106"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		button.anchorY = 1</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="107"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="108"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		button:addEventListener( "touch", menuEvent )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="109"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="110"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="2"></td><td class="diff-num" data-line="111"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-num" data-line="112"></td><td class="diff-sign"></td><td class="diff-code">function ui.newCounterHP( params )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-num" data-line="113"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f3-g0" data-old-start="5" data-new-start="114" data-count="93"><td colspan="4"><button type="button" class="diff-expand">Näytä 93 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-ctx"><td class="diff-num" data-line="1"></td><td class="diff-sign"></td><td class="diff-code">local ui = {}</td><td class="diff-num" data-line="1"></td><td class="diff-sign"></td><td class="diff-code">local ui = {}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="2"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="3"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local screen = require( "scripts.screen" )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="4"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local composer = require( "composer" )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="5"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="6"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local function menuEvent( event )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="7"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if event.phase == "ended" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="8"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		local id = event.target.id</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="9"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		print( id )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="10"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="11"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		if id == "continue" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="12"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			ui.callback()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="13"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="14"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		elseif id == "restart" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="15"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			composer.gotoScene( "scenes.reloadScene", {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="16"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				effect = "fade",</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="17"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				time = 250,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="18"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				params = {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="19"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">					level = ui.currentLevel</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="20"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="21"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			} )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="22"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="23"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		elseif id == "levelSelect" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="24"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			composer.gotoScene( "scenes.levelSelect", { effect = "fade", time = 500 } )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="25"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="26"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		elseif id == "options" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="27"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			composer.showOverlay( "scenes.options", {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="28"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				isModal = true,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="29"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				effect = "fade",</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="30"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				time = 250</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="31"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			} )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="32"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="33"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="34"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="35"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	return true</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="36"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="37"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="38"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">function ui.newMenu( parent, menuType )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="39"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="40"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Jos menu on jo auki, ei avata uutta.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="41"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if ui.menuGroup then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="42"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		return</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="43"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="44"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="45"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Lisäämällä menuGroup muuttujan ui-taulukkoon, pystymme</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="46"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- tarkistamaan myös game scenestä käsin onko menu auki.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="47"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	ui.menuGroup = display.newGroup()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="48"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	parent:insert( ui.menuGroup )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="49"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="50"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local background = display.newRect( ui.menuGroup, screen.centerX, screen.centerY, screen.width, screen.height )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="51"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	background:setFillColor( 0, 0.75 )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="52"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="53"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local windowTitle, windowHeight</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="54"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="55"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local buttonList = {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="56"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		{ label = "Restart Level", id = "restart" },</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="57"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		{ label = "Back to Level Select", id = "levelSelect" },</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="58"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		{ label = "Options", id = "options" }</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="59"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="60"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="61"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Muutetaan menun visuaalisia asetuksia menun tyypin mukaan.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="62"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if menuType == "pause" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="63"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		windowTitle = "Game Paused."</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="64"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		windowHeight = 480</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="65"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		-- Pause-menuun lisätään yksi ylimääräinen nappi.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="66"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		buttonList[#buttonList+1] = { label = "Continue", id = "continue" }</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="67"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="68"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	else</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="69"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		windowHeight = 400</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="70"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="71"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		if menuType == "gameover" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="72"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			windowTitle = "Gameover!"</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="73"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		elseif menuType == "complete" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="74"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			windowTitle = "Level Complete!"</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="75"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="76"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="77"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="78"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local window = display.newRect( ui.menuGroup, screen.centerX, screen.centerY, 600, windowHeight )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="79"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	window:setFillColor( 0, 0.85 )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="80"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="81"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local heading = display.newText({</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="82"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		parent = ui.menuGroup,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="83"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		text = windowTitle,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="84"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		x = window.x,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="85"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		y = window.y - window.height*0.5 + 30,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="86"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		font = "assets/fonts/munro.ttf",</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="87"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		fontSize = 60,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="88"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		align = "left"</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="89"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	})</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="90"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	heading.anchorY = 0</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="91"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="92"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Luodaan napit käänteisesti loopissa, jolloin taulukon viimeinen nappi luodaan</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="93"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- ikkunan pohjalle ensimmäisenä. Näin napit sijoittuvat ikkunaan dynaamisesti.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="94"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	for i = #buttonList, 1, -1 do</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="95"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="96"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		local button = display.newText({</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="97"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			parent = ui.menuGroup,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="98"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			text = buttonList[i].label,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="99"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			x = window.x,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="100"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			y = window.y + window.height*0.5 - 60*(#buttonList-i) - 40,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="101"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			font = "assets/fonts/munro.ttf",</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="102"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			fontSize = 46,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="103"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">			align = "left"</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="104"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		})</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="105"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		button.id = buttonList[i].id</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="106"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		button.anchorY = 1</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="107"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="108"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		button:addEventListener( "touch", menuEvent )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="109"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="110"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="2"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="111"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code">function ui.newCounterHP( params )</td><td class="diff-num" data-line="112"></td><td class="diff-sign"></td><td class="diff-code">function ui.newCounterHP( params )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="113"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f3-g0" data-old-start="5" data-new-start="114" data-count="93"><td colspan="6"><button type="button" class="diff-expand">Näytä 93 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["local ui = {}", "", "local screen = require( \"scripts.screen\" )", "local composer = require( \"composer\" )", "", "local function menuEvent( event )", "\tif event.phase == \"ended\" then", "\t\tlocal id = event.target.id", "\t\tprint( id )", "", "\t\tif id == \"continue\" then", "\t\t\tui.callback()", "", "\t\telseif id == \"restart\" then", "\t\t\tcomposer.gotoScene( \"scenes.reloadScene\", {", "\t\t\t\teffect = \"fade\",", "\t\t\t\ttime = 250,", "\t\t\t\tparams = {", "\t\t\t\t\tlevel = ui.currentLevel", "\t\t\t\t}", "\t\t\t} )", "", "\t\telseif id == \"levelSelect\" then", "\t\t\tcomposer.gotoScene( \"scenes.levelSelect\", { effect = \"fade\", time = 500 } )", "", "\t\telseif id == \"options\" then", "\t\t\tcomposer.showOverlay( \"scenes.options\", {", "\t\t\t\tisModal = true,", "\t\t\t\teffect = \"fade\",", "\t\t\t\ttime = 250", "\t\t\t} )", "", "\t\tend", "\tend", "\treturn true", "end", "", "function ui.newMenu( parent, menuType )", "", "\t-- Jos menu on jo auki, ei avata uutta.", "\tif ui.menuGroup then", "\t\treturn", "\tend", "", "\t-- Lisäämällä menuGroup muuttujan ui-taulukkoon, pystymme", "\t-- tarkistamaan myös game scenestä käsin onko menu auki.", "\tui.menuGroup = display.newGroup()", "\tparent:insert( ui.menuGroup )", "", "\tlocal background = display.newRect( ui.menuGroup, screen.centerX, screen.centerY, screen.width, screen.height )", "\tbackground:setFillColor( 0, 0.75 )", "", "\tlocal windowTitle, windowHeight", "", "\tlocal buttonList = {", "\t\t{ label = \"Restart Level\", id = \"restart\" },", "\t\t{ label = \"Back to Level Select\", id = \"levelSelect\" },", "\t\t{ label = \"Options\", id = \"options\" }", "\t}", "", "\t-- Muutetaan menun visuaalisia asetuksia menun tyypin mukaan.", "\tif menuType == \"pause\" then", "\t\twindowTitle = \"Game Paused.\"", "\t\twindowHeight = 480", "\t\t-- Pause-menuun lisätään yksi ylimääräinen nappi.", "\t\tbuttonList[#buttonList+1] = { label = \"Continue\", id = \"continue\" }", "", "\telse", "\t\twindowHeight = 400", "", "\t\tif menuType == \"gameover\" then", "\t\t\twindowTitle = \"Gameover!\"", "\t\telseif menuType == \"complete\" then", "\t\t\twindowTitle = \"Level Complete!\"", "\t\tend", "\tend", "", "\tlocal window = display.newRect( ui.menuGroup, screen.centerX, screen.centerY, 600, windowHeight )", "\twindow:setFillColor( 0, 0.85 )", "", "\tlocal heading = display.newText({", "\t\tparent = ui.menuGroup,", "\t\ttext = windowTitle,", "\t\tx = window.x,", "\t\ty = window.y - window.height*0.5 + 30,", "\t\tfont = \"assets/fonts/munro.ttf\",", "\t\tfontSize = 60,", "\t\talign = \"left\"", "\t})", "\theading.anchorY = 0", "", "\t-- Luodaan napit käänteisesti loopissa, jolloin taulukon viimeinen nappi luodaan", "\t-- ikkunan pohjalle ensimmäisenä. Näin napit sijoittuvat ikkunaan dynaamisesti.", "\tfor i = #buttonList, 1, -1 do", "", "\t\tlocal button = display.newText({", "\t\t\tparent = ui.menuGroup,", "\t\t\ttext = buttonList[i].label,", "\t\t\tx = window.x,", "\t\t\ty = window.y + window.height*0.5 - 60*(#buttonList-i) - 40,", "\t\t\tfont = \"assets/fonts/munro.ttf\",", "\t\t\tfontSize = 46,", "\t\t\talign = \"left\"", "\t\t})", "\t\tbutton.id = buttonList[i].id", "\t\tbutton.anchorY = 1", "", "\t\tbutton:addEventListener( \"touch\", menuEvent )", "\tend", "end", "", "function ui.newCounterHP( params )", "", "\tlocal counter = display.newGroup()", "\tcounter.x = params.x or 0", "\tcounter.y = params.y or 0", "\tparams.parent:insert( counter )", "", "", "\tlocal sheet = graphics.newImageSheet( \"assets/images/tiles/tilemap.png\", {", "\t\twidth = 18,", "\t\theight = 18,", "\t\tnumFrames = 64", "\t} )", "", "\t-- Alapuolella olevat framet ovat laskettu yläpuolen tilemap.png:stä.", "\t--\t\tstart = 21 tarkoittaa, että framet alkavat 21 tilen/frame kohdalta", "\t--\t\tcount = 3  tarkoittaa, että otamme käyttöön 3 peräkkäistä framea", "\tlocal frames = {", "\t\tstart = 21,", "\t\tcount = 3,", "\t}", "", "\tcounter.title = display.newText({", "\t\tparent = counter,", "\t\ttext = \"HP: \",", "\t\tx = 0,", "\t\ty = 0,", "\t\tfont = \"assets/fonts/munro.ttf\",", "\t\tfontSize = params.fontSize,", "\t\talign = \"left\"", "\t})", "", "\t-- Luodaan tällä kertaa sprite käyttäen vain frameja.", "\tcounter.sprite = display.newSprite( counter, sheet, frames )", "\tcounter.sprite.x = counter.title.width", "\tcounter.sprite.y = 0", "\tcounter.sprite:scale( 2, 2 )", "", "", "\tfunction counter:update( hp )", "\t\t-- Pelaajan HP ja framejen numerot menevät päinvastoin.", "\t\tlocal frame = (2 - hp) + 1", "", "\t\t-- Kun kutsumme frameja counter.sprite::setFrame() funktiolla,", "\t\t-- niin se odottaa framejen alkavan 1:stä. Eli, voimme käyttää", "\t\t-- frameja 1, 2 ja 3, sillä asetimme ylempänä count = 3.", "\t\tcounter.sprite:setFrame( frame )", "\tend", "", "\treturn counter", "end", "", "function ui.newTitle( params )", "\tlocal title = display.newGroup()", "\tparams.parent:insert( title )", "", "\ttitle.x = params.x or 0", "\ttitle.y = params.y or 0", "\ttitle.anchorX = params.anchorX or 0.5", "\ttitle.anchorY = params.anchorY or 0.5", "", "\t-- Lisätään text osaksi title-muuttujaa, jolloin", "\t-- pystymme muuttamaan sen arvoja tarvittaessa.", "\ttitle.text = display.newText({", "\t\tparent = title,", "\t\ttext = params.text,", "\t\tx = 0,", "\t\ty = 0,", "\t\tfont = \"assets/fonts/munro.ttf\",", "\t\tfontSize = params.fontSize,", "\t\talign = params.align", "\t})", "", "\tif type( params.rgb ) == \"table\" then", "\t\ttitle.text:setFillColor( unpack( params.rgb ) )", "\telse", "\t\ttitle.text:setFillColor( 1 )", "\tend", "", "\ttitle.shadow = display.newText({", "\t\tparent = title,", "\t\ttext = params.text,", "\t\tx = 2,", "\t\ty = 2,", "\t\tfont = \"assets/fonts/munro.ttf\",", "\t\tfontSize = params.fontSize,", "\t\talign = params.align", "\t})", "\ttitle.shadow:setFillColor( 0 )", "\ttitle.shadow:toBack()", "", "\treturn title", "end", "", "return ui"]</script>
+</div>
+</details>
+</div>
+<nav class="version-nav" aria-label="Muutosnavigointi">
+  <a class="nav-prev" href="../../../../games/6-platformer/versio-15/muutokset/">Edelliset muutokset</a>
+  <a class="nav-next" href="../../../../games/6-platformer/versio-17/muutokset/">Seuraavat muutokset</a>
+</nav>
+<script>
+// Diff page behaviour: view toggle, saved view choice, and gap expansion.
+(() => {
+    const STORAGE_KEY = "rg-diff-view";
+    const DEFAULT_VIEW = "unified";
+    const VIEWS = ["unified", "split"];
+
+    const toggle = document.querySelector(".diff-toggle");
+    const viewButtons = toggle ? toggle.querySelectorAll("button[data-view]") : [];
+    const parsedSources = new WeakMap();
+
+    // Chromium throws from the localStorage getter itself when storage is blocked.
+    const withStorage = (action, fallback) => {
+        try {
+            return action(window.localStorage);
+        } catch (error) {
+            // Without storage only the remembered view is lost; the page works on the fallback.
+            return fallback;
+        }
+    };
+
+    const readView = () => {
+        const stored = withStorage((storage) => storage.getItem(STORAGE_KEY), null);
+        return VIEWS.includes(stored) ? stored : DEFAULT_VIEW;
+    };
+
+    const saveView = (view) => withStorage((storage) => storage.setItem(STORAGE_KEY, view), null);
+
+    const applyView = (view) => {
+        document.querySelectorAll(".diff-files[data-view]").forEach((files) => {
+            files.dataset.view = view;
+        });
+
+        viewButtons.forEach((button) => {
+            button.setAttribute("aria-pressed", button.dataset.view === view ? "true" : "false");
+        });
+    };
+
+    if (toggle) {
+        toggle.hidden = false;
+        applyView(readView());
+
+        viewButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applyView(button.dataset.view);
+                saveView(button.dataset.view);
+            });
+        });
+    }
+
+    const sourceLines = (file) => {
+        if (!parsedSources.has(file)) {
+            parsedSources.set(file, JSON.parse(file.querySelector("script.diff-source").textContent));
+        }
+
+        return parsedSources.get(file);
+    };
+
+    const createCell = (className) => {
+        const cell = document.createElement("td");
+        cell.className = className;
+        return cell;
+    };
+
+    const numberCell = (line) => {
+        const cell = createCell("diff-num");
+        cell.dataset.line = String(line);
+        return cell;
+    };
+
+    const codeCell = (text) => {
+        const cell = createCell("diff-code");
+        cell.textContent = text;
+        return cell;
+    };
+
+    const contextRow = (isSplit, oldLine, newLine, text) => {
+        const row = document.createElement("tr");
+        row.className = "diff-ctx";
+
+        if (isSplit) {
+            row.append(
+                numberCell(oldLine), createCell("diff-sign"), codeCell(text),
+                numberCell(newLine), createCell("diff-sign"), codeCell(text)
+            );
+        } else {
+            row.append(numberCell(oldLine), numberCell(newLine), createCell("diff-sign"), codeCell(text));
+        }
+
+        return row;
+    };
+
+    const expandGap = (button) => {
+        const clickedRow = button.closest("tr.diff-gap");
+        const file = button.closest(".diff-file");
+        const oldStart = Number(clickedRow.dataset.oldStart);
+        const newStart = Number(clickedRow.dataset.newStart);
+        const count = Number(clickedRow.dataset.count);
+        const lines = sourceLines(file).slice(newStart - 1, newStart - 1 + count);
+        const selector = `tr.diff-gap[data-gap="${CSS.escape(clickedRow.dataset.gap)}"]`;
+        let focusTarget;
+
+        file.querySelectorAll(selector).forEach((gapRow) => {
+            const isSplit = gapRow.closest("table").classList.contains("diff-split");
+            const rows = lines.map((text, index) => contextRow(isSplit, oldStart + index, newStart + index, text));
+
+            if (gapRow === clickedRow) {
+                focusTarget = rows[0].querySelector(".diff-code");
+            }
+
+            gapRow.replaceWith(...rows);
+        });
+
+        // The button is gone, so keep focus at the same spot in the reading order.
+        focusTarget.tabIndex = -1;
+        focusTarget.focus({ preventScroll: true });
+    };
+
+    document.addEventListener("click", (event) => {
+        const button = event.target.closest("button.diff-expand");
+
+        if (button) {
+            expandGap(button);
+        }
+    });
+})();
+</script>
+    </main>
+    <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://www.rosogames.fi">Roso Games</a> &amp; <a href="https://erantanen.com">Eetu Rantanen</a></p>
+</footer>
+    <script>
+    (() => {
+        const toggles = document.querySelectorAll(".crumb-toggle");
+
+        const closeAll = () => {
+            toggles.forEach((toggle) => {
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.parentNode.classList.remove("open");
+            });
+        };
+
+        toggles.forEach((toggle) => {
+            toggle.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const open = toggle.getAttribute("aria-expanded") === "true";
+                closeAll();
+                if (!open) {
+                    toggle.setAttribute("aria-expanded", "true");
+                    toggle.parentNode.classList.add("open");
+                }
+            });
+        });
+
+        document.querySelectorAll(".cat-toggle").forEach((cat) => {
+            cat.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const menu = cat.closest(".crumb-cat-menu");
+                menu.querySelectorAll(".cat-toggle").forEach((other) => {
+                    other.setAttribute("aria-expanded", other === cat ? "true" : "false");
+                });
+            });
+        });
+
+        document.addEventListener("click", closeAll);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeAll();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

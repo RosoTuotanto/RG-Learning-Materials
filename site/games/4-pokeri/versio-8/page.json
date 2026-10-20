@@ -1,0 +1,11 @@
+{
+  "title": "Versio 8",
+  "description": "Lisätään käyttöliittymään ohjetekstit.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-8",
+  "lessons": [
+    {
+      "title": "Pelin UI - Ohjetekstit",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/pelin-ui-ohjetekstit/"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Versio 10",
+  "description": "Lisätään korttien animointi.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-10",
+  "lessons": [
+    {
+      "title": "Animoidaan kortit",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/animoidaan-kortit/"
+    },
+    {
+      "title": "Animaatioiden viimeistely ja piirtojärjestys",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/animaatioiden-viimeistely-ja-piirtojarjestys/"
+    },
+    {
+      "title": "Korttien palautus pakkaan",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/korttien-palautus-pakkaan/"
+    }
+  ]
+}

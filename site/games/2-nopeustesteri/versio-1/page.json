@@ -1,0 +1,11 @@
+{
+  "title": "Versio 1",
+  "description": "Luodaan pelin ensimmäinen pelinappula ja piirretään se näytölle.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-1",
+  "lessons": [
+    {
+      "title": "Luodaan pelinappula",
+      "url": "https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/luodaan-pelinappula/"
+    }
+  ]
+}

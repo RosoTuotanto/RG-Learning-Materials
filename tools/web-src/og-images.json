@@ -1,0 +1,43 @@
+{
+  "dir": "assets/og-images",
+  "heading": "Roso Games opetuspelit ja demot",
+  "highlightWord": "opetuspelit",
+  "fallback": "etusivu.png",
+  "cards": {
+    "frontpage": { "slug": "Etusivu", "filename": "etusivu.png" },
+    "game": { "slugTemplate": "Peli > {title}", "filenameTemplate": "peli-{slug}.png" },
+    "demo": { "slugTemplate": "Demo > {title}", "filenameTemplate": "demo-{slug}.png" }
+  },
+  "assets": {
+    "font": "tools/og-assets/Archivo.ttf",
+    "logo": "tools/og-assets/logo.png"
+  },
+  "canvas": { "width": 1200, "height": 630 },
+  "colors": {
+    "bg": "#0B0C0E",
+    "text": "#F4F5F7",
+    "accent": "#C6F04B",
+    "accentInk": "#0B0C0E",
+    "line": "#4A505A",
+    "muted": "#9AA0AB"
+  },
+  "layout": {
+    "padding": 64,
+    "frameInset": 24,
+    "frameWidth": 2,
+    "gutter": 48,
+    "logoColumnWidth": 400,
+    "headingMaxSize": 88,
+    "headingMinSize": 40,
+    "headingWeight": "ExtraBold",
+    "headingLineSpacing": 1.0,
+    "headingLetterSpacing": -0.01,
+    "slugSize": 46,
+    "slugMinSize": 26,
+    "slugWeight": "Bold",
+    "slugLetterSpacing": -0.01,
+    "slugGap": 34,
+    "slugUnderlineHeight": 6,
+    "slugUnderlineGap": 12
+  }
+}

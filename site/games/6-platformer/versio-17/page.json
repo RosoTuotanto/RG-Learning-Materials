@@ -1,0 +1,15 @@
+{
+  "title": "Versio 17",
+  "description": "Lisätään hattu-vihollinen, joka liikkuu kentällä ja vahingoittaa pelaajaa.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-17",
+  "lessons": [
+    {
+      "title": "Lisätään hattu-vihollinen",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/lisataan-hattu-vihollinen/"
+    },
+    {
+      "title": "Lisätään viholliselle tekoäly",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/lisataan-viholliselle-tekoaly/"
+    }
+  ]
+}

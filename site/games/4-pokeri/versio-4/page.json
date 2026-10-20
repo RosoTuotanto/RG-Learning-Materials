@@ -1,0 +1,11 @@
+{
+  "title": "Versio 4",
+  "description": "Lisätään pelaajan käden tarkistus, joka tunnistaa pokerikädet.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-4",
+  "lessons": [
+    {
+      "title": "Tarkistetaan pelaajan käsi",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/tarkistetaan-pelaajan-kasi/"
+    }
+  ]
+}

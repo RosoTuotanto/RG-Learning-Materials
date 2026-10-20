@@ -1,0 +1,11 @@
+{
+  "title": "Versio 3",
+  "description": "Lisätään loadsave-moduuli, joka tallentaa ja lataa pelin tiedot JSON-muodossa.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-3",
+  "lessons": [
+    {
+      "title": "Tiedon tallentaminen ja lataaminen",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/tiedon-tallentaminen-ja-lataaminen/"
+    }
+  ]
+}

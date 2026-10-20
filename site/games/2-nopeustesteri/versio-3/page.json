@@ -1,0 +1,11 @@
+{
+  "title": "Versio 3",
+  "description": "Eriytetään pelinappuloiden data ja niitä käsittelevä toiminnallisuus omiin osiinsa.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-3",
+  "lessons": [
+    {
+      "title": "Erotellaan data ja toiminnallisuus",
+      "url": "https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/erotellaan-data-ja-toiminnallisuus/"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Versio 3",
+  "description": "Lisätään peliin maali, joka pelaajan tulee saavuttaa.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/3-fysiikkapallo/versio-3",
+  "lessons": [
+    {
+      "title": "Lisätään peliin maali",
+      "url": "https://www.rosogames.fi/lms/3-pelisuunnittelu-ja-prototyypittaminen/lessons/lisataan-peliin-maali/"
+    }
+  ]
+}

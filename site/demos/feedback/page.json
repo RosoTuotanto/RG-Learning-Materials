@@ -1,0 +1,5 @@
+{
+  "title": "Palaute ja game feel",
+  "description": "Sama taistelu toistettuna niin, että joka vaiheessa mekaniikkaan lisätään yksi kerros feedbackia, eikä itse mekaniikka muutu lainkaan. Kaksi laatikkoa ampuu toisiaan seitsemässä versiossa: ensimmäisessä on jo kaikki tieto mutta ei lainkaan game feeliä, ja viimeinen poistaa yhden lisäyksen takaisin. Kielen (suomi/englanti) voi vaihtaa napista.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/demos/feedback"
+}

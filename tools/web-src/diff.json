@@ -1,0 +1,14 @@
+{
+  "excludedDirs": ["AndroidResources", "Images.xcassets", "LaunchScreen.storyboardc", "__pycache__", ".scratch"],
+  "excludedFiles": ["Icon*.png", ".DS_Store", "Thumbs.db", "desktop.ini", "*.pyc"],
+
+  "mapExtensions": [".tmx", ".tsx"],
+  "tiledJsonMarker": "\"tiledversion\"",
+
+  "imageExtensions": [".png", ".jpg", ".jpeg", ".gif", ".webp"],
+  "audioExtensions": [".wav", ".ogg", ".mp3"],
+
+  "contextLines": 3,
+  "moveSimilarity": 0.5,
+  "inlineSimilarity": 0.5
+}

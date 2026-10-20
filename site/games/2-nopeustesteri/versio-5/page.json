@@ -1,0 +1,11 @@
+{
+  "title": "Versio 5",
+  "description": "Lisätään indikaattori, joka näyttää pelaajalle seuraavaksi painettavan nappulan.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-5",
+  "lessons": [
+    {
+      "title": "Seuraavan nappulan indikaattori",
+      "url": "https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/seuraavan-nappulan-indikaattori/"
+    }
+  ]
+}

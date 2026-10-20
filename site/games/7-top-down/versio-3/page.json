@@ -1,0 +1,11 @@
+{
+  "title": "Versio 3",
+  "description": "Määritetään top-downin näppäimet ja lisätään normalisoitu kahdeksansuuntainen liike ilman painovoimaa. Hahmo flipataan liikkeen suuntaan, ja kävellessään se pomppii kahden asennon välillä. Lisätään myös ohjausvinkit ruudun alakulmaan.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-3",
+  "lessons": [
+    {
+      "title": "Hahmon liikkuminen top-down-pelissä",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/hahmon-liikkuminen-top-down-pelissa/"
+    }
+  ]
+}

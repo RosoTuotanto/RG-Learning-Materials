@@ -1,0 +1,15 @@
+{
+  "title": "Versio 4",
+  "description": "Lisätään peliin reset-mekaniikka, jolla pelin saa nopeasti alkutilaan.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/3-fysiikkapallo/versio-4",
+  "lessons": [
+    {
+      "title": "Lisätään helppo reset-mekaniikka",
+      "url": "https://www.rosogames.fi/lms/3-pelisuunnittelu-ja-prototyypittaminen/lessons/lisataan-helppo-reset-mekaniikka/"
+    },
+    {
+      "title": "Koodin järjestely ja reset-bugit",
+      "url": "https://www.rosogames.fi/lms/3-pelisuunnittelu-ja-prototyypittaminen/lessons/koodin-jarjestely-ja-reset-bugit/"
+    }
+  ]
+}

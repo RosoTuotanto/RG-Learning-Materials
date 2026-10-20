@@ -1,0 +1,19 @@
+{
+  "title": "Versio 7",
+  "description": "Käynnistetään tarinamoottori: ladataan Roso Noir -tarina ja haetaan sen ensimmäinen passage.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-7",
+  "lessons": [
+    {
+      "title": "Käynnistetään tarinamoottori",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/kaynnistetaan-tarinamoottori/"
+    },
+    {
+      "title": "Tekstit, kontrollit ja linkit",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/tekstit-kontrollit-ja-linkit/"
+    },
+    {
+      "title": "Linkkien luonti ja kosketustapahtumat",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/linkkien-luonti-ja-kosketustapahtumat/"
+    }
+  ]
+}

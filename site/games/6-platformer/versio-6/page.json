@@ -1,0 +1,11 @@
+{
+  "title": "Versio 6",
+  "description": "Tutustutaan Tiled-karttaeditoriin, jolla pelin kentät suunnitellaan tileistä ja ladataan Solar2D:hen.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-6",
+  "lessons": [
+    {
+      "title": "Yleisesti Tiled-sovelluksesta",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/yleisesti-tiled-sovelluksesta/"
+    }
+  ]
+}

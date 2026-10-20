@@ -1,0 +1,11 @@
+{
+  "title": "Versio 13",
+  "description": "Toteutetaan pelitilan tallentaminen ja lataaminen: tallennus kattaa kartan, pelaajan sijainnin ja suunnan, inventoryn sekä esinerekisterin. Esc tallentaa samalla hetkellä myös tarinan tilan Weaverin save-funktiolla. Continue-nappi palauttaa molemmat ja näkyy vain tallennuksen ollessa olemassa; uusi peli aloittaa tarinan alusta.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-13",
+  "lessons": [
+    {
+      "title": "Pelitilan tallentaminen ja lataaminen",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/pelitilan-tallentaminen-ja-lataaminen/"
+    }
+  ]
+}

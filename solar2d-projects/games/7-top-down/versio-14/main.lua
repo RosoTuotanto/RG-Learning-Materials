@@ -1,0 +1,59 @@
+-- Asetetaan näytön asetukset, kuten piilotetaan statusbar ja
+-- määritetään tekstuurifiltterit pikseligrafiikalle sopiviksi.
+display.setStatusBar( display.HiddenStatusBar )
+display.setDefault("magTextureFilter", "nearest")
+display.setDefault("minTextureFilter", "nearest")
+
+-- Image sheetin framet luetaan vain sisäosastaan, jottei framejen väliin piirry saumoja.
+-- Asetus pitää tehdä ennen kuin yhtäkään image sheetiä luodaan.
+display.setDefault( "isImageSheetSampledInsideFrame", true )
+
+------------------------------------------------------------
+-- Ladataan pelin asetukset ja laitetaan ne päälle.
+
+-- Ladataan userdata tiedosto, jossa on käyttäjän asetukset:
+local loadsave = require( "scripts.loadsave" )
+local userdata = loadsave.load( "userdata.json" )
+
+-- Jos userdataa ei löydy, niin luodaan se:
+if not userdata then
+	userdata = require( "data.defaultSettings" )
+	loadsave.save( userdata, "userdata.json" )
+end
+
+-- Kopioidaan userdata loadsave moduuliin:
+loadsave.userdata = {}
+for k, v in pairs( userdata ) do
+	loadsave.userdata[k] = v
+end
+
+local sfx = require( "scripts.sfx" )
+sfx.update()
+
+if loadsave.userdata["fullscreen"] then
+	native.setProperty( "windowMode", "fullscreen" )
+else
+	native.setProperty( "windowMode", "normal" )
+end
+
+------------------------------------------------------------
+
+-- Reppu alkaa kahdella sekalaisella esineellä, jotta inventoryn käyttöä
+-- (järjestelyä ja slottien vaihtoa) pääsee kokeilemaan heti.
+local inventory = require( "scripts.inventory" )
+inventory.addStartingItems()
+
+------------------------------------------------------------
+
+-- Ladataan pelin tarina Weaveriin kerran pelin käynnistyessä. Weaver pitää tarinan tilan
+-- muistissa, joten keskustelut jatkuvat oikeasta kohdasta myös kenttien vaihdoissa.
+local dialogue = require( "scripts.dialogue" )
+dialogue.init()
+
+------------------------------------------------------------
+
+-- Siirrytään heti pelin menu-sceneen.
+local composer = require( "composer" )
+-- Käytetään automaattista muistinhallintaa scenejen välillä.
+composer.recycleOnSceneChange = true
+composer.gotoScene( "scenes.menu", { effect = "fade", time = 500 } )

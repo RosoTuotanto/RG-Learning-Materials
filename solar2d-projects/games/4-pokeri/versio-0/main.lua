@@ -1,0 +1,1 @@
+-- Tyhjä main.lua-tiedosto

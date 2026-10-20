@@ -1,0 +1,11 @@
+{
+  "title": "Kotitehtävät",
+  "description": "Ohjelmointikotitehtävien malliratkaisu, joka on toteutettu pelin viimeisimmän version päälle. Kotitehtävät jakautuvat kolmeen tasoon: Ensiaskeleet, Seikkailu ja Haaste.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-kotitehtavat",
+  "lessons": [
+    {
+      "title": "Kotitehtävät",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/kotitehtavat-6/"
+    }
+  ]
+}

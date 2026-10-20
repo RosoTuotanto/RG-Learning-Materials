@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0C0E">
+    <meta name="description" content="Top-down-seikkailu: muutokset versio 13 -&gt; versio 14.">
+    <meta name="generator" content="RG-Learning-Materials site builder">
+    <title>Top-down-seikkailu - versio 14: muutokset</title>
+    <link rel="icon" href="../../../../favicon.ico" sizes="48x48">
+    <link rel="icon" href="../../../../favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../../../apple-touch-icon.png">
+    <link rel="manifest" href="../../../../site.webmanifest">
+    <meta name="author" content="Eetu Rantanen">
+    <meta name="robots" content="noindex, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Roso Games opetuspelit ja demot">
+    <meta property="og:title" content="Top-down-seikkailu - versio 14: muutokset">
+    <meta property="og:description" content="Top-down-seikkailu: muutokset versio 13 -&gt; versio 14.">
+    <meta property="og:url" content="https://rosotuotanto.github.io/RG-Learning-Materials/games/7-top-down/versio-14/muutokset/">
+    <meta property="og:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-7-top-down.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta property="og:locale" content="fi_FI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Top-down-seikkailu - versio 14: muutokset">
+    <meta name="twitter:description" content="Top-down-seikkailu: muutokset versio 13 -&gt; versio 14.">
+    <meta name="twitter:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/peli-7-top-down.png">
+    <meta name="twitter:image:alt" content="Roso Games opetuspelit ja demot">
+    <meta name="apple-mobile-web-app-title" content="Roso Games">
+    <style>
+@font-face {
+    font-family: "Archivo";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/archivo-700.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Archivo";
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/archivo-800.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("../../../../assets/fonts/inter-700.woff2") format("woff2");
+}
+
+:root {
+    --color-bg: #0B0C0E;
+    --color-surface: #15171B;
+    --color-surface-hover: #1C1F25;
+    --color-text: #F4F5F7;
+    --color-muted: #9AA0AB;
+    --color-accent: #C6F04B;
+    --color-accent-hover: #D6FF6E;
+    --color-accent-ink: #0B0C0E;
+    --color-border: #33383F;
+    --color-line: #4A505A;
+    --font-head: "Archivo", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radius: 4px;
+    --shadow-hard: 5px 5px 0 rgba(0, 0, 0, 0.55);
+    --shadow-hard-lg: 8px 8px 0 rgba(0, 0, 0, 0.6);
+    --space: 1rem;
+    --max-width: 72rem;
+    --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", "Segoe UI Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --diff-del-bg: #3B1B20;
+    --diff-del-mark: #7D2A33;
+    --diff-del-text: #FF9A9A;
+    --diff-add-bg: #17331D;
+    --diff-add-mark: #2E6A31;
+    --diff-add-text: #A6EE7A;
+    --diff-moved-text: #9CC2FF;
+    --diff-num-text: #B4BAC4;
+    --diff-empty-bg: #101114;
+    --diff-gap-bg: #1C1F25;
+    --diff-checker-dark: #1C1F25;
+    --diff-checker-light: #2C3038;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.6;
+}
+
+h1,
+h2 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+main.content {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem var(--space) 3.5rem;
+}
+
+h1 {
+    margin: 0.25rem 0 1rem;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+h1 mark {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    padding: 0 0.15em;
+}
+
+h2 {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin: 0 0 0.75rem;
+    font-weight: 800;
+    border-bottom: 5px solid var(--color-accent);
+    padding-bottom: 0.15rem;
+}
+
+.lead {
+    font-size: 1.12rem;
+    color: var(--color-muted);
+    max-width: 46rem;
+}
+
+/* Header / navbar */
+
+.site-header {
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-line);
+}
+
+.site-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.4rem var(--space);
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.brand:hover,
+.brand:focus-visible {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.brand-mark {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+}
+
+.breadcrumb {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.crumb-trail {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.crumb a {
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.crumb a:hover,
+.crumb a:focus-visible {
+    color: var(--color-accent);
+}
+
+.crumb-trail > li.crumb + li.crumb::before {
+    content: ">";
+    margin-right: 0.35rem;
+    color: var(--color-line);
+    font-weight: 700;
+}
+
+.crumb.current {
+    color: var(--color-muted);
+}
+
+.crumb-dropdown {
+    position: relative;
+}
+
+.crumb-toggle {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    padding: 0.15rem 0.25rem;
+    cursor: pointer;
+}
+
+.crumb-toggle:hover,
+.crumb-toggle:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.crumb-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+    margin: 0.5rem 0 0;
+    padding: 0.35rem 0;
+    min-width: 13rem;
+    list-style: none;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+.crumb-dropdown.open .crumb-menu {
+    display: block;
+}
+
+.crumb-menu li {
+    margin: 0;
+}
+
+.crumb-menu a {
+    display: block;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.crumb-menu a:hover,
+.crumb-menu a:focus-visible {
+    background: var(--color-surface-hover);
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.crumb-menu a.current {
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+/* Cascading Peli/Demo category menu */
+
+.cat-toggle {
+    font: inherit;
+    font-weight: 700;
+    width: 100%;
+    text-align: left;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.cat-toggle::after {
+    content: "\203A";
+    color: var(--color-accent);
+    transition: transform 0.15s ease;
+}
+
+.cat-toggle[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+}
+
+.cat-toggle:hover,
+.cat-toggle:focus-visible {
+    background: var(--color-surface-hover);
+}
+
+.cat-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0.15rem 0 0.35rem;
+}
+
+.cat-toggle[aria-expanded="true"] + .cat-list {
+    display: block;
+}
+
+.cat-list a {
+    padding-left: 1.75rem;
+}
+
+.cat-empty {
+    padding: 0.4rem 1rem 0.4rem 1.75rem;
+    color: var(--color-muted);
+    font-style: italic;
+    white-space: nowrap;
+}
+
+/* Hero */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.hero-text .lead {
+    max-width: 40rem;
+}
+
+.lang-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.lang-flags {
+    display: inline-flex;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+}
+
+.lang-flags img {
+    height: 1.1em;
+    width: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-line);
+}
+
+.section-divider {
+    border: none;
+    height: 2px;
+    background: var(--color-line);
+    margin: 3rem 0;
+}
+
+.hero-media {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-logo {
+    width: 100%;
+    max-width: 22rem;
+    height: auto;
+}
+
+.hero-shot {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+/* Sections and card lists */
+
+.section {
+    margin: 2.75rem 0 0;
+}
+
+.section-lead {
+    color: var(--color-muted);
+    max-width: 46rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.empty-note {
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.card-list a {
+    display: block;
+    padding: 1.15rem 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 700;
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.card-list a:hover,
+.card-list a:focus-visible {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--color-accent);
+}
+
+/* Game / demo stage */
+
+.game-stage {
+    display: flex;
+    justify-content: center;
+    margin: 1.75rem 0;
+    overflow-x: auto;
+}
+
+.game-frame {
+    max-width: 100%;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: #000000;
+    box-shadow: var(--shadow-hard);
+}
+
+.page-meta {
+    margin: 1.25rem 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.page-meta p {
+    margin: 0.4rem 0;
+}
+
+.source {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.source-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.gh-logo {
+    height: 1.4rem;
+    width: auto;
+    display: block;
+    transition: opacity 0.15s ease;
+}
+
+.source-link:hover .gh-logo,
+.source-link:focus-visible .gh-logo {
+    opacity: 0.8;
+}
+
+.version-nav {
+    display: flex;
+    gap: 1.25rem;
+    margin: 2rem 0 0;
+}
+
+.button-link,
+.version-nav a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border: 2px solid var(--color-accent-ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.button-link:hover,
+.button-link:focus-visible,
+.version-nav a:hover,
+.version-nav a:focus-visible {
+    background: var(--color-accent-hover);
+    color: var(--color-accent-ink);
+    text-decoration: none;
+    transform: translate(-3px, -3px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.version-nav .nav-next {
+    margin-left: auto;
+}
+
+/* Version diff pages */
+
+.diff-summary {
+    margin: 0 0 0.4rem;
+    font-weight: 600;
+}
+
+.back-link {
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+}
+
+.diff-toggle[hidden] {
+    display: none;
+}
+
+.diff-toggle button {
+    font: inherit;
+    font-family: var(--font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 1.1rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.diff-toggle button:hover,
+.diff-toggle button:focus-visible {
+    border-color: var(--color-accent);
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.diff-toggle button[aria-pressed="true"] {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    border-color: var(--color-accent-ink);
+}
+
+.diff-files[data-view="unified"] .diff-split,
+.diff-files[data-view="split"] .diff-unified {
+    display: none;
+}
+
+.diff-file {
+    margin: 0 0 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+    scroll-margin-top: 1rem;
+}
+
+.diff-file > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.diff-file > summary::-webkit-details-marker {
+    display: none;
+}
+
+.diff-file > summary::before {
+    content: "\203A";
+    color: var(--color-accent);
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.15s ease;
+}
+
+.diff-file[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.diff-file > summary:hover {
+    background: var(--color-surface-hover);
+}
+
+.diff-path {
+    flex: 1 1 12rem;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.diff-tag,
+.diff-status {
+    padding: 0.05rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border: 2px solid currentColor;
+    border-radius: var(--radius);
+}
+
+.diff-tag {
+    color: var(--color-accent-ink);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.diff-status {
+    color: var(--color-text);
+}
+
+.diff-status[data-status="added"] {
+    color: var(--diff-add-text);
+}
+
+.diff-status[data-status="removed"] {
+    color: var(--diff-del-text);
+}
+
+.diff-status[data-status="moved"] {
+    color: var(--diff-moved-text);
+}
+
+.diff-stat {
+    display: inline-flex;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.diff-plus {
+    color: var(--diff-add-text);
+}
+
+.diff-minus {
+    color: var(--diff-del-text);
+}
+
+.diff-body {
+    border-top: 2px solid var(--color-line);
+}
+
+.diff-note {
+    margin: 0;
+    padding: 0.75rem 1rem;
+}
+
+.diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.diff-table td {
+    padding: 0 0.3rem;
+    vertical-align: top;
+}
+
+.diff-num,
+.diff-sign {
+    width: 4ch;
+    color: var(--diff-num-text);
+    text-align: right;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.diff-sign {
+    width: 2ch;
+    text-align: center;
+    font-weight: 700;
+}
+
+.diff-num::before {
+    content: attr(data-line);
+}
+
+.diff-sign::before {
+    content: attr(data-sign);
+}
+
+.diff-code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 4;
+    color: var(--color-text);
+}
+
+.diff-split .diff-code {
+    width: 50%;
+}
+
+.diff-split .diff-code:nth-child(3) {
+    border-right: 2px solid var(--color-line);
+}
+
+.diff-table .diff-del {
+    background: var(--diff-del-bg);
+}
+
+.diff-table .diff-add {
+    background: var(--diff-add-bg);
+}
+
+.diff-table .diff-empty {
+    background: var(--diff-empty-bg);
+}
+
+.diff-del .diff-sign,
+.diff-sign.diff-del {
+    color: var(--diff-del-text);
+}
+
+.diff-add .diff-sign,
+.diff-sign.diff-add {
+    color: var(--diff-add-text);
+}
+
+.diff-code mark {
+    color: var(--color-text);
+    border-radius: 2px;
+}
+
+.diff-del mark {
+    background: var(--diff-del-mark);
+}
+
+.diff-add mark {
+    background: var(--diff-add-mark);
+}
+
+.diff-code[tabindex="-1"]:focus-visible {
+    outline-offset: -3px;
+}
+
+.diff-gap td {
+    padding: 0.3rem 0.75rem;
+    background: var(--diff-gap-bg);
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    border-top: 1px dashed var(--color-line);
+    border-bottom: 1px dashed var(--color-line);
+}
+
+.diff-expand {
+    font: inherit;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: none;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    padding: 0.15rem 0.75rem;
+    cursor: pointer;
+}
+
+.diff-expand:hover,
+.diff-expand:focus-visible {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent);
+}
+
+.diff-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.diff-figure {
+    flex: 1 1 14rem;
+    min-width: 0;
+    margin: 0;
+}
+
+.diff-figure figcaption {
+    margin-top: 0.4rem;
+    font-weight: 700;
+}
+
+/* Pixel art is drawn at native size, so scale it up without smoothing. */
+.diff-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 22rem;
+    object-fit: contain;
+    image-rendering: pixelated;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius);
+    background: repeating-conic-gradient(var(--diff-checker-light) 0% 25%, var(--diff-checker-dark) 0% 50%) 0 0 / 16px 16px;
+}
+
+.diff-sounds .diff-figure {
+    max-width: 28rem;
+}
+
+.diff-audio {
+    display: block;
+    width: 100%;
+}
+
+/* 404 */
+
+.error-page {
+    text-align: center;
+    padding-top: 4rem;
+}
+
+.error-code {
+    font-family: var(--font-head);
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+}
+
+.error-page .lead {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer */
+
+.site-footer {
+    flex-shrink: 0;
+    background: var(--color-surface);
+    border-top: 2px solid var(--color-line);
+    padding: 1.5rem var(--space);
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.site-footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+@media (min-width: 48rem) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero {
+        grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .diff-table {
+        font-size: 0.85rem;
+    }
+
+    .diff-table td {
+        padding: 0 0.5rem;
+    }
+
+    .diff-num {
+        width: 5ch;
+    }
+
+    .diff-sign {
+        width: 2.5ch;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+
+    .card-list a:hover,
+    .card-list a:focus-visible,
+    .button-link:hover,
+    .button-link:focus-visible,
+    .version-nav a:hover,
+    .version-nav a:focus-visible,
+    .diff-toggle button:hover,
+    .diff-toggle button:focus-visible {
+        transform: none;
+    }
+}
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="../../../../" aria-label="Roso Games - Etusivu">
+                <img class="brand-mark" src="../../../../favicon.svg" alt="Roso Games">
+            </a>
+            <nav class="breadcrumb" aria-label="Murupolku">
+<ol class="crumb-trail">
+<li class="crumb"><a href="../../../../">Etusivu</a></li>
+<li class="crumb crumb-dropdown crumb-category">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Peli</button>
+  <ul class="crumb-menu crumb-cat-menu">
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="true">Peli</button>
+      <ul class="cat-list">
+        <li><a href="../../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+        <li><a href="../../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+        <li><a href="../../../../games/4-pokeri/">Pokeri</a></li>
+        <li><a href="../../../../games/5-visual-novel/">Visual novel</a></li>
+        <li><a href="../../../../games/6-platformer/">Platformer</a></li>
+        <li><a class="current" href="../../../../games/7-top-down/">Top-down-seikkailu</a></li>
+      </ul>
+    </li>
+    <li class="crumb-cat">
+      <button type="button" class="cat-toggle" aria-expanded="false">Demo</button>
+      <ul class="cat-list">
+        <li><a href="../../../../demos/animations/">Frame-by-frame ja skeletal animation</a></li>
+        <li><a href="../../../../demos/feedback/">Palaute ja game feel</a></li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="crumb crumb-dropdown">
+  <button type="button" class="crumb-toggle" aria-haspopup="true" aria-expanded="false">Top-down-seikkailu</button>
+  <ul class="crumb-menu">
+    <li><a href="../../../../games/2-nopeustesteri/">Nopeustesteri</a></li>
+    <li><a href="../../../../games/3-fysiikkapallo/">Fysiikkapallo</a></li>
+    <li><a href="../../../../games/4-pokeri/">Pokeri</a></li>
+    <li><a href="../../../../games/5-visual-novel/">Visual novel</a></li>
+    <li><a href="../../../../games/6-platformer/">Platformer</a></li>
+    <li><a class="current" href="../../../../games/7-top-down/">Top-down-seikkailu</a></li>
+  </ul>
+</li>
+<li class="crumb"><a href="../../../../games/7-top-down/versio-14/">Versio 14</a></li>
+<li class="crumb current">Muutokset</li>
+</ol>
+</nav>
+        </div>
+    </header>
+    <main class="content">
+<h1>Top-down-seikkailu - versio 14: muutokset</h1>
+<p class="diff-summary">Versio 13 -&gt; versio 14 | 3 tiedostoa, +80 -3</p>
+<p class="back-link"><a href="../">Takaisin: Versio 14</a></p>
+<div class="diff-toggle" role="group" aria-label="Näkymä" hidden>
+  <button type="button" data-view="unified" aria-pressed="true">Yksi sarake</button>
+  <button type="button" data-view="split" aria-pressed="false">Rinnakkain</button>
+</div>
+<div class="diff-files" data-view="unified">
+<details class="diff-file" id="tiedosto-1" data-kind="code" open>
+<summary><span class="diff-path">scenes/game.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+14</span> <span class="diff-minus">-3</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-del"><td class="diff-num" data-line="1"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">-- Pelinäkymä. Tällä oppitunnilla <mark>tallennamme</mark> <mark>pelitilan</mark> ja <mark>jatkamme</mark> <mark>peliä</mark> <mark>tallennuksesta</mark>.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="1"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Pelinäkymä. Tällä oppitunnilla <mark>lisäämme</mark> <mark>ulko-</mark> ja <mark>sisätilan</mark> <mark>taustamusiikin</mark> <mark>sekä äänitehosteet</mark>.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="2"></td><td class="diff-num" data-line="2"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code">-- Ladataan Composer, jotta voimme käyttää sen funktioita.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">local composer = require( "composer" )</td></tr>
+<tr class="diff-gap" data-gap="f1-g0" data-old-start="5" data-new-start="5" data-count="19"><td colspan="4"><button type="button" class="diff-expand">Näytä 19 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="24"></td><td class="diff-num" data-line="24"></td><td class="diff-sign"></td><td class="diff-code">local exit = require( "maps.extensions.exit" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="25"></td><td class="diff-num" data-line="25"></td><td class="diff-sign"></td><td class="diff-code">-- loadsave lukee ja kirjoittaa pelitilan tallennustiedoston.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="26"></td><td class="diff-num" data-line="26"></td><td class="diff-sign"></td><td class="diff-code">local loadsave = require( "scripts.loadsave" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="27"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- sfx soittaa ääniefektit ja music hoitaa ulko- ja sisätilan taustamusiikin.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="28"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local sfx = require( "scripts.sfx" )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="29"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local music = require( "scripts.music" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="27"></td><td class="diff-num" data-line="30"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="28"></td><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code">-- hints näyttää pelin ohjausvinkit ruudun alakulmassa.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="29"></td><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">local hints = require( "scripts.hints" )</td></tr>
+<tr class="diff-gap" data-gap="f1-g1" data-old-start="30" data-new-start="33" data-count="96"><td colspan="4"><button type="button" class="diff-expand">Näytä 96 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="126"></td><td class="diff-num" data-line="129"></td><td class="diff-sign"></td><td class="diff-code">	-- "Continue"-napilla takaisin juuri tähän tilanteeseen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="127"></td><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code">	if action == "menu" and phase == "down" then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="128"></td><td class="diff-num" data-line="131"></td><td class="diff-sign"></td><td class="diff-code">		saveGame()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="132"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		music.stop()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="129"></td><td class="diff-num" data-line="133"></td><td class="diff-sign"></td><td class="diff-code">		composer.gotoScene( "scenes.menu", { effect = "fade", time = 500 } )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="130"></td><td class="diff-num" data-line="134"></td><td class="diff-sign"></td><td class="diff-code">		return</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="131"></td><td class="diff-num" data-line="135"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-gap" data-gap="f1-g2" data-old-start="132" data-new-start="136" data-count="32"><td colspan="4"><button type="button" class="diff-expand">Näytä 32 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="164"></td><td class="diff-num" data-line="168"></td><td class="diff-sign"></td><td class="diff-code">					print( "Talking to: " .. tostring( target.name ) )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="165"></td><td class="diff-num" data-line="169"></td><td class="diff-sign"></td><td class="diff-code">				end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="166"></td><td class="diff-num" data-line="170"></td><td class="diff-sign"></td><td class="diff-code">			elseif target and target.type == "item" then</td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="167"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">				-- Poimitaan esine reppuun<mark>.</mark></td></tr>
+<tr class="diff-del"><td class="diff-num" data-line="168"></td><td class="diff-num"></td><td class="diff-sign" data-sign="-"></td><td class="diff-code">				target:pickup()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="171"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				-- Poimitaan esine reppuun<mark> ja soitetaan äänitehoste vain, jos poiminta</mark></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="172"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				-- onnistui. Jos reppu on täynnä, esine jää kartalle eikä ääntä soiteta.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="173"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				if target:pickup() then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="174"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">					sfx.playInteract()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="175"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">				end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="169"></td><td class="diff-num" data-line="176"></td><td class="diff-sign"></td><td class="diff-code">			else</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="170"></td><td class="diff-num" data-line="177"></td><td class="diff-sign"></td><td class="diff-code">				print( "There is nobody ahead to talk to." )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="171"></td><td class="diff-num" data-line="178"></td><td class="diff-sign"></td><td class="diff-code">			end</td></tr>
+<tr class="diff-gap" data-gap="f1-g3" data-old-start="172" data-new-start="179" data-count="172"><td colspan="4"><button type="button" class="diff-expand">Näytä 172 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="344"></td><td class="diff-num" data-line="351"></td><td class="diff-sign"></td><td class="diff-code">		-- Käynnistetään kameran seuranta.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="345"></td><td class="diff-num" data-line="352"></td><td class="diff-sign"></td><td class="diff-code">		camera.start()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="346"></td><td class="diff-num" data-line="353"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="354"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		-- Soitetaan kartan mukainen taustamusiikki. Ulkokartat jakavat saman raidan,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="355"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		-- joten musiikki jatkuu katkeamatta niiden välillä ja vaihtuu vasta sisälle.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="356"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		music.playForMap( currentMapName )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="357"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="347"></td><td class="diff-num" data-line="358"></td><td class="diff-sign"></td><td class="diff-code">		-- Näytetään uuden pelin aloitusrepliikki, joka kertoo minne suunnata.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="348"></td><td class="diff-num" data-line="359"></td><td class="diff-sign"></td><td class="diff-code">		if newGame then</td></tr>
+<tr class="diff-gap" data-gap="f1-g4" data-old-start="349" data-new-start="360" data-count="63"><td colspan="4"><button type="button" class="diff-expand">Näytä 63 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="1"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">-- Pelinäkymä. Tällä oppitunnilla <mark>tallennamme</mark> <mark>pelitilan</mark> ja <mark>jatkamme</mark> <mark>peliä</mark> <mark>tallennuksesta</mark>.</td><td class="diff-num diff-add" data-line="1"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Pelinäkymä. Tällä oppitunnilla <mark>lisäämme</mark> <mark>ulko-</mark> ja <mark>sisätilan</mark> <mark>taustamusiikin</mark> <mark>sekä äänitehosteet</mark>.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="2"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="2"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code">-- Ladataan Composer, jotta voimme käyttää sen funktioita.</td><td class="diff-num" data-line="3"></td><td class="diff-sign"></td><td class="diff-code">-- Ladataan Composer, jotta voimme käyttää sen funktioita.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">local composer = require( "composer" )</td><td class="diff-num" data-line="4"></td><td class="diff-sign"></td><td class="diff-code">local composer = require( "composer" )</td></tr>
+<tr class="diff-gap" data-gap="f1-g0" data-old-start="5" data-new-start="5" data-count="19"><td colspan="6"><button type="button" class="diff-expand">Näytä 19 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="24"></td><td class="diff-sign"></td><td class="diff-code">local exit = require( "maps.extensions.exit" )</td><td class="diff-num" data-line="24"></td><td class="diff-sign"></td><td class="diff-code">local exit = require( "maps.extensions.exit" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="25"></td><td class="diff-sign"></td><td class="diff-code">-- loadsave lukee ja kirjoittaa pelitilan tallennustiedoston.</td><td class="diff-num" data-line="25"></td><td class="diff-sign"></td><td class="diff-code">-- loadsave lukee ja kirjoittaa pelitilan tallennustiedoston.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="26"></td><td class="diff-sign"></td><td class="diff-code">local loadsave = require( "scripts.loadsave" )</td><td class="diff-num" data-line="26"></td><td class="diff-sign"></td><td class="diff-code">local loadsave = require( "scripts.loadsave" )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="27"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- sfx soittaa ääniefektit ja music hoitaa ulko- ja sisätilan taustamusiikin.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="28"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local sfx = require( "scripts.sfx" )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="29"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local music = require( "scripts.music" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="27"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="30"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="28"></td><td class="diff-sign"></td><td class="diff-code">-- hints näyttää pelin ohjausvinkit ruudun alakulmassa.</td><td class="diff-num" data-line="31"></td><td class="diff-sign"></td><td class="diff-code">-- hints näyttää pelin ohjausvinkit ruudun alakulmassa.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="29"></td><td class="diff-sign"></td><td class="diff-code">local hints = require( "scripts.hints" )</td><td class="diff-num" data-line="32"></td><td class="diff-sign"></td><td class="diff-code">local hints = require( "scripts.hints" )</td></tr>
+<tr class="diff-gap" data-gap="f1-g1" data-old-start="30" data-new-start="33" data-count="96"><td colspan="6"><button type="button" class="diff-expand">Näytä 96 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="126"></td><td class="diff-sign"></td><td class="diff-code">	-- "Continue"-napilla takaisin juuri tähän tilanteeseen.</td><td class="diff-num" data-line="129"></td><td class="diff-sign"></td><td class="diff-code">	-- "Continue"-napilla takaisin juuri tähän tilanteeseen.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="127"></td><td class="diff-sign"></td><td class="diff-code">	if action == "menu" and phase == "down" then</td><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code">	if action == "menu" and phase == "down" then</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="128"></td><td class="diff-sign"></td><td class="diff-code">		saveGame()</td><td class="diff-num" data-line="131"></td><td class="diff-sign"></td><td class="diff-code">		saveGame()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="132"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		music.stop()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="129"></td><td class="diff-sign"></td><td class="diff-code">		composer.gotoScene( "scenes.menu", { effect = "fade", time = 500 } )</td><td class="diff-num" data-line="133"></td><td class="diff-sign"></td><td class="diff-code">		composer.gotoScene( "scenes.menu", { effect = "fade", time = 500 } )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="130"></td><td class="diff-sign"></td><td class="diff-code">		return</td><td class="diff-num" data-line="134"></td><td class="diff-sign"></td><td class="diff-code">		return</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="131"></td><td class="diff-sign"></td><td class="diff-code">	end</td><td class="diff-num" data-line="135"></td><td class="diff-sign"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-gap" data-gap="f1-g2" data-old-start="132" data-new-start="136" data-count="32"><td colspan="6"><button type="button" class="diff-expand">Näytä 32 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="164"></td><td class="diff-sign"></td><td class="diff-code">					print( "Talking to: " .. tostring( target.name ) )</td><td class="diff-num" data-line="168"></td><td class="diff-sign"></td><td class="diff-code">					print( "Talking to: " .. tostring( target.name ) )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="165"></td><td class="diff-sign"></td><td class="diff-code">				end</td><td class="diff-num" data-line="169"></td><td class="diff-sign"></td><td class="diff-code">				end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="166"></td><td class="diff-sign"></td><td class="diff-code">			elseif target and target.type == "item" then</td><td class="diff-num" data-line="170"></td><td class="diff-sign"></td><td class="diff-code">			elseif target and target.type == "item" then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="167"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">				-- Poimitaan esine reppuun<mark>.</mark></td><td class="diff-num diff-add" data-line="171"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				-- Poimitaan esine reppuun<mark> ja soitetaan äänitehoste vain, jos poiminta</mark></td></tr>
+<tr class="diff-change"><td class="diff-num diff-del" data-line="168"></td><td class="diff-sign diff-del" data-sign="-"></td><td class="diff-code diff-del">				target:pickup()</td><td class="diff-num diff-add" data-line="172"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				-- onnistui. Jos reppu on täynnä, esine jää kartalle eikä ääntä soiteta.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="173"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				if target:pickup() then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="174"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">					sfx.playInteract()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="175"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">				end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="169"></td><td class="diff-sign"></td><td class="diff-code">			else</td><td class="diff-num" data-line="176"></td><td class="diff-sign"></td><td class="diff-code">			else</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="170"></td><td class="diff-sign"></td><td class="diff-code">				print( "There is nobody ahead to talk to." )</td><td class="diff-num" data-line="177"></td><td class="diff-sign"></td><td class="diff-code">				print( "There is nobody ahead to talk to." )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="171"></td><td class="diff-sign"></td><td class="diff-code">			end</td><td class="diff-num" data-line="178"></td><td class="diff-sign"></td><td class="diff-code">			end</td></tr>
+<tr class="diff-gap" data-gap="f1-g3" data-old-start="172" data-new-start="179" data-count="172"><td colspan="6"><button type="button" class="diff-expand">Näytä 172 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="344"></td><td class="diff-sign"></td><td class="diff-code">		-- Käynnistetään kameran seuranta.</td><td class="diff-num" data-line="351"></td><td class="diff-sign"></td><td class="diff-code">		-- Käynnistetään kameran seuranta.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="345"></td><td class="diff-sign"></td><td class="diff-code">		camera.start()</td><td class="diff-num" data-line="352"></td><td class="diff-sign"></td><td class="diff-code">		camera.start()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="346"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="353"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="354"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		-- Soitetaan kartan mukainen taustamusiikki. Ulkokartat jakavat saman raidan,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="355"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		-- joten musiikki jatkuu katkeamatta niiden välillä ja vaihtuu vasta sisälle.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="356"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		music.playForMap( currentMapName )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="357"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="347"></td><td class="diff-sign"></td><td class="diff-code">		-- Näytetään uuden pelin aloitusrepliikki, joka kertoo minne suunnata.</td><td class="diff-num" data-line="358"></td><td class="diff-sign"></td><td class="diff-code">		-- Näytetään uuden pelin aloitusrepliikki, joka kertoo minne suunnata.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="348"></td><td class="diff-sign"></td><td class="diff-code">		if newGame then</td><td class="diff-num" data-line="359"></td><td class="diff-sign"></td><td class="diff-code">		if newGame then</td></tr>
+<tr class="diff-gap" data-gap="f1-g4" data-old-start="349" data-new-start="360" data-count="63"><td colspan="6"><button type="button" class="diff-expand">Näytä 63 piilotettua riviä</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["-- Pelinäkymä. Tällä oppitunnilla lisäämme ulko- ja sisätilan taustamusiikin sekä äänitehosteet.", "", "-- Ladataan Composer, jotta voimme käyttää sen funktioita.", "local composer = require( \"composer\" )", "", "-- json lukee Tiled-editorista viedyn kenttätiedoston Lua-taulukoksi.", "local json = require( \"json\" )", "-- ponytiled rakentaa Tiled-kartasta valmiin display-objektin.", "local ponytiled = require( \"com.ponywolf.ponytiled\" )", "-- physics tarvitaan hahmon ja seinien fysiikkaobjekteihin.", "local physics = require( \"physics\" )", "-- controls kuuntelee näppäimistöä ja antaa liikkeen suunnan.", "local controls = require( \"scripts.controls\" )", "-- camera seuraa pelaajaa ja vierittää karttaa isoilla kentillä.", "local camera = require( \"classes.camera\" )", "-- dialogue lataa tarinan ja piirtää NPC-keskustelut ruudulle.", "local dialogue = require( \"scripts.dialogue\" )", "-- inventory säilyttää repun sisällön ja poimittujen esineiden rekisterin.", "local inventory = require( \"scripts.inventory\" )", "-- inventoryPanel piirtää repun ruudukkonäkymän ja käsittelee sen näppäimet.", "local inventoryPanel = require( \"scripts.inventoryPanel\" )", "-- exit on sama moduuli, jonka ponytiled ajaa \"exit\"-objekteille. Pelinäkymä kertoo", "-- sille, miten lukitun portin viesti näytetään.", "local exit = require( \"maps.extensions.exit\" )", "-- loadsave lukee ja kirjoittaa pelitilan tallennustiedoston.", "local loadsave = require( \"scripts.loadsave\" )", "-- sfx soittaa ääniefektit ja music hoitaa ulko- ja sisätilan taustamusiikin.", "local sfx = require( \"scripts.sfx\" )", "local music = require( \"scripts.music\" )", "", "-- hints näyttää pelin ohjausvinkit ruudun alakulmassa.", "local hints = require( \"scripts.hints\" )", "", "-- Luodaan uusi scene-objekti.", "local scene = composer.newScene()", "", "-- Pelitilan tallennustiedosto. Sama nimi on käytössä menussa (scenes/menu.lua).", "local saveFile = \"gamesave.json\"", "", "-- Kartta ja pelaajahahmo, joita käytämme useassa scene-funktiossa.", "local map", "local player", "", "-- Parhaillaan avoinna oleva kartta. Tarvitsemme sen tallennukseen.", "local currentMapName", "", "-- Ryhmä, johon keskustelu- ja inventaario-ikkuna piirretään. Se ei liiku kameran", "-- mukana, joten ne pysyvät paikallaan ruudulla.", "local dialogueGroup", "", "-- Tosi, kun peli alkaa alusta. Silloin pelinäkymän avauduttua näytetään", "-- aloitusrepliikki, joka ohjaa pelaajan kylän vanhimman luo.", "local newGame", "", "--------------------------------------------------------------------------------------", "-- Muut funktiot:", "--------------------------------------------------------------------------------------", "", "-- Weaver antaa omat \u003c\u003c...\u003e\u003e-komennot pelin käsiteltäväksi taulukkoina. Marlow antaa", "-- viestin komennolla \"annaViesti\", ja kylän vanhin ottaa sen vastaan komennolla \"toimitaViesti\".", "local function onDialogueCommand( command )", "\tif command[1] == \"annaViesti\" then", "\t\tinventory.add( \"note\" )", "\telseif command[1] == \"toimitaViesti\" then", "\t\tinventory.remove( \"note\" )", "\tend", "end", "", "", "-- Tallennetaan pelitila: nykyinen kartta, pelaajan sijainti ja katsomissuunta sekä", "-- repun sisältö ja poimittujen esineiden rekisteri. Tarinan tila tallennetaan samalla", "-- hetkellä Weaverin omaan tiedostoon. Näin \"Continue\" voi palauttaa kaiken samaan tilaan.", "local function saveGame()", "\tif not player then return end", "", "\tlocal facingX, facingY = player:getFacing()", "", "\tloadsave.save( {", "\t\tmapName = currentMapName,", "\t\tplayerX = player.x,", "\t\tplayerY = player.y,", "\t\tfacing = { x = facingX, y = facingY },", "\t\tinventory = inventory.slots,", "\t\tcollected = inventory.getCollected(),", "\t}, saveFile )", "", "\tdialogue.save()", "end", "", "", "-- controls kutsuu tätä joka framella ja antaa normalisoidun liikevektorin.", "-- Välitetään vektori pelaajahahmolle, joka hoitaa varsinaisen liikkeen.", "local function onMovementEvent( directionX, directionY )", "\t-- Keskustelun tai repun ollessa auki hahmo ei liiku, vaan pysähtyy paikoilleen.", "\tif dialogue.isOpen() or inventoryPanel.isOpen() then", "\t\tif player and player.stop then", "\t\t\tplayer:stop()", "\t\tend", "\t\treturn", "\tend", "", "\tif player and player.move then", "\t\tplayer:move( directionX, directionY )", "\tend", "end", "", "", "-- controls kutsuu tätä, kun pelaaja painaa tai vapauttaa toimintonäppäimen.", "-- Ammutaan lyhyt säde hahmon katsomissuuntaan ja katsotaan, osuuko se NPC-hahmoon.", "local function onKeyEvent( action, phase )", "\t-- Kun keskustelu on auki, kaikki näppäimet ohjataan dialogille.", "\tif dialogue.isOpen() then", "\t\tdialogue.handleKey( action, phase )", "\t\treturn", "\tend", "", "\t-- Kun reppu on auki, näppäimet ohjataan inventaarioon. Menu-näppäin sulkee repun", "\t-- sen sijaan että tallentaisi ja poistuisi pelistä.", "\tif inventoryPanel.isOpen() then", "\t\tif action == \"menu\" and phase == \"down\" then", "\t\t\tinventoryPanel.close()", "\t\telse", "\t\t\tinventoryPanel.handleKey( action, phase )", "\t\tend", "\t\treturn", "\tend", "", "\t-- Menu-näppäin (esc) tallentaa pelin ja palaa päävalikkoon. Valikosta pääsee", "\t-- \"Continue\"-napilla takaisin juuri tähän tilanteeseen.", "\tif action == \"menu\" and phase == \"down\" then", "\t\tsaveGame()", "\t\tmusic.stop()", "\t\tcomposer.gotoScene( \"scenes.menu\", { effect = \"fade\", time = 500 } )", "\t\treturn", "\tend", "", "\t-- Avataan reppu inventaario-näppäimellä ja pysäytetään hahmo sen ajaksi.", "\tif action == \"inventory\" and phase == \"down\" then", "\t\tinventoryPanel.open( dialogueGroup )", "\t\tif player and player.stop then", "\t\t\tplayer:stop()", "\t\tend", "\t\treturn", "\tend", "", "\tif action == \"interact\" and phase == \"down\" then", "\t\tif player and player.getFacing then", "\t\t\tlocal facingX, facingY = player:getFacing()", "", "\t\t\t-- Säde alkaa hahmon keskeltä. rayCast ei ilmoita objektia, jonka sisältä", "\t\t\t-- säde lähtee, joten hahmo ei osu itseensä.", "\t\t\tlocal reach = 34", "\t\t\tlocal toX = player.x + facingX * reach", "\t\t\tlocal toY = player.y + facingY * reach", "", "\t\t\tlocal hits = physics.rayCast( player.x, player.y, toX, toY, \"closest\" )", "\t\t\tlocal target = hits and hits[1] and hits[1].object", "", "\t\t\tif target and target.type == \"npc\" then", "\t\t\t\t-- NPC:llä, jolla on dialogin passage, avataan keskustelu.", "\t\t\t\t-- Taustahahmoilla ei ole passagea, joten heille vain tulostetaan viesti.", "\t\t\t\tif target.node then", "\t\t\t\t\tif player.stop then", "\t\t\t\t\t\tplayer:stop()", "\t\t\t\t\tend", "\t\t\t\t\tdialogue.open( target.node, dialogueGroup, onDialogueCommand )", "\t\t\t\telse", "\t\t\t\t\tprint( \"Talking to: \" .. tostring( target.name ) )", "\t\t\t\tend", "\t\t\telseif target and target.type == \"item\" then", "\t\t\t\t-- Poimitaan esine reppuun ja soitetaan äänitehoste vain, jos poiminta", "\t\t\t\t-- onnistui. Jos reppu on täynnä, esine jää kartalle eikä ääntä soiteta.", "\t\t\t\tif target:pickup() then", "\t\t\t\t\tsfx.playInteract()", "\t\t\t\tend", "\t\t\telse", "\t\t\t\tprint( \"There is nobody ahead to talk to.\" )", "\t\t\tend", "\t\tend", "\tend", "end", "", "--------------------------------------------------------------------------------------", "-- scene event -funktiot:", "--------------------------------------------------------------------------------------", "", "-- create: kutsutaan kun scene luodaan ensimmäistä kertaa,", "-- tai jos se on poistettu ja sitä luodaan uudelleen.", "function scene:create( event )", "\tlocal sceneGroup = self.view", "", "\t-- Keskusteluikkunat piirretään scene-ryhmään, joka pysyy paikallaan ruudulla.", "\tdialogueGroup = sceneGroup", "", "\t-- Luetaan siirtymän mukana tulleet tiedot: mihin karttaan mennään ja minkä", "\t-- spawn-pisteen kohdalle pelaaja asetetaan. Ilman parametreja aloitamme kylästä.", "\tlocal sceneParams = event.params or {}", "", "\t-- Jos jatkamme tallennetusta pelistä, luetaan pelitila ja tarinan tila levyltä. Uudessa", "\t-- pelissä ja kentän vaihdossa savedState jää nil:ksi, jolloin edetään aivan normaalisti.", "\tlocal savedState", "\tif sceneParams.load then", "\t\tsavedState = loadsave.load( saveFile )", "\t\tdialogue.load()", "\tend", "", "\tlocal mapName = ( savedState and savedState.mapName ) or sceneParams.mapName or \"village\"", "\tlocal spawnName = sceneParams.spawnName", "", "\t-- Peli alkaa alusta, kun sceneen ei tultu siirtymäportin kautta eikä", "\t-- tallennusta ladattu.", "\tnewGame = sceneParams.mapName == nil and not sceneParams.load", "", "\t-- Tallennetaan kartan nimi, jotta pelitilan tallennus tietää, missä ollaan.", "\tcurrentMapName = mapName", "", "\t-- Käynnistetään fysiikka ennen kartan rakentamista, sillä kartan physics-layer", "\t-- luo seinien fysiikkaobjektit heti kun kartta rakennetaan. Top-down-pelissä", "\t-- ei ole painovoimaa, joten asetamme sen nollaan molemmilla akseleilla.", "\tphysics.start()", "\tphysics.setGravity( 0, 0 )", "", "\t-- Luetaan valittu kartta JSON-tiedostosta Lua-taulukoksi.", "\tlocal mapData = json.decodeFile( system.pathForFile( \"maps/\" .. mapName .. \".json\", system.ResourceDirectory ) )", "", "\t-- Rakennetaan kartasta display-objekti. Toinen argumentti kertoo, mistä", "\t-- kansiosta kartan kuvatiedostot löytyvät.", "\tmap = ponytiled.new( mapData, \"maps\" )", "", "\t-- Piilotetaan physics-layer, jolla ovat näkymättömät seinät ja siirtymät.", "\t-- Kartassa layer on jo merkitty piilotetuksi, mutta piilotamme sen myös", "\t-- koodissa, jotta näet miten yksittäisen layerin saa haettua ja kätkettyä.", "\tlocal physicsLayer = map:findLayer( \"physics\" )", "\tif physicsLayer then", "\t\tphysicsLayer.isVisible = false", "\tend", "", "\t-- ponytilediä voidaan laajentaa lisäosilla (extensions); kerrotaan, mistä kansiosta ne löytyvät.", "\tmap.extensions = \"maps.extensions.\"", "", "\t-- Continue: palautetaan repun sisältö ja poimintarekisteri ennen kartan rakentamista,", "\t-- jotta jo poimitut esineet eivät ilmesty takaisin kentälle.", "\tif savedState then", "\t\tinventory.restore( savedState.inventory, savedState.collected )", "\tend", "", "\t-- Kerrotaan repulle, mitä karttaa rakennetaan. Esine-extension tarvitsee tiedon,", "\t-- jotta jo poimitut esineet eivät ilmesty takaisin kentälle.", "\tinventory.setMap( mapName )", "", "\t-- Lukitun portin viesti näytetään dialogi-ikkunassa pelaajan omana repliikkinä.", "\tfunction exit.onLocked( message )", "\t\tdialogue.showMonologue( message, dialogueGroup )", "\tend", "", "\t-- Ajetaan extensionit: hero korvaa \"hero\"-objektin pelaajalla, npc rakentaa", "\t-- jokaisesta \"npc\"-objektista oman hahmonsa, exit tekee \"exit\"-objekteista", "\t-- siirtymäportteja ja item rakentaa poimittavat esineet.", "\tmap:extend( \"hero\", \"npc\", \"exit\", \"item\" )", "", "\t-- Haetaan valmis pelaajahahmo talteen. Jos kartalta puuttuu hero-objekti,", "\t-- kerromme siitä heti, jotta virhe huomataan kehityksen aikana.", "\tplayer = map:findObject( \"hero\" )", "\tif not player then", "\t\tprint( \"WARNING: the map is missing the hero object.\" )", "\tend", "", "\t-- Jos tulemme toisesta kentästä, siirretään pelaaja spawn-pisteen kohdalle.", "\t-- Jos nimeä vastaavaa spawn-pistettä ei löydy, jätetään pelaaja kohtaan 0,0.", "\t-- Näin puuttuva spawn-piste huomataan heti kehityksen aikana.", "\tif player and spawnName then", "\t\tlocal spawn = map:findObject( spawnName )", "\t\tif spawn then", "\t\t\tplayer.x, player.y = spawn.x, spawn.y", "\t\telse", "\t\t\tplayer.x, player.y = 0, 0", "\t\t\tprint( \"WARNING: spawn point \\\"\" .. tostring( spawnName ) .. \"\\\" was not found.\" )", "\t\tend", "\tend", "", "\t-- Continue: asetetaan pelaaja tallennettuun sijaintiin ja katsomissuuntaan. Tämä", "\t-- ohittaa spawn-pisteen, koska palaamme täsmälleen tallennushetken tilanteeseen.", "\tif player and savedState then", "\t\tplayer.x, player.y = savedState.playerX, savedState.playerY", "\t\tif savedState.facing then", "\t\t\tplayer:setFacing( savedState.facing.x, savedState.facing.y )", "\t\tend", "\tend", "", "\t-- Kytketään kamera seuraamaan pelaajaa. Kamera liikuttaa koko karttaryhmää,", "\t-- joten annamme sille kartan yhtenä tasona (delta 1 = liikkuu kameran mukana).", "\tcamera.init( { { group = map, delta = 1 } } )", "", "\t-- Lasketaan kameran rajat kartan pikselikoosta, jotta kamera ei näytä kartan", "\t-- reunojen ylitse. Rajat kertovat, kuinka lähelle reunaa kameran keskipiste voi mennä.", "\tlocal mapPixelWidth = mapData.width * mapData.tilewidth", "\tlocal mapPixelHeight = mapData.height * mapData.tileheight", "\tlocal halfScreenWidth = display.actualContentWidth * 0.5", "\tlocal halfScreenHeight = display.actualContentHeight * 0.5", "", "\tlocal boundsXMin = halfScreenWidth", "\tlocal boundsXMax = mapPixelWidth - halfScreenWidth", "\tlocal boundsYMin = halfScreenHeight", "\tlocal boundsYMax = mapPixelHeight - halfScreenHeight", "", "\t-- Jos kartta on ruutua pienempi jollain akselilla, keskitämme kartan sille", "\t-- akselille (esim. talon sisätila, joka mahtuu kerralla ruudulle).", "\tif boundsXMin \u003e boundsXMax then", "\t\tboundsXMin = mapPixelWidth * 0.5", "\t\tboundsXMax = boundsXMin", "\tend", "\tif boundsYMin \u003e boundsYMax then", "\t\tboundsYMin = mapPixelHeight * 0.5", "\t\tboundsYMax = boundsYMin", "\tend", "", "\tcamera.setBounds( { xMin = boundsXMin, yMin = boundsYMin, xMax = boundsXMax, yMax = boundsYMax } )", "", "\t-- Asetetaan pelaaja kameran seurattavaksi ja siirretään kamera heti kohdalleen,", "\t-- jottei kuva nytkähdä pelin alkaessa.", "\tif player then", "\t\tcamera.setTarget( player, { smoothing = 0.3 } )", "\t\tcamera.snapToTarget()", "\tend", "", "\t-- Lisätään kartta scenen ryhmään, jotta se piirtyy ruudulle.", "\tsceneGroup:insert( map )", "", "\t-- Luodaan ohjausvinkit ruudun alakulmaan. Ne ovat scene-ryhmässä, joten ne", "\t-- pysyvät paikallaan eivätkä liiku kameran mukana.", "\thints.create( sceneGroup )", "", "end", "", "", "-- show: kutsutaan kun scene on luotu mutta ei vielä näytetty.", "function scene:show( event )", "\tlocal sceneGroup = self.view", "\tlocal phase = event.phase", "", "\tif ( phase == \"will\" ) then", "\t\t-- Ajetaan ennen kuin scene tulee näkyviin.", "", "", "\telseif ( phase == \"did\" ) then", "\t\t-- Ajetaan heti kun scene näkyy pelaajalle.", "", "\t\t-- Aletaan kuunnella liikkumisnäppäimiä ja toimintonäppäintä.", "\t\tcontrols.start( onMovementEvent, onKeyEvent )", "", "\t\t-- Käynnistetään kameran seuranta.", "\t\tcamera.start()", "", "\t\t-- Soitetaan kartan mukainen taustamusiikki. Ulkokartat jakavat saman raidan,", "\t\t-- joten musiikki jatkuu katkeamatta niiden välillä ja vaihtuu vasta sisälle.", "\t\tmusic.playForMap( currentMapName )", "", "\t\t-- Näytetään uuden pelin aloitusrepliikki, joka kertoo minne suunnata.", "\t\tif newGame then", "\t\t\tnewGame = false", "\t\t\tdialogue.open( \"intro\", dialogueGroup )", "\t\tend", "", "\tend", "end", "", "", "-- hide: kutsutaan kun näkyvä scene halutaan piilottaa.", "function scene:hide( event )", "\tlocal sceneGroup = self.view", "\tlocal phase = event.phase", "", "\tif ( phase == \"will\" ) then", "\t\t-- Ajetaan ennen kuin scene katoaa näkyvistä.", "\t\t-- Suljetaan mahdollinen avoin keskustelu tai reppu, ettei ikkuna jää roikkumaan.", "\t\tif dialogue.isOpen() then", "\t\t\tdialogue.close()", "\t\tend", "\t\tif inventoryPanel.isOpen() then", "\t\t\tinventoryPanel.close()", "\t\tend", "", "\t\t-- Lopetetaan näppäinten kuuntelu, kameran seuranta ja pysäytetään hahmo.", "\t\tcontrols.stop()", "\t\tcamera.stop()", "\t\tif player and player.stop then", "\t\t\tplayer:stop()", "\t\tend", "", "\telseif ( phase == \"did\" ) then", "\t\t-- Ajetaan heti kun scene on piilotettu.", "", "", "\tend", "end", "", "", "-- destroy: kutsutaan kun scene halutaan poistaa kokonaan.", "-- Täällä siivotaan kaikki objektit ja resurssit.", "function scene:destroy( event )", "\t-- Poistetaan kartta ja nollataan viittaukset, jotta muistista ei jää roskaa.", "\t-- Pelaajahahmo on kartan sisällä, joten se poistuu kartan mukana.", "\tdisplay.remove( map )", "\tmap = nil", "\tplayer = nil", "\tdialogueGroup = nil", "end", "", "", "--------------------------------------------------------------------------------------", "-- Scene event -kuuntelijat:", "-- Voit valita mitä tapahtumia haluat kuunnella. Jos et esimerkiksi koskaan", "-- poista sceneä, niin silloin \"destroy\" ei välttämättä ole tarpeellinen.", "--------------------------------------------------------------------------------------", "scene:addEventListener( \"create\", scene )", "scene:addEventListener( \"show\", scene )", "scene:addEventListener( \"hide\", scene )", "scene:addEventListener( \"destroy\", scene )", "--------------------------------------------------------------------------------------", "", "-- Lopuksi palautetaan scene, jolloin tiedosto toimii Lua-moduulina.", "return scene"]</script>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-2" data-kind="code" open>
+<summary><span class="diff-path">scripts/music.lua</span> <span class="diff-status" data-status="added">lisätty</span> <span class="diff-stat"><span class="diff-plus">+55</span> <span class="diff-minus">-0</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="1"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Taustamusiikin hallinta. Musiikki soi kanavalla 1, jonka sfx-moduuli varaa.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="2"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Sama raita jatkuu, kun siirrytään saman ympäristön karttojen välillä (kylä ja</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="3"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- rantatie ovat ulkona), ja vaihtuu vasta, kun ympäristö muuttuu (talon sisälle).</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="4"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="5"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local music = {}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="6"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="7"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="8"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Muuttujat</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="9"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="10"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Ladataan molemmat raidat streamina, jotta ne eivät varaa paljon muistia kerralla.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="11"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local tracks = {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="12"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	outdoors = audio.loadStream( "assets/audio/outdoors.mp3" ),</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="13"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	indoors = audio.loadStream( "assets/audio/indoors.mp3" ),</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="14"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="15"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="16"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Jaetaan kartat ympäristöihin: ulkona soi outdoors-raita, sisällä indoors-raita.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="17"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local environmentOfMap = {</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="18"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	village = "outdoors",</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="19"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	sideroad = "outdoors",</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="20"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	house = "indoors",</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="21"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">}</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="22"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="23"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Parhaillaan soiva ympäristö. Kun se ei muutu, musiikkia ei aloiteta uudelleen.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="24"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local currentEnvironment</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="25"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="26"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="27"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Julkiset funktiot</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="28"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="29"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Soitetaan kartan mukainen taustaraita. Jos oikea raita jo soi, ei tehdä mitään,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="30"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- jolloin musiikki jatkuu katkeamatta saman ympäristön karttojen välillä. Kokonaan</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="31"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- toinen tapa olisi käynnistää raita aina alusta joka siirtymässä (kerrotaan oppitunnilla).</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="32"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">function music.playForMap( mapName )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="33"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	local environment = environmentOfMap[mapName] or "outdoors"</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="34"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="35"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Sama ympäristö kuin ennen ja musiikki jo soi: annetaan sen jatkua.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="36"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	if environment == currentEnvironment and audio.isChannelPlaying( 1 ) then</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="37"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">		return</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="38"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="39"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="40"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	-- Ympäristö vaihtui: pysäytetään edellinen raita ja aloitetaan uusi kanavalla 1.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="41"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	audio.stop( 1 )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="42"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	currentEnvironment = environment</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="43"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	audio.play( tracks[environment], { channel = 1, loops = -1 } )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="44"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="45"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="46"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="47"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Pysäytetään taustamusiikki. Kutsutaan, kun palataan päävalikkoon.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="48"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">function music.stop()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="49"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	audio.stop( 1 )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="50"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	currentEnvironment = nil</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="51"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="52"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="53"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="54"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="55"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">return music</td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="1"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Taustamusiikin hallinta. Musiikki soi kanavalla 1, jonka sfx-moduuli varaa.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="2"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Sama raita jatkuu, kun siirrytään saman ympäristön karttojen välillä (kylä ja</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="3"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- rantatie ovat ulkona), ja vaihtuu vasta, kun ympäristö muuttuu (talon sisälle).</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="4"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="5"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local music = {}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="6"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="7"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="8"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Muuttujat</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="9"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="10"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Ladataan molemmat raidat streamina, jotta ne eivät varaa paljon muistia kerralla.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="11"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local tracks = {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="12"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	outdoors = audio.loadStream( "assets/audio/outdoors.mp3" ),</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="13"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	indoors = audio.loadStream( "assets/audio/indoors.mp3" ),</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="14"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="15"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="16"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Jaetaan kartat ympäristöihin: ulkona soi outdoors-raita, sisällä indoors-raita.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="17"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local environmentOfMap = {</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="18"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	village = "outdoors",</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="19"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	sideroad = "outdoors",</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="20"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	house = "indoors",</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="21"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">}</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="22"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="23"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Parhaillaan soiva ympäristö. Kun se ei muutu, musiikkia ei aloiteta uudelleen.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="24"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local currentEnvironment</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="25"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="26"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="27"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Julkiset funktiot</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="28"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="29"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Soitetaan kartan mukainen taustaraita. Jos oikea raita jo soi, ei tehdä mitään,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="30"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- jolloin musiikki jatkuu katkeamatta saman ympäristön karttojen välillä. Kokonaan</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="31"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- toinen tapa olisi käynnistää raita aina alusta joka siirtymässä (kerrotaan oppitunnilla).</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="32"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">function music.playForMap( mapName )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="33"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	local environment = environmentOfMap[mapName] or "outdoors"</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="34"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="35"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Sama ympäristö kuin ennen ja musiikki jo soi: annetaan sen jatkua.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="36"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	if environment == currentEnvironment and audio.isChannelPlaying( 1 ) then</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="37"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">		return</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="38"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="39"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="40"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	-- Ympäristö vaihtui: pysäytetään edellinen raita ja aloitetaan uusi kanavalla 1.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="41"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	audio.stop( 1 )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="42"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	currentEnvironment = environment</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="43"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	audio.play( tracks[environment], { channel = 1, loops = -1 } )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="44"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="45"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="46"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="47"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Pysäytetään taustamusiikki. Kutsutaan, kun palataan päävalikkoon.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="48"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">function music.stop()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="49"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	audio.stop( 1 )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="50"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	currentEnvironment = nil</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="51"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="52"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="53"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">--------------------------------------------------------------------------------------</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="54"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="55"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">return music</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<details class="diff-file" id="tiedosto-3" data-kind="code" open>
+<summary><span class="diff-path">scripts/sfx.lua</span> <span class="diff-status" data-status="modified">muutettu</span> <span class="diff-stat"><span class="diff-plus">+11</span> <span class="diff-minus">-0</span></span></summary>
+<div class="diff-body">
+<table class="diff-table diff-unified">
+<tbody>
+<tr class="diff-gap" data-gap="f3-g0" data-old-start="1" data-new-start="1" data-count="4"><td colspan="4"><button type="button" class="diff-expand">Näytä 4 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="5"></td><td class="diff-num" data-line="5"></td><td class="diff-sign"></td><td class="diff-code">-- Varataan kanava 1 taustamusiikille. Muut kanavat jäävät ääniefekteille.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="6"></td><td class="diff-num" data-line="6"></td><td class="diff-sign"></td><td class="diff-code">audio.reserveChannels( 1 )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="7"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="8"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Ladataan vuorovaikutuksen äänitehoste. Lyhyet tehosteet ladataan loadSound:lla,</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="9"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- pitkä musiikki loadStream:lla (ks. scripts/music.lua).</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="10"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">local interactSound = audio.loadSound( "assets/audio/interact.wav" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="7"></td><td class="diff-num" data-line="11"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="8"></td><td class="diff-num" data-line="12"></td><td class="diff-sign"></td><td class="diff-code">function sfx.update()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="9"></td><td class="diff-num" data-line="13"></td><td class="diff-sign"></td><td class="diff-code">	local userdata = loadsave.userdata</td></tr>
+<tr class="diff-gap" data-gap="f3-g1" data-old-start="10" data-new-start="14" data-count="7"><td colspan="4"><button type="button" class="diff-expand">Näytä 7 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="17"></td><td class="diff-num" data-line="21"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="18"></td><td class="diff-num" data-line="22"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="19"></td><td class="diff-num" data-line="23"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="24"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- Soitetaan vuorovaikutuksen äänitehoste. Kanavaa ei anneta, joten audio valitsee</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="25"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">-- vapaan kanavan väliltä 2-32, joita sfx.update ohjaa ääniefektien voimakkuudella.</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="26"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">function sfx.playInteract()</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="27"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">	audio.play( interactSound )</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="28"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code">end</td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="29"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-add"><td class="diff-num"></td><td class="diff-num" data-line="30"></td><td class="diff-sign" data-sign="+"></td><td class="diff-code"></td></tr>
+<tr class="diff-gap" data-gap="f3-g2" data-old-start="20" data-new-start="31" data-count="1"><td colspan="4"><button type="button" class="diff-expand">Näytä 1 piilotettu rivi</button></td></tr>
+</tbody>
+</table>
+<table class="diff-table diff-split">
+<tbody>
+<tr class="diff-gap" data-gap="f3-g0" data-old-start="1" data-new-start="1" data-count="4"><td colspan="6"><button type="button" class="diff-expand">Näytä 4 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="5"></td><td class="diff-sign"></td><td class="diff-code">-- Varataan kanava 1 taustamusiikille. Muut kanavat jäävät ääniefekteille.</td><td class="diff-num" data-line="5"></td><td class="diff-sign"></td><td class="diff-code">-- Varataan kanava 1 taustamusiikille. Muut kanavat jäävät ääniefekteille.</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="6"></td><td class="diff-sign"></td><td class="diff-code">audio.reserveChannels( 1 )</td><td class="diff-num" data-line="6"></td><td class="diff-sign"></td><td class="diff-code">audio.reserveChannels( 1 )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="7"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="8"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Ladataan vuorovaikutuksen äänitehoste. Lyhyet tehosteet ladataan loadSound:lla,</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="9"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- pitkä musiikki loadStream:lla (ks. scripts/music.lua).</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="10"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">local interactSound = audio.loadSound( "assets/audio/interact.wav" )</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="7"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="11"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="8"></td><td class="diff-sign"></td><td class="diff-code">function sfx.update()</td><td class="diff-num" data-line="12"></td><td class="diff-sign"></td><td class="diff-code">function sfx.update()</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="9"></td><td class="diff-sign"></td><td class="diff-code">	local userdata = loadsave.userdata</td><td class="diff-num" data-line="13"></td><td class="diff-sign"></td><td class="diff-code">	local userdata = loadsave.userdata</td></tr>
+<tr class="diff-gap" data-gap="f3-g1" data-old-start="10" data-new-start="14" data-count="7"><td colspan="6"><button type="button" class="diff-expand">Näytä 7 piilotettua riviä</button></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="17"></td><td class="diff-sign"></td><td class="diff-code">end</td><td class="diff-num" data-line="21"></td><td class="diff-sign"></td><td class="diff-code">end</td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="18"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="22"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-ctx"><td class="diff-num" data-line="19"></td><td class="diff-sign"></td><td class="diff-code"></td><td class="diff-num" data-line="23"></td><td class="diff-sign"></td><td class="diff-code"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="24"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- Soitetaan vuorovaikutuksen äänitehoste. Kanavaa ei anneta, joten audio valitsee</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="25"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">-- vapaan kanavan väliltä 2-32, joita sfx.update ohjaa ääniefektien voimakkuudella.</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="26"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">function sfx.playInteract()</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="27"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">	audio.play( interactSound )</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="28"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add">end</td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="29"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-change"><td class="diff-num diff-empty"></td><td class="diff-sign diff-empty"></td><td class="diff-code diff-empty"></td><td class="diff-num diff-add" data-line="30"></td><td class="diff-sign diff-add" data-sign="+"></td><td class="diff-code diff-add"></td></tr>
+<tr class="diff-gap" data-gap="f3-g2" data-old-start="20" data-new-start="31" data-count="1"><td colspan="6"><button type="button" class="diff-expand">Näytä 1 piilotettu rivi</button></td></tr>
+</tbody>
+</table>
+<script type="application/json" class="diff-source">["local sfx = {}", "", "local loadsave = require( \"scripts.loadsave\" )", "", "-- Varataan kanava 1 taustamusiikille. Muut kanavat jäävät ääniefekteille.", "audio.reserveChannels( 1 )", "", "-- Ladataan vuorovaikutuksen äänitehoste. Lyhyet tehosteet ladataan loadSound:lla,", "-- pitkä musiikki loadStream:lla (ks. scripts/music.lua).", "local interactSound = audio.loadSound( \"assets/audio/interact.wav\" )", "", "function sfx.update()", "\tlocal userdata = loadsave.userdata", "", "\t-- Ääniarvot tulee jakaa 100:lla, jotta niistä saadaan desimaaliarvot 1 ja 0 välillä.", "\taudio.setVolume( userdata.masterVolume / 100 ) -- Kanavaa ei määritetty, joten tämä vaikuttaa kaikkiin kanaviin.", "\taudio.setVolume( userdata.musicVolume / 100, { channel = 1 } ) -- Kanava 1, eli taustamusiikki.", "\tfor i = 2, 32 do", "\t\taudio.setVolume( userdata.sfxVolume / 100, { channel = i } ) -- Kanavat 2-32, eli ääniefektit.", "\tend", "end", "", "", "-- Soitetaan vuorovaikutuksen äänitehoste. Kanavaa ei anneta, joten audio valitsee", "-- vapaan kanavan väliltä 2-32, joita sfx.update ohjaa ääniefektien voimakkuudella.", "function sfx.playInteract()", "\taudio.play( interactSound )", "end", "", "", "return sfx"]</script>
+</div>
+</details>
+</div>
+<nav class="version-nav" aria-label="Muutosnavigointi">
+  <a class="nav-prev" href="../../../../games/7-top-down/versio-13/muutokset/">Edelliset muutokset</a>
+  <a class="nav-next" href="../../../../games/7-top-down/versio-15/muutokset/">Seuraavat muutokset</a>
+</nav>
+<script>
+// Diff page behaviour: view toggle, saved view choice, and gap expansion.
+(() => {
+    const STORAGE_KEY = "rg-diff-view";
+    const DEFAULT_VIEW = "unified";
+    const VIEWS = ["unified", "split"];
+
+    const toggle = document.querySelector(".diff-toggle");
+    const viewButtons = toggle ? toggle.querySelectorAll("button[data-view]") : [];
+    const parsedSources = new WeakMap();
+
+    // Chromium throws from the localStorage getter itself when storage is blocked.
+    const withStorage = (action, fallback) => {
+        try {
+            return action(window.localStorage);
+        } catch (error) {
+            // Without storage only the remembered view is lost; the page works on the fallback.
+            return fallback;
+        }
+    };
+
+    const readView = () => {
+        const stored = withStorage((storage) => storage.getItem(STORAGE_KEY), null);
+        return VIEWS.includes(stored) ? stored : DEFAULT_VIEW;
+    };
+
+    const saveView = (view) => withStorage((storage) => storage.setItem(STORAGE_KEY, view), null);
+
+    const applyView = (view) => {
+        document.querySelectorAll(".diff-files[data-view]").forEach((files) => {
+            files.dataset.view = view;
+        });
+
+        viewButtons.forEach((button) => {
+            button.setAttribute("aria-pressed", button.dataset.view === view ? "true" : "false");
+        });
+    };
+
+    if (toggle) {
+        toggle.hidden = false;
+        applyView(readView());
+
+        viewButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applyView(button.dataset.view);
+                saveView(button.dataset.view);
+            });
+        });
+    }
+
+    const sourceLines = (file) => {
+        if (!parsedSources.has(file)) {
+            parsedSources.set(file, JSON.parse(file.querySelector("script.diff-source").textContent));
+        }
+
+        return parsedSources.get(file);
+    };
+
+    const createCell = (className) => {
+        const cell = document.createElement("td");
+        cell.className = className;
+        return cell;
+    };
+
+    const numberCell = (line) => {
+        const cell = createCell("diff-num");
+        cell.dataset.line = String(line);
+        return cell;
+    };
+
+    const codeCell = (text) => {
+        const cell = createCell("diff-code");
+        cell.textContent = text;
+        return cell;
+    };
+
+    const contextRow = (isSplit, oldLine, newLine, text) => {
+        const row = document.createElement("tr");
+        row.className = "diff-ctx";
+
+        if (isSplit) {
+            row.append(
+                numberCell(oldLine), createCell("diff-sign"), codeCell(text),
+                numberCell(newLine), createCell("diff-sign"), codeCell(text)
+            );
+        } else {
+            row.append(numberCell(oldLine), numberCell(newLine), createCell("diff-sign"), codeCell(text));
+        }
+
+        return row;
+    };
+
+    const expandGap = (button) => {
+        const clickedRow = button.closest("tr.diff-gap");
+        const file = button.closest(".diff-file");
+        const oldStart = Number(clickedRow.dataset.oldStart);
+        const newStart = Number(clickedRow.dataset.newStart);
+        const count = Number(clickedRow.dataset.count);
+        const lines = sourceLines(file).slice(newStart - 1, newStart - 1 + count);
+        const selector = `tr.diff-gap[data-gap="${CSS.escape(clickedRow.dataset.gap)}"]`;
+        let focusTarget;
+
+        file.querySelectorAll(selector).forEach((gapRow) => {
+            const isSplit = gapRow.closest("table").classList.contains("diff-split");
+            const rows = lines.map((text, index) => contextRow(isSplit, oldStart + index, newStart + index, text));
+
+            if (gapRow === clickedRow) {
+                focusTarget = rows[0].querySelector(".diff-code");
+            }
+
+            gapRow.replaceWith(...rows);
+        });
+
+        // The button is gone, so keep focus at the same spot in the reading order.
+        focusTarget.tabIndex = -1;
+        focusTarget.focus({ preventScroll: true });
+    };
+
+    document.addEventListener("click", (event) => {
+        const button = event.target.closest("button.diff-expand");
+
+        if (button) {
+            expandGap(button);
+        }
+    });
+})();
+</script>
+    </main>
+    <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://www.rosogames.fi">Roso Games</a> &amp; <a href="https://erantanen.com">Eetu Rantanen</a></p>
+</footer>
+    <script>
+    (() => {
+        const toggles = document.querySelectorAll(".crumb-toggle");
+
+        const closeAll = () => {
+            toggles.forEach((toggle) => {
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.parentNode.classList.remove("open");
+            });
+        };
+
+        toggles.forEach((toggle) => {
+            toggle.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const open = toggle.getAttribute("aria-expanded") === "true";
+                closeAll();
+                if (!open) {
+                    toggle.setAttribute("aria-expanded", "true");
+                    toggle.parentNode.classList.add("open");
+                }
+            });
+        });
+
+        document.querySelectorAll(".cat-toggle").forEach((cat) => {
+            cat.addEventListener("click", (event) => {
+                event.stopPropagation();
+                const menu = cat.closest(".crumb-cat-menu");
+                menu.querySelectorAll(".cat-toggle").forEach((other) => {
+                    other.setAttribute("aria-expanded", other === cat ? "true" : "false");
+                });
+            });
+        });
+
+        document.addEventListener("click", closeAll);
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeAll();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

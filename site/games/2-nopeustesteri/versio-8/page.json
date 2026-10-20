@@ -1,0 +1,11 @@
+{
+  "title": "Versio 8",
+  "description": "Lisätään peliin pisteytys ja viimeistellään pelin toiminta.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-8",
+  "lessons": [
+    {
+      "title": "Pelin pisteytys ja loppuhiominen",
+      "url": "https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/pelin-pisteytys-ja-loppuhiominen/"
+    }
+  ]
+}

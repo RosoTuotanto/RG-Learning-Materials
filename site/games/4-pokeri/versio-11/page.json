@@ -1,0 +1,15 @@
+{
+  "title": "Versio 11",
+  "description": "Lisätään peliin voittojen tunnistus ja käsittely.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-11",
+  "lessons": [
+    {
+      "title": "Lisätään peliin voitot",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/lisataan-peliin-voitot/"
+    },
+    {
+      "title": "Panostaminen ja voittotaulukko",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/panostaminen-ja-voittotaulukko/"
+    }
+  ]
+}

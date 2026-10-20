@@ -1,0 +1,11 @@
+{
+  "title": "Versio 2",
+  "description": "Lisätään asetusten overlay-scene: himmennetty tausta, ikkuna ja otsikko Options-napin taakse.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-2",
+  "lessons": [
+    {
+      "title": "Options overlay scenen luonti",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/options-overlay-scenen-luonti/"
+    }
+  ]
+}

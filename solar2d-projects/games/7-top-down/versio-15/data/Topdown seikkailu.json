@@ -1,0 +1,35 @@
+[
+	{
+		"title": "intro",
+		"body": "You: The village elder wants to see me. I should find their house here in the village."
+	},
+	{
+		"title": "variables",
+		"tags": "options",
+		"body": "{ \"quest\": 0 }"
+	},
+	{
+		"title": "npcHouse",
+		"body": "<<if $quest == 0>>\nElder Wren: Ah, there you are. Thank you for coming.\nElder Wren: A stranger has been camping on the beach for days now.\nElder Wren: Could you go and ask them what brings them to Saltford? The beach road starts at the south gate.\n<<set $quest = 1>>\n\n[[Who is the stranger?|npcHouseMuukalainen]]\n[[I'll go now|npcHouseHyvasti]]\n<<elseif $quest == 1>>\nElder Wren: Have you spoken with the stranger yet? The beach road starts at the south gate.\n<<elseif $quest == 2>>\nElder Wren: You're back! What did the stranger say?\nYou: Their name is Marlow. They asked me to give you this note.\n<<toimitaViesti>>\nElder Wren: A mapmaker drawing a map of our coast! What a relief. Thank you for finding out.\n<<set $quest = 3>>\n<<else>>\nElder Wren: Thank you again. Saltford can rest easy now.\n\n[[Ask about the village|npcHouseKyla]]\n[[Say goodbye|npcHouseHyvasti]]\n<<end>>"
+	},
+	{
+		"title": "npcHouseMuukalainen",
+		"body": "Elder Wren: I wish I knew. They arrived a few days ago and set up camp by the water.\nElder Wren: They seem harmless but I would like to know what they are doing here.\n\n[[I'll go now|npcHouseHyvasti]]"
+	},
+	{
+		"title": "npcHouseKyla",
+		"body": "Elder Wren: Saltford is a quiet fishing village. Most of us have lived by the sea all our lives.\nElder Wren: The road through the south gate leads down to the beach.\n\n[[Say goodbye|npcHouseHyvasti]]"
+	},
+	{
+		"title": "npcHouseHyvasti",
+		"body": "Elder Wren: Safe travels."
+	},
+	{
+		"title": "npcBeach",
+		"body": "<<if $quest == 0>>\nStranger: Hello there. The sea breeze is lovely today.\n<<elseif $quest == 1>>\nStranger: Oh, the elder sent you? I should have come to introduce myself.\nMarlow: My name is Marlow. I'm a mapmaker and I'm drawing a map of this coast.\nMarlow: Could you give this note to your elder? It explains everything.\n<<annaViesti>>\n<<set $quest = 2>>\n<<elseif $quest == 2>>\nMarlow: Did you give my note to your elder?\n<<else>>\nMarlow: Thank you for speaking to your elder for me. The map is coming along nicely.\n<<end>>"
+	},
+	{
+		"title": "npcTausta",
+		"body": "(either: \"Villager: What a beautiful day.\", \"Villager: The fish are biting today.\", \"Villager: Greetings stranger.\", \"Villager: Nice to see a new face in Saltford.\")"
+	}
+]

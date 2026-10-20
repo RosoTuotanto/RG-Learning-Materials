@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rosotuotanto.github.io/RG-Learning-Materials/sitemap.xml

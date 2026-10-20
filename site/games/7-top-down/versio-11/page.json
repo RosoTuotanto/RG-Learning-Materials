@@ -1,0 +1,11 @@
+{
+  "title": "Versio 11",
+  "description": "Lukitaan sisältöä pelitilan avulla: poimittujen esineiden rekisteri estää esineitä ilmestymästä takaisin, ja rantatien portti aukeaa vasta, kun vanhin on antanut tehtävän. Lukittu portti näyttää pelaajan oman repliikin.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-11",
+  "lessons": [
+    {
+      "title": "Sisällön lukitseminen",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/sisallon-lukitseminen/"
+    }
+  ]
+}

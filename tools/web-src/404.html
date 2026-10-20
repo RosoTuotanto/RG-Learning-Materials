@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0C0E">
+    <meta name="description" content="Sivua ei löytynyt">
+    <meta name="robots" content="noindex, follow">
+    <meta name="generator" content="RG-Learning-Materials site builder">
+    <title>404 - Sivua ei löytynyt</title>
+    <script>
+    (() => {
+        // A 404 is served for an unknown path at unknown depth, so the site root
+        // is derived at runtime from the deployment's first path segment.
+        const seg = location.pathname.split("/").filter(Boolean);
+        const base = seg.length ? "/" + seg[0] + "/" : "/";
+        // Inlined @font-face URLs are page-relative, but a 404 is served at an
+        // unknown path depth, so anchor relative resource resolution to the root.
+        const baseEl = document.createElement("base");
+        baseEl.href = base;
+        document.head.insertBefore(baseEl, document.head.firstChild);
+        const addLink = (rel, href, extra) => {
+            const link = document.createElement("link");
+            link.rel = rel;
+            link.href = base + href;
+            if (extra) Object.assign(link, extra);
+            document.head.appendChild(link);
+        };
+        addLink("icon", "favicon.ico", { sizes: "48x48" });
+        addLink("icon", "favicon.svg", { type: "image/svg+xml" });
+        addLink("apple-touch-icon", "apple-touch-icon.png");
+        addLink("manifest", "site.webmanifest");
+        document.addEventListener("DOMContentLoaded", () => {
+            const home = document.getElementById("home");
+            if (home) {
+                home.href = base;
+            }
+        });
+    })();
+    </script>
+    {{inlineStyles}}
+</head>
+<body>
+    <main class="content error-page">
+        <p class="error-code">404</p>
+        <h1>Sivua ei löytynyt</h1>
+        <p class="lead">Etsimääsi sivua ei ole olemassa tai se on siirretty.</p>
+        <p><a id="home" class="button-link" href="/">Takaisin etusivulle</a></p>
+    </main>
+    {{footer}}
+</body>
+</html>

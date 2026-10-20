@@ -1,0 +1,11 @@
+{
+  "title": "Versio 8",
+  "description": "Integroidaan Weaver-dialogijärjestelmä: tarina-JSON ladataan initStory-kutsulla kerran pelin käynnistyessä, vuorovaikutus hakee keskustelun getNode-kutsulla, ja peli piirtää dialogin omana overlaynaan. Ensimmäinen keskustelu kylän vanhimman kanssa toimii.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-8",
+  "lessons": [
+    {
+      "title": "Weaver-integraatio",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/weaver-integraatio/"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Versio 1",
+  "description": "Ladataan ensimmäinen kartta (kylä) ponytiledillä, piilotetaan physics-layer ja kerrotaan, mistä ponytiledin lisäosat (extensions) löytyvät: ponytilediä voidaan laajentaa erilaisten lisäosien avulla. Käynnistetään fysiikka nollapainovoimalla.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-1",
+  "lessons": [
+    {
+      "title": "Ensimmäisen kentän lataaminen",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/ensimmaisen-kentan-lataaminen/"
+    }
+  ]
+}

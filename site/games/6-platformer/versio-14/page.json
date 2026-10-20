@@ -1,0 +1,11 @@
+{
+  "title": "Versio 14",
+  "description": "Lisätään pelaajalle HP ja sen käyttöliittymä sekä kerättävät kolikot.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-14",
+  "lessons": [
+    {
+      "title": "Lisätään HP ja kolikot",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/lisataan-hp-ja-kolikot/"
+    }
+  ]
+}

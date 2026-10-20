@@ -1,0 +1,11 @@
+{
+  "title": "Versio 1",
+  "description": "Luodaan korteille datarakenne, joka kuvaa pakan kortit.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-1",
+  "lessons": [
+    {
+      "title": "Luodaan korttien datarakenne",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/luodaan-korttien-datarakenne/"
+    }
+  ]
+}

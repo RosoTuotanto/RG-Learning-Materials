@@ -1,0 +1,11 @@
+{
+  "title": "Versio 10",
+  "description": "Lisätään controls-moduuli, joka kuuntelee näppäimistön syötteitä ja välittää ne pelin logiikalle.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-10",
+  "lessons": [
+    {
+      "title": "Luodaan controls-moduuli",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/luodaan-controls-moduuli/"
+    }
+  ]
+}
