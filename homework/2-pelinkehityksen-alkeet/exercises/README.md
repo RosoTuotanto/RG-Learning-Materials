@@ -352,6 +352,122 @@ playerData.inventory.items[#playerData.inventory.items + 1] = { name = "potion",
 
 Oppitunti: <https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/toistorakenteet-loops/>
 
+### 1. Parilliset luvut
+
+Tulosta `for`-loopilla parilliset luvut 2:sta 20:een käyttämällä loopin askelväliä.
+
+```lua
+for i = 2, 20, 2 do
+	print( i )
+end
+```
+
+Tämä tulostaa luvut 2, 4, 6, 8, 10, 12, 14, 16, 18 ja 20, kukin omalle rivilleen.
+
+Loop alkaa luvusta 2 ja askelväli 2 kasvattaa lukua joka kierroksella kahdella, joten jokainen tulostuva luku on parillinen. Luku 20 tulostuu, koska loop osuu siihen täsmälleen. Myös `for i = 1, 10 do print( i * 2 ) end` tulostaa samat luvut, mutta tehtävässä harjoiteltiin nimenomaan askelväliä.
+
+### 2. Lukujen summa
+
+Laske `for`-loopilla yhteen luvut yhdestä sataan ja tulosta summa.
+
+```lua
+local sum = 0
+
+for i = 1, 100 do
+	sum = sum + i
+end
+
+print( sum ) -- 5050
+```
+
+Jokaisella iteraatiolla `sum`-muuttujaan lisätään iteraation luku `i`: ensin 0 + 1, sitten 1 + 2, sitten 3 + 3 ja niin edelleen, kunnes kaikki sata lukua on laskettu yhteen.
+
+`sum` täytyy luoda ennen looppia. Jos `local sum = 0` olisi loopin sisällä, muuttuja luotaisiin joka iteraatiolla uudelleen nollana, eikä se olisi edes olemassa loopin jälkeen, joten `print( sum )` tulostaisi `nil`.
+
+### 3. Vihollislista
+
+Tulosta `enemies`-taulukon viholliset järjestysnumeroineen ensin numeerisella `for`-loopilla ja sitten `ipairs`-funktiolla.
+
+```lua
+local enemies = { "Lima", "Lepakko", "Peikko", "Lohikäärme" }
+
+-- Numeerinen for-loop:
+for i = 1, #enemies do
+	print( i .. ". " .. enemies[i] )
+end
+
+-- ipairs:
+for i, enemy in ipairs( enemies ) do
+	print( i .. ". " .. enemy )
+end
+```
+
+Molemmat loopit tulostavat:
+
+```lua
+1. Lima
+2. Lepakko
+3. Peikko
+4. Lohikäärme
+```
+
+Numeerisessa `for`-loopissa `#enemies` kertoo taulukon pituuden, ja vihollisen nimi haetaan taulukosta indeksillä `enemies[i]`. `ipairs` antaa joka kierroksella valmiiksi sekä indeksin että arvon, joten taulukkoon ei tarvitse viitata loopin sisällä. Kummassakin tavassa listaan voi lisätä vihollisia muuttamatta looppia.
+
+### 4. Kaupan hinnat
+
+Käy `prices`-taulukko läpi `pairs`-funktiolla, tulosta jokaisen tuotteen nimi ja hinta ja laske tuotteiden yhteishinta.
+
+```lua
+local prices = {
+	sword = 50,
+	shield = 30,
+	potion = 10
+}
+
+local total = 0
+
+for item, price in pairs( prices ) do
+	print( item, price )
+	total = total + price
+end
+
+print( "Yhteensä:", total ) -- Yhteensä: 90
+```
+
+Tuotteet eivät välttämättä tulostu siinä järjestyksessä, jossa ne on kirjoitettu taulukkoon. Esimerkiksi Lua 5.1 tulosti ne testissä järjestyksessä `shield`, `sword`, `potion`. Tämä johtuu siitä, että `pairs` ei lupaa mitään järjestystä nimetyille avaimille. Yhteishinta on silti aina 90, koska yhteenlaskussa järjestyksellä ei ole väliä.
+
+### 5. Tähtikolmio
+
+Tulosta kahdella sisäkkäisellä `for`-loopilla viisirivinen tähtikolmio.
+
+```lua
+for row = 1, 5 do
+	local line = ""
+
+	for column = 1, row do
+		line = line .. "*"
+	end
+
+	print( line )
+end
+```
+
+Tämä tulostaa:
+
+```lua
+*
+**
+***
+****
+*****
+```
+
+Ulompi loop käy läpi rivit yhdestä viiteen. Sisemmän loopin loppuindeksi on ulomman loopin `row`, joten ensimmäisellä rivillä sisempi loop lisää yhden tähden, toisella rivillä kaksi ja niin edelleen. `line` luodaan tyhjänä jokaisen rivin alussa, ja se tulostetaan vasta, kun sisempi loop on lisännyt siihen kaikki rivin tähdet.
+
+## Toistorakenteet: while ja repeat
+
+Oppitunti: <https://www.rosogames.fi/lms/2-pelinkehityksen-alkeet/lessons/toistorakenteet-while-ja-repeat/>
+
 ### 1. for loop
 
 Luo `for` loop, joka alkaa indeksistä `15`, loppuu indeksiin `2` ja jonka askelväli (step) on `-3`. Tulosta jokaisen iteraation numero. Mitä numeroita tulostuu ja tulostuuko luku 2?
