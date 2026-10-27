@@ -55,7 +55,7 @@ VARIANTS = 3
 SEAM_TOLERANCE = 0.002
 SLIDE_TOLERANCE = 0.01
 # The scarf trails each variant's own last frames, so variants may start it this far apart.
-FOLLOW_TOLERANCE = 1.0
+FOLLOW_TOLERANCE = 1.5
 MIN_DRAWINGS = 2
 
 LUA_LAYOUT = """

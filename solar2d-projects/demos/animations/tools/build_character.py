@@ -914,12 +914,12 @@ IDLE_DOWN = add(STAND, {"chest": 1, "near_shoulder": 3, "far_shoulder": -3, "nea
 
 IDLE_VARIANTS = (
     # Relaxed breathing.
-    Idle(breath=24, breaths=2, blinks=(0.3,)),
+    Idle(breath=30, breaths=1, blinks=(0.3,)),
 
     # Looks up, then leans in to look down ahead, blinking at each glance.
     Idle(
-        breath=24,
-        breaths=2,
+        breath=36,
+        breaths=1,
         blinks=(0.12, 0.36, 0.8),
         keys=(
             (0.06, {}),
@@ -941,7 +941,7 @@ IDLE_VARIANTS = (
 
     # Impatient: quicker breaths, fists, and two runs of toe taps.
     Idle(
-        breath=16,
+        breath=12,
         breaths=3,
         blinks=(0.48,),
         keys=(
@@ -951,7 +951,7 @@ IDLE_VARIANTS = (
             (0.96, {}),
         ),
         swaps=((0.08, 0.92, "hand_near", "fist"), (0.08, 0.92, "hand_far", "fist")),
-        taps=((0.18, 0.42, 3), (0.58, 0.82, 3)),
+        taps=((0.18, 0.42, 2), (0.58, 0.82, 2)),
         tap=20.0,
     ),
 )
@@ -1089,21 +1089,21 @@ WALK_SNEAK = Gait(
 
 @dataclass(frozen=True)
 class Walk:
-    """frames of a style that eases in from WALK over a ramp share of the clip, after one WALK
-    cycle, and back out over the last ramp share, so every walk starts and ends on WALK's contact
-    pose and each foot lands at WALK's pace inside the clip as it does across the loop."""
+    """frames of a style that eases in from WALK over the first ramp share of the clip and back out
+    over the last, so every walk starts and ends on WALK's contact pose and the app's variant
+    label, which changes at the loop seam, sits in the middle of each change of gait."""
 
     style: Gait
     frames: int
     ramp: float = 0.0
 
 
-# Each length holds a whole number of cycles at the gaits' own cadence, so a variant's closing
-# WALK cycle runs at walk_1's pace.
+# Each length holds close to a whole number of cycles at the blended cadence, so the phase
+# barely stretches to close the loop.
 WALK_VARIANTS = (
-    Walk(WALK, 48),
-    Walk(WALK_BRISK, 43, 0.15),
-    Walk(WALK_SNEAK, 45, 0.15),
+    Walk(WALK, 24),
+    Walk(WALK_BRISK, 31, 0.15),
+    Walk(WALK_SNEAK, 34, 0.15),
 )
 WALK_BLINK = 0.6
 STRIKE_SHARE = 0.25
@@ -1119,8 +1119,7 @@ def walk_clip(body: Body, plan: Walk) -> Clip:
 
     def gait_at(time: float) -> Gait:
         share = (time % frames) / frames
-        lead = 2 * WALK.step_frames / frames
-        weight = smooth(min(share - lead, 1.0 - share) / plan.ramp) if plan.ramp > 0 else 1.0
+        weight = smooth(min(share, 1.0 - share) / plan.ramp) if plan.ramp > 0 else 1.0
 
         return blend_gait(WALK, plan.style, weight)
 

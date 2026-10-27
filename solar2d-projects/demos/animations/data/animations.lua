@@ -53,6 +53,6 @@ return {
 		variants = 3,
 
 		-- How many times each variant plays before the next one starts.
-		plays = { idle = 1, walk = 1, jump = 2 },
+		plays = { idle = 1, walk = 1, jump = 1 },
 	},
 }

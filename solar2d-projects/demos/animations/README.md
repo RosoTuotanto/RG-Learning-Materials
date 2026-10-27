@@ -67,8 +67,8 @@ The package is loaded as a plain folder, not as a `.spla` archive, so no zip plu
 
 Each animation family (`idle`, `walk`, `jump`) is built in three variants, `<name>_1` to `<name>_3`, each a set of keyframes written as functions of a parameter set, which is what makes a new variation cheap on the skeletal side:
 
-- `idle_1` breathes in two slow breaths and blinks. `idle_2` looks up, then shifts its weight forward and looks down ahead, blinking at each glance. `idle_3` is impatient: quicker breaths, clenched fists and two runs of toe taps.
-- `walk_1` is the relaxed walk that matches the hand-drawn one. `walk_2` speeds up into a brisk walk with a longer stride, a forward lean and pumping fists, and `walk_3` slows into a sneak on tiptoe with bent knees and the hands raised. Both ease in after one relaxed cycle and ease back out before the end.
+- `idle_1` takes one slow breath and blinks. `idle_2` looks up, then shifts its weight forward and looks down ahead, blinking at each glance. `idle_3` is impatient: quicker breaths, clenched fists and two runs of toe taps.
+- `walk_1` is the relaxed walk that matches the hand-drawn one. `walk_2` speeds up into a brisk walk with a longer stride, a forward lean and pumping fists, and `walk_3` slows into a sneak on tiptoe with bent knees and the hands raised. Both ease in from the relaxed walk over their first steps and back out over their last, so the caption's variant number changes in the middle of each change of gait.
 - `jump_1` is the hand-drawn jump. `jump_2` goes over twice as high and hangs longer, stretched out and reaching up, and `jump_3` tucks its knees and pumps a fist overhead at the apex.
 
 `data/animations.lua` sets the number of variants and how many times each family's variant plays before the next one starts; the build stops if it defines a different number of variants. Every variant of a family starts and ends on the same pose (standing, the relaxed walk's contact pose, standing), so switching at a loop boundary never jumps, and every animation blinks once per loop.

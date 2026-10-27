@@ -13,7 +13,7 @@ local strings = require( "data.strings" )
 
 local frameMs = 16
 
--- Comfortably past the longest wait for a switch: two plays of the longest jump variant.
+-- Comfortably past the longest wait for a switch, the plays of the longest variant.
 local maxFramesPerSwitch = 600
 
 local pixelArtFilter = layout.textureFilter.pixelArt .. "/" .. layout.textureFilter.pixelArt
@@ -537,10 +537,11 @@ check( sprite.isVisible and sprite.isPlaying and sprite.sequence == "jump", "sho
 pressButton( "style" )
 check( rig.isVisible and rig._currentAnimation.name == "jump_1" and rig._isPlaying, "the style button works after a re-show" )
 
--- One full loop and a little more, so jump_1 has one of its two plays counted.
+-- Partway through jump_1's last play, so a switch would come soon if hiding did not pause it.
 local jumpLoop = rig._currentAnimation.frameCount / rig._currentAnimation.fps
-playFrames( math.ceil( jumpLoop * 1000 / frameMs ) + 2 )
-check( rig._currentAnimation.name == "jump_1", "jump_1 is still on its second play" )
+local jumpPlays = animations.skeletal.plays.jump
+playFrames( math.ceil( ( jumpPlays - 0.5 ) * jumpLoop * 1000 / frameMs ) )
+check( rig._currentAnimation.name == "jump_1", "jump_1 is still on its last play" )
 
 stub.sceneEvent( scene, "hide", "will" )
 stub.sceneEvent( scene, "hide", "did" )
@@ -557,7 +558,7 @@ check( rig.isVisible and rig._currentAnimation.name == "jump_1" and rig._isPlayi
 check( rig._elapsedTime == 0, "a re-show starts the variant from its start" )
 check( not sprite.isVisible, "the sprite stays hidden on a skeletal re-show" )
 
--- A re-show counts the variant's plays from zero, so jump_1 still loops twice.
+-- A re-show counts the variant's plays from zero, so jump_1 plays in full again before the switch.
 finishVariant( "jump", 2 )
 
 stub.sceneEvent( scene, "hide", "will" )

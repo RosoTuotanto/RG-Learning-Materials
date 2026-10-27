@@ -20,11 +20,14 @@ end
 
 local plays = animations.skeletal.plays
 
+-- Fixed plays rather than the data's, so the multi-play path is covered whatever the demo uses.
+local testPlays = { idle = 1, walk = 1, jump = 2 }
+
 local function newState()
 	return demoState.new({
 		animations = { "idle", "walk", "jump" },
 		variantCount = 3,
-		plays = plays,
+		plays = testPlays,
 	})
 end
 
@@ -58,10 +61,10 @@ check( state:skeletalAnimationName() == "idle_1", "default skeletal name is idle
 
 -- Each variant plays its animation's number of times, then the next one starts
 state:selectAnimation( "walk" )
-check( playsUntilDone( state ) == plays.walk, "a walk variant is done after " .. plays.walk .. " play" )
+check( playsUntilDone( state ) == testPlays.walk, "a walk variant is done after " .. testPlays.walk .. " play" )
 
 state:selectAnimation( "jump" )
-check( playsUntilDone( state ) == plays.jump, "a jump variant is done after " .. plays.jump .. " plays" )
+check( playsUntilDone( state ) == testPlays.jump, "a jump variant is done after " .. testPlays.jump .. " plays" )
 check( state:getVariant() == 1, "recording plays does not move to the next variant on its own" )
 
 state = newState()
