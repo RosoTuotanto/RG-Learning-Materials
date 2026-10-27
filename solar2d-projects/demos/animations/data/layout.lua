@@ -13,40 +13,39 @@ return {
 	},
 
 	heading = {
-		y = 54,
+		y = 39,
 		size = 32,
 	},
 
 	caption = {
-		y = 96,
+		y = 78,
 		size = 24,
 	},
 
 	-- The line the character stands on. Its top edge is where the feet go.
 	floor = {
-		y = 420,
+		y = 440,
 		height = 6,
 		width = 520,
 	},
 
-	-- The art's feet rest on row 68 of the 72-pixel frame, so the frame centre sits this
-	-- many unscaled pixels above the floor line: 68 - 72 / 2.
+	-- How many unscaled pixels each character's frame centre sits above the floor line; tools/check_assets.py checks them.
 	character = {
-		feetOffset = 32,
+		spriteFeetOffset = 36,
+		skeletalFeetOffset = 44,
 	},
 
-	-- Centred between the floor's bottom edge (423) and the style button's top edge (510)
-	-- on the 640-tall content area.
+	-- Centred between the floor's bottom edge and the style button's top edge on the 640-tall content area.
 	description = {
-		y = 466,
+		y = 487,
 		size = 18,
-		width = 720,
+		width = 760,
 	},
 
 	ui = {
 		-- Placed relative to the bottom of the visible screen, so a taller-than-expected
 		-- viewport keeps the buttons on screen instead of off it.
-		bottomMargin = 46,
+		bottomMargin = 25,
 
 		buttonWidth = 150,
 		buttonHeight = 68,

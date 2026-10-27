@@ -1,0 +1,41 @@
+GIMP Palette
+Channels: RGBA
+Name: Animations Demo
+Columns: 6
+#
+ 69  32  63 255	outline
+142  70  86 255	skin deep
+207 122 109 255	skin shade
+244 180 138 255	skin
+255 220 184 255	skin light
+ 94  42  58 255	hair deep
+138  67  55 255	hair shade
+181 108  68 255	hair
+220 156  96 255	hair light
+154  69  50 255	top deep
+217 130  47 255	top shade
+247 194  62 255	top
+255 240 154 255	top light
+ 31  74 102 255	scarf deep
+ 34 127 140 255	scarf shade
+ 54 185 165 255	scarf
+147 236 196 255	scarf light
+ 48  48 111 255	trousers deep
+ 47  76 156 255	trousers shade
+ 63 119 207 255	trousers
+116 175 236 255	trousers light
+101  28  64 255	shoes deep
+164  42  72 255	shoes shade
+223  60  69 255	shoes
+255 140 108 255	shoes light
+107  70  81 255	belt deep
+155 106  94 255	belt
+201 179 173 255	sole shade
+242 230 214 255	sole
+255 255 255 255	white
+163  54  76 255	mouth
+239 143 124 255	blush
+156 138 126 255	dust dark
+217 203 178 255	dust light
+242 246 255 255	speed line
+255 244 216 150	smear

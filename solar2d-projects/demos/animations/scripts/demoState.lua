@@ -15,15 +15,18 @@ local skeletalStyle = "skeletal"
 --------------------------------------------------------------------------------------
 -- Public functions
 
--- params: variantCount, animations (the animation names; the first is the default)
+-- params: animations (the animation names; the first is the default), variantCount,
+-- plays (keyed by animation name, how many times each variant plays before the next)
 function demoState.new( params )
 	local state = {
-		variantCount = params.variantCount,
 		animations = params.animations,
+		variantCount = params.variantCount,
+		plays = params.plays,
 
 		style = spriteStyle,
 		animation = params.animations[1],
 		variant = 1,
+		playsDone = 0,
 	}
 
 	return setmetatable( state, stateMetatable )
@@ -39,6 +42,7 @@ function stateMethods:toggleStyle()
 	end
 
 	self.variant = 1
+	self.playsDone = 0
 
 	return self.style
 end
@@ -49,6 +53,7 @@ function stateMethods:selectAnimation( name )
 		if self.animations[i] == name then
 			self.animation = name
 			self.variant = 1
+			self.playsDone = 0
 
 			return true
 		end
@@ -57,9 +62,23 @@ function stateMethods:selectAnimation( name )
 	return false
 end
 
+-- Counts one finished play of the current variant from its start. Returns true once the
+-- variant has played as many times as data/animations.lua asks for.
+function stateMethods:recordPlay()
+	self.playsDone = self.playsDone + 1
+
+	return self.playsDone >= self.plays[self.animation]
+end
+
+-- The current variant plays again from its start, so its plays are counted from zero.
+function stateMethods:restartVariant()
+	self.playsDone = 0
+end
+
 -- Moves to the next skeletal variant, wrapping from the last back to 1.
 function stateMethods:advanceVariant()
 	self.variant = self.variant % self.variantCount + 1
+	self.playsDone = 0
 
 	return self.variant
 end

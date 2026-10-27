@@ -14,12 +14,11 @@ return {
 
 	-- Keyed by demoState style.
 	description = {
-		sprite = "Slower to make and harder to change, since every frame is drawn by hand. "
-			.. "In return the artist controls every pixel, effects like motion lines and dust are part of the drawing, "
-			.. "and it is light to run in games.",
+		sprite = "Every frame is drawn by hand, so the artist controls every pixel and can draw anything. "
+			.. "That takes time and skill, and any later change means drawing the frames again.",
 
-		skeletal = "Much faster to adjust and easy to vary, since every animation reuses the same parts. "
-			.. "In return it is heavier to run in games, and rotated pixel art can almost never stay pixel-perfect.",
+		skeletal = "Parts drawn once are moved between keyframes. It looks less hand-crafted, but it is quick to animate "
+			.. "and extend, and a change is a few edited numbers instead of new drawings.",
 	},
 
 	styleButtonLabel = "change style",

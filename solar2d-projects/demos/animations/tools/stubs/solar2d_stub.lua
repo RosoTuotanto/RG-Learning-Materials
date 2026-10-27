@@ -6,6 +6,8 @@ stub.violations = {}
 stub.sprites = {}
 stub.imageSheets = {}
 stub.images = {}
+stub.textures = {}
+stub.imageLoads = {}
 stub.defaults = {}
 stub.scenesVisited = {}
 stub.clock = 0
@@ -243,6 +245,64 @@ function display.newRoundedRect( parent, x, y, width, height, cornerRadius )
 	return object
 end
 
+-- The mag and min filter defaults in effect now, as "mag/min".
+local function currentFilter()
+	local mag = stub.defaults["magTextureFilter"] or {}
+	local min = stub.defaults["minTextureFilter"] or {}
+
+	return tostring( mag[1] ) .. "/" .. tostring( min[1] )
+end
+
+-- The engine caches an image by its path and drops it once nothing uses it, so only an
+-- unreleased texture is certain to hand the image back with the filter it was loaded under.
+local function findHeldTexture( filename )
+	for i = 1, #stub.textures do
+		local texture = stub.textures[i]
+
+		if texture.filename == filename and not texture.isReleased then
+			return texture
+		end
+	end
+
+	return nil
+end
+
+-- Records the filter an image ends up with when an object or texture asks for it.
+local function recordImageLoad( filename, source )
+	readPngSize( filename )
+
+	local held = findHeldTexture( filename )
+	local filter = held and held.filter or currentFilter()
+	stub.imageLoads[#stub.imageLoads + 1] = { filename = filename, source = source, filter = filter }
+
+	return filter
+end
+
+-- An image fill assigned after creation loads its file then, under the filter in effect then.
+local imageMetatable = {
+	__index = function( object, key )
+		if key == "fill" then
+			return rawget( object, "currentFill" )
+		end
+
+		return nil
+	end,
+
+	__newindex = function( object, key, value )
+		if key ~= "fill" then
+			rawset( object, key, value )
+			return
+		end
+
+		if type( value ) == "table" and value.type == "image" then
+			recordImageLoad( value.filename, "fill" )
+			rawset( object, "filename", value.filename )
+		end
+
+		rawset( object, "currentFill", value )
+	end,
+}
+
 -- Accepts ( [parent,] filename, [baseDir,] width, height ), the engine's overloads.
 function display.newImageRect( ... )
 	local args = { ... }
@@ -267,6 +327,8 @@ function display.newImageRect( ... )
 	object.imageWidth, object.imageHeight = readPngSize( filename )
 	object.path = { x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0, x4 = 0, y4 = 0 }
 	stub.images[#stub.images + 1] = object
+	recordImageLoad( filename, "image" )
+	setmetatable( object, imageMetatable )
 
 	return attach( parent or stage, object )
 end
@@ -337,6 +399,45 @@ function graphics.newImageSheet( filename, options )
 	stub.imageSheets[#stub.imageSheets + 1] = sheet
 
 	return sheet
+end
+
+-- Only the image type, which loads the file at once and holds it until releaseSelf. Like the
+-- engine, a file that is already held hands back the same texture object.
+function graphics.newTexture( params )
+	if params.type ~= "image" then
+		fail( "graphics.newTexture type " .. tostring( params.type ) .. " is not stubbed" )
+		return nil
+	end
+
+	local held = findHeldTexture( params.filename )
+
+	if held then
+		return held
+	end
+
+	local texture = {
+		filename = params.filename,
+		baseDir = params.baseDir,
+		isPreloaded = false,
+		isReleased = false,
+	}
+
+	texture.filter = recordImageLoad( params.filename, "texture" )
+
+	function texture:preload()
+		self.isPreloaded = true
+	end
+
+	-- The engine detaches a released texture's methods, so calling one again raises an error.
+	function texture:releaseSelf()
+		self.isReleased = true
+		self.preload = nil
+		self.releaseSelf = nil
+	end
+
+	stub.textures[#stub.textures + 1] = texture
+
+	return texture
 end
 
 -- Accepts ( [parent,] imageSheet, sequenceData ).

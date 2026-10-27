@@ -31,8 +31,8 @@ local function setTextureFilter( filter )
 	display.setDefault( "minTextureFilter", filter )
 end
 
--- Only the active style's character is visible and playing. The hidden one is paused,
--- and showing the skeletal one also cancels any variant switch still waiting.
+-- Only the active style's character is visible and playing, from the start of its animation.
+-- The hidden one is paused.
 local function showActiveCharacter()
 	if state:isSkeletal() then
 		spriteVersion.hide()
@@ -46,8 +46,9 @@ local function showActiveCharacter()
 end
 
 local function selectAnimation( name )
-	state:selectAnimation( name )
-	showActiveCharacter()
+	if state:selectAnimation( name ) then
+		showActiveCharacter()
+	end
 end
 
 local function onVariantChange()
@@ -68,31 +69,31 @@ function scene:create( event )
 	local sceneGroup = self.view
 
 	state = demoState.new({
-		variantCount = animations.skeletal.variants,
 		animations = animations.names,
+		variantCount = animations.skeletal.variants,
+		plays = animations.skeletal.plays,
 	})
 
 	local floorSettings = layout.floor
 	local floor = display.newRect( sceneGroup, screen.centerX, floorSettings.y, floorSettings.width, floorSettings.height )
 	floor:setFillColor( palette.floor[1], palette.floor[2], palette.floor[3] )
 
-	-- Both characters share one centre, placed so their feet rest on top of the floor.
+	-- Both characters are centred horizontally, each placed so its feet rest on top of the floor.
 	local floorTop = floorSettings.y - floorSettings.height * 0.5
-	local characterY = floorTop - layout.character.feetOffset * animations.scale
 
-	-- Filters apply to textures loaded after they are set, and spriteloop loads every part image in new.
+	-- Filters apply to textures loaded after they are set, and both characters load every image they use in new.
 	setTextureFilter( textureFilter.pixelArt )
 
 	spriteVersion = spriteCharacter.new({
 		parent = sceneGroup,
 		x = screen.centerX,
-		y = characterY,
+		y = floorTop - layout.character.spriteFeetOffset * animations.scale,
 	})
 
 	skeletalVersion = skeletalCharacter.new({
 		parent = sceneGroup,
 		x = screen.centerX,
-		y = characterY,
+		y = floorTop - layout.character.skeletalFeetOffset * animations.scale,
 		state = state,
 		onVariantChange = onVariantChange,
 	})

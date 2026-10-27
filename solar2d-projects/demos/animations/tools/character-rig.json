@@ -1,0 +1,28 @@
+{
+    "canvas": {"width": 80, "height": 96},
+    "feetRow": 92,
+    "hipX": 41.5,
+
+    "parts": [
+        {"id": "arm_far_upper", "parent": "torso", "joint": [-3, -11], "pivot": [3.5, 0.5], "image": "arm_far_upper"},
+        {"id": "arm_far_lower", "parent": "arm_far_upper", "joint": [0, 5], "pivot": [2.5, 0.5], "image": "arm_far_lower"},
+        {"id": "hand_far", "parent": "arm_far_lower", "joint": [0, 4], "pivot": [2.5, 0.5], "images": {"open": "hand_far_open", "fist": "hand_far_fist"}, "default": "open"},
+        {"id": "foot_far", "parent": "leg_far_lower", "joint": [0, 5], "pivot": [3.5, 3.5], "image": "foot_far", "heel": [-2.5, 6.5], "toe": [8.5, 6.5]},
+        {"id": "leg_far_upper", "parent": "hips", "joint": [-4, 0], "pivot": [3.5, 3.5], "image": "leg_far_upper"},
+        {"id": "leg_far_lower", "parent": "leg_far_upper", "joint": [0, 7], "pivot": [3.5, 0.5], "image": "leg_far_lower"},
+        {"id": "scarf_3", "parent": "scarf_2", "joint": [-2, 4], "pivot": [5.5, 3.5], "image": "scarf_3", "follow": {"source": "scarf_knot", "lag": 2.5, "rotation": 0.2, "drag": 3, "fall": 6, "direction": 1, "min": -15, "max": 56}},
+        {"id": "scarf_2", "parent": "scarf_1", "joint": [-1, 4], "pivot": [5.5, 3.5], "image": "scarf_2", "follow": {"source": "scarf_knot", "lag": 1.5, "rotation": 0.4, "drag": 2.2, "fall": 4.5, "direction": 1, "min": -15, "max": 48}},
+        {"id": "scarf_1", "parent": "scarf_knot", "joint": [0.5, 3.5], "pivot": [4.5, 3.5], "image": "scarf_1", "follow": {"source": "scarf_knot", "lag": 0.75, "rotation": 0.6, "drag": 1.5, "fall": 3, "direction": 1, "min": -15, "max": 40}},
+        {"id": "torso", "parent": "hips", "joint": [0, 0], "pivot": [8.5, 22.5], "image": "torso"},
+        {"id": "scarf_knot", "parent": "torso", "joint": [-8.5, -16.5], "pivot": [4, 3], "image": "scarf_knot"},
+        {"id": "foot_near", "parent": "leg_near_lower", "joint": [0, 5], "pivot": [3.5, 3.5], "image": "foot_near", "heel": [-2.5, 6.5], "toe": [8.5, 6.5]},
+        {"id": "leg_near_upper", "parent": "hips", "joint": [0, 0], "pivot": [3.5, 0.5], "image": "leg_near_upper"},
+        {"id": "leg_near_lower", "parent": "leg_near_upper", "joint": [0, 7], "pivot": [3.5, 0.5], "image": "leg_near_lower"},
+        {"id": "head", "parent": "torso", "joint": [-2, -19], "pivot": [5.5, 14.5], "image": "head"},
+        {"id": "eyes", "parent": "head", "joint": [6, -6], "pivot": [0.5, 0.5], "images": {"open": "eyes_open", "closed": "eyes_closed"}, "default": "open"},
+        {"id": "mouth", "parent": "head", "joint": [7, -2], "pivot": [0.5, 0.5], "images": {"neutral": "mouth_neutral", "effort": "mouth_effort"}, "default": "neutral"},
+        {"id": "arm_near_upper", "parent": "torso", "joint": [-1, -11], "pivot": [3.5, 0.5], "image": "arm_near_upper"},
+        {"id": "arm_near_lower", "parent": "arm_near_upper", "joint": [0, 5], "pivot": [2.5, 0.5], "image": "arm_near_lower"},
+        {"id": "hand_near", "parent": "arm_near_lower", "joint": [0, 4], "pivot": [2.5, 0.5], "images": {"open": "hand_near_open", "fist": "hand_near_fist"}, "default": "open"}
+    ]
+}

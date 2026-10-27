@@ -26,7 +26,7 @@ settings =
 	--
 	excludeFiles =
 	{
-		-- The art generator and the repository documents are not needed at runtime.
-		all = { "tools/*", "README.md", ".luacheckrc", ".gitignore" },
+		-- The art sources, the art generator and the repository documents are not needed at runtime.
+		all = { "developmentFiles/*", "tools/*", "README.md", ".luacheckrc", ".gitignore" },
 	},
 }
