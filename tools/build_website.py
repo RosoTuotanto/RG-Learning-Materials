@@ -977,7 +977,8 @@ def _render_diff_page(context: dict, game: dict, version: dict, prev_slug: str,
 
 def _write_page(path: Path, content: str, report: BuildReport) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8")
+    # Pin LF so a run on Windows does not rewrite every page with CRLF.
+    path.write_text(content, encoding="utf-8", newline="\n")
     report.pages_generated += 1
 
 

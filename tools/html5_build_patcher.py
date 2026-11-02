@@ -329,7 +329,7 @@ def patch_index_html(index_path: Path) -> list[tuple[str, str]]:
             changed = True
 
     if changed:
-        with open(index_path, "w", encoding="utf-8") as f:
+        with open(index_path, "w", encoding="utf-8", newline="\n") as f:
             f.write(content)
 
     return results

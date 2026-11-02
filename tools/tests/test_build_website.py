@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Tests for tools/build_website.py. Run: python3 tools/tests/test_build_website.py"""
 
+import _pyio
+import builtins
+import io
 import json
+import os
 import re
 import shutil
 import sys
@@ -9,6 +13,7 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "tools"))
@@ -394,6 +399,19 @@ class ValidTreeTests(unittest.TestCase):
         self.assertEqual(snapshot.keys(), after.keys())
         for path, data in snapshot.items():
             self.assertEqual(data, after[path], f"{path} changed on re-run")
+
+    def test_windows_newline_translation_writes_lf(self):
+        # The C io module picks its newline at compile time, so emulate a Windows run with _pyio.
+        with mock.patch.object(os, "linesep", "\r\n"), \
+                mock.patch.object(io, "open", _pyio.open), \
+                mock.patch.object(builtins, "open", _pyio.open):
+            report = build_website.run(self.site)
+
+        self.assertEqual(report.exit_code, 0)
+        written = [path for path in self.site.rglob("*") if path.suffix in {".html", ".xml", ".txt"}]
+        self.assertIn(self.site / "games" / "3-fysiikkapallo" / "versio-2" / "app" / "index.html", written)
+        for path in written:
+            self.assertFalse(b"\r" in path.read_bytes(), f"{path} has CRLF")
 
 
 class FailureTreeTests(unittest.TestCase):

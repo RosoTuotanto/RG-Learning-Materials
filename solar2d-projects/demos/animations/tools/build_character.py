@@ -1808,7 +1808,7 @@ def write_previews(directory: Path, only: list[str], sheet: Sheet, sheet_feet_ro
 
 def write_assets(sheet: Sheet, rig: Rig, manifest: dict) -> None:
     MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
-    MANIFEST_PATH.write_text(manifest_text(manifest), encoding="utf-8")
+    MANIFEST_PATH.write_text(manifest_text(manifest), encoding="utf-8", newline="\n")
     print(f"wrote {MANIFEST_PATH}")
 
     save(lesson_sheet(sheet), LESSON_IMAGES / "animointi-solar2dssa-spritesheet.png")

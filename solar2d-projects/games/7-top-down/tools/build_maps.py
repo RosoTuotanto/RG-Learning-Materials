@@ -991,7 +991,7 @@ def write_version(version, out_dir):
 	for name, builder in MAPS.items():
 		data = builder(version)
 		path = os.path.join(out_dir, name + ".json")
-		with open(path, "w", encoding="utf-8") as handle:
+		with open(path, "w", encoding="utf-8", newline="\n") as handle:
 			json.dump(data, handle, indent=1)
 			handle.write("\n")
 		images.extend(image for image in referenced_images(data) if image not in images)
