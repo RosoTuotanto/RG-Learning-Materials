@@ -1,0 +1,5 @@
+{
+  "title": "Mitä Roso Games Templateista voisi tehdä?",
+  "description": "Kahdeksantoista pientä pelattavaa esimerkkiä, kuusi jokaiselle templatelle (Visual Novel, Platformer ja Top-down). Jokainen näyttää yhden idean siitä, millaisen pelin templatesta voisi tehdä. Esimerkkejä ei ole tehty Roso Games Templateilla. Ne ovat vain yksinkertaisia ideoita, eikä pelisi tarvitse muistuttaa yhtäkään niistä. Jokainen esimerkki on omassa kansiossaan, joten voit lukea sen koodin ja kopioida siitä osia omaan peliisi.",
+  "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/demos/template-showcase"
+}

@@ -3,8 +3,8 @@
 return {
 	-- Keyed by demoState style.
 	heading = {
-		sprite = "Frame-by-frame",
-		skeletal = "Skeletal",
+		sprite = "Now showing: frame-by-frame animation",
+		skeletal = "Now showing: skeletal animation",
 	},
 
 	-- Filled with the animation name.
@@ -12,16 +12,9 @@ return {
 	-- Filled with the captionFormat text, the current variant and the variant count.
 	skeletalCaptionFormat = "%s (variant %d/%d)",
 
-	-- Keyed by demoState style.
-	description = {
-		sprite = "Every frame is drawn by hand, so the artist controls every pixel and can draw anything. "
-			.. "That takes time and skill, and any later change means drawing the frames again.",
+	styleButtonLabel = "Switch animation style",
 
-		skeletal = "Parts drawn once are moved between keyframes. It looks less hand-crafted, but it is quick to animate "
-			.. "and extend, and a change is a few edited numbers instead of new drawings.",
-	},
-
-	styleButtonLabel = "change style",
+	animationPanelTitle = "Select animation sequence",
 
 	-- Keyed by animation name, so the button order comes from data/animations.lua.
 	buttonLabel = {

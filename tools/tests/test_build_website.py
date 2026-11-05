@@ -289,6 +289,34 @@ class ValidTreeTests(unittest.TestCase):
         self.assertIn('class="cat-toggle" aria-expanded="true">Demo', demo)
         self.assertIn('href="../../demos/shader-demo/"', demo)
 
+    def test_demo_details_render_above_the_app(self):
+        write_page_json(
+            self.site / "demos" / "shader-demo",
+            title="Varjostin-demo",
+            description="Varjostinkokeilu.",
+            source="https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/demos/shader-demo",
+            details=[
+                {"title": "Ensimmäinen", "text": "Ensimmäisen teksti."},
+                {"title": "Tyhjä", "text": " "},
+                "ei objekti",
+            ],
+        )
+        build_website.run(self.site)
+
+        demo = self._read("demos", "shader-demo", "index.html")
+        self.assertIn('<div class="demo-details">', demo)
+        self.assertIn("<h2>Ensimmäinen</h2>", demo)
+        self.assertIn("<p>Ensimmäisen teksti.</p>", demo)
+        self.assertNotIn("Tyhjä", demo)
+        self.assertLess(demo.index('class="lead"'), demo.index('class="demo-details"'))
+        self.assertLess(demo.index('class="demo-details"'), demo.index('class="page-meta"'))
+        self.assertLess(demo.index('class="demo-details"'), demo.index('class="game-stage"'))
+
+    def test_demo_without_details_has_no_details_block(self):
+        build_website.run(self.site)
+
+        self.assertNotIn('<div class="demo-details">', self._read("demos", "shader-demo", "index.html"))
+
     def test_favicon_and_shell(self):
         build_website.run(self.site)
         version = self._read("games", "3-fysiikkapallo", "versio-2", "index.html")

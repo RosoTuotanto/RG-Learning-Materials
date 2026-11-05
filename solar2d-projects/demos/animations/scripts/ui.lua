@@ -1,4 +1,4 @@
--- The heading, caption, description and buttons are drawn inside the game canvas, because the demo
+-- The heading, caption and buttons are drawn inside the game canvas, because the demo
 -- is embedded in a lesson and has to work on its own.
 
 local ui = {}
@@ -15,14 +15,15 @@ local screen = require( "scripts.screen" )
 
 local palette = layout.palette
 local uiSettings = layout.ui
+local panelSettings = layout.animationPanel
 
 local group
 local headingText
 local captionText
-local descriptionText
 
+local styleButton
+local panelGroup
 local buttons = {}
-local rowButtons = {}
 
 --------------------------------------------------------------------------------------
 -- Private functions
@@ -97,12 +98,61 @@ end
 local function placeRow()
 	screen.update()
 
-	local rowHeight = math.max( uiSettings.styleButtonHeight, uiSettings.buttonHeight )
+	local rowHeight = math.max( uiSettings.styleButtonHeight, panelSettings.height )
 	local rowY = screen.maxY - uiSettings.bottomMargin - rowHeight * 0.5
 
-	for i = 1, #rowButtons do
-		rowButtons[i].y = rowY
+	styleButton.y = rowY
+	panelGroup.y = rowY
+end
+
+-- The panel holds the title and the animation buttons, with positions relative to the panel centre.
+local function newAnimationPanel( params )
+	local names = params.names
+	local panelWidth = #names * uiSettings.buttonWidth + ( #names - 1 ) * uiSettings.buttonGap + panelSettings.paddingX * 2
+
+	local panel = display.newGroup()
+	params.parent:insert( panel )
+
+	local background = display.newRoundedRect( panel, 0, 0, panelWidth, panelSettings.height, panelSettings.cornerRadius )
+	setColor( background, palette.panelFill )
+	background.strokeWidth = 2
+	background:setStrokeColor( palette.panelBorder[1], palette.panelBorder[2], palette.panelBorder[3] )
+
+	local top = -panelSettings.height * 0.5
+
+	local title = display.newText({
+		parent = panel,
+		text = strings.animationPanelTitle,
+		x = 0,
+		y = top + panelSettings.titleOffset,
+		font = layout.font.heading,
+		fontSize = panelSettings.titleSize,
+	})
+	setColor( title, palette.textMuted )
+
+	local x = -panelWidth * 0.5 + panelSettings.paddingX + uiSettings.buttonWidth * 0.5
+
+	for i = 1, #names do
+		local name = names[i]
+
+		buttons[i] = newButton({
+			parent = panel,
+			id = name,
+			x = x,
+			y = top + panelSettings.buttonsOffset,
+			width = uiSettings.buttonWidth,
+			height = uiSettings.buttonHeight,
+			label = strings.buttonLabel[name],
+			fontSize = uiSettings.fontSize,
+			onPress = function()
+				params.onSelect( name )
+			end,
+		})
+
+		x = x + uiSettings.buttonWidth + uiSettings.buttonGap
 	end
+
+	return panel, panelWidth
 end
 
 --------------------------------------------------------------------------------------
@@ -110,6 +160,8 @@ end
 
 -- params: parent, names (the animation names in button order), onSelect( name ), onStyleChange
 function ui.create( params )
+	local panelWidth
+
 	group = display.newGroup()
 	params.parent:insert( group )
 
@@ -133,31 +185,22 @@ function ui.create( params )
 	})
 	setColor( captionText, palette.textMuted )
 
-	descriptionText = display.newText({
+	-- The style button leads the row, followed by the animation panel. The panel is built
+	-- first because its width decides where the row's left edge sits.
+	panelGroup, panelWidth = newAnimationPanel({
 		parent = group,
-		text = "",
-		x = screen.centerX,
-		y = layout.description.y,
-		width = layout.description.width,
-		font = layout.font.body,
-		fontSize = layout.description.size,
-		align = "center",
+		names = params.names,
+		onSelect = params.onSelect,
 	})
-	setColor( descriptionText, palette.textMuted )
 
-	-- The style button leads the row, followed by the animation buttons.
-	local names = params.names
-	local widths = { uiSettings.styleButtonWidth }
-	local gaps = { uiSettings.styleButtonGap }
+	local positions = layoutRow(
+		{ uiSettings.styleButtonWidth, panelWidth },
+		{ uiSettings.styleButtonGap }
+	)
 
-	for i = 1, #names do
-		widths[i + 1] = uiSettings.buttonWidth
-		gaps[i + 1] = uiSettings.buttonGap
-	end
+	panelGroup.x = positions[2]
 
-	local positions = layoutRow( widths, gaps )
-
-	rowButtons[1] = newButton({
+	styleButton = newButton({
 		parent = group,
 		id = "style",
 		x = positions[1],
@@ -165,29 +208,9 @@ function ui.create( params )
 		width = uiSettings.styleButtonWidth,
 		height = uiSettings.styleButtonHeight,
 		label = strings.styleButtonLabel,
-		fontSize = uiSettings.fontSize,
+		fontSize = uiSettings.styleButtonFontSize,
 		onPress = params.onStyleChange,
 	})
-
-	for i = 1, #names do
-		local name = names[i]
-
-		buttons[i] = newButton({
-			parent = group,
-			id = name,
-			x = positions[i + 1],
-			y = 0,
-			width = uiSettings.buttonWidth,
-			height = uiSettings.buttonHeight,
-			label = strings.buttonLabel[name],
-			fontSize = uiSettings.fontSize,
-			onPress = function()
-				params.onSelect( name )
-			end,
-		})
-
-		rowButtons[i + 1] = buttons[i]
-	end
 
 	placeRow()
 	Runtime:addEventListener( "resize", placeRow )
@@ -210,7 +233,6 @@ function ui.refresh( state )
 
 	headingText.text = strings.heading[style]
 	captionText.text = caption
-	descriptionText.text = strings.description[style]
 end
 
 function ui.destroy()
@@ -220,9 +242,7 @@ function ui.destroy()
 	group = nil
 	headingText = nil
 	captionText = nil
-	descriptionText = nil
 	buttons = {}
-	rowButtons = {}
 end
 
 --------------------------------------------------------------------------------------

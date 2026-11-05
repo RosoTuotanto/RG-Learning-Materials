@@ -551,11 +551,29 @@ def demo_body(title: str, data: dict) -> str:
         f'<h1>{escape(title)}</h1>',
         f'<p class="lead">{escape(data["description"])}</p>',
     ]
+    details = _details_block(data)
+    if details:
+        parts.append(details)
     meta = _meta_block(data)
     if meta:
         parts.append(meta)
     parts.append(_iframe_block(title, width, height))
     return "\n".join(parts)
+
+
+def _details_block(data: dict) -> str:
+    """Optional `details` entries ({title, text}) as headed paragraphs between the description and the app."""
+    sections = []
+    for entry in data.get("details", []):
+        if not isinstance(entry, dict):
+            continue
+        title, text = entry.get("title"), entry.get("text")
+        if not (isinstance(title, str) and title.strip() and isinstance(text, str) and text.strip()):
+            continue
+        sections.append(f'  <h2>{escape(title)}</h2>\n  <p>{escape(text)}</p>')
+    if not sections:
+        return ""
+    return '<div class="demo-details">\n' + "\n".join(sections) + '\n</div>'
 
 
 # ------------------------------------------------------------------------------

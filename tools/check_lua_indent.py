@@ -11,8 +11,8 @@ LUA_PATTERNS = ("*.lua", ".luacheckrc")
 
 # Vendored upstream code keeps its own formatting byte-for-byte.
 SKIPPED_PARTS = (".scratch",)
-SKIPPED_SUFFIXES = ("libs/spriteloop.lua",)
-SKIPPED_SEGMENTS = ("/com/ponywolf/",)
+SKIPPED_SUFFIXES = ("libs/spriteloop.lua", "libs/ponytiled.lua")
+SKIPPED_SEGMENTS = ("/com/ponywolf/", "/tools/harness/engine/")
 
 _LONG_OPEN_RE = re.compile(r"\[(=*)\[")
 _INDENT_RE = re.compile(r"[ \t]*")

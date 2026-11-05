@@ -148,6 +148,15 @@ h2 {
     max-width: 46rem;
 }
 
+.demo-details h2 {
+    margin-top: 1.5rem;
+}
+
+.demo-details p {
+    max-width: 46rem;
+    margin: 0 0 1.25rem;
+}
+
 /* Header / navbar */
 
 .site-header {

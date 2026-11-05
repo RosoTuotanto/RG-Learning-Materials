@@ -93,7 +93,7 @@ Model: This document was prepared by Fable 5
 - `site/games/4-pokeri/`: versio-1 to versio-12, versio-kotitehtavat
 - `site/games/5-visual-novel/`: versio-1 to versio-9, versio-kotitehtavat
 - `site/games/7-top-down/`: versio-1 to versio-15
-- `site/demos/animations/` and `site/demos/feedback/` (demos)
+- `site/demos/animations/`, `site/demos/feedback/` and `site/demos/template-showcase/` (demos)
 - **After the builds:** run `python tools/build_website.py` from the repo root so it patches every new build; it reported 77 MISSING apps in total.
 
 ---

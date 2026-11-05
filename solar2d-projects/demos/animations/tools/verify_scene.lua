@@ -120,7 +120,7 @@ end
 
 local heading = findText( strings.heading.sprite )
 local caption = findText( spriteCaption( "idle" ) )
-local description = findText( strings.description.sprite )
+local panelTitle = findText( strings.animationPanelTitle )
 
 check( #stub.sprites == 1, "exactly one sprite is created" )
 check( stub.imageSheets[1] and stub.imageSheets[1].filename == animations.sheet.file, "the sprite sheet is loaded from data.animations" )
@@ -141,7 +141,7 @@ check( sprite.sequence == "idle", "the sprite starts on idle" )
 check( not rig.isVisible, "the skeletal character starts hidden" )
 check( heading ~= nil, "the heading reads the sprite style" )
 check( caption ~= nil, "the caption names the idle animation" )
-check( description ~= nil, "the description explains the sprite style" )
+check( panelTitle ~= nil, "the animation panel carries its title" )
 check( sameColor( findButton( "idle" ).background.fillColor, layout.palette.buttonActiveFill ), "the idle button is highlighted" )
 
 -- The buttons are the style button and one per animation, nothing else.
@@ -255,60 +255,56 @@ local idleButton = findButton( "idle" )
 local walkButton = findButton( "walk" )
 local jumpButton = findButton( "jump" )
 
+local panelBackground = stub.findObject( view, function( object )
+	return object.kind == "roundedRect" and sameColor( object.fillColor, layout.palette.panelFill )
+end )
+
 local styleX, styleY = stub.contentPosition( styleButton )
 local idleX, idleY = stub.contentPosition( idleButton )
-local walkX = stub.contentPosition( walkButton )
 local jumpX = stub.contentPosition( jumpButton )
+local panelX, panelY = stub.contentPosition( panelBackground )
+local _, titleY = stub.contentPosition( panelTitle )
+local walkX = stub.contentPosition( walkButton )
 
 local styleWidth = styleButton.background.width
 local buttonWidth = idleButton.background.width
-local styleGap = ( idleX - buttonWidth * 0.5 ) - ( styleX + styleWidth * 0.5 )
 local buttonGap = ( walkX - buttonWidth * 0.5 ) - ( idleX + buttonWidth * 0.5 )
-local rowLeft = styleX - styleWidth * 0.5
-local rowRight = jumpX + jumpButton.background.width * 0.5
+local panelLeft = panelX - panelBackground.width * 0.5
+local panelRight = panelX + panelBackground.width * 0.5
+local panelTop = panelY - panelBackground.height * 0.5
+local panelBottom = panelY + panelBackground.height * 0.5
+local styleLeft = styleX - styleWidth * 0.5
+local styleRight = styleX + styleWidth * 0.5
 local styleTop = styleY - styleButton.background.height * 0.5
 local styleBottom = styleY + styleButton.background.height * 0.5
 
--- The stub sizes text only when it is created, so each description is measured on a throwaway copy.
-local function measureDescription( text )
-	local copy = display.newText({
-		text = text,
-		x = description.x,
-		y = description.y,
-		width = description.width,
-		font = description.font,
-		fontSize = description.size,
-		align = description.align,
-	})
-	local top = copy.y - copy.height * 0.5
-	local bottom = copy.y + copy.height * 0.5
-	display.remove( copy )
-
-	return top, bottom
-end
-
 local floorBottom = floorLine.y + floorLine.height * 0.5
 
-check( styleButton.label.text == strings.styleButtonLabel, "the style button reads change style" )
+check( styleButton.label.text == "Switch animation style", "the style button reads Switch animation style" )
 check( styleWidth > buttonWidth and styleButton.background.height > idleButton.background.height, "the style button is larger than the animation buttons" )
-check( styleX < idleX, "the style button sits left of idle" )
-check( styleGap > buttonGap and buttonGap > 0, "the style button's gap is larger than the gaps between animation buttons" )
-check( math.abs( ( rowLeft + rowRight ) * 0.5 - display.contentCenterX ) < 0.001, "the button row is centred horizontally" )
-check( styleY == idleY, "the style button and the animation buttons share a centre line" )
-check( math.abs( styleBottom + layout.ui.bottomMargin - display.contentHeight ) < 0.001, "the bottom margin applies to the taller style button" )
+check( styleButton.label.size < idleButton.label.size, "the style button label is smaller than the animation button labels" )
+check( styleButton.label.width <= styleWidth, "the style button label fits inside the button" )
+check( styleRight < panelLeft, "the style button sits left of the animation panel" )
+check( math.abs( ( panelLeft - styleRight ) - layout.ui.styleButtonGap ) < 0.001, "the style button and the panel are one style gap apart" )
+check( buttonGap > 0, "the animation buttons do not touch" )
+check( math.abs( ( styleLeft + panelRight ) * 0.5 - display.contentCenterX ) < 0.001, "the style button and the panel are centred horizontally as a row" )
+check( styleY == panelY, "the style button and the panel share a centre line" )
+check( idleButton.y == walkButton.y and walkButton.y == jumpButton.y, "the animation buttons share one centre line inside the panel" )
+check( math.abs( panelBottom + layout.ui.bottomMargin - display.contentHeight ) < 0.001, "the bottom margin applies to the panel" )
+check( panelTop > floorBottom, "the panel sits below the floor" )
+check( styleTop > floorBottom and styleBottom <= panelBottom, "the style button sits below the floor and within the panel's height" )
 
-check( description.align == "center" and description.width == layout.description.width, "the description wraps centred at the layout width" )
-check( description.font == layout.font.body and description.size == layout.description.size, "the description uses the body font at the layout size" )
-check( math.abs( description.y - ( floorBottom + styleTop ) * 0.5 ) <= 2, "the description sits midway between the floor and the style button" )
+check( panelTitle.font == layout.font.heading and panelTitle.size == layout.animationPanel.titleSize, "the panel title uses the layout font and size" )
+check( sameColor( panelTitle.fillColor, layout.palette.textMuted ), "the panel title uses the muted colour" )
+check( math.abs( stub.contentPosition( panelTitle ) - panelX ) < 0.001, "the panel title is centred on the panel" )
+check( titleY < idleY - idleButton.background.height * 0.5, "the panel title sits above the animation buttons" )
+check( titleY > panelTop, "the panel title sits inside the panel" )
+check( idleX - buttonWidth * 0.5 >= panelLeft and jumpX + buttonWidth * 0.5 <= panelRight, "the animation buttons sit inside the panel" )
+check( idleY + idleButton.background.height * 0.5 <= panelBottom, "the animation buttons end above the panel's bottom edge" )
 
-local styleNames = { "sprite", "skeletal" }
-
-for i = 1, #styleNames do
-	local top, bottom = measureDescription( strings.description[styleNames[i]] )
-	check( top > floorBottom and bottom < styleTop, "the " .. styleNames[i] .. " description fits between the floor and the style button" )
+for _, id in ipairs( { "idle", "walk", "jump" } ) do
+	check( stub.contentPosition( findButton( id ) ) >= panelLeft, "the " .. id .. " button is not left of the panel" )
 end
-
-check( sameColor( description.fillColor, layout.palette.textMuted ), "the description uses the muted colour" )
 
 local function pressButton( id )
 	local x, y = stub.contentPosition( findButton( id ) )
@@ -331,7 +327,6 @@ check( sameColor( findButton( "walk" ).background.fillColor, layout.palette.butt
 check( sameColor( findButton( "idle" ).background.fillColor, layout.palette.buttonFill ), "the idle button is no longer highlighted" )
 check( caption.text == spriteCaption( "walk" ), "the caption names the walk animation" )
 check( heading.text == strings.heading.sprite, "the sprite heading stays after a button press" )
-check( description.text == strings.description.sprite, "the sprite description stays after a button press" )
 check( stub.pendingTimerCount() == 0, "the sprite side schedules no timers" )
 
 --------------------------------------------------------------------------------------
@@ -346,7 +341,6 @@ check( rig._isPlaying and rig._elapsedTime == 0, "walk_1 plays from its start" )
 check( caption.text == captionFor( "walk", 1 ), "the caption reads walk variant 1" )
 check( caption.text == "Playing: walk animation (variant 1/3)", "the caption reads exactly as specified" )
 check( heading.text == strings.heading.skeletal, "the heading reads the skeletal style" )
-check( description.text == strings.description.skeletal, "the description explains the skeletal style" )
 check( sameColor( walkButton.background.fillColor, layout.palette.buttonActiveFill ), "the walk button stays highlighted across the style change" )
 checkStyleButtonPlain()
 
@@ -458,7 +452,8 @@ local function checkTapsIgnored( suffix )
 	checkTapIgnored( 100, 250, "the background" .. suffix )
 	checkTapIgnored( floorX, floorY, "the floor line" .. suffix )
 	checkTapIgnored( characterX, characterY, "the character" .. suffix )
-	checkTapIgnored( styleX, ( floorBottom + styleTop ) * 0.5, "the description" .. suffix )
+	checkTapIgnored( panelX, panelTop + layout.animationPanel.titleOffset, "the panel title" .. suffix )
+	checkTapIgnored( panelX, floorBottom + ( panelTop - floorBottom ) * 0.5, "the gap above the panel" .. suffix )
 end
 
 checkTapsIgnored( "" )
@@ -476,7 +471,6 @@ check( sprite.sequence == "jump", "the sprite plays the selected jump sequence" 
 check( not rig.isVisible and not rig._isPlaying, "the skeletal character is hidden and paused" )
 check( caption.text == spriteCaption( "jump" ), "the caption names the jump animation without a variant" )
 check( heading.text == strings.heading.sprite, "the heading is back to the sprite style" )
-check( description.text == strings.description.sprite, "the description is back to the sprite style" )
 checkStyleButtonPlain()
 
 checkTapsIgnored( " in sprite style" )
@@ -505,11 +499,11 @@ display.actualContentHeight = 720
 stub.fire( "resize" )
 
 local _, resizedStyleY = stub.contentPosition( styleButton )
-local _, resizedIdleY = stub.contentPosition( idleButton )
-local resizedBottom = resizedStyleY + styleButton.background.height * 0.5
+local _, resizedPanelY = stub.contentPosition( panelBackground )
+local resizedBottom = resizedStyleY + layout.animationPanel.height * 0.5
 
 check( math.abs( resizedBottom + layout.ui.bottomMargin - 680 ) < 0.001, "a resize keeps the row on the bottom of the visible screen" )
-check( resizedIdleY == resizedStyleY, "a resize keeps the row on one centre line" )
+check( resizedPanelY == resizedStyleY, "a resize keeps the row on one centre line" )
 
 display.screenOriginY = 0
 display.actualContentHeight = 640

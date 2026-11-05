@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0B0C0E">
-    <meta name="description" content="Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu &quot;change style&quot; -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.">
+    <meta name="description" content="Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu Switch animation style -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.">
     <meta name="generator" content="RG-Learning-Materials site builder">
     <title>Demo - Frame-by-frame ja skeletal animation</title>
     <link rel="icon" href="../../favicon.ico" sizes="48x48">
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Roso Games opetuspelit ja demot">
     <meta property="og:title" content="Demo - Frame-by-frame ja skeletal animation">
-    <meta property="og:description" content="Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu &quot;change style&quot; -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.">
+    <meta property="og:description" content="Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu Switch animation style -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.">
     <meta property="og:url" content="https://rosotuotanto.github.io/RG-Learning-Materials/demos/animations/">
     <meta property="og:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/demo-animations.png">
     <meta property="og:image:width" content="1200">
@@ -26,7 +26,7 @@
     <meta property="og:locale" content="fi_FI">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Demo - Frame-by-frame ja skeletal animation">
-    <meta name="twitter:description" content="Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu &quot;change style&quot; -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.">
+    <meta name="twitter:description" content="Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu Switch animation style -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.">
     <meta name="twitter:image" content="https://rosotuotanto.github.io/RG-Learning-Materials/assets/og-images/demo-animations.png">
     <meta name="twitter:image:alt" content="Roso Games opetuspelit ja demot">
     <meta name="apple-mobile-web-app-title" content="Roso Games">
@@ -179,6 +179,15 @@ h2 {
     font-size: 1.12rem;
     color: var(--color-muted);
     max-width: 46rem;
+}
+
+.demo-details h2 {
+    margin-top: 1.5rem;
+}
+
+.demo-details p {
+    max-width: 46rem;
+    margin: 0 0 1.25rem;
 }
 
 /* Header / navbar */
@@ -1033,6 +1042,7 @@ h2 {
         <li><a class="current" href="../../demos/animations/">Frame-by-frame ja skeletal animation</a></li>
         <li><a href="../../demos/ball-prototype/">Prototyypin versiot 1 ja 9</a></li>
         <li><a href="../../demos/feedback/">Palaute ja game feel</a></li>
+        <li><a href="../../demos/template-showcase/">Mitä Roso Games Templateista voisi tehdä?</a></li>
       </ul>
     </li>
   </ul>
@@ -1043,6 +1053,7 @@ h2 {
     <li><a class="current" href="../../demos/animations/">Frame-by-frame ja skeletal animation</a></li>
     <li><a href="../../demos/ball-prototype/">Prototyypin versiot 1 ja 9</a></li>
     <li><a href="../../demos/feedback/">Palaute ja game feel</a></li>
+    <li><a href="../../demos/template-showcase/">Mitä Roso Games Templateista voisi tehdä?</a></li>
   </ul>
 </li>
 </ol>
@@ -1051,7 +1062,13 @@ h2 {
     </header>
     <main class="content">
 <h1>Demo - Frame-by-frame ja skeletal animation</h1>
-<p class="lead">Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu &quot;change style&quot; -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.</p>
+<p class="lead">Sama hahmo animoituna kahdella tavalla: frame-by-frame-animaationa käsin piirretystä sprite sheetistä ja skeletal-animaationa erillisistä osista. Tapa vaihtuu Switch animation style -napista, ja kolmella napilla valitaan animaatio (idle, walk tai jump). Frame-by-frame-puolella jokaisesta animaatiosta on yksi käsin piirretty versio, skeletal-puolella kolme varianttia, joiden välillä hahmo vaihtaa itse.</p>
+<div class="demo-details">
+  <h2>Frame-by-frame-animaatio</h2>
+  <p>Frame-by-frame-animaatiossa taiteilija piirtää jokaisen framen käsin. Hän päättää jokaisen pikselin ja voi piirtää mitä tahansa, mutta se vie aikaa ja vaatii taitoa. Jos animaatiota haluaa myöhemmin muuttaa, framet joutuu piirtämään uudelleen.</p>
+  <h2>Skeletal-animaatio</h2>
+  <p>Skeletal-animaatiossa hahmon osat piirretään vain kerran, ja niitä liikutetaan keyframesta toiseen. Lopputulos näyttää vähemmän käsintehdyltä, mutta animaatio syntyy nopeasti, ja siihen voi lisätä uutta pienellä vaivalla. Muutos on muutama muokattu luku uusien piirrosten sijaan.</p>
+</div>
 <div class="page-meta">
   <p class="source">Lähdekoodi: <a class="source-link" href="https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/demos/animations" target="_blank" rel="noopener"><img class="gh-logo" src="../../assets/github-lockup-white.svg" alt="Lähdekoodi GitHubissa"></a></p>
 </div>
