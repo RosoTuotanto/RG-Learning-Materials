@@ -2,6 +2,8 @@
 
 Two boxes shoot each other with pistols. The same fight replays across seven versions, and each one changes a layer of feedback on a mechanic that never changes at all. Version 1 already contains every piece of information the fight has to offer and none of the feel. Everything after it adds nothing to the mechanic and everything to how it reads, until version 7 takes one of those additions back out again.
 
+Try it in the browser on the [learning materials site](https://rosotuotanto.github.io/RG-Learning-Materials/demos/feedback/).
+
 The points the demo is making, and the ones it deliberately does not make, are written out in [NOTES.md](NOTES.md).
 
 ## The versions

@@ -2,6 +2,8 @@
 
 The pressable circle from the lesson "Iterointi käytännössä", twice: once as version 1, the first prototype, and once as version 9, after eight rounds of iteration. The lesson asks where development should have stopped, and the answer is version 1. Pressing the two side by side is the argument: version 9 is smoother and has three bugs fixed, but it answers exactly the same question about how the circle feels to press.
 
+Try it in the browser on the [learning materials site](https://rosotuotanto.github.io/RG-Learning-Materials/demos/ball-prototype/).
+
 ## The versions
 
 `scripts/version1.lua` and `scripts/version9.lua` are the lesson's listings verbatim, with only a `return button` added at the end so the demo can hold on to the circle each one creates. Their comments stay Finnish because that is what the learner reads in the lesson, and nothing in them is fixed or reformatted. That includes version 1's bug: if the finger slides off the circle before it is lifted, the `"ended"` phase never reaches the circle and it stays big. Pressing it again grows it further.

@@ -4,6 +4,8 @@
 
 Mallivastausprojekti löytyy kansiosta [`solar2d-projects/games/6-platformer/versio-kotitehtavat/`](../../../../solar2d-projects/games/6-platformer/versio-kotitehtavat/), ja voit tarkistaa oman ratkaisusi myös alla olevilla listoilla.
 
+Voit myös pelata mallivastausta selaimessa [oppimateriaalien verkkosivustolla](https://rosotuotanto.github.io/RG-Learning-Materials/games/6-platformer/versio-kotitehtavat/).
+
 ## Tarkista omasta ratkaisustasi
 
 Ensiaskeleet:

@@ -4,6 +4,8 @@
 
 Mallivastaus on saatavilla myös ajettavana Solar2D-projektina kansiossa [`solar2d-projects/games/2-nopeustesteri/versio-kotitehtavat/`](../../../../solar2d-projects/games/2-nopeustesteri/versio-kotitehtavat/).
 
+Voit myös pelata mallivastausta selaimessa [oppimateriaalien verkkosivustolla](https://rosotuotanto.github.io/RG-Learning-Materials/games/2-nopeustesteri/versio-kotitehtavat/).
+
 Alapuolella on mallivastaus, joka tarjoaa yhden mahdollisen ratkaisun kaikkiin tehtäviin. Muista kuitenkin, että tämä on vain yksi esimerkki: aivan kuten kaikissa muissakin ohjelmointitehtävissä, niin myös näihin löytyy lukemattomia erilaisia ratkaisuja. Vaikka oma ratkaisusi näyttäisi täysin erilaiselta kuin mallivastaus, se voi silti olla aivan yhtä oikea. Tämä onkin yksi peliohjelmoinnin hienoista puolista: samaan ongelmaan voi olla enemmän ratkaisuja kuin tekijöitä ja ne voivat olla kaikki oikein. Ohjelmointi on luovaa toimintaa ja sinulla on vapaus ilmaista itseäsi haluamallasi tavalla!
 
 ## Tarkista omasta ratkaisustasi

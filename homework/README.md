@@ -31,6 +31,7 @@ Tee tehtävä aina ensin itse ja katso vastausta vasta sen jälkeen. Vastaus on 
 
 - Ohjelmointitehtäviin on aina enemmän kuin yksi oikea ratkaisu. Mallivastaus on vain yksi esimerkki: vaikka oma ratkaisusi näyttäisi täysin erilaiselta, se voi silti olla aivan yhtä oikea.
 - Suunnittelu- ja pohdintatehtävät ovat luonteeltaan niin avoimia, ettei niihin ole olemassa yhtä oikeaa vastausta. Näiden tehtävien vastaukset ovat esimerkkejä ja tarkistuslistoja, joita vasten voit peilata omaa vastaustasi.
+- Ohjelmointitehtävien mallivastaukset ovat pelattavissa myös selaimessa [oppimateriaalien verkkosivustolla](https://rosotuotanto.github.io/RG-Learning-Materials/) kunkin opetuspelin Kotitehtävät-versiona, joten voit kokeilla valmista ratkaisua ennen kuin avaat sen koodin.
 - Osaan tehtävistä ei ole mallivastausta lainkaan, koska vastaus riippuu täysin sinun valinnoistasi ja tulkinnoistasi. Näiden tehtävien kansioista löydät pohdittavia kysymyksiä, joilla voit arvioida omaa vastaustasi.
 
 ## Kurssit

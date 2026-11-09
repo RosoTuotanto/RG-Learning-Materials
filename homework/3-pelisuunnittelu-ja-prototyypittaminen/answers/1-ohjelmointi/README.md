@@ -4,6 +4,8 @@
 
 Mallivastausprojekti löytyy kansiosta [`solar2d-projects/games/3-fysiikkapallo/versio-kotitehtavat/`](../../../../solar2d-projects/games/3-fysiikkapallo/versio-kotitehtavat/), ja voit tarkistaa oman ratkaisusi myös alla olevilla listoilla.
 
+Voit myös pelata mallivastausta selaimessa [oppimateriaalien verkkosivustolla](https://rosotuotanto.github.io/RG-Learning-Materials/games/3-fysiikkapallo/versio-kotitehtavat/).
+
 ## Tarkista omasta ratkaisustasi
 
 Ensiaskeleet:

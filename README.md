@@ -4,6 +4,12 @@ Tämä repositorio on osa Roso Games -projekteja. Se täydentää osoitteessa [w
 
 Sisältö on toistaiseksi vain suomeksi. Englanninkielinen laajennus on mahdollinen myöhemmin.
 
+## Selaimessa pelattavat versiot
+
+Kaikki opetuspelit ja demot ovat pelattavissa selaimessa [oppimateriaalien verkkosivustolla](https://rosotuotanto.github.io/RG-Learning-Materials/). Sieltä löytyy jokaisen opetuspelin jokainen kehitysvaihe: version sivulta näet, mihin oppituntiin versio kuuluu, ja pääset sen lähdekoodiin ja muutoksiin edelliseen versioon verrattuna.
+
+[![Oppimateriaalien verkkosivuston etusivu, jossa ovat kurssien opetuspelit ja demot](site/assets/readme/oppimateriaalien-verkkosivusto.png)](https://rosotuotanto.github.io/RG-Learning-Materials/)
+
 ## Rakenne
 
 - [`homework/`](homework/README.md) sisältää kurssien 2-6 kotitehtävät ja niiden vastaukset. Jokaisella kurssilla on oma kansionsa, jonka `README.md` listaa kurssin kaikki kotitehtävät, ja jonka `answers/`-kansiosta löytyvät tehtäväkohtaiset vastaukset ja pohdinnat. Kurssin 2 kansiossa on lisäksi `exercises/`, jossa ovat oppituntien pienten harjoitusten vastaukset.

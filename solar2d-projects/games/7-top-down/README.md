@@ -2,6 +2,8 @@
 
 Kurssin 6 (Kentät, äänimaailma ja pelisuunnittelun haasteet) opetuspeli. Peli rakennetaan kurssin oppitunneilla vaihe vaiheelta, ja kukin `versio-N`-kansio sisältää pelin siinä tilassa, jossa se on tietyn oppitunnin lopussa. Pelin sisäinen kieli on englanti; koodin kommentit ovat suomeksi.
 
+Valmis peli ja jokainen sen kehitysvaihe ovat pelattavissa selaimessa [oppimateriaalien verkkosivustolla](https://rosotuotanto.github.io/RG-Learning-Materials/games/7-top-down/). Jokaisen version sivulta näet, mihin oppituntiin se kuuluu ja mitä koodissa muuttui edellisestä versiosta.
+
 Pelaaja saapuu Saltfordin kylään, jonka vanhin pyytää selvittämään, miksi muukalainen on leiriytynyt rannalle. Rantatie aukeaa vasta tehtävän myötä. Muukalainen antaa viestin, jonka pelaaja vie vanhimmalle.
 
 Kansiot `versio-0` ... `versio-15` ovat pelin kehitysvaiheet oppituntien etenemisen mukaisesti:

@@ -4,6 +4,8 @@
 
 Mallivastausprojekti löytyy kansiosta [`solar2d-projects/games/4-pokeri/versio-kotitehtavat/`](../../../../solar2d-projects/games/4-pokeri/versio-kotitehtavat/), ja voit tarkistaa oman ratkaisusi myös alla olevilla listoilla.
 
+Voit myös pelata mallivastausta selaimessa [oppimateriaalien verkkosivustolla](https://rosotuotanto.github.io/RG-Learning-Materials/games/4-pokeri/versio-kotitehtavat/).
+
 ## Tarkista omasta ratkaisustasi
 
 Ensiaskeleet:
