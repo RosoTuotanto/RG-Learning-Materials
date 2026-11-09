@@ -1,0 +1,28 @@
+{
+  "titles": {
+    "game": "Peli kaatui.",
+    "demo": "Demo kaatui."
+  },
+
+  "notes": {
+    "inProgress": [
+      "Peli on tässä vaiheessa vielä keskeneräinen. Saatoit törmätä virheeseen, joka ratkotaan tulevilla oppitunneilla.",
+      "Jos törmäät virheeseen vielä pelin viimeisessä versiossa, niin ota yhteyttä <strong>#help-deskiin</strong>."
+    ],
+
+    "expected": [
+      "Peli on tässä vaiheessa vielä keskeneräinen. <strong>Tässä versiossa on tiedossa oleva virhe</strong>, joka ratkotaan tulevilla oppitunneilla.",
+      "Jos törmäät virheeseen vielä pelin viimeisessä versiossa, niin ota yhteyttä <strong>#help-deskiin</strong>."
+    ],
+
+    "final": [
+      "Löysit pelistä virheen. Tässä vaiheessa opetuspelissä ei pitäisi olla enää virheitä.",
+      "Jos viitsit, niin ilmoittaisitko tästä <strong>#help-deskiin</strong>? Kun ilmoitat virheestä, niin kerrothan mitä teit ennen kuin peli kaatui ja liitäthän alapuolella olevan virheilmoituksen viestiisi. Kiitos!"
+    ],
+
+    "demo": [
+      "Löysit demosta virheen. Demoissa ei pitäisi olla virheitä.",
+      "Jos viitsit, niin ilmoittaisitko tästä <strong>#help-deskiin</strong>? Kun ilmoitat virheestä, niin kerrothan mitä teit ennen kuin demo kaatui ja liitäthän alapuolella olevan virheilmoituksen viestiisi. Kiitos!"
+    ]
+  }
+}

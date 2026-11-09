@@ -11,6 +11,11 @@ also gets a noindex muutokset/ page diffing its source against that predecessor.
 Games are the folders under site/games/ and demos the folders under site/demos/.
 The assets/ folder holds shared images; any other site-root folder is a stray.
 
+Every app sits under a crash panel that opens when the build reports a Lua
+error. Its texts are in web-src/crash.json: the note depends on whether the page
+is a demo, a game's last numbered or homework version, a version whose page.json
+sets "expectedCrash": true, or any other game version.
+
 Usage:
     python tools/build_website.py            Build into ../site.
     python tools/build_website.py PATH       Build into PATH (mainly for tests).
@@ -21,6 +26,7 @@ import re
 import shutil
 import sys
 from dataclasses import dataclass, field
+from functools import cache
 from html import escape
 from itertools import zip_longest
 from pathlib import Path
@@ -493,12 +499,48 @@ def _meta_block(data: dict, changes: str = "") -> str:
     return '<div class="page-meta">\n' + "\n".join(rows) + '\n</div>'
 
 
-def _iframe_block(title: str, width: int, height: int) -> str:
+@cache
+def _web_src_text(name: str) -> str:
+    return (WEB_SRC_DIR / name).read_text(encoding="utf-8")
+
+
+@cache
+def _crash_texts() -> dict:
+    return json.loads(_web_src_text("crash.json"))
+
+
+def _crash_kind(data: dict, versions: list[dict], index: int) -> str:
+    """Which crash note a game version gets: expected, final (last numbered or homework), or inProgress."""
+    if data.get("expectedCrash") is True:
+        return "expected"
+    slug = versions[index]["slug"]
+    numbered = [version["slug"] for version in versions if _VERSION_RE.match(version["slug"])]
+    if slug == KOTITEHTAVAT or (numbered and slug == numbered[-1]):
+        return "final"
+    return "inProgress"
+
+
+def _crash_panel(title_key: str, note_key: str) -> str:
+    """The hidden crash panel shown when the app reports a Lua error."""
+    texts = _crash_texts()
+    note = "".join(f'  <p class="crash-note">{paragraph}</p>\n' for paragraph in texts["notes"][note_key])
+    panel = _web_src_text("crash-panel.html").replace("{{crashTitle}}", escape(texts["titles"][title_key]))
+    return panel.replace("{{crashNote}}\n", note).rstrip("\n")
+
+
+def _iframe_block(title: str, data: dict, panel: str) -> str:
+    width = _dimension(data, "width", DEFAULT_WIDTH)
+    height = _dimension(data, "height", DEFAULT_HEIGHT)
+    panel = "\n".join(f"    {line}" for line in panel.splitlines())
     return (
         '<div class="game-stage">\n'
-        f'  <iframe class="game-frame" src="./app/index.html" title="{escape(title)}" '
+        '  <div class="game-screen">\n'
+        f'    <iframe class="game-frame" src="./app/index.html" title="{escape(title)}" '
         f'width="{width}" height="{height}"></iframe>\n'
-        '</div>'
+        f'{panel}\n'
+        '  </div>\n'
+        '</div>\n'
+        f'<script>\n{_web_src_text("crash.js")}</script>'
     )
 
 
@@ -531,13 +573,11 @@ def _version_nav(game_path: str, versions: list[dict], index: int) -> str:
 
 def version_body(title: str, data: dict, game_path: str, versions: list[dict], index: int,
                  changes: str = "") -> str:
-    width = _dimension(data, "width", DEFAULT_WIDTH)
-    height = _dimension(data, "height", DEFAULT_HEIGHT)
     parts = [f'<h1>{escape(title)}</h1>']
     meta = _meta_block(data, changes)
     if meta:
         parts.append(meta)
-    parts.append(_iframe_block(title, width, height))
+    parts.append(_iframe_block(title, data, _crash_panel("game", _crash_kind(data, versions, index))))
     nav = _version_nav(game_path, versions, index)
     if nav:
         parts.append(nav)
@@ -545,8 +585,6 @@ def version_body(title: str, data: dict, game_path: str, versions: list[dict], i
 
 
 def demo_body(title: str, data: dict) -> str:
-    width = _dimension(data, "width", DEFAULT_WIDTH)
-    height = _dimension(data, "height", DEFAULT_HEIGHT)
     parts = [
         f'<h1>{escape(title)}</h1>',
         f'<p class="lead">{escape(data["description"])}</p>',
@@ -557,7 +595,7 @@ def demo_body(title: str, data: dict) -> str:
     meta = _meta_block(data)
     if meta:
         parts.append(meta)
-    parts.append(_iframe_block(title, width, height))
+    parts.append(_iframe_block(title, data, _crash_panel("demo", "demo")))
     return "\n".join(parts)
 
 

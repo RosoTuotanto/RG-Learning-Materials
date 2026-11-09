@@ -517,12 +517,83 @@ h2 {
     overflow-x: auto;
 }
 
+.game-screen {
+    position: relative;
+    max-width: 100%;
+}
+
 .game-frame {
+    display: block;
     max-width: 100%;
     border: 2px solid var(--color-line);
     border-radius: var(--radius);
     background: #000000;
     box-shadow: var(--shadow-hard);
+}
+
+/* Crash panel over an app that reported a Lua error */
+
+.crash-panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 2rem;
+    overflow: auto;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+}
+
+.crash-panel[hidden] {
+    display: none;
+}
+
+/* Auto margins centre the content vertically and keep it scrollable when it overflows. */
+.crash-panel > :first-child {
+    margin-top: auto;
+}
+
+.crash-panel > :last-child {
+    margin-bottom: auto;
+}
+
+.crash-title {
+    margin: 0;
+}
+
+.crash-note {
+    max-width: 46rem;
+    margin: 0;
+}
+
+.crash-label {
+    margin: 0.5rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.crash-error {
+    align-self: stretch;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    overflow: auto;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.crash-reload {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .page-meta {
@@ -1095,8 +1166,44 @@ h2 {
   <p class="changes">Muutokset: <a href="./muutokset/">versio 3 -&gt; versio 4</a></p>
 </div>
 <div class="game-stage">
-  <iframe class="game-frame" src="./app/index.html" title="Platformer - versio 4" width="960" height="640"></iframe>
+  <div class="game-screen">
+    <iframe class="game-frame" src="./app/index.html" title="Platformer - versio 4" width="960" height="640"></iframe>
+    <div class="crash-panel" role="alert" hidden>
+      <h2 class="crash-title">Peli kaatui.</h2>
+      <p class="crash-note">Peli on tässä vaiheessa vielä keskeneräinen. Saatoit törmätä virheeseen, joka ratkotaan tulevilla oppitunneilla.</p>
+      <p class="crash-note">Jos törmäät virheeseen vielä pelin viimeisessä versiossa, niin ota yhteyttä <strong>#help-deskiin</strong>.</p>
+      <p class="crash-label">Virheilmoitus:</p>
+      <pre class="crash-error"></pre>
+      <button type="button" class="button-link crash-reload">Käynnistä uudelleen</button>
+    </div>
+  </div>
 </div>
+<script>
+// Shows the crash panel when the app reports a Lua error (see html5_build_patcher.py).
+(() => {
+    const frame = document.querySelector(".game-frame");
+    const panel = document.querySelector(".crash-panel");
+    const errorText = panel.querySelector(".crash-error");
+    const reloadButton = panel.querySelector(".crash-reload");
+
+    window.addEventListener("message", (event) => {
+        const data = event.data;
+        if (event.source !== frame.contentWindow || !data || data.type !== "app-crash" || !panel.hidden) {
+            return;
+        }
+
+        errorText.textContent = data.message;
+        panel.hidden = false;
+        reloadButton.focus({ preventScroll: true });
+    });
+
+    reloadButton.addEventListener("click", () => {
+        panel.hidden = true;
+        errorText.textContent = "";
+        frame.contentWindow.location.reload();
+    });
+})();
+</script>
 <nav class="version-nav" aria-label="Versionavigointi">
   <a class="nav-prev" href="../../../games/6-platformer/versio-3/">Edellinen versio</a>
   <a class="nav-next" href="../../../games/6-platformer/versio-5/">Seuraava versio</a>

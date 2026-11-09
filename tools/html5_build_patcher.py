@@ -22,7 +22,9 @@ Patches applied to every build:
   5. index.html: replaces statusElement.innerHTML with textContent.
   6. index.html: replaces the default listener script block with one that
      blocks arrow-key scrolling and adds pointer capture with edge projection.
-  7. Deletes index-debug.html and index-nosplash.html.
+  7. index.html: makes printErr post Lua errors to the embedding page as an
+     {type: "app-crash", message} message, which the site's crash panel shows.
+  8. Deletes index-debug.html and index-nosplash.html.
 
 Usage:
   python html5_build_patcher.py            Patch every build under ../site.
@@ -60,6 +62,15 @@ PROGRESS_CSS_WEBKIT_MARKER = "-webkit-appearance: none;"
 PROGRESS_CSS_MOZ_MARKER = "-moz-appearance: none;"
 TEXT_CONTENT_MARKER = "statusElement.textContent"
 ENHANCED_SCRIPT_MARKER = "function edgeProject("
+CRASH_REPORT_MARKER = 'postMessage({ type: "app-crash"'
+
+# Solar2D logs every Lua error that stops a script with one of these prefixes;
+# its other "ERROR:" lines are non-fatal and must not open the crash panel.
+CRASH_REPORT_LINES = (
+    "// Report Lua errors to the embedding page, which shows its crash panel.",
+    'if (typeof text === "string" && /^ERROR: (Runtime|Syntax|Out of Memory|Generic) error/.test(text) '
+    '&& window.parent !== window) window.parent.postMessage({ type: "app-crash", message: text }, "/");',
+)
 
 IDBFS_GET_DB = "getDB:function(name,callback){"
 IDBFS_PER_BUILD_NAME = 'name=location.pathname.replace(/\\/[^\\/]*$/,"")+name;'
@@ -132,6 +143,22 @@ def patch_text_content(content: str) -> tuple[str, str]:
         return modified, APPLIED
 
     return content, FAILED
+
+
+def patch_crash_report(content: str) -> tuple[str, str]:
+    """Insert the crash report as the first statements of printErr."""
+    if CRASH_REPORT_MARKER in content:
+        return content, ALREADY
+
+    pattern = r'(printErr:\s*function\(text\)\s*\{\n)([ \t]*)'
+    if len(re.findall(pattern, content)) != 1:
+        return content, FAILED
+
+    def insert(match: re.Match) -> str:
+        indent = match.group(2)
+        return match.group(1) + "".join(indent + line + "\n" for line in CRASH_REPORT_LINES) + indent
+
+    return re.sub(pattern, insert, content, count=1), APPLIED
 
 
 # The enhanced script block that replaces Solar2D's default event listeners.
@@ -336,9 +363,10 @@ def patch_bin(bin_path: Path) -> list[tuple[str, str]]:
 
 
 def patch_index_html(index_path: Path) -> list[tuple[str, str]]:
-    """Apply the four index.html patches. Rewrites the file only when content changed."""
+    """Apply the index.html patches. Rewrites the file only when content changed."""
     patches = [
         ("printErr alert comment-out", patch_printerr_alert),
+        ("crash report", patch_crash_report),
         ("progress bar CSS", patch_progress_css),
         ("statusElement textContent", patch_text_content),
         ("enhanced script block", patch_inject_scripts),

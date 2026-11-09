@@ -484,12 +484,83 @@ h2 {
     overflow-x: auto;
 }
 
+.game-screen {
+    position: relative;
+    max-width: 100%;
+}
+
 .game-frame {
+    display: block;
     max-width: 100%;
     border: 2px solid var(--color-line);
     border-radius: var(--radius);
     background: #000000;
     box-shadow: var(--shadow-hard);
+}
+
+/* Crash panel over an app that reported a Lua error */
+
+.crash-panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 2rem;
+    overflow: auto;
+    background: var(--color-surface);
+    border: 2px solid var(--color-line);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+}
+
+.crash-panel[hidden] {
+    display: none;
+}
+
+/* Auto margins centre the content vertically and keep it scrollable when it overflows. */
+.crash-panel > :first-child {
+    margin-top: auto;
+}
+
+.crash-panel > :last-child {
+    margin-bottom: auto;
+}
+
+.crash-title {
+    margin: 0;
+}
+
+.crash-note {
+    max-width: 46rem;
+    margin: 0;
+}
+
+.crash-label {
+    margin: 0.5rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.crash-error {
+    align-self: stretch;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    overflow: auto;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.crash-reload {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .page-meta {
