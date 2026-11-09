@@ -49,13 +49,15 @@ window.focus();
 </html>
 """
 
-# JS whose blur callback body matches the removal pattern.
+# JS whose blur callback body and IDBFS getDB match the .js patch targets.
 PATCHABLE_JS = (
     "var x=1;\n"
     "function _emscripten_set_blur_callback_on_thread(target,userData,useCapture,"
     "callbackfunc,eventTypeId,targetThread)"
     '{registerFocusEventCallback(target,userData,useCapture,callbackfunc,12,"blur",'
     "targetThread);return 0}\n"
+    "var IDBFS={getDB:function(name,callback){var db=IDBFS.dbs[name];"
+    "if(db){return callback(null,db)}}};\n"
     "var y=2;\n"
 )
 
@@ -112,6 +114,10 @@ class SingleBuildTests(unittest.TestCase):
             js = read_js_from_bin(build / "game.bin", "game")
             self.assertNotIn("registerFocusEventCallback", js)
             self.assertIn("{return 0}", js)
+            self.assertIn(
+                'getDB:function(name,callback){name=location.pathname.replace(/\\/[^\\/]*$/,"")+name;var db=',
+                js,
+            )
 
             html = (build / "index.html").read_text(encoding="utf-8")
             self.assertIn("// Commented out: blocking alert()", html)
@@ -191,6 +197,7 @@ class FailureTests(unittest.TestCase):
 
             self.assertEqual(result.returncode, 1, result.stdout)
             self.assertIn(f"blur callback removal: {FAILED}", result.stdout)
+            self.assertIn(f"per-build documents database: {FAILED}", result.stdout)
             self.assertIn("1 with failures", result.stdout)
 
     def test_zero_build_path_exits_1(self):

@@ -59,6 +59,8 @@ PATCHABLE_JS = (
     "callbackfunc,eventTypeId,targetThread)"
     '{registerFocusEventCallback(target,userData,useCapture,callbackfunc,12,"blur",'
     "targetThread);return 0}\n"
+    "var IDBFS={getDB:function(name,callback){var db=IDBFS.dbs[name];"
+    "if(db){return callback(null,db)}}};\n"
     "var y=2;\n"
 )
 
@@ -401,6 +403,7 @@ class ValidTreeTests(unittest.TestCase):
             self.site / "games" / "3-fysiikkapallo" / "versio-2" / "app" / "fysiikka.bin"
         ).read("fysiikka.js").decode("utf-8")
         self.assertNotIn("registerFocusEventCallback", js)
+        self.assertIn("getDB:function(name,callback){name=location.pathname", js)
 
         html = self._read("games", "3-fysiikkapallo", "versio-2", "app", "index.html")
         self.assertIn("statusElement.textContent", html)

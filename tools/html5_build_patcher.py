@@ -11,14 +11,18 @@ generated HTML files, so an already-patched build must still be detected.
 Patches applied to every build:
   1. .bin/.js: removes the blur callback registration so builds no longer
      freeze when the user clicks outside the app.
-  2. index.html: comments out the alert() in printErr (blocking popups on
+  2. .bin/.js: names the IndexedDB database behind system.DocumentsDirectory
+     after the page's folder path. The engine always names it "/documentsDir",
+     so every build on one origin otherwise shares one set of save files and
+     reads another game's or version's userdata.json.
+  3. index.html: comments out the alert() in printErr (blocking popups on
      non-fatal WASM errors).
-  3. index.html: adds cross-browser vendor prefixes and styling fixes to the
+  4. index.html: adds cross-browser vendor prefixes and styling fixes to the
      progress bar CSS.
-  4. index.html: replaces statusElement.innerHTML with textContent.
-  5. index.html: replaces the default listener script block with one that
+  5. index.html: replaces statusElement.innerHTML with textContent.
+  6. index.html: replaces the default listener script block with one that
      blocks arrow-key scrolling and adds pointer capture with edge projection.
-  6. Deletes index-debug.html and index-nosplash.html.
+  7. Deletes index-debug.html and index-nosplash.html.
 
 Usage:
   python html5_build_patcher.py            Patch every build under ../site.
@@ -57,6 +61,9 @@ PROGRESS_CSS_MOZ_MARKER = "-moz-appearance: none;"
 TEXT_CONTENT_MARKER = "statusElement.textContent"
 ENHANCED_SCRIPT_MARKER = "function edgeProject("
 
+IDBFS_GET_DB = "getDB:function(name,callback){"
+IDBFS_PER_BUILD_NAME = 'name=location.pathname.replace(/\\/[^\\/]*$/,"")+name;'
+
 
 def patch_blur_callback(js_content: str) -> tuple[str, str]:
     """Remove the blur callback registration from _emscripten_set_blur_callback_on_thread."""
@@ -69,6 +76,17 @@ def patch_blur_callback(js_content: str) -> tuple[str, str]:
         return modified, APPLIED
 
     return js_content, FAILED
+
+
+def patch_documents_db_name(js_content: str) -> tuple[str, str]:
+    """Prefix the IDBFS database name with the page's folder path."""
+    if IDBFS_GET_DB + IDBFS_PER_BUILD_NAME in js_content:
+        return js_content, ALREADY
+
+    if js_content.count(IDBFS_GET_DB) != 1:
+        return js_content, FAILED
+
+    return js_content.replace(IDBFS_GET_DB, IDBFS_GET_DB + IDBFS_PER_BUILD_NAME), APPLIED
 
 
 def patch_printerr_alert(content: str) -> tuple[str, str]:
@@ -283,26 +301,38 @@ def patch_inject_scripts(content: str) -> tuple[str, str]:
     return content, FAILED
 
 
-def patch_bin(bin_path: Path) -> str:
-    """Patch the .js inside a .bin archive. Rewrites the archive only on APPLIED."""
+def patch_bin(bin_path: Path) -> list[tuple[str, str]]:
+    """Apply the .js patches inside a .bin archive. Rewrites the archive only when content changed."""
+    patches = [
+        ("blur callback removal", patch_blur_callback),
+        ("per-build documents database", patch_documents_db_name),
+    ]
+
     js_name = bin_path.stem + ".js"
 
     with zipfile.ZipFile(bin_path, "r") as zip_ref:
         names = zip_ref.namelist()
         if js_name not in names:
-            return FAILED
+            return [(name, FAILED) for name, _ in patches]
         members = {name: zip_ref.read(name) for name in names}
 
     js_content = members[js_name].decode("utf-8")
-    modified, status = patch_blur_callback(js_content)
 
-    if status == APPLIED:
-        members[js_name] = modified.encode("utf-8")
+    results = []
+    changed = False
+    for name, fn in patches:
+        js_content, status = fn(js_content)
+        results.append((name, status))
+        if status == APPLIED:
+            changed = True
+
+    if changed:
+        members[js_name] = js_content.encode("utf-8")
         with zipfile.ZipFile(bin_path, "w", zipfile.ZIP_DEFLATED) as zip_ref:
             for name in names:
                 zip_ref.writestr(name, members[name])
 
-    return status
+    return results
 
 
 def patch_index_html(index_path: Path) -> list[tuple[str, str]]:
@@ -430,7 +460,7 @@ def patch_build(bin_path: Path) -> list[tuple[str, str]]:
     """Patch one build and return every patch's (name, status)."""
     build_dir = bin_path.parent
 
-    results = [("blur callback removal", patch_bin(bin_path))]
+    results = patch_bin(bin_path)
     results.extend(patch_index_html(build_dir / "index.html"))
     results.append(("debug HTML cleanup", delete_unused_html(build_dir)))
 
