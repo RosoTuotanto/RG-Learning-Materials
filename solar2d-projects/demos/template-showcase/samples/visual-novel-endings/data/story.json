@@ -1,0 +1,42 @@
+[
+	{
+		"title": "Opening",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-endings/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nYou're late. Again.\n<<speaker, Detective>>\nThe city kept me up.\n<<speaker, Secretary>>\nThe city doesn't pay rent. The landlord came by twice.\n<<speaker, Detective>>\nHow much do we have?\n<<speaker, Secretary>>\nEnough for the phone bill or the light bill. Pick one.\n<<speaker, Detective>>\nKeep the phone. I can work in the dark.\n<<speaker, Secretary>>\nGood. Because the phone rang at eight. Vivian Ash.\n<<speaker, Detective>>\nThe Vivian Ash? Hill money?\n<<speaker, Secretary>>\nSomeone stole her gem last night. The Crimson Heart. She wants us on it today.\n<<speaker, Detective>>\nWhy us?\n<<speaker, Secretary>>\nShe asked for someone discreet. I think she meant cheap.\nAnd there's a man on the stairs who says he's your lawyer.\n<<speaker, Detective>>\nI don't have a lawyer.\n<<speaker, Secretary>>\nHe says that's your problem. He's been knocking for ten minutes.\n<<character, hide, secretary>>\n<<character, show, jimmy, x = 680>>\n<<speaker>>\nThe door opens. A man in a bright checked suit is already holding out a business card.\n<<speaker, Jimmy>>\nFirst consultation is free. Second one is also free. I'm running a promotion.\nBefore the cops tell you anything about me, you hear it from me. I have something you need and nothing I want to keep.\n[[Hear him out|HearHimOut]]\n[[Throw him out|ThrowHimOut]]"
+	},
+	{
+		"title": "HearHimOut",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-endings/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, jimmy, x = 680>>\n<<speaker, Jimmy>>\nPawn ticket. Kessler Loans on Dock Street, number 4471, made out to Mrs. V. Ash.\nShe pawned the Crimson Heart herself yesterday morning. I phoned ahead for her. I thought it was a short loan for a lady.\nLast night she gave me the box, the key and this ticket to get rid of. Two hours later she called the police.\n<<speaker, Detective>>\nYesterday morning. Funny time to pawn a gem that was stolen last night.\n<<speaker, Jimmy>>\nAnd my card is on her hall table. I'm a lawyer. I know when someone is setting me up.\n<<character, hide, jimmy>>\n<<speaker>>\nJimmy leaves. A minute later Vivian Ash walks in without knocking.\n<<jump, VivianOffer>>"
+	},
+	{
+		"title": "ThrowHimOut",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-endings/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, jimmy, x = 680>>\n<<speaker, Detective>>\nOut. I can't afford a lawyer.\n<<character, hide, jimmy>>\n<<speaker>>\nJimmy leaves a card on the desk and goes. Five minutes later the phone rings.\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nIt's the commissioner. For you.\n<<speaker, \"Commissioner Briggs\">>\nThe lawyer was seen going into your building. Where is he now?\nNine o'clock. After that it's my case and I close it my way.\n[[Give Briggs the lawyer|ClosedByNine]]\n[[Go after Jimmy|GoAfterJimmy]]"
+	},
+	{
+		"title": "GoAfterJimmy",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-endings/assets/images/office_exterior.png\">>\n<<character, show, detective, x = 300, xScale = -1>>\n<<character, show, jimmy, x = 680>>\n<<speaker>>\nJimmy is still on the sidewalk, handing a card to a man at the bus stop.\n<<speaker, Jimmy>>\nChanged your mind? Smart. Here.\nPawn ticket. Kessler Loans on Dock Street, number 4471. Mrs. Ash pawned the gem herself yesterday morning.\nI arranged the loan. She arranged for my card to be on her hall table.\n<<speaker, Detective>>\nYesterday morning. Funny time to pawn a gem that was stolen last night.\n<<character, hide, jimmy>>\n<<speaker>>\nBack upstairs, Vivian Ash is waiting in the client chair.\n<<jump, VivianOffer>>"
+	},
+	{
+		"title": "VivianOffer",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-endings/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, \"Vivian Ash\">>\nI asked for someone discreet. You look wonderfully discreet.\nTwo hundred for you, darling, if that lawyer is in a cell by tonight.\n[[Take her money|PaidInFull]]\n[[Show her the ticket|PawnTicket]]"
+	},
+	{
+		"title": "PawnTicket",
+		"tags": "",
+		"body": "<<ending, pawnTicket>>\n<<img, \"samples/visual-novel-endings/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Detective>>\nBriggs got the ticket. Kessler got a visit. The Crimson Heart went back to the insurance company.\nMrs. Ash got charged. Jimmy got a thank-you he'll frame. We got a reward big enough for the rent.\n<<speaker, Secretary>>\nThree months paid. Don't get used to it."
+	},
+	{
+		"title": "PaidInFull",
+		"tags": "",
+		"body": "<<ending, paidInFull>>\n<<img, \"samples/visual-novel-endings/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Detective>>\nI took her money. Briggs took Jimmy. The ticket went in my bottom drawer.\n<<speaker, Secretary>>\nThe rent is paid. You haven't said a word since.\n<<speaker, Detective>>\nSome mornings the city keeps me up. Now I know why."
+	},
+	{
+		"title": "ClosedByNine",
+		"tags": "",
+		"body": "<<ending, closedByNine>>\n<<img, \"samples/visual-novel-endings/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Detective>>\nBriggs had his lawyer at nine and his headline at ten.\nThey let Jimmy go a week later for lack of evidence. He sent me a bill for his time.\n<<speaker, Secretary>>\nMrs. Ash sent flowers. And somewhere on Dock Street a red stone is still waiting."
+	}
+]

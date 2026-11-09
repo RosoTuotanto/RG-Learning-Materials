@@ -1,0 +1,12 @@
+{
+	"jump": [
+		{"wave": "square", "start": 300, "end": 600, "duration": 0.1, "volume": 0.12}
+	],
+	"dash": [
+		{"wave": "noise", "start": 2400, "end": 700, "duration": 0.14, "volume": 0.16, "attack": 0.01, "release": 0.06}
+	],
+	"spike": [
+		{"wave": "square", "start": 520, "end": 140, "duration": 0.18, "volume": 0.13},
+		{"wave": "noise", "start": 600, "end": 200, "duration": 0.08, "volume": 0.12}
+	]
+}

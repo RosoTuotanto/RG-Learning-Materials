@@ -1,0 +1,16 @@
+{
+	"jump": [
+		{"wave": "square", "start": 280, "end": 560, "duration": 0.11, "volume": 0.14}
+	],
+	"coin": [
+		{"wave": "square", "start": 988, "duration": 0.05, "volume": 0.1, "release": 0.01},
+		{"wave": "square", "start": 1319, "duration": 0.16, "volume": 0.1}
+	],
+	"stomp": [
+		{"wave": "noise", "start": 900, "end": 200, "duration": 0.06, "volume": 0.22},
+		{"wave": "triangle", "start": 220, "end": 90, "duration": 0.1, "volume": 0.3}
+	],
+	"hurt": [
+		{"wave": "square", "start": 440, "end": 160, "duration": 0.22, "volume": 0.14}
+	]
+}

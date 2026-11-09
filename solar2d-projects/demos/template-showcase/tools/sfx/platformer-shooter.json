@@ -1,0 +1,11 @@
+{
+	"shoot": [
+		{"wave": "square", "start": 1100, "end": 520, "duration": 0.06, "volume": 0.07, "release": 0.015}
+	],
+	"turretShot": [
+		{"wave": "triangle", "start": 520, "end": 260, "duration": 0.09, "volume": 0.12}
+	],
+	"hit": [
+		{"wave": "noise", "start": 1400, "end": 300, "duration": 0.07, "volume": 0.16}
+	]
+}

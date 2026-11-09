@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="13" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="49">
+ <editorsettings>
+  <export target="level.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" spacing="4" margin="2" tilecount="20" columns="5">
+  <image source="images/tileset.png" width="180" height="144"/>
+  <tile id="0" type="bed"/>
+  <tile id="1" type="cap"/>
+  <tile id="2" type="cap_end_e"/>
+  <tile id="3" type="cap_end_w"/>
+  <tile id="4" type="cap_ne"/>
+  <tile id="5" type="cap_nw"/>
+  <tile id="6" type="cap_se"/>
+  <tile id="7" type="cap_side"/>
+  <tile id="8" type="cap_sw"/>
+  <tile id="9" type="fence_post"/>
+  <tile id="10" type="fence_rail"/>
+  <tile id="11" type="fence_side_e"/>
+  <tile id="12" type="fence_side_w"/>
+  <tile id="13" type="floor"/>
+  <tile id="14" type="grass"/>
+  <tile id="15" type="pine_bottom"/>
+  <tile id="16" type="pine_top"/>
+  <tile id="17" type="wall"/>
+ </tileset>
+ <layer id="1" name="ground" width="20" height="13">
+  <data encoding="csv">
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,14,14,14,14,14,14,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,14,14,14,14,14,14,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,14,14,14,14,14,14,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,14,14,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15
+</data>
+ </layer>
+ <layer id="2" name="tiles" width="20" height="13">
+  <data encoding="csv">
+17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+13,0,6,2,2,2,2,2,2,5,0,0,0,0,0,0,0,0,0,12,
+13,0,8,18,18,18,18,18,18,8,0,0,0,0,0,0,0,0,0,12,
+13,0,8,1,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,12,
+13,0,8,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,12,
+13,0,8,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,12,
+13,0,9,2,3,0,0,4,2,7,0,0,0,0,0,0,0,0,0,12,
+13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,
+10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,10
+</data>
+ </layer>
+ <objectgroup id="3" name="physics" visible="0">
+  <object id="1" type="wall" x="0" y="0" width="640" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="2" type="wall" x="0" y="64" width="32" height="320">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="3" type="wall" x="64" y="64" width="256" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="4" type="wall" x="608" y="64" width="32" height="320">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="5" type="wall" x="64" y="128" width="64" height="32">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="6" type="wall" x="288" y="128" width="32" height="96">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="7" type="wall" x="64" y="160" width="32" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="8" type="wall" x="64" y="224" width="96" height="32">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="9" type="wall" x="224" y="224" width="96" height="32">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="10" type="wall" x="0" y="384" width="640" height="32">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="game" visible="0">
+  <object id="11" name="player" type="player" x="208" y="272">
+   <point/>
+  </object>
+  <object id="12" name="field" type="field" x="400" y="144">
+   <point/>
+  </object>
+  <object id="13" name="field" type="field" x="432" y="144">
+   <point/>
+  </object>
+  <object id="14" name="field" type="field" x="464" y="144">
+   <point/>
+  </object>
+  <object id="15" name="field" type="field" x="496" y="144">
+   <point/>
+  </object>
+  <object id="16" name="field" type="field" x="528" y="144">
+   <point/>
+  </object>
+  <object id="17" name="field" type="field" x="560" y="144">
+   <point/>
+  </object>
+  <object id="18" name="field" type="field" x="400" y="176">
+   <point/>
+  </object>
+  <object id="19" name="field" type="field" x="432" y="176">
+   <point/>
+  </object>
+  <object id="20" name="field" type="field" x="464" y="176">
+   <point/>
+  </object>
+  <object id="21" name="field" type="field" x="496" y="176">
+   <point/>
+  </object>
+  <object id="22" name="field" type="field" x="528" y="176">
+   <point/>
+  </object>
+  <object id="23" name="field" type="field" x="560" y="176">
+   <point/>
+  </object>
+  <object id="24" name="field" type="field" x="400" y="208">
+   <point/>
+  </object>
+  <object id="25" name="field" type="field" x="432" y="208">
+   <point/>
+  </object>
+  <object id="26" name="field" type="field" x="464" y="208">
+   <point/>
+  </object>
+  <object id="27" name="field" type="field" x="496" y="208">
+   <point/>
+  </object>
+  <object id="28" name="field" type="field" x="528" y="208">
+   <point/>
+  </object>
+  <object id="29" name="field" type="field" x="560" y="208">
+   <point/>
+  </object>
+  <object id="30" name="field" type="field" x="400" y="240">
+   <point/>
+  </object>
+  <object id="31" name="field" type="field" x="432" y="240">
+   <point/>
+  </object>
+  <object id="32" name="field" type="field" x="464" y="240">
+   <point/>
+  </object>
+  <object id="33" name="field" type="field" x="496" y="240">
+   <point/>
+  </object>
+  <object id="34" name="field" type="field" x="528" y="240">
+   <point/>
+  </object>
+  <object id="35" name="field" type="field" x="560" y="240">
+   <point/>
+  </object>
+  <object id="36" name="field" type="field" x="400" y="272">
+   <point/>
+  </object>
+  <object id="37" name="field" type="field" x="432" y="272">
+   <point/>
+  </object>
+  <object id="38" name="field" type="field" x="464" y="272">
+   <point/>
+  </object>
+  <object id="39" name="field" type="field" x="496" y="272">
+   <point/>
+  </object>
+  <object id="40" name="field" type="field" x="528" y="272">
+   <point/>
+  </object>
+  <object id="41" name="field" type="field" x="560" y="272">
+   <point/>
+  </object>
+  <object id="42" name="field" type="field" x="400" y="304">
+   <point/>
+  </object>
+  <object id="43" name="field" type="field" x="432" y="304">
+   <point/>
+  </object>
+  <object id="44" name="field" type="field" x="464" y="304">
+   <point/>
+  </object>
+  <object id="45" name="field" type="field" x="496" y="304">
+   <point/>
+  </object>
+  <object id="46" name="field" type="field" x="528" y="304">
+   <point/>
+  </object>
+  <object id="47" name="field" type="field" x="560" y="304">
+   <point/>
+  </object>
+  <object id="48" name="bed" type="bed" x="112" y="144">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,13 @@
+{
+	"jump": [
+		{"wave": "square", "start": 300, "end": 600, "duration": 0.1, "volume": 0.1}
+	],
+	"dash": [
+		{"wave": "noise", "start": 2400, "end": 700, "duration": 0.16, "volume": 0.14, "attack": 0.01, "release": 0.06}
+	],
+	"pickup": [
+		{"wave": "triangle", "start": 660, "duration": 0.08, "volume": 0.2, "gap": 0.02},
+		{"wave": "triangle", "start": 880, "duration": 0.08, "volume": 0.2, "gap": 0.02},
+		{"wave": "triangle", "start": 1320, "duration": 0.22, "volume": 0.2, "release": 0.12}
+	]
+}

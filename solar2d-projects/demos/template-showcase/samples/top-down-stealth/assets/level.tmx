@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="23" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="26">
+ <editorsettings>
+  <export target="level.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" spacing="4" margin="2" tilecount="20" columns="5">
+  <image source="images/tileset.png" width="180" height="144"/>
+  <tile id="0" type="barrel"/>
+  <tile id="1" type="bookshelf"/>
+  <tile id="2" type="cap"/>
+  <tile id="3" type="cap_end_e"/>
+  <tile id="4" type="cap_end_w"/>
+  <tile id="5" type="cap_ne"/>
+  <tile id="6" type="cap_nw"/>
+  <tile id="7" type="cap_se"/>
+  <tile id="8" type="cap_side"/>
+  <tile id="9" type="cap_sw"/>
+  <tile id="10" type="crate"/>
+  <tile id="11" type="door"/>
+  <tile id="12" type="floor"/>
+  <tile id="13" type="plant"/>
+  <tile id="14" type="wall"/>
+  <tile id="15" type="wall_left"/>
+  <tile id="16" type="wall_right"/>
+ </tileset>
+ <layer id="1" name="ground" width="23" height="16">
+  <data encoding="csv">
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
+13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13
+</data>
+ </layer>
+ <layer id="2" name="tiles" width="23" height="16">
+  <data encoding="csv">
+7,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,6,
+9,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,12,15,15,15,9,
+9,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,9,
+9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
+9,0,0,0,0,0,11,11,0,0,0,0,0,0,0,1,0,0,0,0,0,0,9,
+9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
+9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
+9,0,0,0,5,3,3,3,3,3,4,0,0,0,5,3,3,3,3,3,4,0,9,
+9,0,0,0,16,15,15,15,15,15,17,0,0,0,16,15,15,15,15,15,17,0,9,
+9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
+9,0,0,1,0,0,0,0,0,0,11,11,0,0,0,0,0,0,1,0,0,0,9,
+9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
+9,0,0,0,0,11,11,0,0,0,0,0,0,1,1,0,0,0,0,11,0,0,9,
+9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,
+9,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,9,
+10,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,8
+</data>
+ </layer>
+ <objectgroup id="3" name="physics" visible="0">
+  <object id="1" type="wall" x="0" y="0" width="736" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="2" type="wall" x="0" y="32" width="576" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="3" type="wall" x="608" y="32" width="128" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="4" type="wall" x="0" y="64" width="96" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="5" type="wall" x="672" y="64" width="64" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="6" type="wall" x="0" y="96" width="32" height="352">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="7" type="wall" x="704" y="96" width="32" height="352">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="8" type="wall" x="192" y="128" width="64" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="9" type="wall" x="480" y="128" width="32" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="10" type="wall" x="128" y="224" width="224" height="64">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="11" type="wall" x="448" y="224" width="224" height="64">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="12" type="wall" x="96" y="320" width="32" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="13" type="wall" x="320" y="320" width="64" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="14" type="wall" x="576" y="320" width="32" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="15" type="wall" x="160" y="384" width="64" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="16" type="wall" x="416" y="384" width="64" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="17" type="wall" x="608" y="384" width="32" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="18" type="wall" x="0" y="448" width="64" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="19" type="wall" x="672" y="448" width="64" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="20" type="wall" x="0" y="480" width="736" height="32">
+   <properties>
+    <property name="blocksSight" type="bool" value="true"/>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="game" visible="0">
+  <object id="21" name="player" type="player" x="80" y="432">
+   <point/>
+  </object>
+  <object id="22" name="door" type="door" x="592" y="48">
+   <point/>
+  </object>
+  <object id="23" name="guard" type="guard" x="112" y="368">
+   <polyline points="0,0 512,0"/>
+  </object>
+  <object id="24" name="guard" type="guard" x="112" y="112">
+   <polyline points="0,0 256,0 256,64 0,64"/>
+  </object>
+  <object id="25" name="guard" type="guard" x="656" y="208">
+   <polyline points="0,0 -192,0 -192,-96 0,-96"/>
+  </object>
+ </objectgroup>
+</map>

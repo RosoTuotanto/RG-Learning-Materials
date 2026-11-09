@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="80" height="18" tilewidth="36" tileheight="36" infinite="0" nextlayerid="4" nextobjectid="34">
+ <editorsettings>
+  <export target="level.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="tilemap" tilewidth="36" tileheight="36" tilecount="64" columns="8">
+  <image source="images/tilemap.png" width="288" height="288"/>
+ </tileset>
+ <layer id="1" name="level" width="80" height="18">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,11,12,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,11,11,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,14,51,52,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,51,51,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,14,51,51,52,0,0,0,0,0,0,0,0,50,
+13,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,0,0,0,10,11,14,51,51,13,11,11,11,11,11,11,11,11,11,11,11,11,11,11,14,11,11,12,0,0,0,10,11,11,11,11,11,11,11,11,12,0,0,10,11,11,14,51,51,51,13,11,11,11,11,11,11,11,11,14,
+51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,52,0,0,0,50,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,52,0,0,0,50,51,51,51,51,51,51,51,51,52,0,0,50,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,
+51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,52,0,0,0,50,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,52,0,0,0,50,51,51,51,51,51,51,51,51,52,0,0,50,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51
+</data>
+ </layer>
+ <objectgroup id="2" name="physics" visible="0">
+  <object id="1" type="ground" x="0" y="252">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 36,0 36,288 756,288 756,396 0,396"/>
+  </object>
+  <object id="2" type="ground" x="2844" y="252">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 36,0 36,396 -576,396 -576,288 -468,288 -468,252 -432,252 -432,216 -396,216 -396,180 -288,180 -288,288 0,288"/>
+  </object>
+  <object id="3" type="ground" x="1152" y="432" width="144" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="4" type="ground" x="936" y="468">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 144,0 144,72 648,72 648,0 684,0 684,72 792,72 792,180 -72,180 -72,72 0,72"/>
+  </object>
+  <object id="5" type="ground" x="1836" y="540" width="360" height="108">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="game">
+  <object id="6" name="player" type="player" x="126" y="516">
+   <point/>
+  </object>
+  <object id="7" name="enemy" type="enemy" x="1026" y="444">
+   <point/>
+  </object>
+  <object id="8" name="enemy" type="enemy" x="486" y="516">
+   <point/>
+  </object>
+  <object id="9" name="enemy" type="enemy" x="1422" y="516">
+   <point/>
+  </object>
+  <object id="10" name="enemy" type="enemy" x="2070" y="516">
+   <point/>
+  </object>
+  <object id="11" name="enemy" type="enemy" x="2682" y="516">
+   <point/>
+  </object>
+  <object id="12" name="block" type="block" x="306" y="414">
+   <point/>
+  </object>
+  <object id="13" name="block" type="block" x="558" y="414">
+   <point/>
+  </object>
+  <object id="14" name="block" type="block" x="666" y="414">
+   <point/>
+  </object>
+  <object id="15" name="block" type="block" x="1962" y="414">
+   <point/>
+  </object>
+  <object id="16" name="block" type="block" x="2070" y="414">
+   <point/>
+  </object>
+  <object id="17" name="coin" type="coin" x="1170" y="342">
+   <point/>
+  </object>
+  <object id="18" name="coin" type="coin" x="1206" y="342">
+   <point/>
+  </object>
+  <object id="19" name="coin" type="coin" x="1242" y="342">
+   <point/>
+  </object>
+  <object id="20" name="coin" type="coin" x="1278" y="342">
+   <point/>
+  </object>
+  <object id="21" name="coin" type="coin" x="2502" y="342">
+   <point/>
+  </object>
+  <object id="22" name="coin" type="coin" x="2538" y="342">
+   <point/>
+  </object>
+  <object id="23" name="coin" type="coin" x="378" y="378">
+   <point/>
+  </object>
+  <object id="24" name="coin" type="coin" x="414" y="378">
+   <point/>
+  </object>
+  <object id="25" name="coin" type="coin" x="450" y="378">
+   <point/>
+  </object>
+  <object id="26" name="coin" type="coin" x="990" y="378">
+   <point/>
+  </object>
+  <object id="27" name="coin" type="coin" x="1026" y="378">
+   <point/>
+  </object>
+  <object id="28" name="coin" type="coin" x="612" y="414">
+   <point/>
+  </object>
+  <object id="29" name="coin" type="coin" x="2016" y="414">
+   <point/>
+  </object>
+  <object id="30" name="coin" type="coin" x="1782" y="450">
+   <point/>
+  </object>
+  <object id="31" name="coin" type="coin" x="2214" y="450">
+   <point/>
+  </object>
+  <object id="32" name="coin" type="coin" x="2250" y="450">
+   <point/>
+  </object>
+  <object id="33" name="flag" type="flag" x="2754" y="522">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

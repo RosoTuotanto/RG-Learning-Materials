@@ -1,0 +1,10 @@
+{
+	"lap": [
+		{"wave": "square", "start": 523, "duration": 0.09, "volume": 0.1, "gap": 0.02},
+		{"wave": "square", "start": 659, "duration": 0.09, "volume": 0.1, "gap": 0.02},
+		{"wave": "square", "start": 784, "duration": 0.2, "volume": 0.1, "release": 0.08}
+	],
+	"bump": [
+		{"wave": "noise", "start": 420, "end": 120, "duration": 0.12, "volume": 0.14, "release": 0.05, "seed": 3}
+	]
+}

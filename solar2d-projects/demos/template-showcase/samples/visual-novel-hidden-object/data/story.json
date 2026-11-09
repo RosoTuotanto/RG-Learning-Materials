@@ -1,0 +1,42 @@
+[
+	{
+		"title": "Opening",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-hidden-object/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nYou're late. Again.\n<<speaker, Detective>>\nThe city kept me up.\n<<speaker, Secretary>>\nThe city doesn't pay rent. The landlord came by twice.\n<<speaker, Detective>>\nHow much do we have?\n<<speaker, Secretary>>\nEnough for the phone bill or the light bill. Pick one.\n<<speaker, Detective>>\nKeep the phone. I can work in the dark.\n<<speaker, Secretary>>\nGood. Because the phone rang at eight. Vivian Ash.\n<<speaker, Detective>>\nThe Vivian Ash? Hill money?\n<<speaker, Secretary>>\nSomeone stole her gem last night. The Crimson Heart. She wants us on it today.\n<<speaker, Detective>>\nWhy us?\n<<speaker, Secretary>>\nShe asked for someone discreet. I think she meant cheap.\nOne more thing. Somebody was in here last night. The drawers were open when I came in.\n<<speaker, Detective>>\nAnything missing?\n<<speaker, Secretary>>\nNothing missing. But there are things in here that aren't ours. Have a look.\n<<character, hide, detective>>\n<<character, hide, secretary>>\n<<search>>"
+	},
+	{
+		"title": "clueMatchbook",
+		"tags": "",
+		"body": "<<speaker, Detective>>\nMae's. Somebody needed light in here and didn't want the lamp on.\n<<search>>"
+	},
+	{
+		"title": "cluePhoto",
+		"tags": "",
+		"body": "<<speaker, Detective>>\nA bank notice on a rich woman's door. That's a rich woman with a problem.\n<<search>>"
+	},
+	{
+		"title": "clueKey",
+		"tags": "",
+		"body": "<<speaker, Detective>>\nNot my key. Not my coat pocket's usual company either.\n<<search>>"
+	},
+	{
+		"title": "clueTicket",
+		"tags": "",
+		"body": "<<speaker, Detective>>\nYesterday morning. Funny time to pawn a gem that was stolen last night.\n<<search>>"
+	},
+	{
+		"title": "clueCard",
+		"tags": "",
+		"body": "<<speaker, Detective>>\nJimmy leaves these everywhere. This time he left one at a break-in.\n<<search>>"
+	},
+	{
+		"title": "clueBox",
+		"tags": "",
+		"body": "<<speaker, Detective>>\nA thief takes the stone and leaves the box. Somebody packed this.\n<<search>>"
+	},
+	{
+		"title": "Closing",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Detective>>\nHer box. Her key. A pawn ticket in her name. And Jimmy's card on top.\n<<speaker, Secretary>>\nSo a burglar broke into our office to leave us presents.\n<<speaker, Detective>>\nNot a burglar. Somebody who wanted these found. Just not on him.\n<<speaker, Secretary>>\nAnd Mrs. Ash?\n<<speaker, Detective>>\nMrs. Ash wasn't robbed. Get my hat. We're going to Dock Street."
+	}
+]

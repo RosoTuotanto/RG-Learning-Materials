@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="54" height="22" tilewidth="36" tileheight="36" infinite="0" nextlayerid="4" nextobjectid="16">
+ <editorsettings>
+  <export target="level.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="tilemap" tilewidth="36" tileheight="36" tilecount="64" columns="8">
+  <image source="images/tilemap.png" width="288" height="288"/>
+ </tileset>
+ <layer id="1" name="level" width="54" height="22">
+  <data encoding="csv">
+5,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,6,5,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,59,6,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,60,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,3,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,2,3,3,3,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,3,3,14,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+13,3,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,3,3,3,3,4,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,3,3,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,2,3,3,3,4,0,0,0,0,0,0,10,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,3,3,4,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,
+13,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,14,13,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,14,
+51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51
+</data>
+ </layer>
+ <objectgroup id="2" name="physics" visible="0">
+  <object id="1" type="ground" x="0" y="0">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 1944,0 1944,792 0,792"/>
+  </object>
+  <object id="2" type="ground" x="36" y="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 0,468 144,468 144,504 0,504 0,684 576,684 576,576 648,576 648,684 1872,684 1872,396 1656,396 1656,360 1872,360 1872,0 1260,0 1260,288 1188,288 1188,0"/>
+  </object>
+  <object id="3" type="ground" x="864" y="360" width="288" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="4" type="ground" x="252" y="396" width="252" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="5" type="ground" x="612" y="468" width="180" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="6" type="ground" x="1260" y="504" width="324" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="7" type="ground" x="828" y="576" width="324" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="8" type="ground" x="216" y="612" width="180" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="9" type="ground" x="1620" y="612" width="180" height="36">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="bounce" type="float" value="0"/>
+    <property name="friction" type="float" value="0.3"/>
+    <property name="isGround" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="game">
+  <object id="10" name="player" type="player" x="90" y="696">
+   <point/>
+  </object>
+  <object id="11" name="turret" type="turret" x="1062" y="342">
+   <point/>
+  </object>
+  <object id="12" name="turret" type="turret" x="414" y="378">
+   <point/>
+  </object>
+  <object id="13" name="turret" type="turret" x="1818" y="378">
+   <point/>
+  </object>
+  <object id="14" name="turret" type="turret" x="1494" y="486">
+   <point/>
+  </object>
+  <object id="15" name="turret" type="turret" x="990" y="558">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

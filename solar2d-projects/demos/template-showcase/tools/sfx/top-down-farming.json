@@ -1,0 +1,12 @@
+{
+	"dig": [
+		{"wave": "noise", "start": 900, "end": 250, "duration": 0.09, "volume": 0.12, "release": 0.04}
+	],
+	"water": [
+		{"wave": "noise", "start": 3200, "end": 1800, "duration": 0.22, "volume": 0.08, "attack": 0.03, "release": 0.12}
+	],
+	"harvest": [
+		{"wave": "triangle", "start": 587, "duration": 0.07, "volume": 0.2, "release": 0.01},
+		{"wave": "triangle", "start": 880, "duration": 0.16, "volume": 0.2}
+	]
+}

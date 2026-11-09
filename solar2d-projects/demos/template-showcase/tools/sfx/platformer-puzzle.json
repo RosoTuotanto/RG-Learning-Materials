@@ -1,0 +1,12 @@
+{
+	"switch": [
+		{"wave": "square", "start": 1100, "end": 700, "duration": 0.04, "volume": 0.09, "release": 0.015}
+	],
+	"door": [
+		{"wave": "noise", "start": 320, "end": 110, "duration": 0.22, "volume": 0.13, "attack": 0.02, "release": 0.08}
+	],
+	"key": [
+		{"wave": "sine", "start": 880, "duration": 0.06, "volume": 0.16, "gap": 0.02},
+		{"wave": "sine", "start": 1320, "duration": 0.14, "volume": 0.16, "release": 0.06}
+	]
+}

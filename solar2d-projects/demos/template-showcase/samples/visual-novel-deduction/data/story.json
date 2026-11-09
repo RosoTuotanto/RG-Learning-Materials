@@ -1,0 +1,27 @@
+[
+	{
+		"title": "Opening",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-deduction/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nYou're late. Again.\n<<speaker, Detective>>\nThe city kept me up.\n<<speaker, Secretary>>\nThe city doesn't pay rent. The landlord came by twice.\n<<speaker, Detective>>\nHow much do we have?\n<<speaker, Secretary>>\nEnough for the phone bill or the light bill. Pick one.\n<<speaker, Detective>>\nKeep the phone. I can work in the dark.\n<<speaker, Secretary>>\nGood. Because the phone rang at eight. Vivian Ash.\n<<speaker, Detective>>\nThe Vivian Ash? Hill money?\n<<speaker, Secretary>>\nSomeone stole her gem last night. The Crimson Heart. She wants us on it today.\n<<speaker, Detective>>\nWhy us?\n<<speaker, Secretary>>\nShe asked for someone discreet. I think she meant cheap.\nI pinned up everything we have. Half of it turned up in this office last night.\n<<speaker, Detective>>\nThen let's see who it points at.\n<<speaker, Secretary>>\nBriggs wants a name by tonight. Give him the right one.\n<<jump, Board>>"
+	},
+	{
+		"title": "Board",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-deduction/assets/images/corkboard.png\">>\n<<board>>"
+	},
+	{
+		"title": "VerdictRight",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-deduction/assets/images/corkboard.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<speaker, Detective>>\nVivian Ash pawned her own gem and called it a theft. The photo is her motive. The key and the ticket are her proof.\nJimmy carried the box and stayed quiet too long. Mae saw the handover.\n<<character, show, commissioner, x = 680>>\n<<speaker, \"Commissioner Briggs\">>\nThe insurance company is going to love you. I'm going to pretend this was my idea."
+	},
+	{
+		"title": "VerdictPartlyRight",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-deduction/assets/images/corkboard.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<speaker, Detective>>\nThe ticket puts the gem in a pawnshop under her name. The rest I can't explain.\n<<character, show, commissioner, x = 680>>\n<<speaker, \"Commissioner Briggs\">>\nThen I'll take the lady and the lawyer both and let the judge sort it out.\n<<character, hide, commissioner>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nJimmy spends a night in a cell for helping. Next time finish the board."
+	},
+	{
+		"title": "VerdictWrong",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-deduction/assets/images/corkboard.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<speaker, Detective>>\nIt has to be the lawyer.\n<<character, show, commissioner, x = 680>>\n<<speaker, \"Commissioner Briggs\">>\nFinally someone agrees with me. We pick him up at nine.\n<<character, hide, commissioner>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nMrs. Ash sent flowers. They're very expensive. I hate them."
+	}
+]

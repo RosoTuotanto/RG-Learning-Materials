@@ -1,0 +1,5 @@
+[
+	{ "title": "Start", "body": "Hello.\n<<stat, money, -10>>\n[[Go on->Middle]]\n[[Nowhere]]", "tags": "" },
+	{ "title": "Middle", "body": "<<found, matchbook\nBroken command above.", "tags": "" },
+	{ "title": "Notes", "body": "[[Missing in a comment]]", "tags": "comment" }
+]

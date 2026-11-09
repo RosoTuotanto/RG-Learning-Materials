@@ -1,0 +1,11 @@
+{
+	"spotted": [
+		{"wave": "square", "start": 660, "duration": 0.07, "volume": 0.12, "release": 0.01},
+		{"wave": "square", "start": 990, "duration": 0.18, "volume": 0.12}
+	],
+	"escaped": [
+		{"wave": "triangle", "start": 523, "duration": 0.09, "volume": 0.22, "release": 0.01},
+		{"wave": "triangle", "start": 659, "duration": 0.09, "volume": 0.22, "release": 0.01},
+		{"wave": "triangle", "start": 784, "duration": 0.24, "volume": 0.22}
+	]
+}

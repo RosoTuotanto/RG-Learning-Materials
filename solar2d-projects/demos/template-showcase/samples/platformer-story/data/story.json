@@ -1,0 +1,32 @@
+[
+	{
+		"title": "variables",
+		"tags": "options",
+		"body": "{ \"hasPie\": false, \"bridgeDown\": false }"
+	},
+	{
+		"title": "Tilda",
+		"tags": "",
+		"body": "<<if $bridgeDown == true>>\nI heard the bridge. He liked the pie then.\n<<elseif $hasPie == true>>\nBless you. Don't eat it on the way.\n<<else>>\nBram forgot his lunch again. He gets impossible when he's hungry.\nWould you take him this pie? It's still warm.\n[[Take the pie to Bram|TildaTakePie]]\n[[Not right now|TildaNotNow]]\n<<end>>"
+	},
+	{
+		"title": "TildaTakePie",
+		"tags": "",
+		"body": "<<set $hasPie = true>>\nBless you. Don't eat it on the way."
+	},
+	{
+		"title": "TildaNotNow",
+		"tags": "",
+		"body": "It won't stay warm forever. Neither will Bram's patience."
+	},
+	{
+		"title": "Bram",
+		"tags": "",
+		"body": "<<if $bridgeDown == true>>\nBest bridge keeper in the valley. When fed.\n<<elseif $hasPie == true>>\nIs that Tilda's pie? Why didn't you say so!\n<<set $bridgeDown = true>>\n<<lowerBridge>>\nStand back. Bridge coming down. Mind your toes.\n<<else>>\nThe bridge stays up. I don't lower bridges on an empty stomach.\n<<end>>"
+	},
+	{
+		"title": "Pip",
+		"tags": "",
+		"body": "<<if $bridgeDown == true>>\nYou got Bram his pie? Now he'll nap till supper.\n<<else>>\nBram's been grumpy since breakfast. He didn't have breakfast.\n<<end>>"
+	}
+]

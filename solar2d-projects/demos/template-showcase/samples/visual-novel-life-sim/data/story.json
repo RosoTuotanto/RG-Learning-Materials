@@ -1,0 +1,107 @@
+[
+	{
+		"title": "Opening",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nYou're late. Again.\n<<speaker, Detective>>\nThe city kept me up.\n<<speaker, Secretary>>\nThe city doesn't pay rent. The landlord came by twice.\n<<speaker, Detective>>\nHow much do we have?\n<<speaker, Secretary>>\nEnough for the phone bill or the light bill. Pick one.\n<<speaker, Detective>>\nKeep the phone. I can work in the dark.\n<<speaker, Secretary>>\nGood. Because the phone rang at eight. Vivian Ash.\n<<speaker, Detective>>\nThe Vivian Ash? Hill money?\n<<speaker, Secretary>>\nSomeone stole her gem last night. The Crimson Heart. She wants us on it today.\n<<speaker, Detective>>\nWhy us?\n<<speaker, Secretary>>\nShe asked for someone discreet. I think she meant cheap.\nMrs. Ash can wait a day. The landlord can't wait a week.\n<<speaker, Detective>>\nSo what's the plan?\n<<speaker, Secretary>>\nSeven days. Pay the rent and stay on your feet. How you spend them is your business.\n<<jump, Day>>"
+	},
+	{
+		"title": "Day",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<pickAction>>\n<<speaker, Secretary>>\n(either: \"Where to now?\", \"Pick something. The day is short.\", \"The landlord is counting the days. So am I.\")"
+	},
+	{
+		"title": "TakeCase",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<speaker>>\nA shoe shop owner thinks his brother-in-law is stealing from the till.\n[[Watch the till all day|CaseWatchTill]]\n[[Just ask the brother-in-law|CaseAsk]]"
+	},
+	{
+		"title": "CaseWatchTill",
+		"tags": "",
+		"body": "<<stat, money, 15>>\n<<stat, health, -10>>\n<<stat, happiness, -5>>\n<<relation, secretary, 5>>\n<<endAction>>"
+	},
+	{
+		"title": "CaseAsk",
+		"tags": "",
+		"body": "<<stat, money, 5>>\n<<stat, social, 5>>\n<<relation, secretary, -5>>\n<<endAction>>"
+	},
+	{
+		"title": "GoToMaes",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/bar.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, mae, x = 680>>\n<<speaker, Mae>>\nSame as always? Or are you buying news today?\n[[Just a drink|MaeDrink]]\n[[Buy the news|MaeNews]]"
+	},
+	{
+		"title": "MaeDrink",
+		"tags": "",
+		"body": "<<stat, happiness, 10>>\n<<stat, health, -5>>\n<<stat, money, -5>>\n<<relation, mae, 5>>\n<<endAction>>"
+	},
+	{
+		"title": "MaeNews",
+		"tags": "",
+		"body": "<<stat, money, -10>>\n<<stat, social, 10>>\n<<relation, mae, 10>>\n<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, mae, x = 680>>\n<<speaker, Mae>>\nVivian Ash was in here last night. Not alone.\n<<endAction>>"
+	},
+	{
+		"title": "Rest",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<speaker>>\nThe couch in the back room is lumpy. It's still a couch.\n[[Sleep till noon|RestSleep]]\n[[Nap and get back to work|RestNap]]"
+	},
+	{
+		"title": "RestSleep",
+		"tags": "",
+		"body": "<<stat, health, 15>>\n<<stat, happiness, 5>>\n<<relation, secretary, -5>>\n<<endAction>>"
+	},
+	{
+		"title": "RestNap",
+		"tags": "",
+		"body": "<<stat, health, 5>>\n<<stat, money, 5>>\n<<endAction>>"
+	},
+	{
+		"title": "Precinct",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/precinct.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, commissioner, x = 680>>\n<<speaker, \"Commissioner Briggs\">>\nIf you're here to help me close the Ash case then sit down. If not then stand up.\n[[Tell him about Jimmy|PrecinctTell]]\n[[Keep it to yourself|PrecinctKeep]]"
+	},
+	{
+		"title": "PrecinctTell",
+		"tags": "",
+		"body": "<<stat, social, 5>>\n<<relation, briggs, 15>>\n<<relation, jimmy, -20>>\n<<endAction>>"
+	},
+	{
+		"title": "PrecinctKeep",
+		"tags": "",
+		"body": "<<stat, happiness, 5>>\n<<relation, briggs, -10>>\n<<endAction>>"
+	},
+	{
+		"title": "CallOn",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<speaker>>\nTwo people want a word with you today. You have time for one.\n[[Vivian Ash|CallVivian]]\n[[Slippin' Jimmy|CallJimmy]]"
+	},
+	{
+		"title": "CallVivian",
+		"tags": "",
+		"body": "<<stat, money, 15>>\n<<stat, happiness, 5>>\n<<relation, vivian, 10>>\n<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, \"Vivian Ash\">>\nAn advance, darling. Find me a thief.\n<<endAction>>"
+	},
+	{
+		"title": "CallJimmy",
+		"tags": "",
+		"body": "<<stat, social, 10>>\n<<relation, jimmy, 15>>\n<<relation, briggs, -5>>\n<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, jimmy, x = 680>>\n<<speaker, Jimmy>>\nYou came to me. That's growth.\n<<endAction>>"
+	},
+	{
+		"title": "DayEnd",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<speaker, Detective>>\n(either: \"Another day gone. The rent is still due.\", \"Lights off. The light bill is high enough.\", \"My feet hurt. The rent is the same size it was this morning.\")\n<<nextDay>>"
+	},
+	{
+		"title": "RentPaid",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nSeven days and the rent is paid. The landlord even said thank you.\n<<speaker, Detective>>\nWrite that down. It won't happen again.\n<<speaker, Secretary>>\nI already did. In ink."
+	},
+	{
+		"title": "RentPaidWornOut",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nThe rent is paid. You look like you haven't slept all week.\n<<speaker, Detective>>\nI haven't.\n<<speaker, Secretary>>\nPaying the landlord doesn't help if you can't stand up. Go home and lie down."
+	},
+	{
+		"title": "RentMissed",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-life-sim/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nSeven days. The rent isn't paid and the landlord is on the stairs again.\n<<speaker, Detective>>\nTell him I'm out on a case.\n<<speaker, Secretary>>\nI've told him that every day this week."
+	}
+]

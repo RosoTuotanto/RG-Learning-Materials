@@ -1,0 +1,72 @@
+[
+	{
+		"title": "Opening",
+		"tags": "",
+		"body": "<<img, \"samples/visual-novel-interrogation/assets/images/office_interior_nophone.png\">>\n<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, secretary, x = 680>>\n<<speaker, Secretary>>\nYou're late. Again.\n<<speaker, Detective>>\nThe city kept me up.\n<<speaker, Secretary>>\nThe city doesn't pay rent. The landlord came by twice.\n<<speaker, Detective>>\nHow much do we have?\n<<speaker, Secretary>>\nEnough for the phone bill or the light bill. Pick one.\n<<speaker, Detective>>\nKeep the phone. I can work in the dark.\n<<speaker, Secretary>>\nGood. Because the phone rang at eight. Vivian Ash.\n<<speaker, Detective>>\nThe Vivian Ash? Hill money?\n<<speaker, Secretary>>\nSomeone stole her gem last night. The Crimson Heart. She wants us on it today.\n<<speaker, Detective>>\nWhy us?\n<<speaker, Secretary>>\nShe asked for someone discreet. I think she meant cheap.\nAnd somebody was in here last night. I picked all this off the floor and the shelves.\n<<speaker, Detective>>\nI'll take it. Every bit of it.\n<<speaker, Secretary>>\nThen straighten your tie. Mrs. Ash didn't wait for a call back. She's outside the door.\n<<character, hide, secretary>>\n<<character, show, vivian, x = 680>>\n<<speaker>>\nVivian Ash walks in without knocking.\n<<speaker, Detective>>\nTell me about last night, Mrs. Ash. From the start.\n<<startTestimony>>"
+	},
+	{
+		"title": "Statement1",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Vivian>>\nThe Crimson Heart sat in its case all day yesterday. I saw it there myself at seven in the evening."
+	},
+	{
+		"title": "Press1",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Detective>>\nAll day? Nobody took it out?\n<<speaker, Vivian>>\nNobody, darling. It never leaves the house.\n<<speaker, Detective>>\nThen I'd like another look at that pawn ticket.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Wrong1",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Vivian>>\nDarling, what is that supposed to be?\n<<speaker, Detective>>\nWrong one. What I want says where your gem was yesterday morning.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Broken1",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Detective>>\nA pawn ticket from Kessler Loans. One red stone, pawned by Mrs. V. Ash yesterday at 9:40 in the morning.\nYour gem spent yesterday in a pawnshop safe, not in its case.\n<<speaker, Vivian>>\nThat's... somebody used my name.\n<<speaker, Detective>>\nSomebody with your handwriting.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Statement2",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Vivian>>\nThe thief forced my display case open. The only key never leaves my bedside table."
+	},
+	{
+		"title": "Press2",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Detective>>\nThe only key? No spare?\n<<speaker, Vivian>>\nJust the one, darling. Brass, with a little velvet tassel.\n<<speaker, Detective>>\nBrass with a velvet tassel. I've seen a key like that today.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Wrong2",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Vivian>>\nDarling, what is that supposed to be?\n<<speaker, Detective>>\nWrong one. What I want opens your display case.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Broken2",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Detective>>\nThe only key to your display case. It was in a coat pocket in my office this morning.\nNobody forced anything. The case was opened with its own key.\n<<speaker, Vivian>>\nI... must have lost it weeks ago.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Statement3",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Vivian>>\nAnd before you ask, this isn't about money. I have more than I could ever spend."
+	},
+	{
+		"title": "Press3",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Detective>>\nNo debts? No bills?\n<<speaker, Vivian>>\nThe Ash family doesn't have debts, darling. We have accounts.\n<<speaker, Detective>>\nThen let's look at that torn photo of your front door again.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Wrong3",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Vivian>>\nDarling, what is that supposed to be?\n<<speaker, Detective>>\nWrong one. What I want shows your front door.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Broken3",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Detective>>\nYour front steps, yesterday. And a bank's notice of sale nailed to your door.\nThe bank is taking your house, Mrs. Ash.\n<<speaker, Vivian>>\nEvery old house has its paperwork, darling.\n<<resumeTestimony>>"
+	},
+	{
+		"title": "Breakthrough",
+		"tags": "",
+		"body": "<<character, show, detective, x = 280, xScale = -1>>\n<<character, show, vivian, x = 680>>\n<<speaker, Detective>>\nThree statements, three lies. You pawned the Crimson Heart yourself and reported it stolen for the insurance.\n<<speaker, Vivian>>\nDo you know what it costs to keep a house like mine? The insurance would have saved it. Nobody would have been hurt.\n<<speaker, Detective>>\nThe insurance company would disagree. So would the police.\n<<speaker>>\nThe pawn ticket stays on the desk between them."
+	}
+]
