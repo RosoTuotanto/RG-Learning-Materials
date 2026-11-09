@@ -1,6 +1,7 @@
 {
   "title": "Versio 11",
   "description": "Lisätään pelaajahahmolle move-metodi, jolla hahmo liikkuu ja animoituu vasemmalle ja oikealle.",
+  "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-11",
   "lessons": [
     {
