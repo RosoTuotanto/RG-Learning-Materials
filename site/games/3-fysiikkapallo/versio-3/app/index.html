@@ -119,7 +119,7 @@ e+g);break;case sa.M:m=(new I(this.input,{index:e,bufferSize:k.J})).r();break;de
 k.p.toString(16)+", data=0x"+p.toString(16)))}return m};t.L=function(a){this.j=a};function wa(a,b,c){c^=a.s(b);a.k(b,c);return c}t.k=U.prototype.k;t.S=U.prototype.T;t.s=U.prototype.s;v("Zlib.Unzip",V);v("Zlib.Unzip.prototype.decompress",V.prototype.r);v("Zlib.Unzip.prototype.getFilenames",V.prototype.Y);v("Zlib.Unzip.prototype.setPassword",V.prototype.L);}).call(this),
         preRun: [],
         postRun: [],
-        print: function() {},
+        print: function() { console.log.apply(console, arguments); },
         printErr: function(text) {
           // Report Lua errors to the embedding page, which shows its crash panel.
           if (typeof text === "string" && /^ERROR: (Runtime|Syntax|Out of Memory|Generic) error/.test(text) && window.parent !== window) window.parent.postMessage({ type: "app-crash", message: text }, "/");

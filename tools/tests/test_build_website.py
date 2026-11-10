@@ -34,6 +34,7 @@ INDEX_HTML = """<!DOCTYPE html>
 </style>
 <script>
 \tvar Module = {
+\t\tprint: function() {},
 \t\tprintErr: function(text) {
 \t\t\tif( typeof(text) === "string" && text.toUpperCase().indexOf("ERROR") >= 0) alert(text);
 \t\t\tstatusElement.innerHTML = text;
@@ -161,6 +162,22 @@ class ValidTreeTests(unittest.TestCase):
             html = self._read(*parts)
             self.assertNotIn("{{", html, f"unreplaced placeholder in {parts}")
             self.assertNotIn("}}", html, f"unreplaced placeholder in {parts}")
+
+    def test_help_panel_above_every_app_only(self):
+        build_website.run(self.site)
+
+        for parts in (
+            ("games", "3-fysiikkapallo", "versio-1", "index.html"),
+            ("games", "3-fysiikkapallo", "versio-kotitehtavat", "index.html"),
+            ("demos", "shader-demo", "index.html"),
+        ):
+            html = self._read(*parts)
+            self.assertEqual(html.count('<details class="info-panel">'), 1, parts)
+            self.assertLess(html.find('class="info-panel"'), html.find('class="game-frame"'), parts)
+            self.assertIn("Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K", html)
+
+        for parts in (("index.html",), ("games", "3-fysiikkapallo", "index.html"), ("404.html",)):
+            self.assertNotIn("info-panel", self._read(*parts).replace(".info-panel", ""), parts)
 
     def test_landing_lists_games_and_demos_and_headings(self):
         build_website.run(self.site)

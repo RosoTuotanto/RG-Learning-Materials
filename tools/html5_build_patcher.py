@@ -24,7 +24,9 @@ Patches applied to every build:
      blocks arrow-key scrolling and adds pointer capture with edge projection.
   7. index.html: makes printErr post Lua errors to the embedding page as an
      {type: "app-crash", message} message, which the site's crash panel shows.
-  8. Deletes index-debug.html and index-nosplash.html.
+  8. index.html: makes print write to the browser console, so Lua print()
+     output shows in the developer tools (the stock print discards it).
+  9. Deletes index-debug.html and index-nosplash.html.
 
 Usage:
   python html5_build_patcher.py            Patch every build under ../site.
@@ -71,6 +73,10 @@ CRASH_REPORT_LINES = (
     'if (typeof text === "string" && /^ERROR: (Runtime|Syntax|Out of Memory|Generic) error/.test(text) '
     '&& window.parent !== window) window.parent.postMessage({ type: "app-crash", message: text }, "/");',
 )
+
+# Lua print() reaches Module.print, which stock index.html sets to a no-op.
+CONSOLE_PRINT_PATTERN = r"^([ \t]*)print:\s*function\(\)\s*\{\s*\},"
+CONSOLE_PRINT_LINE = "print: function() { console.log.apply(console, arguments); },"
 
 IDBFS_GET_DB = "getDB:function(name,callback){"
 IDBFS_PER_BUILD_NAME = 'name=location.pathname.replace(/\\/[^\\/]*$/,"")+name;'
@@ -159,6 +165,24 @@ def patch_crash_report(content: str) -> tuple[str, str]:
         return match.group(1) + "".join(indent + line + "\n" for line in CRASH_REPORT_LINES) + indent
 
     return re.sub(pattern, insert, content, count=1), APPLIED
+
+
+def patch_console_print(content: str) -> tuple[str, str]:
+    """Replace the no-op Module.print with one that logs to the browser console."""
+    if CONSOLE_PRINT_LINE in content:
+        return content, ALREADY
+
+    if len(re.findall(CONSOLE_PRINT_PATTERN, content, flags=re.MULTILINE)) != 1:
+        return content, FAILED
+
+    modified = re.sub(
+        CONSOLE_PRINT_PATTERN,
+        lambda match: match.group(1) + CONSOLE_PRINT_LINE,
+        content,
+        count=1,
+        flags=re.MULTILINE,
+    )
+    return modified, APPLIED
 
 
 # The enhanced script block that replaces Solar2D's default event listeners.
@@ -367,6 +391,7 @@ def patch_index_html(index_path: Path) -> list[tuple[str, str]]:
     patches = [
         ("printErr alert comment-out", patch_printerr_alert),
         ("crash report", patch_crash_report),
+        ("console print", patch_console_print),
         ("progress bar CSS", patch_progress_css),
         ("statusElement textContent", patch_text_content),
         ("enhanced script block", patch_inject_scripts),

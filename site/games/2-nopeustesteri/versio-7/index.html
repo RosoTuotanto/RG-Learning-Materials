@@ -596,6 +596,145 @@ h2 {
     cursor: pointer;
 }
 
+/* Help panel above the app */
+
+.game-column {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+/* Zero width with a full min-width keeps the panel text from widening the column past the app. */
+.info-panel {
+    width: 0;
+    min-width: 100%;
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+.info-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.9rem;
+    list-style: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.info-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.info-toggle:hover,
+.info-toggle:focus-visible,
+.info-panel[open] .info-toggle {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+}
+
+.info-icon,
+.info-chevron {
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.info-icon {
+    color: var(--color-accent);
+}
+
+.info-chevron {
+    color: var(--color-muted);
+    transition: transform 0.15s ease;
+}
+
+.info-panel[open] .info-chevron {
+    transform: rotate(180deg);
+}
+
+.info-body {
+    margin-top: 0.75rem;
+    text-align: left;
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+.info-body h3 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.info-body h3:not(:first-child) {
+    margin-top: 1.5rem;
+}
+
+.info-body p {
+    max-width: 46rem;
+    margin: 0 0 0.75rem;
+}
+
+.info-body > :last-child {
+    margin-bottom: 0;
+}
+
+.info-shortcuts {
+    max-width: 46rem;
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.info-shortcuts li {
+    margin: 0.45rem 0;
+}
+
+.info-shortcuts li::marker {
+    color: var(--color-accent);
+}
+
+.info-body code,
+.info-body kbd {
+    font-family: var(--font-mono);
+    color: var(--color-text);
+    background: var(--color-bg);
+    border-radius: var(--radius);
+}
+
+.info-body code {
+    padding: 0.1em 0.35em;
+    font-size: 0.9em;
+    border: 1px solid var(--color-border);
+}
+
+.info-body kbd {
+    display: inline-block;
+    padding: 0 0.45em;
+    font-size: 0.8em;
+    line-height: 1.6;
+    border: 1px solid var(--color-line);
+    border-bottom-width: 3px;
+}
+
 .page-meta {
     margin: 1.25rem 0;
     color: var(--color-muted);
@@ -1049,6 +1188,10 @@ h2 {
         grid-template-columns: 1.1fr 0.9fr;
     }
 
+    .info-body {
+        padding: 1.5rem 1.75rem;
+    }
+
     .diff-table {
         font-size: 0.85rem;
     }
@@ -1155,15 +1298,37 @@ h2 {
   <p class="changes">Muutokset: <a href="./muutokset/">versio 6 -&gt; versio 7</a></p>
 </div>
 <div class="game-stage">
-  <div class="game-screen">
-    <iframe class="game-frame" src="./app/index.html" title="Nopeustesteri - versio 7" width="960" height="640"></iframe>
-    <div class="crash-panel" role="alert" hidden>
-      <h2 class="crash-title">Peli kaatui.</h2>
-      <p class="crash-note">Peli on tässä vaiheessa vielä keskeneräinen. Saatoit törmätä virheeseen, joka ratkotaan tulevilla oppitunneilla.</p>
-      <p class="crash-note">Jos törmäät virheeseen vielä pelin viimeisessä versiossa, niin ota yhteyttä <strong>#help-deskiin</strong>.</p>
-      <p class="crash-label">Virheilmoitus:</p>
-      <pre class="crash-error"></pre>
-      <button type="button" class="button-link crash-reload">Käynnistä uudelleen</button>
+  <div class="game-column">
+    <details class="info-panel">
+      <summary class="info-toggle">
+        <svg class="info-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.01"/></svg>
+        <span>Ongelmia pelin tai demon kanssa?</span>
+        <svg class="info-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <div class="info-body">
+        <h3>Selaimen konsoli</h3>
+        <p>Tämän sivuston pelit ja demot ovat Solar2D:n HTML5-buildeja. Ne voivat tulostaa viestejä selaimen konsoliin. Esimerkiksi kaikki <code>print()</code>-funktiolla tulostettu teksti näkyy siellä.</p>
+        <p>Jos pelin tai demon ikkuna näyttää mustalta tai ei reagoi mihinkään, niin katso selaimen konsolia. Se on voinut tulostaa sinne viestejä, jotka kertovat, mistä on kyse.</p>
+        <p>Näin avaat konsolin:</p>
+        <ul class="info-shortcuts">
+          <li><strong>Chrome ja Edge:</strong> <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>J</kbd> (Windows ja Linux) tai <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>J</kbd> (macOS)</li>
+          <li><strong>Firefox:</strong> <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> (Windows ja Linux) tai <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>K</kbd> (macOS)</li>
+          <li><strong>Safari:</strong> ota ensin käyttöön <em>Safari &gt; Settings &gt; Advanced &gt; Show features for web developers</em>. Sen jälkeen konsoli aukeaa näppäinyhdistelmällä <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>C</kbd>.</li>
+        </ul>
+        <h3>Mobiililaitteet</h3>
+        <p>Osa peleistä ja demoista tarvitsee näppäimistöä, joten niitä ei voi pelata kokonaan puhelimella tai tabletilla.</p>
+      </div>
+    </details>
+    <div class="game-screen">
+      <iframe class="game-frame" src="./app/index.html" title="Nopeustesteri - versio 7" width="960" height="640"></iframe>
+      <div class="crash-panel" role="alert" hidden>
+        <h2 class="crash-title">Peli kaatui.</h2>
+        <p class="crash-note">Peli on tässä vaiheessa vielä keskeneräinen. Saatoit törmätä virheeseen, joka ratkotaan tulevilla oppitunneilla.</p>
+        <p class="crash-note">Jos törmäät virheeseen vielä pelin viimeisessä versiossa, niin ota yhteyttä <strong>#help-deskiin</strong>.</p>
+        <p class="crash-label">Virheilmoitus:</p>
+        <pre class="crash-error"></pre>
+        <button type="button" class="button-link crash-reload">Käynnistä uudelleen</button>
+      </div>
     </div>
   </div>
 </div>

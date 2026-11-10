@@ -30,6 +30,7 @@ INDEX_HTML = """<!DOCTYPE html>
 </style>
 <script>
 \tvar Module = {
+\t\tprint: function() {},
 \t\tprintErr: function(text) {
 \t\t\tif( typeof(text) === "string" && text.toUpperCase().indexOf("ERROR") >= 0) alert(text);
 \t\t\tstatusElement.innerHTML = text;
@@ -122,6 +123,8 @@ class SingleBuildTests(unittest.TestCase):
             html = (build / "index.html").read_text(encoding="utf-8")
             self.assertIn("// Commented out: blocking alert()", html)
             self.assertIn("statusElement.textContent", html)
+            self.assertIn("\t\tprint: function() { console.log.apply(console, arguments); },\n", html)
+            self.assertNotIn("print: function() {},", html)
 
             # Progress bar CSS: every sub-replacement, both directions.
             self.assertIn("-webkit-appearance: none;", html)
@@ -199,6 +202,14 @@ class FailureTests(unittest.TestCase):
             self.assertIn(f"blur callback removal: {FAILED}", result.stdout)
             self.assertIn(f"per-build documents database: {FAILED}", result.stdout)
             self.assertIn("1 with failures", result.stdout)
+
+    def test_console_print_fails_without_the_stock_print(self):
+        content = INDEX_HTML.replace("print: function() {},", "print: function(text) { log(text); },")
+
+        patched, status = html5_build_patcher.patch_console_print(content)
+
+        self.assertEqual(status, FAILED)
+        self.assertEqual(patched, content)
 
     def test_zero_build_path_exits_1(self):
         with tempfile.TemporaryDirectory() as tmp:

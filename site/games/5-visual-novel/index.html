@@ -596,6 +596,145 @@ h2 {
     cursor: pointer;
 }
 
+/* Help panel above the app */
+
+.game-column {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+/* Zero width with a full min-width keeps the panel text from widening the column past the app. */
+.info-panel {
+    width: 0;
+    min-width: 100%;
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+.info-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.9rem;
+    list-style: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.info-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.info-toggle:hover,
+.info-toggle:focus-visible,
+.info-panel[open] .info-toggle {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+}
+
+.info-icon,
+.info-chevron {
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.info-icon {
+    color: var(--color-accent);
+}
+
+.info-chevron {
+    color: var(--color-muted);
+    transition: transform 0.15s ease;
+}
+
+.info-panel[open] .info-chevron {
+    transform: rotate(180deg);
+}
+
+.info-body {
+    margin-top: 0.75rem;
+    text-align: left;
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-left: 6px solid var(--color-accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hard);
+}
+
+.info-body h3 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.info-body h3:not(:first-child) {
+    margin-top: 1.5rem;
+}
+
+.info-body p {
+    max-width: 46rem;
+    margin: 0 0 0.75rem;
+}
+
+.info-body > :last-child {
+    margin-bottom: 0;
+}
+
+.info-shortcuts {
+    max-width: 46rem;
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.info-shortcuts li {
+    margin: 0.45rem 0;
+}
+
+.info-shortcuts li::marker {
+    color: var(--color-accent);
+}
+
+.info-body code,
+.info-body kbd {
+    font-family: var(--font-mono);
+    color: var(--color-text);
+    background: var(--color-bg);
+    border-radius: var(--radius);
+}
+
+.info-body code {
+    padding: 0.1em 0.35em;
+    font-size: 0.9em;
+    border: 1px solid var(--color-border);
+}
+
+.info-body kbd {
+    display: inline-block;
+    padding: 0 0.45em;
+    font-size: 0.8em;
+    line-height: 1.6;
+    border: 1px solid var(--color-line);
+    border-bottom-width: 3px;
+}
+
 .page-meta {
     margin: 1.25rem 0;
     color: var(--color-muted);
@@ -1047,6 +1186,10 @@ h2 {
 
     .hero {
         grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .info-body {
+        padding: 1.5rem 1.75rem;
     }
 
     .diff-table {

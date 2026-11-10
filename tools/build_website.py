@@ -16,6 +16,9 @@ error. Its texts are in web-src/crash.json: the note depends on whether the page
 is a demo, a game's last numbered or homework version, a version whose page.json
 sets "expectedCrash": true, or any other game version.
 
+Above every app sits the collapsible help panel from web-src/info-panel.html
+(browser console and keyboard notes).
+
 Usage:
     python tools/build_website.py            Build into ../site.
     python tools/build_website.py PATH       Build into PATH (mainly for tests).
@@ -531,13 +534,18 @@ def _crash_panel(title_key: str, note_key: str) -> str:
 def _iframe_block(title: str, data: dict, panel: str) -> str:
     width = _dimension(data, "width", DEFAULT_WIDTH)
     height = _dimension(data, "height", DEFAULT_HEIGHT)
-    panel = "\n".join(f"    {line}" for line in panel.splitlines())
+    panel = "\n".join(f"      {line}" for line in panel.splitlines())
+    info = "\n".join(f"    {line}" for line in _web_src_text("info-panel.html").rstrip("\n").splitlines())
+
     return (
         '<div class="game-stage">\n'
-        '  <div class="game-screen">\n'
-        f'    <iframe class="game-frame" src="./app/index.html" title="{escape(title)}" '
+        '  <div class="game-column">\n'
+        f'{info}\n'
+        '    <div class="game-screen">\n'
+        f'      <iframe class="game-frame" src="./app/index.html" title="{escape(title)}" '
         f'width="{width}" height="{height}"></iframe>\n'
         f'{panel}\n'
+        '    </div>\n'
         '  </div>\n'
         '</div>\n'
         f'<script>\n{_web_src_text("crash.js")}</script>'
