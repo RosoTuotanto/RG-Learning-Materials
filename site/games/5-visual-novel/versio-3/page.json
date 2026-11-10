@@ -1,6 +1,7 @@
 {
   "title": "Versio 3",
   "description": "Rakennetaan menu-scene: gradienttitausta, pelin nimi ja logo sekä Start- ja Quit-napit.",
+  "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-3",
   "lessons": [
     {
