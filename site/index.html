@@ -565,9 +565,12 @@ h2 {
     max-width: 100%;
 }
 
+/* The apps are 3:2, so the height follows the width when a narrow screen shrinks the frame. */
 .game-frame {
     display: block;
     max-width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
     border: 2px solid var(--color-line);
     border-radius: var(--radius);
     background: #000000;
