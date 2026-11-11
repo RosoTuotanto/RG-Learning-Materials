@@ -22,4 +22,24 @@ return {
 		walk = "walk",
 		jump = "jump",
 	},
+
+	outfitPanelTitle = "Customize",
+
+	-- Keyed by outfit slot, then by the option the character shows, so the button order comes from data/outfits.lua.
+	outfitButtonLabel = {
+		shirt = {
+			yellow = "shirt: yellow",
+			red = "shirt: red",
+		},
+
+		pants = {
+			blue = "pants: blue",
+			grey = "pants: grey",
+		},
+
+		flowers = {
+			none = "hold nothing",
+			held = "hold flowers",
+		},
+	},
 }

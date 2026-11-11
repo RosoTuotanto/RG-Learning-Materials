@@ -68,6 +68,7 @@ PART_IDS = {
     "scarf_1",
     "scarf_2",
     "scarf_3",
+    "bouquet",
     *(f"{kind}_{side}_{segment}" for kind in ("arm", "leg") for side in SIDES for segment in ("upper", "lower")),
     *(f"{kind}_{side}" for kind in ("hand", "foot") for side in SIDES),
 }
@@ -321,10 +322,24 @@ class RigPart:
     heel: tuple[float, float] | None
     toe: tuple[float, float] | None
     follow: Follow | None
+    # Images the app swaps in by hand, outside the frames' states.
+    variants: tuple[str, ...]
+    hidden: bool
+    # (rigid, bent) canvas rotations: the part bends at its joint like a wrist instead of turning rigidly.
+    bend: tuple[tuple[float, float], ...] | None
 
     @property
     def layer(self) -> str:
         return self.states[self.default]
+
+
+@dataclass(frozen=True)
+class RigSkin:
+    """A skin beside the default one: hidden parts it shows, and swap parts it holds on one state."""
+
+    id: str
+    show: tuple[str, ...]
+    lock_states: dict[str, str]
 
 
 @dataclass
@@ -334,6 +349,7 @@ class Rig:
     hip_x: float
     parts: list[RigPart]
     images: dict[str, Image.Image]
+    skins: list[RigSkin]
 
     def __post_init__(self) -> None:
         self.by_id = {part.id: part for part in self.parts}
@@ -374,12 +390,22 @@ def rig_follow(value: object, path: Path, line: int | None, part_id: str) -> Fol
     return Follow(value["source"], float(value["lag"]), float(value["rotation"]), float(value["drag"]), float(value["fall"]), value["direction"], float(value["min"]), float(value["max"]))
 
 
+def rig_bend(value: object, path: Path, line: int | None, part_id: str) -> tuple[tuple[float, float], ...]:
+    points = value if isinstance(value, list) else []
+    valid = len(points) >= 2 and all(isinstance(point, list) and len(point) == 2 and all(is_number(angle) and -180 <= angle <= 180 for angle in point) for point in points)
+
+    if not valid or any(start[0] >= end[0] for start, end in zip(points, points[1:])):
+        raise art_error(path, line, f"{part_id}: bend must be two or more [rigid, bent] rotations in degrees from -180 to 180, rigid rising")
+
+    return tuple((float(rigid), float(bent)) for rigid, bent in points)
+
+
 def load_rig(path: Path = RIG_PATH, parts_root: Path = PARTS_ROOT) -> Rig:
     """The rig description and every layer image it names."""
     data, text = read_json(path)
 
-    if not isinstance(data, dict) or set(data) != {"canvas", "feetRow", "hipX", "parts"}:
-        raise art_error(path, 1, 'expected an object with exactly "canvas", "feetRow", "hipX" and "parts"')
+    if not isinstance(data, dict) or set(data) - {"skins"} != {"canvas", "feetRow", "hipX", "parts"}:
+        raise art_error(path, 1, 'expected an object with exactly "canvas", "feetRow", "hipX", "parts" and an optional "skins"')
 
     canvas = data["canvas"]
 
@@ -396,7 +422,7 @@ def load_rig(path: Path = RIG_PATH, parts_root: Path = PARTS_ROOT) -> Rig:
         raise art_error(path, line_of(text, '"parts"'), "parts must be a list in draw order, back to front")
 
     parts = []
-    known = {"id", "parent", "joint", "pivot", "image", "images", "default", "heel", "toe", "follow"}
+    known = {"id", "parent", "joint", "pivot", "image", "images", "default", "heel", "toe", "follow", "variants", "hidden", "bend"}
 
     for entry in data["parts"]:
         part_id = entry.get("id") if isinstance(entry, dict) else None
@@ -429,9 +455,17 @@ def load_rig(path: Path = RIG_PATH, parts_root: Path = PARTS_ROOT) -> Rig:
             wanted = ", ".join(sorted(SWAP_STATES[part_id])) if part_id in SWAP_STATES else 'one "image"'
             raise art_error(path, line, f"{part_id}: images must be {wanted}")
 
-        for layer in states.values():
+        variants = entry.get("variants", [])
+
+        if not isinstance(variants, list) or len(set(map(str, variants))) != len(variants):
+            raise art_error(path, line, f"{part_id}: variants must be a list of distinct layer names")
+
+        for layer in [*states.values(), *variants]:
             if not isinstance(layer, str) or not NAME_PATTERN.fullmatch(layer):
                 raise art_error(path, line, f"{part_id}: layer name {layer!r} must use only letters, digits, - and _")
+
+        if not isinstance(entry.get("hidden", False), bool):
+            raise art_error(path, line, f"{part_id}: hidden must be true or false")
 
         is_foot = part_id in FEET
 
@@ -451,6 +485,9 @@ def load_rig(path: Path = RIG_PATH, parts_root: Path = PARTS_ROOT) -> Rig:
             heel=as_point(entry["heel"], path, line, f"{part_id} heel") if is_foot else None,
             toe=as_point(entry["toe"], path, line, f"{part_id} toe") if is_foot else None,
             follow=rig_follow(entry["follow"], path, line, part_id) if "follow" in entry else None,
+            variants=tuple(variants),
+            hidden=entry.get("hidden", False),
+            bend=rig_bend(entry["bend"], path, line, part_id) if "bend" in entry else None,
         ))
 
     missing = PART_IDS - {part.id for part in parts}
@@ -475,19 +512,65 @@ def load_rig(path: Path = RIG_PATH, parts_root: Path = PARTS_ROOT) -> Rig:
         elif part.parent in FOLLOWERS:
             raise art_error(path, line_of(text, f'"id": "{part.id}"'), f"{part.id}: only followers may hang from the follower {part.parent}")
 
+    # The manifest names a variant by its layer, so a variant layer belongs to one part only.
+    owners = {}
+
+    for part in parts:
+        for layer in [*set(part.states.values()), *part.variants]:
+            if layer in owners and (owners[layer] != part.id or layer in part.variants):
+                raise art_error(path, line_of(text, f'"id": "{part.id}"'), f"{part.id}: layer {layer} is already used by {owners[layer]}")
+
+            owners[layer] = part.id
+
     images = {}
 
     for part in parts:
         sizes = set()
+        layers = [*part.states.values(), *part.variants]
 
-        for layer in part.states.values():
+        for layer in layers:
             images[layer] = read_png(parts_root / f"{layer}.png")
             sizes.add(images[layer].size)
 
         if len(sizes) > 1:
-            raise art_error(parts_root, None, f"{part.id}: its images {', '.join(part.states.values())} differ in size; the runtime keeps one pivot per part")
+            raise art_error(parts_root, None, f"{part.id}: its images {', '.join(layers)} differ in size; the runtime keeps one pivot per part")
 
-    return Rig((canvas["width"], canvas["height"]), data["feetRow"], float(data["hipX"]), parts, images)
+    skins = rig_skins(data.get("skins", []), path, text, by_id)
+
+    return Rig((canvas["width"], canvas["height"]), data["feetRow"], float(data["hipX"]), parts, images, skins)
+
+
+def rig_skins(value: object, path: Path, text: str, by_id: dict[str, RigPart]) -> list[RigSkin]:
+    """The skins beside the default one, each naming only hidden parts and real swap states."""
+    line = line_of(text, '"skins"')
+
+    if not isinstance(value, list):
+        raise art_error(path, line, "skins must be a list")
+
+    skins = []
+
+    for entry in value:
+        if not isinstance(entry, dict) or set(entry) != {"id", "show", "lockStates"}:
+            raise art_error(path, line, 'each skin must have exactly "id", "show" and "lockStates"')
+
+        skin_id = entry["id"]
+
+        if not isinstance(skin_id, str) or not NAME_PATTERN.fullmatch(skin_id) or skin_id == "default" or any(skin.id == skin_id for skin in skins):
+            raise art_error(path, line, f"skin id {skin_id!r} must be a distinct name other than default")
+
+        show = entry["show"]
+
+        if not isinstance(show, list) or not all(isinstance(part_id, str) and part_id in by_id and by_id[part_id].hidden for part_id in show):
+            raise art_error(path, line, f"skin {skin_id}: show must list hidden parts")
+
+        locks = entry["lockStates"]
+
+        if not isinstance(locks, dict) or not all(part_id in by_id and state in by_id[part_id].states and part_id in SWAP_STATES for part_id, state in locks.items()):
+            raise art_error(path, line, f"skin {skin_id}: lockStates must map swap parts to one of their states")
+
+        skins.append(RigSkin(skin_id, tuple(show), dict(locks)))
+
+    return skins
 
 
 @dataclass(frozen=True)
@@ -608,6 +691,20 @@ def smooth(amount: float) -> float:
 
 def lerp(start: float, end: float, amount: float) -> float:
     return start + (end - start) * amount
+
+
+def bent(points: tuple[tuple[float, float], ...], rotation: float) -> float:
+    """The bend curve at a rigid canvas rotation: linear between its points, held past its ends."""
+    rotation = (rotation + 180) % 360 - 180
+
+    if rotation <= points[0][0]:
+        return points[0][1]
+
+    for (start, start_bent), (end, end_bent) in zip(points, points[1:]):
+        if rotation <= end:
+            return lerp(start_bent, end_bent, (rotation - start) / (end - start))
+
+    return points[-1][1]
 
 
 def opaque_corners(image: Image.Image, pivot: tuple[float, float]) -> list[tuple[float, float]]:
@@ -808,6 +905,7 @@ class Body:
             "scarf_knot": current["knot"],
             "eyes": 0.0,
             "mouth": 0.0,
+            "bouquet": 0.0,
             **{part_id: current[part_id] for part_id in FOLLOWERS},
         }
 
@@ -836,7 +934,8 @@ class Body:
             parent_x, parent_y, parent_rotation = world[part.parent]
             joint = offset(part.joint, (0.0, current["chest"])) if part_id == "torso" else part.joint
             x, y = offset((parent_x, parent_y), rotate(joint, parent_rotation))
-            world[part_id] = (x, y, parent_rotation + rotations[part_id])
+            rotation = parent_rotation + rotations[part_id]
+            world[part_id] = (x, y, bent(part.bend, rotation) if part.bend else rotation)
 
         lowest = max(
             world[foot][1] + rotate(corner, world[foot][2])[1]
@@ -1463,6 +1562,7 @@ def tidy(value: float) -> float:
 def build_manifest(rig: Rig, body: Body, clips: list[tuple[str, Clip]]) -> dict:
     manifest_parts = []
     variants = []
+    manual_variants = []
     skin_parts = {}
 
     for order, part in enumerate(rig.parts):
@@ -1477,7 +1577,7 @@ def build_manifest(rig: Rig, body: Body, clips: list[tuple[str, Clip]]) -> dict:
             "height": image.height,
             "pivot": {"x": part.pivot[0], "y": part.pivot[1]},
             "drawOrder": order,
-            "visible": True,
+            "visible": not part.hidden,
         })
 
         if part.id in SWAP_STATES:
@@ -1494,6 +1594,34 @@ def build_manifest(rig: Rig, body: Body, clips: list[tuple[str, Clip]]) -> dict:
                 })
 
             skin_parts[part.id] = {"states": {state: layer for state, layer in sorted(part.states.items())}}
+
+    # The app swaps these in by hand with setVariant, so no frame names them.
+    for part in rig.parts:
+        for layer in part.variants:
+            manual_variants.append({
+                "id": layer,
+                "part": part.id,
+                "key": layer,
+                "name": layer,
+                "asset": f"parts/{layer}.png",
+                "width": rig.images[layer].width,
+                "height": rig.images[layer].height,
+            })
+
+    # A skin replaces the default one whole, so each repeats every swap part's states.
+    skins = [{"id": "default", "name": "default", "parts": skin_parts}]
+
+    for skin in rig.skins:
+        parts = {part_id: {"states": dict(entry["states"])} for part_id, entry in skin_parts.items()}
+
+        for part_id, state in skin.lock_states.items():
+            layer = rig.by_id[part_id].states[state]
+            parts[part_id]["states"] = {name: layer for name in parts[part_id]["states"]}
+
+        for part_id in skin.show:
+            parts[part_id] = {"visible": True}
+
+        skins.append({"id": skin.id, "name": skin.id, "parts": parts})
 
     animations = []
 
@@ -1539,8 +1667,8 @@ def build_manifest(rig: Rig, body: Body, clips: list[tuple[str, Clip]]) -> dict:
         "name": "character",
         "canvas": {"width": rig.canvas[0], "height": rig.canvas[1]},
         "parts": manifest_parts,
-        "variants": variants,
-        "skins": [{"id": "default", "name": "default", "parts": skin_parts}],
+        "variants": variants + manual_variants,
+        "skins": skins,
         "animations": animations,
     }
 
@@ -1574,15 +1702,22 @@ def scaled(image: Image.Image, scale: int) -> Image.Image:
 
 
 class Visuals:
-    """Each part's image and pivot per state, resolved from a manifest the way the runtime does."""
+    """Each part's image and pivot per state, resolved from a manifest the way the runtime does:
+    a manual variant first, then the frame state through the skin, then the part's own image."""
 
-    def __init__(self, manifest: dict, root: Path = SKELETAL_ROOT) -> None:
+    def __init__(self, manifest: dict, root: Path = SKELETAL_ROOT, skin: str | None = None, manual: dict[str, str] | None = None) -> None:
         self.parts = {part["id"]: part for part in manifest["parts"]}
         self.variants = {variant["id"]: variant for variant in manifest.get("variants", [])}
         skins = manifest.get("skins") or [{}]
-        self.skin = skins[0].get("parts", {})
+        self.skin = next(entry for entry in skins if skin is None or entry.get("id") == skin).get("parts", {})
+        self.manual = manual or {}
         self.root = root
         self.cache = {}
+
+    def visible(self, part_id: str) -> bool:
+        override = self.skin.get(part_id, {})
+
+        return override.get("visible", self.parts[part_id].get("visible", True))
 
     def state_asset(self, part_id: str, state: str | None) -> dict | None:
         """The variant a frame state resolves to, or None for the part's own image."""
@@ -1598,7 +1733,8 @@ class Visuals:
 
         if key not in self.cache:
             part = self.parts[part_id]
-            source = self.state_asset(part_id, state) or part
+            manual = self.variants[self.manual[part_id]] if part_id in self.manual else None
+            source = manual or self.state_asset(part_id, state) or part
 
             with Image.open(self.root / source["asset"]) as image:
                 picture = image.convert("RGBA")
@@ -1614,6 +1750,9 @@ def composite_frame(frame: dict, visuals: Visuals, canvas: tuple[int, int], scal
     image = Image.new("RGBA", (canvas[0] * scale, canvas[1] * scale), TRANSPARENT)
 
     for entry in frame["parts"]:
+        if not visuals.visible(entry["part"]):
+            continue
+
         part, pivot = visuals.get(entry["part"], entry.get("state"))
         big = scaled(part, scale)
         pivot_x = round(pivot[0] * scale)
@@ -1712,13 +1851,13 @@ def sprite_previews(name: str, sheet: Sheet, feet_row: int) -> dict[str, Image.I
 
 
 def parts_sheet(rig: Rig, scale: int) -> Image.Image:
-    """Every layer in draw order, each labelled, with its part's pivot marked."""
+    """Every frame-state layer of the visible parts in draw order, each labelled, with its part's pivot marked."""
     font = ImageFont.load_default(size=16)
     columns = 6
     margin = 16
     padding = 12
     label_height = 24
-    layers = [(part, layer) for part in rig.parts for _, layer in sorted(part.states.items(), key=lambda item: item[0] != part.default)]
+    layers = [(part, layer) for part in rig.parts if not part.hidden for _, layer in sorted(part.states.items(), key=lambda item: item[0] != part.default)]
     art_width = max(rig.images[layer].width for _, layer in layers) * scale
     art_height = max(rig.images[layer].height for _, layer in layers) * scale
     label_width = max(math.ceil(font.getlength(layer)) for _, layer in layers)

@@ -39,3 +39,19 @@ Columns: 6
 217 203 178 255	dust light
 242 246 255 255	speed line
 255 244 216 150	smear
+132  34  58 255	top red deep
+184  42  50 255	top red shade
+228  68  52 255	top red
+255 156 104 255	top red light
+100  88 112 255	trousers grey deep
+144 136 150 255	trousers grey shade
+190 188 190 255	trousers grey
+176  64 132 255	petal pink deep
+232 108 170 255	petal pink
+255 176 212 255	petal pink light
+120  64 160 255	petal purple deep
+176  96 208 255	petal purple
+222 160 240 255	petal purple light
+ 60 122  62 255	leaf deep
+100 172  74 255	leaf
+164 212  96 255	leaf light

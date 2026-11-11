@@ -8,11 +8,12 @@ Run from anywhere:
     python3 -B tools/check_assets.py
 """
 
+import itertools
 import json
 import subprocess
 import sys
 
-from PIL import Image
+from PIL import Image, ImageChops
 
 from build_character import (
     DEMO_ROOT,
@@ -33,6 +34,7 @@ from build_character import (
     Rig,
     Sheet,
     Visuals,
+    bent,
     build_clip,
     build_manifest,
     composite_frame,
@@ -57,10 +59,48 @@ SLIDE_TOLERANCE = 0.01
 # The scarf trails each variant's own last frames, so variants may start it this far apart.
 FOLLOW_TOLERANCE = 1.5
 MIN_DRAWINGS = 2
+# Parts with no rotation of their own: each sits on its joint and turns with its parent, or along its bend curve.
+RIGID = ("eyes", "mouth", "bouquet")
+# No part a skin shows may cover these in any frame.
+UNCOVERED = "eyes"
 
 LUA_LAYOUT = """
 local character = dofile( "data/layout.lua" ).character
 io.write( character.spriteFeetOffset, " ", character.skeletalFeetOffset )
+"""
+
+# One line per slot ("slot NAME OPTION ..."), part rule ("part ID key=value ...") and skin rule ("skin key=value ..."),
+# then "default SKIN".
+LUA_OUTFITS = """
+local outfits = dofile( "data/outfits.lua" )
+
+local function writeRule( prefix, rule )
+	local fields = {}
+
+	for key, value in pairs( rule ) do
+		fields[#fields + 1] = tostring( key ) .. "=" .. tostring( value )
+	end
+
+	table.sort( fields )
+	io.write( prefix, " ", table.concat( fields, " " ), "\\n" )
+end
+
+for i = 1, #outfits.slots do
+	local slot = outfits.slots[i]
+	io.write( "slot ", slot, " ", table.concat( outfits.options[slot] or {}, " " ), "\\n" )
+end
+
+for partId, rules in pairs( outfits.parts ) do
+	for i = 1, #rules do
+		writeRule( "part " .. partId, rules[i] )
+	end
+end
+
+for i = 1, #outfits.skins do
+	writeRule( "skin", outfits.skins[i] )
+end
+
+io.write( "default ", tostring( outfits.defaultSkin ), "\\n" )
 """
 
 
@@ -164,7 +204,7 @@ def check_rig(checker: Checker, rig: Rig) -> None:
         corners = ((bottom[0] - part.pivot[0], image.height - part.pivot[1]), (bottom[-1] + 1 - part.pivot[0], image.height - part.pivot[1])) if bottom else None
         checker.expect(corners == (part.heel, part.toe), f"{foot}: sole corners are {corners}, the rig gives heel {part.heel} and toe {part.toe}")
 
-    layers = {layer for part in rig.parts for layer in part.states.values()}
+    layers = {layer for part in rig.parts for layer in [*part.states.values(), *part.variants]}
     files = {path.stem for path in PARTS_ROOT.glob("*.png")}
     checker.expect(not layers - files, f"assets/skeletal/parts lacks layers the rig uses: {sorted(layers - files)}")
     checker.expect(not files - layers, f"assets/skeletal/parts holds layers the rig does not use: {sorted(files - layers)}")
@@ -232,6 +272,147 @@ def check_shared_start(checker: Checker, variants: list[dict]) -> None:
             checker.expect(same, f"{animation['id']} frame 0: {part_id} differs from {variants[0]['id']} frame 0 by {moved:.3f}, state {other.get('state')!r} against {entry.get('state')!r}")
 
 
+def check_skins(checker: Checker, rig: Rig, manifest: dict) -> None:
+    """The default skin shows no hidden part; every other skin keeps every swap, shows its hidden
+    parts and holds its locked parts on one image."""
+    skins = {skin["id"]: skin.get("parts", {}) for skin in manifest.get("skins", [])}
+    checker.expect(list(skins) == ["default", *(skin.id for skin in rig.skins)], f"manifest skins are {list(skins)}, expected default and the rig's skins")
+    variants = {variant["id"]: variant for variant in manifest.get("variants", [])}
+
+    for part in rig.parts:
+        if part.hidden:
+            entry = next((entry for entry in manifest["parts"] if entry["id"] == part.id), {})
+            checker.expect(entry.get("visible") is False and "visible" not in skins.get("default", {}).get(part.id, {}), f"{part.id}: hidden in the rig, but the default skin shows it")
+            checker.expect((SKELETAL_ROOT / entry.get("asset", "")).is_file(), f"{part.id}: its image {entry.get('asset')!r} does not resolve")
+
+    for skin in rig.skins:
+        overrides = skins.get(skin.id, {})
+
+        for part_id in skin.show:
+            checker.expect(overrides.get(part_id, {}).get("visible") is True, f"skin {skin.id}: does not show {part_id}")
+
+        for part_id, states in SWAP_STATES.items():
+            mapped = overrides.get(part_id, {}).get("states", {})
+            checker.expect(set(mapped) == states and all(mapped[state] in variants and variants[mapped[state]]["part"] == part_id for state in states), f"skin {skin.id}: {part_id} states {mapped} do not resolve every state to one of its images")
+
+            if part_id in skin.lock_states:
+                locked = rig.by_id[part_id].states[skin.lock_states[part_id]]
+                checker.expect(set(mapped.values()) == {locked}, f"skin {skin.id}: {part_id} shows {sorted(set(mapped.values()))}, expected only {locked}")
+
+
+def lua_outfits(checker: Checker) -> list[list[str]] | None:
+    try:
+        result = subprocess.run(["lua5.1", "-e", LUA_OUTFITS], cwd=DEMO_ROOT, capture_output=True, text=True, timeout=LUA_TIMEOUT)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        checker.expect(False, f"data/outfits.lua: could not run lua5.1: {error}")
+        return None
+
+    if not checker.expect(result.returncode == 0, f"data/outfits.lua: lua5.1 failed: {result.stderr.strip()}"):
+        return None
+
+    return [line.split() for line in result.stdout.splitlines()]
+
+
+def rule_fields(fields: list[str]) -> dict[str, str]:
+    return dict(field.split("=", 1) for field in fields)
+
+
+def check_outfits(checker: Checker, rig: Rig, manifest: dict) -> None:
+    """data/outfits.lua names only the manifest's own variants and skins, uses every hand-swapped
+    variant, and never lets two rules for one part, or two skin rules, match the same outfit."""
+    lines = lua_outfits(checker)
+
+    if lines is None:
+        return
+
+    slots = {line[1]: line[2:] for line in lines if line[0] == "slot"}
+    part_rules = {}
+    skin_rules = [rule_fields(line[1:]) for line in lines if line[0] == "skin"]
+    default = next((line[1] for line in lines if line[0] == "default"), None)
+
+    for line in lines:
+        if line[0] == "part":
+            part_rules.setdefault(line[1], []).append(rule_fields(line[2:]))
+
+    checker.expect(all(len(options) >= 2 for options in slots.values()) and slots, f"data/outfits.lua: every slot needs at least two options, got {slots}")
+
+    variants = {variant["id"]: variant["part"] for variant in manifest.get("variants", [])}
+    skins = [skin["id"] for skin in manifest.get("skins", [])]
+    used = set()
+
+    for part_id, rules in part_rules.items():
+        for rule in rules:
+            variant = rule.get("variant")
+            used.add(variant)
+            checker.expect(variants.get(variant) == part_id and part_id in rig.by_id and variant in rig.by_id[part_id].variants, f"data/outfits.lua: {part_id} rule names {variant!r}, which is not one of that part's hand-swapped variants")
+
+    for rule in skin_rules:
+        checker.expect(rule.get("skin") in skins[1:], f"data/outfits.lua: skin rule names {rule.get('skin')!r}, not one of the manifest's extra skins {skins[1:]}")
+
+    checker.expect(default == (skins[0] if skins else None), f"data/outfits.lua: defaultSkin is {default!r}, the manifest's first skin is {skins[0] if skins else None!r}")
+
+    manual = {layer for part in rig.parts for layer in part.variants}
+    checker.expect(manual <= used, f"data/outfits.lua: no rule uses {sorted(manual - used)}")
+
+    for kind, rules in [*part_rules.items(), ("skins", skin_rules)]:
+        for rule in rules:
+            named = {slot: option for slot, option in rule.items() if slot not in ("variant", "skin")}
+            checker.expect(named and all(slot in slots and option in slots[slot] for slot, option in named.items()), f"data/outfits.lua: {kind} rule {rule} names a slot or option that does not exist")
+
+        for outfit in itertools.product(*slots.values()):
+            chosen = dict(zip(slots, outfit))
+            matches = [rule for rule in rules if all(chosen.get(slot) == option for slot, option in rule.items() if slot not in ("variant", "skin"))]
+            checker.expect(len(matches) <= 1, f"data/outfits.lua: {kind} has {len(matches)} rules matching {chosen}")
+
+
+def check_rigid(checker: Checker, rig: Rig, animation_id: str, frame: dict) -> None:
+    """Each rigid part sits at its joint on its parent and turns with it, or along its bend curve."""
+    poses = frame_poses(frame)
+
+    for part_id in RIGID:
+        part = rig.by_id[part_id]
+        parent = poses[part.parent]
+        joint = rotate(part.joint, parent["rotation"])
+        entry = poses[part_id]
+        rotation = bent(part.bend, parent["rotation"]) if part.bend else parent["rotation"]
+        moved = max(abs(entry["x"] - parent["x"] - joint[0]), abs(entry["y"] - parent["y"] - joint[1]), abs(entry["rotation"] - rotation))
+        checker.expect(moved <= SEAM_TOLERANCE, f"{animation_id} frame {frame['index']}: {part_id} is {moved:.3f} off its joint on {part.parent}")
+
+
+def part_mask(frame: dict, visuals: Visuals, canvas: tuple[int, int], part_id: str) -> Image.Image:
+    subset = {**frame, "parts": [entry for entry in frame["parts"] if entry["part"] == part_id]}
+
+    return composite_frame(subset, visuals, canvas, 1).getchannel("A").point(lambda alpha: 255 if alpha else 0)
+
+
+def unhidden(masks: dict[str, Image.Image], order: list[str], part_id: str, skip: tuple[str, ...]) -> Image.Image:
+    """The part's pixels no later part draws over, leaving out the parts in skip."""
+    visible = masks[part_id]
+
+    for later in order[order.index(part_id) + 1:]:
+        if later in masks and later not in skip:
+            visible = ImageChops.subtract(visible, masks[later])
+
+    return visible
+
+
+def check_uncovered(checker: Checker, rig: Rig, manifest: dict, animations: dict) -> None:
+    """No part a skin shows covers a pixel of the uncovered part that would be visible without it."""
+    order = [part.id for part in rig.parts]
+
+    for skin in rig.skins:
+        visuals = Visuals(manifest, skin=skin.id)
+
+        for animation_id, animation in animations.items():
+            for frame in animation["frames"]:
+                masks = {part_id: part_mask(frame, visuals, rig.canvas, part_id) for part_id in order if visuals.visible(part_id)}
+                target = unhidden(masks, order, UNCOVERED, skin.show)
+
+                for part_id in skin.show:
+                    covered = ImageChops.multiply(target, unhidden(masks, order, part_id, ())).histogram()[255]
+                    checker.expect(not covered, f"skin {skin.id}: {animation_id} frame {frame['index']}: {part_id} covers {covered} {UNCOVERED} pixels")
+
+
 def toe(rig: Rig, entry: dict) -> tuple[float, float]:
     """The foot's toe corner on the canvas."""
     point = rotate(rig.by_id[entry["part"]].toe, entry["rotation"])
@@ -271,6 +452,7 @@ def check_frames(checker: Checker, animations: dict, clips: dict, rig: Rig, mani
                     checker.expect("state" not in entry, f"{where}: {entry['part']} has a state but no swap images")
 
             blinks += poses["eyes"].get("state") == "closed"
+            check_rigid(checker, rig, animation_id, frame)
 
             for side in ("near", "far"):
                 bend = poses[f"leg_{side}_lower"]["rotation"] - poses[f"leg_{side}_upper"]["rotation"]
@@ -329,8 +511,21 @@ def check_manifest(checker: Checker, rig: Rig, data: AnimationData) -> None:
         declared = (part["width"], part["height"])
         checker.expect(size == declared, f"part {part['id']}: image is {size}, manifest declares {declared}")
 
+    parts = {part["id"]: part for part in manifest["parts"]}
+
     for variant in manifest.get("variants", []):
-        checker.expect((SKELETAL_ROOT / variant["asset"]).is_file(), f"variant {variant['id']}: missing {variant['asset']}")
+        if not checker.expect((SKELETAL_ROOT / variant["asset"]).is_file(), f"variant {variant['id']}: missing {variant['asset']}"):
+            continue
+
+        with Image.open(SKELETAL_ROOT / variant["asset"]) as image:
+            size = image.size
+
+        part = parts.get(variant["part"])
+        base = (part["width"], part["height"]) if part else None
+        checker.expect(size == (variant["width"], variant["height"]) == base, f"variant {variant['id']}: image is {size}, its part {variant['part']} is {base}; the runtime keeps one pivot per part")
+
+    check_skins(checker, rig, manifest)
+    check_outfits(checker, rig, manifest)
 
     animations = {animation["id"]: animation for animation in manifest["animations"]}
     names = [animation_id for animation_id, _, _ in expected]
@@ -355,6 +550,7 @@ def check_manifest(checker: Checker, rig: Rig, data: AnimationData) -> None:
             checker.expect(clip.keys[0] == clip.keys[-1], f"{animation_id}: the first and last keys are different poses, so the loop jumps")
 
     check_frames(checker, animations, dict(clips), rig, manifest)
+    check_uncovered(checker, rig, manifest, animations)
 
 
 def main() -> None:

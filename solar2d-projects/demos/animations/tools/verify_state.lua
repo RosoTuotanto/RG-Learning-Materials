@@ -4,6 +4,7 @@ local root = string.match( arg[0], "^(.*)/tools/[^/]*$" ) or "."
 package.path = root .. "/?.lua;" .. package.path
 
 local animations = require( "data.animations" )
+local outfits = require( "data.outfits" )
 local demoState = require( "scripts.demoState" )
 
 local checks = 0
@@ -23,11 +24,19 @@ local plays = animations.skeletal.plays
 -- Fixed plays rather than the data's, so the multi-play path is covered whatever the demo uses.
 local testPlays = { idle = 1, walk = 1, jump = 2 }
 
+-- Fixed options too, with a three-option slot so the wrap is tested past two.
+local testOutfits = {
+	shirt = { "yellow", "red" },
+	pants = { "blue", "grey" },
+	hat = { "none", "cap", "beanie" },
+}
+
 local function newState()
 	return demoState.new({
 		animations = { "idle", "walk", "jump" },
 		variantCount = 3,
 		plays = testPlays,
+		outfitOptions = testOutfits,
 	})
 end
 
@@ -49,6 +58,20 @@ for i = 1, #animations.names do
 	local name = animations.names[i]
 	check( type( plays[name] ) == "number" and plays[name] >= 1, "every animation plays its variants at least once: " .. name )
 end
+
+-- The outfit data the scene passes in
+for i = 1, #outfits.slots do
+	local slot = outfits.slots[i]
+	local options = outfits.options[slot]
+	check( type( options ) == "table" and #options >= 2, "data/outfits.lua gives the " .. slot .. " slot at least two options" )
+end
+
+check( table.concat( outfits.slots, "," ) == "shirt,pants,flowers", "the outfit buttons are shirt, pants and flowers, top to bottom" )
+check( table.concat( outfits.options.shirt, "," ) == "yellow,red", "the shirt starts yellow and swaps to red" )
+check( table.concat( outfits.options.pants, "," ) == "blue,grey", "the trousers start blue and swap to grey" )
+check( outfits.options.flowers[1] == "none" and #outfits.options.flowers == 2, "the bouquet starts hidden and toggles" )
+local highlighted = outfits.highlighted
+check( highlighted.flowers == true and not highlighted.shirt and not highlighted.pants, "only the flowers button shows an active state" )
 
 -- Defaults
 local state = newState()
@@ -140,6 +163,37 @@ check( state:getVariant() == 1, "a style toggle resets the variant to 1" )
 state:toggleStyle()
 check( state:recordPlay() == false, "a style toggle forgets the plays already counted" )
 
+-- Outfit defaults and toggles
+state = newState()
+check( state:getOutfitOption( "shirt" ) == "yellow" and state:getOutfitOption( "pants" ) == "blue", "the outfit starts on each slot's first option" )
+check( state:getOutfitOption( "hat" ) == "none" and not state:isOutfitChanged( "hat" ), "a slot on its first option is unchanged" )
+check( state:toggleOutfit( "shirt" ) == "red" and state:isOutfitChanged( "shirt" ), "toggling the shirt swaps it to red" )
+check( state:toggleOutfit( "shirt" ) == "yellow" and not state:isOutfitChanged( "shirt" ), "toggling the shirt again swaps it back" )
+check( state:getOutfitOption( "pants" ) == "blue", "toggling the shirt leaves the trousers alone" )
+check( state:toggleOutfit( "hat" ) == "cap" and state:toggleOutfit( "hat" ) == "beanie", "a three-option slot steps through its options" )
+check( state:toggleOutfit( "hat" ) == "none", "a three-option slot wraps back to its first option" )
+check( state:toggleOutfit( "scarf" ) == nil, "an unknown slot is rejected" )
+check( state:getOutfitOption( "scarf" ) == nil and not state:isOutfitChanged( "scarf" ), "a rejected slot adds nothing to the outfit" )
+
+-- Outfit toggles leave the animation alone, and the outfit survives every animation change
+state = newState()
+state:toggleStyle()
+state:selectAnimation( "jump" )
+state:advanceVariant()
+state:recordPlay()
+state:toggleOutfit( "shirt" )
+state:toggleOutfit( "pants" )
+check( state:getAnimation() == "jump" and state:getVariant() == 2, "an outfit toggle keeps the animation and variant" )
+check( state:recordPlay() == true, "an outfit toggle keeps the plays already counted" )
+check( state:isSkeletal(), "an outfit toggle keeps the style" )
+
+state:advanceVariant()
+state:selectAnimation( "walk" )
+state:toggleStyle()
+state:toggleStyle()
+state:restartVariant()
+check( state:getOutfitOption( "shirt" ) == "red" and state:getOutfitOption( "pants" ) == "grey", "the outfit survives variant, animation and style changes" )
+
 -- Instances do not share state
 state = newState()
 state:selectAnimation( "walk" )
@@ -147,6 +201,10 @@ state:advanceVariant()
 local other = newState()
 check( other:getAnimation() == "idle" and other:getVariant() == 1, "a new instance starts fresh" )
 check( state:getVariant() == 2, "each instance keeps its own variant" )
+
+state:toggleOutfit( "shirt" )
+check( newState():getOutfitOption( "shirt" ) == "yellow", "a new instance starts on the default outfit" )
+check( testOutfits.shirt[1] == "yellow", "toggling never reorders the options passed in" )
 
 print( checks .. " checks, " .. failures .. " failures" )
 

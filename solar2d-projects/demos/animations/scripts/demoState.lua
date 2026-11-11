@@ -1,5 +1,5 @@
--- What the demo is showing: the animation style, the selected animation and the skeletal
--- variant. Pure Lua with no display calls, so it runs under stock Lua 5.1.
+-- What the demo is showing: the animation style, the selected animation, the skeletal
+-- variant and the skeletal outfit. Pure Lua with no display calls, so it runs under stock Lua 5.1.
 
 local demoState = {}
 
@@ -16,18 +16,25 @@ local skeletalStyle = "skeletal"
 -- Public functions
 
 -- params: animations (the animation names; the first is the default), variantCount,
--- plays (keyed by animation name, how many times each variant plays before the next)
+-- plays (keyed by animation name, how many times each variant plays before the next),
+-- outfitOptions (keyed by outfit slot, the options in toggle order; the first is the default)
 function demoState.new( params )
 	local state = {
 		animations = params.animations,
 		variantCount = params.variantCount,
 		plays = params.plays,
+		outfitOptions = params.outfitOptions,
 
 		style = spriteStyle,
 		animation = params.animations[1],
 		variant = 1,
 		playsDone = 0,
+		outfit = {},
 	}
+
+	for slot, options in pairs( params.outfitOptions ) do
+		state.outfit[slot] = options[1]
+	end
 
 	return setmetatable( state, stateMetatable )
 end
@@ -81,6 +88,39 @@ function stateMethods:advanceVariant()
 	self.playsDone = 0
 
 	return self.variant
+end
+
+-- Moves the slot to its next option, wrapping from the last back to the first. The animation,
+-- variant and plays are left alone. Returns the new option, or nil for an unknown slot.
+function stateMethods:toggleOutfit( slot )
+	local options = self.outfitOptions[slot]
+
+	if not options then
+		return nil
+	end
+
+	local nextIndex = 1
+
+	for i = 1, #options do
+		if options[i] == self.outfit[slot] then
+			nextIndex = i % #options + 1
+		end
+	end
+
+	self.outfit[slot] = options[nextIndex]
+
+	return self.outfit[slot]
+end
+
+function stateMethods:getOutfitOption( slot )
+	return self.outfit[slot]
+end
+
+-- True while the slot shows any option but its first.
+function stateMethods:isOutfitChanged( slot )
+	local options = self.outfitOptions[slot]
+
+	return options ~= nil and self.outfit[slot] ~= options[1]
 end
 
 function stateMethods:getStyle()

@@ -8,6 +8,7 @@ local ui = {}
 
 local layout = require( "data.layout" )
 local strings = require( "data.strings" )
+local outfits = require( "data.outfits" )
 local screen = require( "scripts.screen" )
 
 --------------------------------------------------------------------------------------
@@ -16,6 +17,11 @@ local screen = require( "scripts.screen" )
 local palette = layout.palette
 local uiSettings = layout.ui
 local panelSettings = layout.animationPanel
+local outfitSettings = layout.outfitPanel
+
+local outfitButtonsHeight = #outfits.slots * outfitSettings.buttonHeight + ( #outfits.slots - 1 ) * outfitSettings.buttonGap
+local outfitPanelWidth = outfitSettings.buttonWidth + outfitSettings.paddingX * 2
+local outfitPanelHeight = outfitSettings.buttonsOffset - outfitSettings.buttonHeight * 0.5 + outfitButtonsHeight + outfitSettings.paddingBottom
 
 local group
 local headingText
@@ -24,6 +30,9 @@ local captionText
 local styleButton
 local panelGroup
 local buttons = {}
+
+local outfitGroup
+local outfitButtons = {}
 
 --------------------------------------------------------------------------------------
 -- Private functions
@@ -93,16 +102,29 @@ local function layoutRow( widths, gaps )
 	return positions
 end
 
--- Keeps the row on the bottom of the visible screen, which moves when an HTML5 window resizes.
--- Refreshing screen first keeps this independent of the order Runtime runs resize listeners in.
+-- Keeps the row on the bottom of the visible screen.
 local function placeRow()
-	screen.update()
-
 	local rowHeight = math.max( uiSettings.styleButtonHeight, panelSettings.height )
 	local rowY = screen.maxY - uiSettings.bottomMargin - rowHeight * 0.5
 
 	styleButton.y = rowY
 	panelGroup.y = rowY
+end
+
+-- Keeps the outfit panel on the right edge of the visible screen, at a fixed height over the floor.
+local function placeOutfitPanel()
+	local floorTop = layout.floor.y - layout.floor.height * 0.5
+
+	outfitGroup.x = screen.maxX - outfitSettings.rightMargin - outfitPanelWidth * 0.5
+	outfitGroup.y = floorTop - outfitSettings.floorOffset - outfitPanelHeight * 0.5
+end
+
+-- The visible screen moves when an HTML5 window resizes. Refreshing screen first keeps this
+-- independent of the order Runtime runs resize listeners in.
+local function placeControls()
+	screen.update()
+	placeRow()
+	placeOutfitPanel()
 end
 
 -- The panel holds the title and the animation buttons, with positions relative to the panel centre.
@@ -155,10 +177,58 @@ local function newAnimationPanel( params )
 	return panel, panelWidth
 end
 
+-- The panel holds the title and the outfit buttons top to bottom, with positions relative to the panel centre.
+local function newOutfitPanel( params )
+	local panel = display.newGroup()
+	params.parent:insert( panel )
+
+	local background = display.newRoundedRect( panel, 0, 0, outfitPanelWidth, outfitPanelHeight, panelSettings.cornerRadius )
+	setColor( background, palette.panelFill )
+	background.strokeWidth = 2
+	background:setStrokeColor( palette.panelBorder[1], palette.panelBorder[2], palette.panelBorder[3] )
+
+	local top = -outfitPanelHeight * 0.5
+
+	local title = display.newText({
+		parent = panel,
+		text = strings.outfitPanelTitle,
+		x = 0,
+		y = top + panelSettings.titleOffset,
+		font = layout.font.heading,
+		fontSize = panelSettings.titleSize,
+	})
+	setColor( title, palette.textMuted )
+
+	local y = top + outfitSettings.buttonsOffset
+
+	for i = 1, #outfits.slots do
+		local slot = outfits.slots[i]
+
+		outfitButtons[i] = newButton({
+			parent = panel,
+			id = slot,
+			x = 0,
+			y = y,
+			width = outfitSettings.buttonWidth,
+			height = outfitSettings.buttonHeight,
+			label = strings.outfitButtonLabel[slot][outfits.options[slot][1]],
+			fontSize = outfitSettings.fontSize,
+			onPress = function()
+				params.onToggle( slot )
+			end,
+		})
+
+		y = y + outfitSettings.buttonHeight + outfitSettings.buttonGap
+	end
+
+	return panel
+end
+
 --------------------------------------------------------------------------------------
 -- Public functions
 
--- params: parent, names (the animation names in button order), onSelect( name ), onStyleChange
+-- params: parent, names (the animation names in button order), onSelect( name ), onStyleChange,
+-- onOutfitToggle( slot )
 function ui.create( params )
 	local panelWidth
 
@@ -212,11 +282,16 @@ function ui.create( params )
 		onPress = params.onStyleChange,
 	})
 
-	placeRow()
-	Runtime:addEventListener( "resize", placeRow )
+	outfitGroup = newOutfitPanel({
+		parent = group,
+		onToggle = params.onOutfitToggle,
+	})
+
+	placeControls()
+	Runtime:addEventListener( "resize", placeControls )
 end
 
--- Re-reads everything shown from the demo state: the texts and the highlighted button.
+-- Re-reads everything shown from the demo state: the texts, the outfit labels and the highlighted buttons.
 function ui.refresh( state )
 	local style = state:getStyle()
 	local animation = state:getAnimation()
@@ -233,16 +308,28 @@ function ui.refresh( state )
 
 	headingText.text = strings.heading[style]
 	captionText.text = caption
+
+	-- A hidden group takes no touches, so the outfit buttons only work on the skeletal view.
+	outfitGroup.isVisible = state:isSkeletal()
+
+	for i = 1, #outfitButtons do
+		local button = outfitButtons[i]
+		local slot = button.id
+
+		button.label.text = strings.outfitButtonLabel[slot][state:getOutfitOption( slot )]
+		button:setActive( outfits.highlighted[slot] == true and state:isOutfitChanged( slot ) )
+	end
 end
 
 function ui.destroy()
-	Runtime:removeEventListener( "resize", placeRow )
+	Runtime:removeEventListener( "resize", placeControls )
 	display.remove( group )
 
 	group = nil
 	headingText = nil
 	captionText = nil
 	buttons = {}
+	outfitButtons = {}
 end
 
 --------------------------------------------------------------------------------------

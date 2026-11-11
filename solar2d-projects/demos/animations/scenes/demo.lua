@@ -1,5 +1,5 @@
 -- The demo itself: one character, shown either as a sprite sheet or as a skeletal rig,
--- with the style and the animation picked from the buttons.
+-- with the style, the animation and the skeletal outfit picked from the buttons.
 
 --------------------------------------------------------------------------------------
 -- Libraries, classes, scripts, configs, etc.
@@ -7,6 +7,7 @@
 local composer = require( "composer" )
 local layout = require( "data.layout" )
 local animations = require( "data.animations" )
+local outfits = require( "data.outfits" )
 local demoState = require( "scripts.demoState" )
 local spriteCharacter = require( "scripts.spriteCharacter" )
 local skeletalCharacter = require( "scripts.skeletalCharacter" )
@@ -60,6 +61,14 @@ local function changeStyle()
 	showActiveCharacter()
 end
 
+-- The animation keeps playing; only the skeletal character's images change.
+local function toggleOutfit( slot )
+	if state:toggleOutfit( slot ) then
+		skeletalVersion.applyOutfit()
+		ui.refresh( state )
+	end
+end
+
 --------------------------------------------------------------------------------------
 -- Scene functions
 
@@ -72,6 +81,7 @@ function scene:create( event )
 		animations = animations.names,
 		variantCount = animations.skeletal.variants,
 		plays = animations.skeletal.plays,
+		outfitOptions = outfits.options,
 	})
 
 	local floorSettings = layout.floor
@@ -105,6 +115,7 @@ function scene:create( event )
 		names = animations.names,
 		onSelect = selectAnimation,
 		onStyleChange = changeStyle,
+		onOutfitToggle = toggleOutfit,
 	})
 end
 

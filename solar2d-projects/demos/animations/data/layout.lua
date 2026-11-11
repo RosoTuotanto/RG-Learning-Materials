@@ -68,6 +68,26 @@ return {
 		cornerRadius = 12,
 	},
 
+	-- The panel of outfit buttons on the right edge of the visible screen, shown while the skeletal character shows.
+	-- Its title, corner radius and colours match the animation panel's. Offsets are measured from the panel's top edge.
+	outfitPanel = {
+		rightMargin = 25,
+
+		-- How far above the floor line's top edge the panel's bottom edge sits.
+		floorOffset = 0,
+
+		paddingX = 12,
+		paddingBottom = 18,
+
+		-- To the centre of the top button.
+		buttonsOffset = 72,
+
+		buttonWidth = 150,
+		buttonHeight = 48,
+		buttonGap = 10,
+		fontSize = 20,
+	},
+
 	palette = {
 		background = { 0.09, 0.10, 0.12 },
 		floor = { 0.22, 0.24, 0.28 },

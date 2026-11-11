@@ -10,6 +10,7 @@ local json = require( "json" )
 local animations = require( "data.animations" )
 local layout = require( "data.layout" )
 local strings = require( "data.strings" )
+local outfits = require( "data.outfits" )
 
 local frameMs = 16
 
@@ -155,7 +156,48 @@ stub.findObject( view, function( object )
 	return false
 end )
 
-check( #buttonIds == #animations.names + 1, "the only buttons are the style button and the animation buttons, got " .. table.concat( buttonIds, "," ) )
+local buttonCount = #animations.names + 1 + #outfits.slots
+check( #buttonIds == buttonCount, "the only buttons are the style, animation and outfit buttons, got " .. table.concat( buttonIds, "," ) )
+
+local outfitIds = { "shirt", "pants", "flowers" }
+
+-- The label each outfit button shows per option, written out apart from data/strings.lua.
+local expectedOutfitLabels = {
+	shirt = { yellow = "shirt: yellow", red = "shirt: red" },
+	pants = { blue = "pants: blue", grey = "pants: grey" },
+	flowers = { none = "hold nothing", held = "hold flowers" },
+}
+
+local function checkOutfitLabels( shirt, pants, isHolding, what )
+	local options = { shirt = shirt, pants = pants, flowers = isHolding and "held" or "none" }
+
+	for i = 1, #outfitIds do
+		local id = outfitIds[i]
+		local button = findButton( id )
+		local expected = expectedOutfitLabels[id][options[id]]
+
+		local shown = tostring( button and button.label.text )
+		check( shown == expected, "the " .. id .. " button reads " .. expected .. " " .. what .. ", got " .. shown )
+	end
+end
+
+for slot, labels in pairs( expectedOutfitLabels ) do
+	for option, label in pairs( labels ) do
+		check( strings.outfitButtonLabel[slot][option] == label, "the " .. slot .. " label for " .. option .. " reads " .. label )
+	end
+end
+
+checkOutfitLabels( "yellow", "blue", false, "at creation" )
+
+local outfitTitle = findText( "Customize" )
+check( outfitTitle ~= nil and strings.outfitPanelTitle == "Customize", "the outfit panel carries the Customize title" )
+
+for i = 1, #outfitIds do
+	local button = findButton( outfitIds[i] )
+	check( button ~= nil and not button.parent.isVisible, "the " .. outfitIds[i] .. " button is hidden while frame-by-frame shows" )
+end
+
+check( outfitTitle ~= nil and outfitTitle.parent == findButton( "shirt" ).parent, "the outfit title is in the outfit panel, hidden with the buttons" )
 
 --------------------------------------------------------------------------------------
 -- Swap images
@@ -306,6 +348,81 @@ for _, id in ipairs( { "idle", "walk", "jump" } ) do
 	check( stub.contentPosition( findButton( id ) ) >= panelLeft, "the " .. id .. " button is not left of the panel" )
 end
 
+local shirtButton = findButton( "shirt" )
+local pantsButton = findButton( "pants" )
+local flowersButton = findButton( "flowers" )
+local outfitPanel = shirtButton.parent
+local outfitSettings = layout.outfitPanel
+
+local outfitBackground = stub.findObject( outfitPanel, function( object )
+	return object.kind == "roundedRect" and sameColor( object.fillColor, layout.palette.panelFill )
+end )
+
+local shirtX, shirtY = stub.contentPosition( shirtButton )
+local pantsX, pantsY = stub.contentPosition( pantsButton )
+local flowersX, flowersY = stub.contentPosition( flowersButton )
+local outfitTitleX, outfitTitleY = stub.contentPosition( outfitTitle )
+local outfitPanelX, outfitPanelY = stub.contentPosition( outfitBackground )
+local outfitWidth = shirtButton.background.width
+local outfitHeight = shirtButton.background.height
+local outfitPanelWidth = outfitBackground.width
+local outfitPanelLeft = outfitPanelX - outfitPanelWidth * 0.5
+local outfitPanelRight = outfitPanelX + outfitPanelWidth * 0.5
+local outfitPanelTop = outfitPanelY - outfitBackground.height * 0.5
+local outfitPanelBottom = outfitPanelY + outfitBackground.height * 0.5
+local floorTop = floorLine.y - floorLine.height * 0.5
+local floorRight = floorLine.x + floorLine.width * 0.5
+local _, captionY = stub.contentPosition( caption )
+
+-- The skeletal canvas, centred on the character, bounds every pose the rig draws.
+local characterRight = stub.contentPosition( rig ) + manifest.canvas.width * animations.scale * 0.5
+
+check( shirtX == pantsX and pantsX == flowersX and shirtX == outfitPanelX, "the outfit buttons share one column, centred in the panel" )
+check( shirtY < pantsY and pantsY < flowersY, "the outfit buttons stack shirt, pants, flowers from the top" )
+
+local isOneGapApart = math.abs( ( pantsY - shirtY ) - ( outfitHeight + outfitSettings.buttonGap ) ) < 0.001
+check( isOneGapApart and math.abs( ( flowersY - pantsY ) - ( pantsY - shirtY ) ) < 0.001, "the outfit buttons are one gap apart" )
+
+check( outfitBackground ~= nil and outfitBackground.parent == outfitPanel, "the outfit panel has its own background" )
+check( sameColor( outfitBackground.strokeColor, layout.palette.panelBorder ), "the outfit panel shares the animation panel's border" )
+check( outfitBackground.cornerRadius == panelBackground.cornerRadius, "the outfit panel shares the animation panel's corner radius" )
+check( math.abs( outfitPanelRight + outfitSettings.rightMargin - display.contentWidth ) < 0.001, "the outfit panel keeps its margin from the right edge" )
+check( outfitPanelLeft > floorRight and outfitPanelLeft > characterRight, "the outfit panel sits right of the floor and the character" )
+check( math.abs( outfitPanelBottom + outfitSettings.floorOffset - floorTop ) < 0.001, "the outfit panel ends its floor offset above the floor line" )
+check( outfitPanelBottom < panelTop and outfitPanelTop > captionY + layout.caption.size, "the outfit panel sits between the caption and the bottom panel" )
+
+check( outfitTitle.font == panelTitle.font and outfitTitle.size == panelTitle.size, "the outfit title uses the animation panel title's font and size" )
+check( sameColor( outfitTitle.fillColor, layout.palette.textMuted ), "the outfit title uses the muted colour" )
+check( math.abs( outfitTitleX - outfitPanelX ) < 0.001, "the outfit title is centred on the panel" )
+check( outfitTitleY - outfitPanelTop == titleY - panelTop, "the outfit title sits as far below the panel top as the animation panel title" )
+check( outfitTitleY + outfitTitle.size * 0.5 < shirtY - outfitHeight * 0.5, "the outfit title sits above the outfit buttons" )
+
+local outfitButtonsLeft = shirtX - outfitWidth * 0.5
+local outfitButtonsRight = shirtX + outfitWidth * 0.5
+local isInsidePanel = outfitButtonsLeft > outfitPanelLeft and outfitButtonsRight < outfitPanelRight
+check( isInsidePanel and flowersY + outfitHeight * 0.5 < outfitPanelBottom, "the outfit buttons sit inside the panel" )
+
+local shirtBackground = shirtButton.background
+local hasLayoutSize = shirtBackground.width == outfitSettings.buttonWidth and outfitHeight == outfitSettings.buttonHeight
+check( hasLayoutSize and shirtButton.label.size == outfitSettings.fontSize, "the outfit buttons use the layout size and font size" )
+check( shirtButton.label.size < idleButton.label.size, "the outfit labels are smaller than the animation button labels" )
+
+-- The stub estimates text width from the character count, which overestimates Roboto Bold at these sizes.
+local longestLabel = 0
+
+for _, labels in pairs( strings.outfitButtonLabel ) do
+	for _, label in pairs( labels ) do
+		longestLabel = math.max( longestLabel, #label * outfitSettings.fontSize * 0.52 )
+	end
+end
+
+check( longestLabel < outfitWidth, "the longest outfit label fits inside its button" )
+check( #strings.outfitPanelTitle * outfitTitle.size * 0.52 < outfitPanelWidth, "the outfit title fits inside its panel" )
+
+local hasButtonLook = sameColor( shirtBackground.strokeColor, layout.palette.buttonBorder )
+hasButtonLook = hasButtonLook and sameColor( shirtBackground.fillColor, layout.palette.buttonFill )
+check( hasButtonLook, "the outfit buttons share the button fill and border" )
+
 local function pressButton( id )
 	local x, y = stub.contentPosition( findButton( id ) )
 
@@ -344,9 +461,16 @@ check( heading.text == strings.heading.skeletal, "the heading reads the skeletal
 check( sameColor( walkButton.background.fillColor, layout.palette.buttonActiveFill ), "the walk button stays highlighted across the style change" )
 checkStyleButtonPlain()
 
+-- Called after every frame the checks below play, when set.
+local afterFrame
+
 local function playFrames( count )
 	for _ = 1, count do
 		stub.advanceFrame( frameMs )
+
+		if afterFrame then
+			afterFrame()
+		end
 	end
 end
 
@@ -357,6 +481,10 @@ local function playUntilSwitch()
 
 	for _ = 1, maxFramesPerSwitch do
 		stub.advanceFrame( frameMs )
+
+		if afterFrame then
+			afterFrame()
+		end
 
 		if rig._currentAnimation ~= playing then
 			return ( stub.clock - startClock ) / 1000
@@ -370,7 +498,8 @@ end
 local function finishVariant( animationName, expectedVariant )
 	local playing = rig._currentAnimation
 	local plays = animations.skeletal.plays[animationName]
-	local expectedSeconds = plays * playing.frameCount / playing.fps
+	-- Less whatever the variant has already played, when frames ran before this call.
+	local expectedSeconds = plays * playing.frameCount / playing.fps - rig._elapsedTime
 	local expectedName = animationName .. "_" .. expectedVariant
 
 	local seconds = playUntilSwitch()
@@ -383,6 +512,150 @@ local function finishVariant( animationName, expectedVariant )
 	check( rig._currentFrameIndex == 0, expectedName .. " shows its first frame on the switch frame" )
 	check( caption.text == captionFor( animationName, expectedVariant ), "the caption reads variant " .. expectedVariant .. " for " .. expectedName )
 	check( stub.pendingTimerCount() == 0, "the switch to " .. expectedName .. " needs no timer" )
+end
+
+--------------------------------------------------------------------------------------
+-- Outfit
+
+local function partImage( name )
+	return animations.skeletal.path .. "/parts/" .. name .. ".png"
+end
+
+-- What each recoloured part shows per shirt and trousers, written out apart from data/outfits.lua.
+local recolours = {
+	torso = { ["red/blue"] = "torso_red_shirt", ["yellow/grey"] = "torso_grey_pants", ["red/grey"] = "torso_red_shirt_grey_pants" },
+	arm_near_upper = { ["red/blue"] = "arm_near_upper_red_shirt", ["red/grey"] = "arm_near_upper_red_shirt" },
+	arm_far_upper = { ["red/blue"] = "arm_far_upper_red_shirt", ["red/grey"] = "arm_far_upper_red_shirt" },
+	leg_near_upper = { ["yellow/grey"] = "leg_near_upper_grey_pants", ["red/grey"] = "leg_near_upper_grey_pants" },
+	leg_near_lower = { ["yellow/grey"] = "leg_near_lower_grey_pants", ["red/grey"] = "leg_near_lower_grey_pants" },
+	leg_far_upper = { ["yellow/grey"] = "leg_far_upper_grey_pants", ["red/grey"] = "leg_far_upper_grey_pants" },
+	leg_far_lower = { ["yellow/grey"] = "leg_far_lower_grey_pants", ["red/grey"] = "leg_far_lower_grey_pants" },
+}
+
+local recolouredParts = { "torso", "arm_near_upper", "arm_far_upper", "leg_near_upper", "leg_near_lower", "leg_far_upper", "leg_far_lower" }
+
+-- The image the near hand's state in the current frame names, read from the manifest.
+local function handStateImage()
+	local frame = rig._currentAnimation.frames[rig._currentFrameIndex + 1]
+
+	return partImage( "hand_near_" .. frame.partsMap.hand_near.state )
+end
+
+local function childIndex( object )
+	for i = 1, rig.numChildren do
+		if rig[i] == object then
+			return i
+		end
+	end
+
+	return nil
+end
+
+-- Every mismatch between what the rig draws and the outfit, or an empty list.
+local function outfitMismatches( shirt, pants, isHolding )
+	local mismatches = {}
+	local key = shirt .. "/" .. pants
+
+	for i = 1, #recolouredParts do
+		local partId = recolouredParts[i]
+		local expected = partImage( recolours[partId][key] or partId )
+		local shown = rig._partObjects[partId].filename
+
+		if shown ~= expected then
+			mismatches[#mismatches + 1] = partId .. " shows " .. tostring( shown ) .. ", expected " .. expected
+		end
+	end
+
+	local bouquet = rig._partObjects.bouquet
+	local hand = rig._partObjects.hand_near
+	local isBouquetShown = bouquet ~= nil and bouquet.isVisible
+
+	if isBouquetShown ~= isHolding then
+		mismatches[#mismatches + 1] = "the bouquet is " .. ( isBouquetShown and "shown" or "hidden" )
+	end
+
+	local expectedHand = isHolding and partImage( "hand_near_fist" ) or handStateImage()
+
+	if hand.filename ~= expectedHand then
+		mismatches[#mismatches + 1] = "hand_near shows " .. tostring( hand.filename ) .. ", expected " .. expectedHand
+	end
+
+	if isHolding and childIndex( bouquet ) ~= childIndex( hand ) - 1 then
+		mismatches[#mismatches + 1] = "the bouquet is not drawn directly behind hand_near"
+	end
+
+	return mismatches
+end
+
+local function checkOutfit( shirt, pants, isHolding, what )
+	local mismatches = outfitMismatches( shirt, pants, isHolding )
+	check( #mismatches == 0, what .. ": " .. table.concat( mismatches, "; " ) )
+end
+
+checkOutfit( "yellow", "blue", false, "the skeletal character starts in the drawn outfit" )
+check( rig._partObjects.bouquet == nil or not rig._partObjects.bouquet.isVisible, "the bouquet starts hidden" )
+
+-- Every combination in turn, one press apart: shirt, pants, shirt, flowers, shirt, pants, shirt.
+local outfitPresses = {
+	{ "shirt", "red", "blue", false },
+	{ "pants", "red", "grey", false },
+	{ "shirt", "yellow", "grey", false },
+	{ "flowers", "yellow", "grey", true },
+	{ "shirt", "red", "grey", true },
+	{ "pants", "red", "blue", true },
+	{ "shirt", "yellow", "blue", true },
+}
+
+for i = 1, #outfitPresses do
+	local press = outfitPresses[i]
+	local what = "after pressing " .. press[1] .. " (" .. press[2] .. " shirt, " .. press[3] .. " trousers, " .. ( press[4] and "bouquet" or "no bouquet" ) .. ")"
+
+	playFrames( 7 )
+
+	local animationBefore = rig._currentAnimation
+	local elapsedBefore = rig._elapsedTime
+	local frameBefore = rig._currentFrameIndex
+	local captionBefore = caption.text
+
+	check( pressButton( press[1] ) == findButton( press[1] ), "the " .. press[1] .. " button receives its press" )
+	checkOutfit( press[2], press[3], press[4], what )
+	checkOutfitLabels( press[2], press[3], press[4], what )
+
+	local isUnchanged = rig._currentAnimation == animationBefore and rig._elapsedTime == elapsedBefore and rig._currentFrameIndex == frameBefore
+	check( isUnchanged and rig._isPlaying, "the animation carries on without a restart " .. what )
+	check( caption.text == captionBefore and heading.text == strings.heading.skeletal, "the caption and heading stay " .. what )
+
+	local flowersFill = press[4] and layout.palette.buttonActiveFill or layout.palette.buttonFill
+	check( sameColor( flowersButton.background.fillColor, flowersFill ), "the flowers button is " .. ( press[4] and "active" or "plain" ) .. " " .. what )
+
+	local isShirtPlain = sameColor( shirtButton.background.fillColor, layout.palette.buttonFill )
+	local arePlain = isShirtPlain and sameColor( pantsButton.background.fillColor, layout.palette.buttonFill )
+	check( arePlain, "the shirt and pants buttons stay plain " .. what )
+	check( sameColor( walkButton.background.fillColor, layout.palette.buttonActiveFill ), "the walk button stays highlighted " .. what )
+	check( outfitPanel.isVisible and rig.isVisible and not sprite.isVisible, "an outfit press does not change the style " .. what )
+	check( stub.pendingTimerCount() == 0, "an outfit press needs no timer " .. what )
+end
+
+pressButton( "shirt" )
+pressButton( "pants" )
+checkOutfit( "red", "grey", true, "red shirt, grey trousers and the bouquet" )
+
+-- From here every frame drawn checks the outfit, until the bouquet is put down again.
+local outfitFramesChecked = 0
+local outfitFrameFailure
+
+function afterFrame()
+	if not rig._isPlaying then
+		return
+	end
+
+	outfitFramesChecked = outfitFramesChecked + 1
+
+	local mismatches = outfitMismatches( "red", "grey", true )
+
+	if #mismatches > 0 and not outfitFrameFailure then
+		outfitFrameFailure = rig._currentAnimation.name .. " frame " .. rig._currentFrameIndex .. ": " .. table.concat( mismatches, "; " )
+	end
 end
 
 finishVariant( "walk", 2 )
@@ -415,6 +688,17 @@ check( rig._currentAnimation.name == "idle_1", "idle plays idle_1" )
 finishVariant( "idle", 2 )
 finishVariant( "idle", 3 )
 finishVariant( "idle", 1 )
+
+afterFrame = nil
+check( outfitFramesChecked > 1000, "the outfit is checked on every frame of every variant, " .. outfitFramesChecked .. " frames" )
+check( outfitFrameFailure == nil, "the outfit and the fist hold on every frame: " .. tostring( outfitFrameFailure ) )
+check( caption.text == captionFor( "idle", 1 ), "the variant cycling and captions run as before with the outfit changed" )
+
+pressButton( "flowers" )
+checkOutfit( "red", "grey", false, "the bouquet put down again" )
+check( sameColor( flowersButton.background.fillColor, layout.palette.buttonFill ), "the flowers button is plain once the bouquet is put down" )
+playFrames( 60 )
+checkOutfit( "red", "grey", false, "the near hand follows its frame states again without the bouquet" )
 
 -- Every variant has played, so every swap image the package uses has been shown.
 local fills, fillCount = checkPackageLoads( "after every variant played" )
@@ -475,6 +759,13 @@ checkStyleButtonPlain()
 
 checkTapsIgnored( " in sprite style" )
 
+check( not outfitPanel.isVisible, "the outfit panel, its title and its buttons hide while frame-by-frame shows" )
+
+for i = 1, #outfitIds do
+	local x, y = stub.contentPosition( findButton( outfitIds[i] ) )
+	checkTapIgnored( x, y, "the hidden " .. outfitIds[i] .. " button" )
+end
+
 playFrames( 400 )
 check( stub.pendingTimerCount() == 0, "the paused skeletal character schedules no switch" )
 
@@ -482,6 +773,12 @@ check( stub.pendingTimerCount() == 0, "the paused skeletal character schedules n
 pressButton( "style" )
 check( rig._currentAnimation.name == "jump_1" and rig._elapsedTime == 0, "a style change starts the skeletal side from jump_1" )
 check( caption.text == captionFor( "jump", 1 ), "the caption reads variant 1 after a style change" )
+check( outfitPanel.isVisible, "the outfit panel shows again with the skeletal character" )
+checkOutfit( "red", "grey", false, "the outfit survives a trip to frame-by-frame and back" )
+checkOutfitLabels( "red", "grey", false, "after a trip to frame-by-frame and back" )
+check( pressButton( "flowers" ) == flowersButton, "the flowers button works again after a style change" )
+checkOutfit( "red", "grey", true, "the bouquet back in hand after a style change" )
+checkOutfitLabels( "red", "grey", true, "with the bouquet back in hand" )
 finishVariant( "jump", 2 )
 
 -- A style change partway through a variant pauses the skeletal side where it is.
@@ -508,6 +805,27 @@ check( resizedPanelY == resizedStyleY, "a resize keeps the row on one centre lin
 display.screenOriginY = 0
 display.actualContentHeight = 640
 stub.fire( "resize" )
+
+-- A 16:9 window shows 640 * 16 / 9 content units across, extending past each side edge.
+local wideWidth = 640 * 16 / 9
+display.screenOriginX = ( display.contentWidth - wideWidth ) * 0.5
+display.actualContentWidth = wideWidth
+stub.fire( "resize" )
+
+local wideShirtX, wideShirtY = stub.contentPosition( shirtButton )
+local widePanelX = stub.contentPosition( outfitBackground )
+local wideRight = display.contentWidth - display.screenOriginX
+local wideGap = wideRight - ( widePanelX + outfitPanelWidth * 0.5 )
+local _, wideRowY = stub.contentPosition( panelBackground )
+check( math.abs( wideGap - outfitSettings.rightMargin ) < 0.001, "a wider window keeps the outfit panel on the visible right edge" )
+check( wideShirtY == shirtY and wideShirtX == widePanelX, "a wider window keeps the outfit panel at its height, buttons centred" )
+local isWideClear = widePanelX - outfitPanelWidth * 0.5 > floorRight and wideRowY == panelY
+check( isWideClear, "a wider window keeps the outfit panel clear of the floor and the bottom panel" )
+
+display.screenOriginX = 0
+display.actualContentWidth = 960
+stub.fire( "resize" )
+check( stub.contentPosition( shirtButton ) == shirtX, "the outfit panel returns after the window narrows back" )
 
 local restoredX, restoredY = stub.contentPosition( styleButton )
 check( restoredX == styleX and restoredY == styleY, "the row returns after the window shrinks back" )

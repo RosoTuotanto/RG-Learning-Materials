@@ -8,6 +8,7 @@ local skeletalCharacter = {}
 
 local spriteloop = require( "libs.spriteloop" )
 local animations = require( "data.animations" )
+local outfits = require( "data.outfits" )
 
 --------------------------------------------------------------------------------------
 -- Private functions
@@ -54,6 +55,28 @@ local function holdPackageImages( skeletalPackage )
 	end
 
 	return textures
+end
+
+-- The first rule whose every named slot holds the state's option, or nil.
+local function findOutfitRule( rules, state )
+	for i = 1, #rules do
+		local rule = rules[i]
+		local isMatch = true
+
+		for slotIndex = 1, #outfits.slots do
+			local slot = outfits.slots[slotIndex]
+
+			if rule[slot] ~= nil and rule[slot] ~= state:getOutfitOption( slot ) then
+				isMatch = false
+			end
+		end
+
+		if isMatch then
+			return rule
+		end
+	end
+
+	return nil
 end
 
 --------------------------------------------------------------------------------------
@@ -104,6 +127,25 @@ function skeletalCharacter.new( params )
 	function character.hide()
 		rig:pause()
 		rig.isVisible = false
+	end
+
+	-- Shows the state's outfit on the animation already playing, without restarting it.
+	function character.applyOutfit()
+		for partId, rules in pairs( outfits.parts ) do
+			local rule = findOutfitRule( rules, state )
+
+			if rule then
+				rig:setVariant( partId, rule.variant )
+			else
+				rig:clearVariant( partId )
+			end
+		end
+
+		local skinRule = findOutfitRule( outfits.skins, state )
+		rig:setSkin( skinRule and skinRule.skin or outfits.defaultSkin )
+
+		-- The swaps redraw the current frame without interpolation; a zero step redraws it the way playback does.
+		rig:update( 0 )
 	end
 
 	-- Removing the group also removes the runtime's own enterFrame listener.
