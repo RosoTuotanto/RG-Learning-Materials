@@ -1851,13 +1851,13 @@ def sprite_previews(name: str, sheet: Sheet, feet_row: int) -> dict[str, Image.I
 
 
 def parts_sheet(rig: Rig, scale: int) -> Image.Image:
-    """Every frame-state layer of the visible parts in draw order, each labelled, with its part's pivot marked."""
+    """Every layer of every part in draw order (frame states, outfit variants and hidden parts), each labelled, with its part's pivot marked."""
     font = ImageFont.load_default(size=16)
     columns = 6
     margin = 16
     padding = 12
     label_height = 24
-    layers = [(part, layer) for part in rig.parts if not part.hidden for _, layer in sorted(part.states.items(), key=lambda item: item[0] != part.default)]
+    layers = [(part, layer) for part in rig.parts for layer in [*(layer for _, layer in sorted(part.states.items(), key=lambda item: item[0] != part.default)), *part.variants]]
     art_width = max(rig.images[layer].width for _, layer in layers) * scale
     art_height = max(rig.images[layer].height for _, layer in layers) * scale
     label_width = max(math.ceil(font.getlength(layer)) for _, layer in layers)
@@ -1951,7 +1951,7 @@ def write_assets(sheet: Sheet, rig: Rig, manifest: dict) -> None:
     print(f"wrote {MANIFEST_PATH}")
 
     save(lesson_sheet(sheet), LESSON_IMAGES / "animointi-solar2dssa-spritesheet.png")
-    save(parts_sheet(rig, LESSON_SCALE), LESSON_IMAGES / "animointi-solar2dssa-osat.png")
+    save(parts_sheet(rig, LESSON_SCALE), LESSON_IMAGES / "animointi-solar2dssa-osat-new.png")
 
 
 def load_all() -> tuple[Sheet, Rig, Body, AnimationData, dict]:
