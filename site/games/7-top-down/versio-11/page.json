@@ -1,6 +1,6 @@
 {
   "title": "Versio 11",
-  "description": "Lukitaan sisältöä pelitilan avulla: poimittujen esineiden rekisteri estää esineitä ilmestymästä takaisin, ja rantatien portti aukeaa vasta, kun vanhin on antanut tehtävän. Lukittu portti näyttää pelaajan oman repliikin.",
+  "description": "Poimitut esineet eivät enää ilmesty takaisin. Rantatien portti aukeaa vasta, kun vanhin on antanut tehtävän.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-11",
   "lessons": [
     {

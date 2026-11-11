@@ -1,6 +1,6 @@
 {
   "title": "Versio 9",
-  "description": "Lisätään tehtävät ja dialogin ehdot: tarinan $-muuttujat sekä <<set>>- ja <<if>>-komennot. Kylän vanhin lähettää pelaajan selvittämään, mitä rannalle leiriytynyt muukalainen tekee, ja pelaaja raportoi vastauksen takaisin. Uuden pelin aloitusrepliikki ohjaa pelaajan vanhimman luo.",
+  "description": "Peliin tulee tehtäviä ja dialogin ehtoja. Kylän vanhin lähettää pelaajan selvittämään, mitä rannalle leiriytynyt muukalainen tekee.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-9",
   "lessons": [
     {

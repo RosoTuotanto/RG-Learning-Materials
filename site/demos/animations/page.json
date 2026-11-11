@@ -11,5 +11,11 @@
       "text": "Skeletal-animaatiossa hahmon osat piirretään vain kerran. Niitä liikutetaan animointityökalussa keyframesta toiseen. Lopputulos ei ole yhtä viimeistelty, mutta sen tekeminen vie paljon vähemmän aikaa ja vaivaa kuin frame-by-frame-animaation. Hyvä skeletal-animaatio voi silti viedä paljon aikaa ja vaatia taitoa. Muutokset tehdään animointityökalussa kääntämällä ja siirtämällä osia, siirtämällä keyframeja ja muuttamalla ajoitusta. Mitään ei tarvitse piirtää uudelleen."
     }
   ],
+  "lessons": [
+    {
+      "title": "Animointi Solar2D:ssä",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/animointi-solar2dssa/"
+    }
+  ],
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/demos/animations"
 }

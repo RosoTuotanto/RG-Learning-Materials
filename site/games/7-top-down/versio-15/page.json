@@ -1,6 +1,6 @@
 {
   "title": "Versio 15",
-  "description": "Viimeistellään peli: tausta-NPC:t saavat yhteisen satunnaisrepliikin, NPC pomppaa ja soittaa äänen, kun sille puhutaan, rantatien mustat reunat täytetään ja kartoille lisätään Tiledissä määritettävät viestitriggerit. Kylään tulee kaksi triggeriä, jotka neuvovat pelaajaa.",
+  "description": "Pelin viimeinen versio: tausta-NPC:t saavat repliikin ja pomppaavat, kun niille puhuu. Lisäksi kylässä on kaksi kohtaa, joissa peli neuvoo pelaajaa.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-15",
   "lessons": [
     {

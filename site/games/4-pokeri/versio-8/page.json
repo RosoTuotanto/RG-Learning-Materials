@@ -1,6 +1,6 @@
 {
   "title": "Versio 8",
-  "description": "Lisätään käyttöliittymään ohjetekstit.",
+  "description": "Näytölle tulee ohjetekstit, jotka neuvovat pelaajaa.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-8",
   "lessons": [
     {

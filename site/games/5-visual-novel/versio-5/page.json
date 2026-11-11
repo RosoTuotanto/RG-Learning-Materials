@@ -1,12 +1,12 @@
 {
   "title": "Versio 5",
-  "description": "Lisätään main.lua:hun developer-tila, jolla pelin äänet voidaan vaimentaa kehityksen ja testaamisen ajaksi.",
+  "description": "Roso Noir -tarinan alku kirjoitetaan Twinessä ja tallennetaan projektiin JSON-tiedostona. Peli ei vielä käytä sitä.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-5",
   "lessons": [
     {
-      "title": "Developer-tila",
-      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/developer-tila/"
+      "title": "Tutustutaan Twinen käyttöön",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/tutustutaan-twinen-kayttoon/"
     }
   ]
 }

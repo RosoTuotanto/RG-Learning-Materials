@@ -1,6 +1,6 @@
 {
   "title": "Versio 4",
-  "description": "Arvotaan seuraavaksi painettava nappula ja toistetaan arvonta ajastimella, jolloin peliin syntyy gameplay loop.",
+  "description": "Peli arpoo ajastimella aina uuden nappulan painettavaksi. Näin peliin syntyy gameplay loop.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-4",
   "lessons": [
     {

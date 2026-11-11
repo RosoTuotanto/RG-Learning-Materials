@@ -1,6 +1,6 @@
 {
   "title": "Versio 9",
-  "description": "Toteutetaan peliin puuttuvat tarinakomennot: hahmojen näyttäminen ja piilottaminen (character) sekä tekstin poisto (del).",
+  "description": "Peli saa puuttuvat tarinakomennot: character näyttää ja piilottaa hahmot, del poistaa taustakuvan.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-9",
   "lessons": [
     {

@@ -1,5 +1,15 @@
 {
   "title": "Mitä Roso Games Templateista voisi tehdä?",
   "description": "Kahdeksantoista pientä pelattavaa esimerkkiä, kuusi jokaiselle templatelle (Visual Novel, Platformer ja Top-down). Jokainen näyttää yhden idean siitä, millaisen pelin templatesta voisi tehdä. Esimerkkejä ei ole tehty Roso Games Templateilla. Ne ovat vain yksinkertaisia ideoita, eikä pelisi tarvitse muistuttaa yhtäkään niistä. Jokainen esimerkki on omassa kansiossaan, joten voit lukea sen koodin ja kopioida siitä osia omaan peliisi.",
+  "lessons": [
+    {
+      "title": "Oman peli-idean kehittäminen",
+      "url": "https://www.rosogames.fi/lms/4-kayttajakokemus-pelisuunnittelussa/lessons/oman-peli-idean-kehittaminen-osa-1-4/"
+    },
+    {
+      "title": "Peli-idean toteutettavuus ja pitch-dokumentti",
+      "url": "https://www.rosogames.fi/lms/6-kentat-aanimaailma-ja-pelisuunnittelun-haasteet/lessons/oman-peli-idean-kehittaminen-osa-2-4/"
+    }
+  ],
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/demos/template-showcase"
 }

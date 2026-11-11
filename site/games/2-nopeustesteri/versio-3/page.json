@@ -1,6 +1,6 @@
 {
   "title": "Versio 3",
-  "description": "Eriytetään pelinappuloiden data ja niitä käsittelevä toiminnallisuus omiin osiinsa.",
+  "description": "Pelinappuloiden data ja niitä käsittelevä koodi erotetaan nyt toisistaan.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/2-nopeustesteri/versio-3",
   "lessons": [
     {

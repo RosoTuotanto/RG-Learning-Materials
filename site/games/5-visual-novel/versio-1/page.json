@@ -1,11 +1,15 @@
 {
   "title": "Versio 1",
-  "description": "Tutustutaan Solar2D:n Composer-scene-manageriin ja jaetaan peli erillisiin sceneihin, joilla on omat tehtävänsä.",
+  "description": "Solar2D:n Composerilla peli jaetaan sceneihin, joilla on omat tehtävänsä. Ensimmäinen scene, menu, tehdään Composerin scenepohjasta.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-1",
   "lessons": [
     {
       "title": "Yleisesti Composerista",
       "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/yleisesti-composerista/"
+    },
+    {
+      "title": "Lisätään Composer",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/lisataan-composer/"
     }
   ]
 }

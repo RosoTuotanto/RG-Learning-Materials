@@ -1,6 +1,6 @@
 {
   "title": "Versio 3",
-  "description": "Määritetään top-downin näppäimet ja lisätään normalisoitu kahdeksansuuntainen liike ilman painovoimaa. Hahmo flipataan liikkeen suuntaan, ja kävellessään se pomppii kahden asennon välillä. Lisätään myös ohjausvinkit ruudun alakulmaan.",
+  "description": "Hahmo liikkuu nyt kahdeksaan suuntaan, kääntyy kulkusuunnan mukaan vasemmalle tai oikealle ja pomppii kävellessään. Ruudun alakulmassa näkyvät ohjausvinkit.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-3",
   "lessons": [
     {

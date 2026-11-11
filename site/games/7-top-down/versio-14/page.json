@@ -1,6 +1,6 @@
 {
   "title": "Versio 14",
-  "description": "Lisätään äänet seikkailuun: kaksi taustamusiikkiraitaa (ulkona ja sisällä), jotka vaihtuvat kenttäsiirtymissä. Musiikki soi yhdellä kanavalla: ulkoraita jatkuu katkeamatta kylän ja rantatien välillä, ja raita vaihtuu vain, kun pelaaja menee taloon.",
+  "description": "Peliin tulee taustamusiikki: ulkona soi yksi raita ja sisällä toinen. Raita vaihtuu, kun pelaaja menee taloon.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-14",
   "lessons": [
     {

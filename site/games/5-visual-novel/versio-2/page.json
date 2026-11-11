@@ -1,12 +1,16 @@
 {
   "title": "Versio 2",
-  "description": "Otetaan käyttöön Composer-scenepohja create-, show-, hide- ja destroy-vaiheineen.",
+  "description": "Menu-scenessä on nyt gradienttitausta, pelin nimi ja logo sekä Start- ja Quit-napit.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-2",
   "lessons": [
     {
-      "title": "Lisätään Composer",
-      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/lisataan-composer/"
+      "title": "Luodaan menu scene",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/luodaan-menu-scene/"
+    },
+    {
+      "title": "Pelin nimi, logo ja napit",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/pelin-nimi-logo-ja-napit/"
     }
   ]
 }

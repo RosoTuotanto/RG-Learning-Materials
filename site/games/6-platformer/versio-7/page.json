@@ -1,6 +1,6 @@
 {
   "title": "Versio 7",
-  "description": "Lisätään ponytiled-tile-loader ja ladataan Tiledissä tehty testikenttä peliin.",
+  "description": "Peli lataa nyt Tiledissä tehdyn testikentän ponytiled-tile-loaderilla.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-7",
   "lessons": [

@@ -1,6 +1,6 @@
 {
   "title": "Versio 9",
-  "description": "Määritetään pelin vaiheet, jotka ohjaavat pelin etenemistä.",
+  "description": "Peli jaetaan vaiheisiin, jotka ohjaavat sen etenemistä.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-9",
   "lessons": [
     {

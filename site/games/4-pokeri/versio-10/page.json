@@ -1,6 +1,6 @@
 {
   "title": "Versio 10",
-  "description": "Lisätään korttien animointi.",
+  "description": "Kortit on nyt animoitu ja ne piirtyvät oikeassa järjestyksessä. Lisäksi kortit palaavat pakkaan.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-10",
   "lessons": [
     {

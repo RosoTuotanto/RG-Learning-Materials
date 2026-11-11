@@ -1,6 +1,6 @@
 {
   "title": "Versio 7",
-  "description": "Tehdään käyttöliittymästä dynaaminen, jotta se mukautuu eri ruutukokoihin ja näyttää selkeästi pelialueen rajan.",
+  "description": "Käyttöliittymä mukautuu eri ruutukokoihin ja näyttää nyt selvästi, mihin asti palloa saa raahata.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/3-fysiikkapallo/versio-7",
   "lessons": [
     {

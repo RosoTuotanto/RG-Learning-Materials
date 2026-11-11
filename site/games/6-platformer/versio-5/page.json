@@ -1,6 +1,6 @@
 {
   "title": "Versio 5",
-  "description": "Lisätään level select -scene taustoineen, otsikoineen ja back-nappeineen kenttien valintaa varten.",
+  "description": "Peliin tulee level select -scene, josta pelaaja valitsee kentän. Scenessä on tausta, otsikko ja Back-nappi.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-5",
   "lessons": [
     {

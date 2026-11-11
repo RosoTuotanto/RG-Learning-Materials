@@ -1,6 +1,6 @@
 {
   "title": "Versio 7",
-  "description": "Toteutetaan kenttien väliset siirtymät: uloskäyntisensorit, tuplasiirtymien esto, scenen uudelleenlataus ja jokaisen kulkuyhteyden oma spawn-piste. Jos nimettyä spawn-pistettä ei löydy, pelaaja jää tarkoituksella kohtaan 0,0. Kaikki kolme karttaa ovat nyt saavutettavissa.",
+  "description": "Uloskäynnit vievät nyt kartasta toiseen. Kaikkiin kolmeen karttaan pääsee.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-7",
   "lessons": [
     {

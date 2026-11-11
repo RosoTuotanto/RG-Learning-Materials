@@ -1,6 +1,6 @@
 {
   "title": "Versio 16",
-  "description": "Lisätään esc-näppäimellä avattava in-game-menu sekä pelin voitto- ja häviötilat.",
+  "description": "Esc avaa nyt in-game-menun. Peliin tulee myös voitto- ja häviötilat.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-16",
   "lessons": [

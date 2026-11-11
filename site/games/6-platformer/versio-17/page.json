@@ -1,6 +1,6 @@
 {
   "title": "Versio 17",
-  "description": "Lisätään hattu-vihollinen, joka liikkuu kentällä ja vahingoittaa pelaajaa.",
+  "description": "Kentälle tulee hattu-vihollinen, joka liikkuu ja vahingoittaa pelaajaa.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-17",
   "lessons": [

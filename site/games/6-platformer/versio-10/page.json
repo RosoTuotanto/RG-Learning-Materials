@@ -1,6 +1,6 @@
 {
   "title": "Versio 10",
-  "description": "Lisätään controls-moduuli, joka kuuntelee näppäimistön syötteitä ja välittää ne pelin logiikalle.",
+  "description": "Peliin tulee controls-moduuli, joka kuuntelee näppäimistöä ja välittää painallukset pelin logiikalle.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-10",
   "lessons": [

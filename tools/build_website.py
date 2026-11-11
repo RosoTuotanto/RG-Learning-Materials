@@ -581,7 +581,10 @@ def _version_nav(game_path: str, versions: list[dict], index: int) -> str:
 
 def version_body(title: str, data: dict, game_path: str, versions: list[dict], index: int,
                  changes: str = "") -> str:
-    parts = [f'<h1>{escape(title)}</h1>']
+    parts = [
+        f'<h1>{escape(title)}</h1>',
+        f'<p class="lead">{escape(data["description"])}</p>',
+    ]
     meta = _meta_block(data, changes)
     if meta:
         parts.append(meta)

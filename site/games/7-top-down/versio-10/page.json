@@ -1,6 +1,6 @@
 {
   "title": "Versio 10",
-  "description": "Lisätään inventory ja esineiden poimiminen: esine-extension, poiminta vuorovaikutuksella ja ruudukkomainen inventory (i-näppäin), joka alustetaan kahdella aloitusesineellä. Marlow antaa viestin omalla tarinakomennolla, ja vanhin ottaa sen vastaan.",
+  "description": "Pelaaja voi nyt poimia esineitä inventoryyn, joka aukeaa i-näppäimellä. Marlow antaa pelaajalle viestin vietäväksi vanhimmalle.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-10",
   "lessons": [
     {

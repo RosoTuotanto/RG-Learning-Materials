@@ -1,6 +1,6 @@
 {
   "title": "Versio 1",
-  "description": "Rakennetaan menu-scene taustakuvalla ja otsikolla, josta peli käynnistyy.",
+  "description": "Peli saa menu-scenen, jossa on taustakuva ja otsikko.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-1",
   "lessons": [
     {

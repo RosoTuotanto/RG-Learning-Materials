@@ -1,6 +1,6 @@
 {
   "title": "Versio 7",
-  "description": "Lisätään käyttöliittymään pakan näyttäminen.",
+  "description": "Myös pakka näkyy nyt näytöllä. Samalla pakan koodia jäsennellään selkeämmäksi.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/4-pokeri/versio-7",
   "lessons": [
     {

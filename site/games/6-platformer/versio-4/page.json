@@ -1,6 +1,6 @@
 {
   "title": "Versio 4",
-  "description": "Lisätään kehittyneempi sfx-moduuli, joka hallitsee master-, musiikki- ja sfx-äänenvoimakkuuksia sekä Solar2D:n audiokanavia.",
+  "description": "Peliin tulee sfx-moduuli, joka hallitsee Solar2D:n audiokanavia sekä master-, musiikki- ja sfx-äänenvoimakkuutta.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-4",
   "lessons": [
     {

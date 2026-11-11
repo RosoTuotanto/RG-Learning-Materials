@@ -1,6 +1,6 @@
 {
   "title": "Versio 15",
-  "description": "Lisätään kentän ulkoreunoille sensorit, jotka vievät pelaajan HP:n, jos hän putoaa kentän ulkopuolelle.",
+  "description": "Kentän ulkoreunoilla on nyt sensorit. Jos pelaaja putoaa kentän ulkopuolelle, hän menettää HP:nsä.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/6-platformer/versio-15",
   "lessons": [

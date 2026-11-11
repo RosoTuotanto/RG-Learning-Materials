@@ -1,12 +1,12 @@
 {
   "title": "Versio 4",
-  "description": "Lisätään menuun Music on/off-nappi, jolla pelaaja hallitsee taustamusiikkia ja ääniä. Nappi näkyy myös scene-siirtymien aikana.",
+  "description": "Peliin tulee developer-tila, jolla pelin äänet saa pois päältä kehityksen ja testauksen ajaksi.",
   "expectedCrash": true,
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/5-visual-novel/versio-4",
   "lessons": [
     {
-      "title": "Luodaan Music on/off-nappi",
-      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/luodaan-music-on-off-nappi/"
+      "title": "Developer-tila",
+      "url": "https://www.rosogames.fi/lms/5-narratiivi-ja-pelitaide/lessons/developer-tila/"
     }
   ]
 }

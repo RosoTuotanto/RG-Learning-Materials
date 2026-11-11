@@ -241,8 +241,9 @@ class ValidTreeTests(unittest.TestCase):
         # Source: plain "Lähdekoodi:" label, the GitHub logo image is the link.
         self.assertIn('Lähdekoodi: <a class="source-link"', version)
         self.assertIn("assets/github-lockup-white.svg", version)
-        # No description/lead paragraph on version pages.
-        self.assertNotIn('class="lead"', version)
+        # The description is the intro paragraph, above the lesson and source links.
+        self.assertIn('class="lead"', version)
+        self.assertLess(version.index('class="lead"'), version.index('class="page-meta"'))
 
     def test_split_lesson_version_lists_every_part(self):
         write_page_json(
