@@ -22,6 +22,16 @@ settings =
 	},
 
 	--
+	-- Build section
+	--
+	build =
+	{
+		-- Keeps debug symbols in the build, so stack traces show real function names and line numbers.
+		-- Read more at https://docs.coronalabs.com/guide/distribution/advancedSettings/index.html#build-control
+		neverStripDebugInfo = true,
+	},
+
+	--
 	-- Project section
 	--
 	excludeFiles =
