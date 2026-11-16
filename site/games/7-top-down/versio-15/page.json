@@ -1,6 +1,6 @@
 {
   "title": "Versio 15",
-  "description": "Pelin viimeinen versio: tausta-NPC:t saavat repliikin ja pomppaavat, kun niille puhuu. Lisäksi kylässä on kaksi kohtaa, joissa peli neuvoo pelaajaa.",
+  "description": "Pelin viimeinen versio: tausta-NPC:t saavat repliikin ja pomppaavat, kun niille puhuu. Lisäksi kylässä on kaksi kohtaa, joissa peli neuvoo pelaajaa. Ruudulla alempana oleva hahmo, esine tai kaivo piirtyy nyt ylempänä olevan eteen.",
   "source": "https://github.com/RosoTuotanto/RG-Learning-Materials/tree/main/solar2d-projects/games/7-top-down/versio-15",
   "lessons": [
     {

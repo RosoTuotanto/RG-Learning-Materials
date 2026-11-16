@@ -109,6 +109,11 @@ local function onMovementEvent( directionX, directionY )
 	if player and player.move then
 		player:move( directionX, directionY )
 	end
+
+	-- Järjestetään game-layerin objektit niin, että ruudulla alempana oleva objekti
+	-- piirtyy ylempänä olevan eteen. Keskustelun aikana tähän riviin ei päästä, joten
+	-- NPC:n pomppu ei siirrä NPC:tä pelaajan taakse.
+	map:sortLayer( "game" )
 end
 
 
@@ -311,6 +316,9 @@ function scene:create( event )
 			player:setFacing( savedState.facing.x, savedState.facing.y )
 		end
 	end
+
+	-- Järjestetään objektit heti, jotta ne piirtyvät oikein jo scenen häivytyksen aikana.
+	map:sortLayer( "game" )
 
 	-- Kytketään kamera seuraamaan pelaajaa. Kamera liikuttaa koko karttaryhmää,
 	-- joten annamme sille kartan yhtenä layerina (delta 1 = liikkuu kameran mukana).

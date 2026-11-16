@@ -39,9 +39,14 @@ Checks:
   wall right behind it, since a locked exit only shows a message.
 - in a versio-N folder: the village has the well object exactly from versio-4 and
   a locked exitToSideRoad exactly from versio-11.
+- the "above" tile layer, which hides the characters, comes after the "game"
+  layer (ponytiled draws layers in file order); tree crowns, tent tops and roofs
+  (tile_palette.OVERHEAD_TILES) sit on it and on no other layer, it holds nothing
+  else, and no hero, spawn, NPC, item, exit or zone lies under one of its tiles.
 """
 
 import json
+import math
 import os
 import re
 import sys
@@ -49,6 +54,7 @@ import sys
 from PIL import Image
 
 from build_maps import LOCKED_EXIT_FROM_VERSION, WELL_FROM_VERSION
+from tile_palette import OVERHEAD_TILES, TILE_NAMES
 
 FLIP_MASK = 0x1FFFFFFF
 
@@ -57,6 +63,12 @@ GAME_ROOT = os.path.normpath(os.path.join(HERE, ".."))
 DEFAULT_MAP_DIR = os.path.join(GAME_ROOT, "versio-15", "maps")
 
 MAP_NAMES = ("village", "house", "sideroad")
+
+ABOVE_LAYER = "above"
+TERRAIN_TILESET_NAME = "topdown"
+
+# Object types the player must see, so no tile above the characters may cover them.
+VISIBLE_TYPES = ("hero", "spawn", "npc", "item", "exit", "zone")
 
 
 class Report:
@@ -288,6 +300,54 @@ def check_locked_exit_backstop(report, name, data):
 			f"{name}: locked exit '{obj.get('name')}' has no solid wall behind it; the hero can walk off the map")
 
 
+def check_above_layer(report, name, data):
+	layer_names = [layer.get("name") for layer in data["layers"]]
+	terrain = next((tileset for tileset in data["tilesets"] if tileset.get("name") == TERRAIN_TILESET_NAME), None)
+	if terrain is None:
+		report.check(False, f"{name}: no '{TERRAIN_TILESET_NAME}' tileset")
+		return
+
+	def tile_name(gid):
+		index = (gid & FLIP_MASK) - terrain["firstgid"]
+		return TILE_NAMES[index] if 0 <= index < len(TILE_NAMES) else None
+
+	above = None
+	for layer in data["layers"]:
+		if layer.get("type") != "tilelayer" or not isinstance(layer.get("data"), list):
+			continue
+		names = {tile_name(gid) for gid in layer["data"] if gid & FLIP_MASK}
+		if layer.get("name") == ABOVE_LAYER:
+			above = layer
+			stray = sorted(str(tile) for tile in names - OVERHEAD_TILES)
+			report.check(not stray, f"{name}: '{ABOVE_LAYER}' layer holds tiles that belong below the characters: {stray}")
+		else:
+			misplaced = sorted(names & OVERHEAD_TILES)
+			report.check(not misplaced,
+				f"{name}: tile layer '{layer.get('name')}' holds tiles that belong on '{ABOVE_LAYER}': {misplaced}")
+	if above is None:
+		return
+
+	report.check("game" in layer_names and layer_names.index(ABOVE_LAYER) > layer_names.index("game"),
+		f"{name}: '{ABOVE_LAYER}' layer must come after the 'game' layer, or it draws under the characters")
+
+	tile_w = data["tilewidth"]
+	tile_h = data["tileheight"]
+	for layer in data["layers"]:
+		if layer.get("type") != "objectgroup":
+			continue
+		for obj in layer["objects"]:
+			if obj.get("type") not in VISIBLE_TYPES:
+				continue
+			left, top, width, height = object_rect(obj)
+			covered = []
+			for row in range(max(0, math.floor(top / tile_h)), min(data["height"], math.ceil((top + height) / tile_h))):
+				for col in range(max(0, math.floor(left / tile_w)), min(data["width"], math.ceil((left + width) / tile_w))):
+					if above["data"][row * data["width"] + col] & FLIP_MASK:
+						covered.append((col, row))
+			report.check(not covered,
+				f"{name}: {obj.get('type')} '{obj.get('name')}' lies under '{ABOVE_LAYER}' tiles at {covered}")
+
+
 def check_stage(report, maps, version):
 	"""Stage features that the lessons depend on: the well from WELL_FROM_VERSION,
 	the locked beach gate from LOCKED_EXIT_FROM_VERSION."""
@@ -357,6 +417,7 @@ def validate_map(report, name, data, map_dir):
 	report.check(has_physics, f"{name}: no hidden 'physics' object layer")
 	check_sensor_occlusion(report, name, data)
 	check_locked_exit_backstop(report, name, data)
+	check_above_layer(report, name, data)
 
 
 def cross_validate(report, maps):

@@ -77,31 +77,35 @@ def render_map(map_path, out_png):
 	tile_h = data["tileheight"]
 	frames = TilesetFrames(os.path.dirname(map_path), data["tilesets"])
 
+	# Layers paint in file order, as ponytiled draws them, so a tile layer after the objects covers the characters.
 	canvas = Image.new("RGBA", (width * tile_w, height * tile_h), (0, 0, 0, 255))
 	for layer in data["layers"]:
-		if layer["type"] != "tilelayer" or not layer.get("visible", True):
+		if not layer.get("visible", True):
 			continue
-		for index, gid in enumerate(layer["data"]):
-			if gid == 0:
-				continue
-			frame = frames.frame(gid)
-			if frame is None:
-				continue
-			# Tiles anchor bottom-left in ponytiled; tall tiles rise above their cell.
-			left = (index % width) * tile_w
-			top = (index // width + 1) * tile_h - frame.height
-			canvas.alpha_composite(frame, (left, top))
 
-	# Tile objects first, then every outline and label on top so none are hidden.
+		if layer["type"] == "tilelayer":
+			for index, gid in enumerate(layer["data"]):
+				if gid == 0:
+					continue
+				frame = frames.frame(gid)
+				if frame is None:
+					continue
+				# Tiles anchor bottom-left in ponytiled; tall tiles rise above their cell.
+				left = (index % width) * tile_w
+				top = (index // width + 1) * tile_h - frame.height
+				canvas.alpha_composite(frame, (left, top))
+
+		elif layer["type"] == "objectgroup":
+			for obj in layer["objects"]:
+				if "gid" not in obj:
+					continue
+				frame = frames.frame(obj["gid"])
+				if frame is not None:
+					size = (int(obj["width"]), int(obj["height"]))
+					canvas.alpha_composite(frame.resize(size, Image.NEAREST), (int(obj["x"]), int(obj["y"] - obj["height"])))
+
+	# Every outline and label goes on top so none are hidden.
 	objects = [obj for layer in data["layers"] if layer["type"] == "objectgroup" for obj in layer["objects"]]
-	for obj in objects:
-		if "gid" not in obj:
-			continue
-		frame = frames.frame(obj["gid"])
-		if frame is not None:
-			size = (int(obj["width"]), int(obj["height"]))
-			canvas.alpha_composite(frame.resize(size, Image.NEAREST), (int(obj["x"]), int(obj["y"] - obj["height"])))
-
 	draw = ImageDraw.Draw(canvas)
 	for obj in objects:
 		colour = MARKER_COLOURS.get(obj.get("type"), (255, 255, 255, 255))

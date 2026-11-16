@@ -1,6 +1,6 @@
 # Top-down-seikkailu: assetit
 
-Tässä kansiossa ovat top-down-seikkailupelin grafiikka- ja ääniassetit sekä niiden lähdemateriaalit. Grafiikka on peräisin Kenneyn ilmaisista CC0-paketeista kaivon kuvaa lukuun ottamatta, ja äänet on tehty itse.
+Tässä kansiossa ovat top-down-seikkailupelin grafiikka- ja ääniassetit sekä niiden lähdemateriaalit. Grafiikka on peräisin Kenneyn ilmaisista CC0-paketeista kaivon kuvaa ja neljää tätä peliä varten piirrettyä tileä lukuun ottamatta, ja äänet on tehty itse.
 
 ## Lisenssi
 
@@ -19,7 +19,8 @@ Molemmat paketit ladattiin 2026-08-16 suoraan Kenneyn sivustolta.
 
 Pelissä käytettävät, valmiiksi 2x-suurennetut tiedostot kaivon kuvaa lukuun ottamatta on tuotettu skripteillä kansiossa `../tools/`. Suurennos on tehty nearest neighbour -skaalauksella (`Image.NEAREST`), jotta pikselit pysyvät terävinä. Skriptit voi ajaa uudelleen, jos valintoja muuttaa.
 
-- `tileset-topdown.png`: Tiled-karttojen tileset, johon on valittu RPG-paketista vain pelin tarvitsemat tilet (maasto, luonto, aidat, talojen osat ja sisätilat) 2x-suurennettuina. Valinta ja tilejen nimet ovat tiedostossa `../tools/tile_palette.py`.
+- `tileset-topdown.png`: Tiled-karttojen tileset, johon on valittu RPG-paketista vain pelin tarvitsemat tilet (maasto, luonto, aidat, talojen osat ja sisätilat) 2x-suurennettuina. Kolmessatoista tilessä on kaksi Kenneyn tileä päällekkäin: aukion reunakivi polun päällä, aidan päätytolppa ja ne katon tilet, joissa pääty tai räystäs on katon tai seinän päällä. Käytössä olevista tileistä viimeisinä ovat kansion `custom-tiles/` tilet. Valinta ja tilejen nimet ovat tiedostossa `../tools/tile_palette.py`.
+- `custom-tiles/`: neljä tätä peliä varten piirrettyä 16 x 16 pikselin tileä eli kaksi ruukkukasvia ja kahdesta puolikkaasta koostuva ovimatto. Ne on piirretty Kenneyn tilesetin tyyliin. `build_assets.py` lisää ne tilesetin loppuun.
 - `well.png`: ylhäältä kuvattu pyöreä kaivo, 80 x 80 pikseliä. Tein kaivon kuvan käyttäen Kenneyn tilesettiä mallina. Koko ei ole 32:n monikerta, koska kaivo näyttää, että kartan objekti voi olla minkä kokoinen kuva tahansa eikä vain yksi tile.
 - `characters.png`: pelin hahmojen image sheet, kuusi framea yhdellä rivillä.
 - `items.png`: pelin esineiden image sheet, viisi framea yhdellä rivillä.
@@ -46,15 +47,15 @@ Hahmojen spritesheetillä tilejä on 648, mutta suuri osa on tyhjiä; varsinaisi
 
 | Parametri | Arvo |
 |-----------|------|
-| Kuvakoko | 360 x 396 |
+| Kuvakoko | 360 x 684 |
 | tilewidth | 32 |
 | tileheight | 32 |
 | margin | 2 |
 | spacing | 4 |
 | columns | 10 |
-| tilecount | 110 |
+| tilecount | 190 |
 
-Tilejä on käytössä 109, ja viimeinen paikka on läpinäkyvä. Tilet on extrudattu: jokaisen tilen ympärillä on 2 pikselin reunus, joka toistaa tilen omaa uloimman rivin ja sarakkeen väriä. Siksi sheetin reunalla on 2 pikselin marginaali ja tilejen välissä 4 pikselin väli. Extrudointi estää saumat: kun kamera liikkuu ja tile piirretään puolikkaan pikselin kohdalle, näytönohjain voi lukea väriä hieman tilen ulkopuolelta, ja läpinäkyvästä välistä luettu väri näkyisi ohuena viivana tilejen välissä. `tools/build_assets.py` tarkistaa rakennuksen jälkeen, että jokainen reunuspikseli vastaa tilen reunaa ja että ponytiledin kaavalla lasketut tilet osuvat täsmälleen tilejen sisältöön.
+Tilejä on käytössä 181. Viimeiset 9 paikkaa ovat läpinäkyviä. Tilet on extrudattu: jokaisen tilen ympärillä on 2 pikselin reunus, joka toistaa tilen omaa uloimman rivin ja sarakkeen väriä. Siksi sheetin reunalla on 2 pikselin marginaali ja tilejen välissä 4 pikselin väli. Extrudointi estää saumat: kun kamera liikkuu ja tile piirretään puolikkaan pikselin kohdalle, näytönohjain voi lukea väriä hieman tilen ulkopuolelta, ja läpinäkyvästä välistä luettu väri näkyisi ohuena viivana tilejen välissä. `tools/build_assets.py` tarkistaa rakennuksen jälkeen, että jokainen reunuspikseli vastaa tilen reunaa ja että ponytiledin kaavalla lasketut tilet osuvat täsmälleen tilejen sisältöön.
 
 Kartat viedään Tiledistä JSON-muodossa ja CSV-muotoisilla layereilla, koska ponytiled ei osaa lukea base64- tai pakattuja layereita. Tilesetit upotetaan karttoihin, jotta jokainen kartta on yksi itsenäinen tiedosto, jota myös projektin tarkistustyökalut lukevat suoraan.
 

@@ -6,8 +6,9 @@ margin. At the game's 960x640 content area the tiles are used at 2x (32 px
 effective), so we pre-upscale with nearest-neighbour once here rather than
 scaling at runtime, which keeps pixels crisp.
 
-The map tileset holds only the curated tiles listed in tile_palette.py. Every
-tile is edge-extruded: a 2 px border repeats its outermost pixels, so texture
+The map tileset holds only the curated tiles listed in tile_palette.py: tiles
+picked from the Kenney sheet, tiles composed of two of them, then the tiles
+drawn for this game. Every tile is edge-extruded: a 2 px border repeats its outermost pixels, so texture
 sampling just outside a frame while the camera scrolls hits the tile's own
 colour instead of a transparent gutter (no seam lines between tiles).
 
@@ -24,11 +25,15 @@ import sys
 from PIL import Image
 
 from tile_palette import (
+	COMPOSITE_PARTS,
+	COMPOSITE_TILES,
+	CUSTOM_TILES,
 	PALETTE,
 	SOURCE_MARGIN,
 	SOURCE_SPACING,
 	SOURCE_TILE_SIZE,
 	TILE_MARGIN,
+	TILE_NAMES,
 	TILE_SIZE,
 	TILE_SPACING,
 	TILESET_COLUMNS,
@@ -52,6 +57,8 @@ RPG_SHEET = os.path.join(
 CHAR_SHEET = os.path.join(
 	ASSETS, "kenney_roguelike-characters", "Spritesheet", "roguelikeChar_transparent.png"
 )
+
+CUSTOM_TILE_DIR = os.path.join(ASSETS, "custom-tiles")
 
 TILESET_NAME = "tileset-topdown.png"
 
@@ -124,7 +131,7 @@ def extrude(tile):
 
 
 def tileset_rows():
-	return math.ceil(len(PALETTE) / TILESET_COLUMNS)
+	return math.ceil(len(TILE_NAMES) / TILESET_COLUMNS)
 
 
 def tile_origin(index):
@@ -136,9 +143,23 @@ def tile_origin(index):
 	)
 
 
+def custom_tile(name):
+	tile = Image.open(os.path.join(CUSTOM_TILE_DIR, name + ".png")).convert("RGBA")
+	assert tile.size == (TILE, TILE), f"{name}: custom tile is {tile.size}, expected {TILE} x {TILE}"
+	return tile
+
+
 def palette_tiles(sheet):
-	"""Upscaled content of every palette tile, in palette order."""
-	return [upscale(sheet.crop(cell_box(col, row))) for _name, col, row in PALETTE]
+	"""Upscaled content of every tileset tile, in TILE_NAMES order."""
+	tiles = {name: sheet.crop(cell_box(col, row)) for name, col, row in PALETTE + COMPOSITE_PARTS}
+
+	for name, under, over in COMPOSITE_TILES:
+		tiles[name] = Image.alpha_composite(tiles[under], tiles[over])
+
+	for name in CUSTOM_TILES:
+		tiles[name] = custom_tile(name)
+
+	return [upscale(tiles[name]) for name in TILE_NAMES]
 
 
 def build_tileset():
@@ -155,7 +176,7 @@ def build_tileset():
 	print(
 		f"{TILESET_NAME} {out.width}x{out.height} tilewidth={TILE_SIZE} tileheight={TILE_SIZE} "
 		f"margin={TILE_MARGIN} spacing={TILE_SPACING} columns={TILESET_COLUMNS} "
-		f"tilecount={TILESET_COLUMNS * rows} (used {len(PALETTE)}, rest transparent)"
+		f"tilecount={TILESET_COLUMNS * rows} (used {len(TILE_NAMES)}, rest transparent)"
 	)
 
 
@@ -177,7 +198,7 @@ def check_tileset():
 
 	pixels = built.load()
 	for index, tile in enumerate(palette_tiles(sheet)):
-		name = PALETTE[index][0]
+		name = TILE_NAMES[index]
 		x0, y0 = tile_origin(index)
 
 		frame = built.crop((x0, y0, x0 + TILE_SIZE, y0 + TILE_SIZE))
@@ -228,7 +249,7 @@ def run_check():
 		for problem in problems:
 			print(f"CHECK FAILED: {problem}")
 		return 1
-	print(f"check ok: {len(PALETTE)} tiles, frames and extruded gutters verified")
+	print(f"check ok: {len(TILE_NAMES)} tiles, frames and extruded gutters verified")
 	return 0
 
 
