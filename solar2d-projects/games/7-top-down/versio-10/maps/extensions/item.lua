@@ -1,6 +1,6 @@
 -- Esineen extension ponytiled-kartalle.
 -- ponytiled kutsuu M.new-funktiota jokaiselle kartan "item"-tyyppiselle objektille
--- ja korvaa alkuperäisen Tiled-objektin tämän funktion palauttamalla esineellä.
+-- ja antaa funktiolle Tiled-objektin. Extension poistaa sen ja rakentaa tilalle esineen.
 
 local inventory = require( "scripts.inventory" )
 

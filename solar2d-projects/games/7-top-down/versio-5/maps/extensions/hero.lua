@@ -1,6 +1,6 @@
 -- Pelaajahahmon extension ponytiled-kartalle.
 -- ponytiled kutsuu M.new-funktiota jokaiselle kartan "hero"-tyyppiselle objektille
--- ja korvaa alkuperäisen Tiled-objektin tämän funktion palauttamalla objektilla.
+-- ja antaa funktiolle Tiled-objektin. Extension poistaa sen ja rakentaa tilalle pelaajahahmon.
 
 local M = {}
 

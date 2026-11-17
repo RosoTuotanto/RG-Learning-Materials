@@ -1,6 +1,6 @@
 -- NPC-hahmon extension ponytiled-kartalle.
 -- ponytiled kutsuu M.new-funktiota jokaiselle kartan "npc"-tyyppiselle objektille
--- ja korvaa alkuperäisen Tiled-objektin tämän funktion palauttamalla hahmolla.
+-- ja antaa funktiolle Tiled-objektin. Extension poistaa sen ja rakentaa tilalle NPC-hahmon.
 
 local M = {}
 

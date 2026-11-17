@@ -36,8 +36,8 @@ function loadsave.load( filename )
 	local contents = file:read( "*a" )
 	io.close( file )
 
-	-- Suojataan dekoodaus pcall:lla. Jos tiedosto on vioittunut, pcall nappaa virheen
-	-- eikä peli kaadu, vaan palautetaan nil ja kerrotaan asiasta.
+	-- Vioittuneesta tiedostosta json.decode palauttaa nil, joten tarkistetaan tuloksen tyyppi.
+	-- pcall on lisäsuoja odottamattomia virheitä vastaan. Peli ei kaadu, vaan palautetaan nil.
 	local success, data = pcall( json.decode, contents )
 	if not success or type( data ) ~= "table" then
 		print( "WARNING: failed to read save file \"" .. filename .. "\"." )
