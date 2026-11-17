@@ -31,7 +31,7 @@ end
 
 ------------------------------------------------------------
 
--- Siirrytään heti pelin menu näkymään.
+-- Siirrytään heti pelin menu-sceneen.
 local composer = require( "composer" )
 -- Käytetään automaattista muistinhallintaa scenejen välillä.
 composer.recycleOnSceneChange = true

@@ -36,7 +36,7 @@ local enemy = {}
 local function menuClose()
 	display.remove( ui.menuGroup )
 	ui.menuGroup = nil
-	composer.hideOverlay( 0 )
+	composer.hideOverlay()
 
 	physics.start()
 	transition.resumeAll()

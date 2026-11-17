@@ -201,7 +201,7 @@ function player.new( parent, reference )
 				self.nearbyTrampoline = nil
 			end
 
-			self:applyLinearImpulse( 0, jumpForce*multiplier, player.x, player.y )
+			self:applyLinearImpulse( 0, jumpForce*multiplier, self.x, self.y )
 			isJumping = true
 
 		else

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="18" tileheight="18" infinite="0" nextlayerid="5" nextobjectid="1">
- <editorsettings>
-  <export target="test.json" format="json"/>
- </editorsettings>
  <tileset firstgid="1" name="Level" tilewidth="18" tileheight="18" tilecount="64" columns="8">
   <image source="images/tiles/tilemap.png" width="144" height="144"/>
  </tileset>

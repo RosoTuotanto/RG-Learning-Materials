@@ -17,7 +17,7 @@ local buttonPlay
 local buttonOptions
 local buttonExit
 
--- Function to handle button events
+-- Listener-funktio menun napeille.
 local function menuListener( event )
 	if event.phase == "ended" then
 		local id = event.target.id

@@ -104,7 +104,7 @@ local function playSFX( dx, distance )
 	elseif dx > 0 then
 		whichSFX = sfx.left
 
-	-- Jos dx on positiivinen, niin vihollinen on pelaajan oikealla puolella.
+	-- Jos dx on negatiivinen, niin vihollinen on pelaajan oikealla puolella.
 	else
 		whichSFX = sfx.right
 
@@ -168,7 +168,7 @@ local function lookForPlayer( character, player )
 		end
 	end
 
-	-- Draw debug line based on line of sight
+	-- Piirretään näköyhteyttä kuvaava debug-viiva.
 	if aiConfig.debugMode then
 		character.visionLine = display.newLine(character._parent, character.x, character.y, player.x, player.y)
 		character.visionLine.strokeWidth = aiConfig.debugLineWidth
@@ -292,7 +292,7 @@ function enemy.new( parent, reference )
 		display.remove(self.visionLine)
 	end
 
-	-- Jos hahmo tuhotaan, niin varmistetaan, että sen tekoäly on
+	-- Jos hahmo tuhotaan, niin varmistetaan, että sen tekoäly on pysäytetty.
 	function character:finalize()
 		self:stopAI( true )
 	end

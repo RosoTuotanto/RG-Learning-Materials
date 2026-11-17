@@ -56,7 +56,7 @@ function player.new( parent, reference )
 	local jumpCount = 0
 	local maxJumpCount = 2
 	local jumpForce = -1.2
-	local isJumping = false
+	local isJumping = false -- Otetaan käyttöön vasta oppitunnilla, jossa hiotaan projektia.
 
 	function newPlayer:move( vx, vy )
 		-- Hahmo oli aiemmin paikallaan ja nyt se alkaa liikkua.
@@ -133,7 +133,7 @@ function player.new( parent, reference )
 				self.nearbyTrampoline = nil
 			end
 
-			self:applyLinearImpulse( 0, jumpForce*multiplier, player.x, player.y )
+			self:applyLinearImpulse( 0, jumpForce*multiplier, self.x, self.y )
 			isJumping = true
 
 		else
