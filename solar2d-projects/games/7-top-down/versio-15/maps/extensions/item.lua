@@ -16,6 +16,8 @@ function M.new( instance )
 	local frame = instance.frame or 1
 	local itemId = instance.item
 	local name = instance.name
+	-- ignoreInteract on tosi, kun esine ei saa olla vuorovaikutuksen kohde.
+	local ignoreInteract = instance.ignoreInteract
 
 	-- Poistetaan Tiledin luoma placeholder-objekti. Rakennamme tilalle oman.
 	display.remove( instance )
@@ -44,8 +46,10 @@ function M.new( instance )
 	item.type = "item"
 	-- Säilytetään esineen tunnus reppua varten.
 	item.item = itemId
+	-- Säilytetään myös ignoreInteract, jotta kohteen haku ohittaa esineen.
+	item.ignoreInteract = ignoreInteract
 
-	-- Staattinen fysiikkaobjekti antaa vuorovaikutussäteelle (rayCast) kohteen, johon osua.
+	-- Staattinen fysiikkaobjekti estää pelaajaa kävelemästä esineen läpi.
 	physics.addBody( item, "static", { radius = 12 } )
 
 	-- Poimitaan esine reppuun ja poistetaan se kartalta. Rekisteriin merkitään,

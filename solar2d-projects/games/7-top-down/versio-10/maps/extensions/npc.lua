@@ -15,6 +15,8 @@ function M.new( instance )
 	local frame = instance.frame or 1
 	local name = instance.name
 	local node = instance.node
+	-- ignoreInteract on tosi, kun hahmo ei saa olla vuorovaikutuksen kohde.
+	local ignoreInteract = instance.ignoreInteract
 
 	-- Poistetaan Tiledin luoma placeholder-objekti. Rakennamme tilalle oman.
 	display.remove( instance )
@@ -38,9 +40,10 @@ function M.new( instance )
 	npc.type = "npc"
 	-- Säilytetään dialogin passagen nimi, jotta puhekoodi löytää sen myöhemmin.
 	npc.node = node
+	-- Säilytetään myös ignoreInteract, jotta kohteen haku ohittaa hahmon.
+	npc.ignoreInteract = ignoreInteract
 
-	-- Staattinen fysiikkaobjekti estää pelaajaa kävelemästä hahmon läpi ja antaa
-	-- vuorovaikutussäteelle (rayCast) kohteen, johon osua.
+	-- Staattinen fysiikkaobjekti estää pelaajaa kävelemästä hahmon läpi.
 	physics.addBody( npc, "static", { radius = 14 } )
 
 	return npc

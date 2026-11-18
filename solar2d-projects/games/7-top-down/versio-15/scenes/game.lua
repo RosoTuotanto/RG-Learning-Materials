@@ -36,6 +36,9 @@ local music = require( "scripts.music" )
 -- hints näyttää pelin ohjausvinkit ruudun alakulmassa.
 local hints = require( "scripts.hints" )
 
+-- gameConfig sisältää pelin säätöarvot, kuten vuorovaikutuksen ulottuvuuden.
+local gameConfig = require( "data.gameConfig" )
+
 -- Luodaan uusi scene-objekti.
 local scene = composer.newScene()
 
@@ -79,13 +82,12 @@ end
 local function saveGame()
 	if not player then return end
 
-	local facingX, facingY = player:getFacing()
-
 	loadsave.save( {
 		mapName = currentMapName,
 		playerX = player.x,
 		playerY = player.y,
-		facing = { x = facingX, y = facingY },
+		facingX = player.facingX,
+		facingY = player.facingY,
 		inventory = inventory.slots,
 		collected = inventory.getCollected(),
 		zones = zone.getTriggered(),
@@ -117,8 +119,53 @@ local function onMovementEvent( directionX, directionY )
 end
 
 
--- controls kutsuu tätä, kun pelaaja painaa tai vapauttaa toimintonäppäimen.
--- Ammutaan lyhyt säde hahmon katsomissuuntaan ja katsotaan, osuuko se NPC-hahmoon.
+-- Etsii pelaajahahmon edestä kohteen, jonka kanssa hahmo voi olla vuorovaikutuksessa.
+-- candidates on lista kohteiksi kelpaavista objekteista. Palauttaa lähimmän kohteen tai nil.
+local function findInteractTarget( hero, candidates )
+	-- Objektien contentBounds-reunat ovat ruudun koordinaatteja, joten hahmon keskipiste muunnetaan
+	-- layerin koordinaateista samoihin koordinaatteihin.
+	local heroX, heroY = hero.parent:localToContent( hero.x, hero.y )
+
+	-- Vuorovaikutuspiste on hahmon edessä katsomissuuntaan, joten kohde löytyy vain hahmon edestä.
+	local pointX = heroX + hero.facingX * gameConfig.interactReach
+	local pointY = heroY + hero.facingY * gameConfig.interactReach
+
+	local target
+
+	-- math.huge on suurempi kuin mikään etäisyys, joten ensimmäinen ulottuvilla oleva objekti on aina lähempänä.
+	local targetDistance = math.huge
+
+	for i = 1, #candidates do
+		local candidate = candidates[i]
+
+		-- Objekti, jonka ignoreInteract on tosi, ei ole koskaan kohde. Arvon voi antaa Tiledissä tai koodissa.
+		if not candidate.ignoreInteract then
+			-- Etäisyys mitataan objektin lähimpään reunaan eikä keskipisteeseen, jotta myös iso
+			-- objekti löytyy, kun hahmo on sen vieressä. contentBounds kertoo objektin reunat sen
+			-- koosta ja ankkurista riippumatta. Kun piste rajataan reunojen väliin, saadaan
+			-- objektin lähin piste. Jos piste on objektin sisällä, etäisyys on nolla.
+			local bounds = candidate.contentBounds
+			local nearestX = math.min( math.max( pointX, bounds.xMin ), bounds.xMax )
+			local nearestY = math.min( math.max( pointY, bounds.yMin ), bounds.yMax )
+			local distanceX = nearestX - pointX
+			local distanceY = nearestY - pointY
+			local distance = math.sqrt( distanceX * distanceX + distanceY * distanceY )
+
+			-- Objekti kelpaa, kun sen reuna on enintään interactRadius-etäisyydellä pisteestä.
+			-- Lähempänä oleva kohde korvaa aiemmin löydetyn.
+			if distance <= gameConfig.interactRadius and distance < targetDistance then
+				target = candidate
+				targetDistance = distance
+			end
+		end
+	end
+
+	return target
+end
+
+
+-- controls kutsuu tätä, kun pelaaja painaa tai vapauttaa näppäimen, johon on liitetty toiminto.
+-- Interact-näppäin etsii pelaajahahmon edestä kohteen ja toimii kohteen tyypin mukaan.
 local function onKeyEvent( action, phase )
 	-- Kun keskustelu on auki, kaikki näppäimet ohjataan dialogille.
 	if dialogue.isOpen() then
@@ -156,17 +203,11 @@ local function onKeyEvent( action, phase )
 	end
 
 	if action == "interact" and phase == "down" then
-		if player and player.getFacing then
-			local facingX, facingY = player:getFacing()
-
-			-- Säde alkaa hahmon keskeltä. rayCast ei ilmoita objektia, jonka sisältä
-			-- säde lähtee, joten hahmo ei osu itseensä.
-			local reach = 34
-			local toX = player.x + facingX * reach
-			local toY = player.y + facingY * reach
-
-			local hits = physics.rayCast( player.x, player.y, toX, toY, "closest" )
-			local target = hits and hits[1] and hits[1].object
+		if player then
+			-- listTypes antaa kartan objektit, joiden kanssa pelaajahahmo voi olla vuorovaikutuksessa:
+			-- NPC-hahmot ja esineet. Uusi kohdetyyppi lisätään tähän kutsuun, ja sille kirjoitetaan
+			-- alle oma haaransa. Poimittu esine on jo poistettu kartalta, joten se ei ole listassa.
+			local target = findInteractTarget( player, map:listTypes( "npc", "item" ) )
 
 			if target and target.type == "npc" then
 				-- Pysäytetään hahmo ja annetaan palaute: NPC pomppaa ja soitetaan
@@ -189,7 +230,7 @@ local function onKeyEvent( action, phase )
 					sfx.playInteract()
 				end
 			else
-				print( "There is nobody ahead to talk to." )
+				print( "There is nothing nearby to interact with." )
 			end
 		end
 	end
@@ -308,13 +349,15 @@ function scene:create( event )
 		end
 	end
 
-	-- Continue: asetetaan pelaaja tallennettuun sijaintiin ja katsomissuuntaan. Tämä
+	-- Continue: asetetaan pelaaja tallennettuun sijaintiin. Tämä
 	-- ohittaa spawn-pisteen, koska palaamme täsmälleen tallennushetken tilanteeseen.
 	if player and savedState then
 		player.x, player.y = savedState.playerX, savedState.playerY
-		if savedState.facing then
-			player:setFacing( savedState.facing.x, savedState.facing.y )
-		end
+
+		-- Vanhemmassa tallennuksessa ei ole katsomissuuntaa. Silloin hahmo katsoo alas
+		-- kuten uudessa pelissä.
+		player.facingX = savedState.facingX or player.facingX
+		player.facingY = savedState.facingY or player.facingY
 	end
 
 	-- Järjestetään objektit heti, jotta ne piirtyvät oikein jo scenen häivytyksen aikana.

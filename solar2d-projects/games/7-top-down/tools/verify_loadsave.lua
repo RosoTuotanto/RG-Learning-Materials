@@ -146,7 +146,7 @@ check( loadsave.load( "poisto.json" ) ~= nil, "delete: tallennus on olemassa enn
 loadsave.delete( "poisto.json" )
 check( loadsave.load( "poisto.json" ) == nil, "delete poistaa tallennuksen" )
 
--- 5. Pelitilan (versio 13) tallennusmuoto säilyy round tripissä ennallaan.
+-- 5. Pelitilan (versio 13) tallennusmuoto säilyy round tripissä ennallaan, myös pelaajan katsomissuunta.
 -- inventory on repun ruudukko, joka tallennetaan merkkijonoavaimin (game.lua kirjoittaa
 -- inventory.slots-taulun suoraan). Paikka 2 jätetään tyhjäksi, jotta harva paikkataulu
 -- (aukko paikkojen 1 ja 3 välissä) testataan: merkkijonoavaimin se säilyy JSON-round tripissä ehjänä.
@@ -154,7 +154,8 @@ local gameState = {
 	mapName = "sideroad",
 	playerX = 128.5,
 	playerY = 640,
-	facing = { x = 0, y = 1 },
+	facingX = -1,
+	facingY = 0,
 	inventory = { ["1"] = "note", ["3"] = "book_red" },
 	collected = { village = { book = true }, sideroad = { bottle = true } },
 }

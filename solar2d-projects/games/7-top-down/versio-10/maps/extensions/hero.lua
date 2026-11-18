@@ -6,24 +6,6 @@ local M = {}
 
 --------------------------------------------------------------------------------------
 
--- Päätellään katsomissuunta liikevektorista. Suunta lukitaan neljään pääilmansuuntaan
--- (oikea, vasen, alas, ylös), jotta vuorovaikutussäde osoittaa aina selkeästi yhteen
--- suuntaan. Jos hahmo ei liiku, säilytetään edellinen katsomissuunta.
-local function resolveFacing( directionX, directionY, currentFacingX, currentFacingY )
-	if directionX == 0 and directionY == 0 then
-		return currentFacingX, currentFacingY
-	end
-
-	-- Valitaan akseli, jolla liike on voimakkaampaa. Tasapelissä valitaan vaakasuunta.
-	if math.abs( directionX ) >= math.abs( directionY ) then
-		return directionX < 0 and -1 or 1, 0
-	else
-		return 0, directionY < 0 and -1 or 1
-	end
-end
-
---------------------------------------------------------------------------------------
-
 function M.new( instance )
 	-- Otetaan talteen sijainti ja layer, joihin ponytiled asetti hahmon.
 	local parentLayer = instance.parent
@@ -53,7 +35,8 @@ function M.new( instance )
 	hero.type = "hero"
 	hero.speed = 160
 
-	-- Katsomissuunta vuorovaikutusta varten. Aloitetaan katse alaspäin.
+	-- Suunta, johon hahmo katsoo: viimeisin liikesuunta, joka säilyy, kun hahmo pysähtyy.
+	-- Vuorovaikutus etsii kohdetta tästä suunnasta. Aluksi hahmo katsoo alas.
 	hero.facingX = 0
 	hero.facingY = 1
 
@@ -68,21 +51,21 @@ function M.new( instance )
 	function hero:move( directionX, directionY )
 		self.directionX = directionX
 		self.directionY = directionY
-		-- Päivitetään katsomissuunta vain, kun hahmo tosiasiassa liikkuu.
-		self.facingX, self.facingY = resolveFacing( directionX, directionY, self.facingX, self.facingY )
+
+		-- Paikallaan oleminen (0, 0) ei muuta katsomissuuntaa.
+		if directionX ~= 0 or directionY ~= 0 then
+			self.facingX = directionX
+			self.facingY = directionY
+		end
+
 		self:setLinearVelocity( directionX * self.speed, directionY * self.speed )
 	end
 
-	-- Pysäytetään hahmo kokonaan. Katsomissuunta säilyy ennallaan.
+	-- Pysäytetään hahmo kokonaan.
 	function hero:stop()
 		self.directionX = 0
 		self.directionY = 0
 		self:setLinearVelocity( 0, 0 )
-	end
-
-	-- Palautetaan hahmon nykyinen katsomissuunta yksikkövektorina.
-	function hero:getFacing()
-		return self.facingX, self.facingY
 	end
 
 	-- Kevyt liikkeen tuntu ilman kävelyanimaation frameja: hahmo kääntyy
@@ -97,11 +80,11 @@ function M.new( instance )
 		local directionY = hero.directionY or 0
 		local isMoving = directionX ~= 0 or directionY ~= 0
 
-		-- Flipataan hahmo katsomaan liikkeen suuntaan vaakatasossa.
-		-- Pystysuora liike säilyttää edellisen katsomissuunnan.
-		if directionX < 0 then
+		-- Flipataan hahmo katsomaan vasemmalle tai oikealle katsomissuunnan mukaan.
+		-- Pystysuorassa liikkeessä facingX on 0, joten sprite pysyy edellisessä käännössään.
+		if hero.facingX < 0 then
 			hero.sprite.xScale = -1
-		elseif directionX > 0 then
+		elseif hero.facingX > 0 then
 			hero.sprite.xScale = 1
 		end
 

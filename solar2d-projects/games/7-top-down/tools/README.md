@@ -105,7 +105,7 @@ lua5.1 verify_camera.lua                        # oletus: versio 15
 
 ## verify_loadsave.lua
 
-Ajaa pelin oikean `scripts/loadsave.lua`-moduulin pienillä Solar2D-stubeilla (muistinvarainen tiedostojärjestelmä sekä yksinkertainen JSON-stubi) ja tarkistaa tallennuksen kestävyyden: tallennuksen ja latauksen round tripin, puuttuvan tiedoston (palautuu nil), rikkinäisen tiedoston (palautuu nil kaatumatta), poiston (`loadsave.delete`) sekä pelitilan versio 13 -tallennusmuodon round tripin. Moduuli on sama versioissa 12-15.
+Ajaa pelin oikean `scripts/loadsave.lua`-moduulin pienillä Solar2D-stubeilla (muistinvarainen tiedostojärjestelmä sekä yksinkertainen JSON-stubi) ja tarkistaa tallennuksen kestävyyden: tallennuksen ja latauksen round tripin, puuttuvan tiedoston (palautuu nil), rikkinäisen tiedoston (palautuu nil kaatumatta), poiston (`loadsave.delete`) sekä pelitilan versio 13 -tallennusmuodon round tripin pelaajan katsomissuunta mukaan lukien. Moduuli on sama versioissa 12-15.
 
 ```
 lua5.1 verify_loadsave.lua                          # oletus: versio 15
@@ -127,6 +127,15 @@ Ajaa pelin oikean `maps/extensions/zone.lua`-extensionin mockatuilla törmäysta
 
 ```
 lua5.1 verify_zone.lua                          # oletus: versio 15
+```
+
+## verify_interact.lua
+
+Ajaa pelin oikean `scenes/game.lua`-scenen sekä `maps/extensions/`-kansion hero-, npc- ja item-extensionit pienillä Solar2D-stubeilla ja tarkistaa interact-näppäimen kohdehaun (`findInteractTarget`). Kartta rakennetaan jokaiseen testiin uudelleen scenen omalla `scene:create`-funktiolla, hahmoa käännetään controlsin liikekutsulla ja kohde luetaan siitä, mitä näppäinkäsittelijä tekee (tuloste, keskustelu tai poiminta). Kamera on siirtänyt karttaa jokaisessa testissä. Testit tarkistavat aloitussuunnan (alas) ja suunnan säilymisen pysähtyessä, koskettavan kohteen neljässä suunnassa ja viistosti, ettei kohde takana tai sivulla löydy, 10 pikselin raon, edessä olevan kohteen voiton takana olevasta lähemmästä, 200x200-objektin koko reunalta, ankkuroidun ja näkymättömän objektin, `ignoreInteract`-ominaisuuden Tiledistä ja koodista, lähemmän reunan voiton kahden kohteen välillä, tyhjän haun sekä esineet NPC-hahmojen rinnalla. Keksitty kolmas objektityyppi annetaan haulle suoraan, ja versiosta 13 alkaen tarkistetaan katsomissuunnan tallennus ja lataus, myös vanhasta tallennuksesta ilman suuntaa. Lopuksi skripti tulostaa mitatut rajat `data/gameConfig.lua`-tiedoston arvoilla. Toinen argumentti on versionumero. Kohdehaku on olemassa versiosta 5 alkaen.
+
+```
+lua5.1 verify_interact.lua                          # oletus: versio 15
+lua5.1 verify_interact.lua ../versio-5 5
 ```
 
 Kaikki Lua-testiskriptit palauttavat nollasta poikkeavan paluuarvon, jos jokin assert epäonnistuu. Ne ajetaan tästä kansiosta; `luacheck versio-N` ajetaan pelin kansiosta, jotta `.luacheckrc` on käytössä.
