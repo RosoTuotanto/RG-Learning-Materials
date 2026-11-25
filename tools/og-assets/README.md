@@ -2,14 +2,9 @@
 
 Input assets for `tools/generate_og_images.py` (the Open Graph share-image generator). These are not served; the generated images land in `site/assets/og-images/`.
 
-## Files
-
-- `Archivo.ttf` - Archivo variable font (weight + width axes), used by Pillow for the heading and slug text. Downloaded from the Google Fonts repository (`cdn.jsdelivr.net/gh/google/fonts@main/ofl/archivo/Archivo[wdth,wght].ttf`) on 2026-08-31. Licensed under the SIL Open Font License 1.1 (`LICENSE-Archivo.txt`).
-- `logo.png` - the Roso Games logo, rasterized once from `site/assets/roso-games-hero.svg` (transparent background, 3x the 520px viewBox). Pillow cannot render SVG, so this raster is committed as a generator input. The source SVG is frozen; regenerate only if it ever changes.
-
 ## Regenerating logo.png
 
-Requires the container's global Playwright (Chromium). From the repo root:
+`logo.png` is `site/assets/roso-games-hero.svg` rasterized, because Pillow cannot render SVG. Regenerate it only if the SVG changes. This needs Playwright with Chromium. From the repo root:
 
 ```bash
 NODE_PATH=$(npm root -g) node - <<'JS'

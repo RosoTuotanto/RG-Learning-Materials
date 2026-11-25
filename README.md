@@ -12,14 +12,30 @@ Kaikki opetuspelit ja demot ovat pelattavissa selaimessa [oppimateriaalien verkk
 
 ## Rakenne
 
-- [`homework/`](homework/README.md) sisältää kurssien 2-6 kotitehtävät ja niiden vastaukset. Jokaisella kurssilla on oma kansionsa, jonka `README.md` listaa kurssin kaikki kotitehtävät, ja jonka `answers/`-kansiosta löytyvät tehtäväkohtaiset vastaukset ja pohdinnat. Kurssin 2 kansiossa on lisäksi `exercises/`, jossa ovat oppituntien pienten harjoitusten vastaukset.
-- `solar2d-projects/` sisältää kaikki Solar2D-projektit. [`solar2d-projects/games/`](solar2d-projects/games/README.md) sisältää kurssien opetuspelien lähdekoodit ja assetit eri kehitysvaiheissa: yksi kansio per peli ja yksi `versio-N`-alikansio per vaihe, jonka sisällä on kokonainen, Solar2D Simulatorissa ajettava projektikansio. Lisäksi jokaisella pelillä on `versio-kotitehtavat`-kansio, jossa on kurssin ohjelmointikotitehtävien malliratkaisu. Kurssin 6 top-down-seikkailulla (`7-top-down`) ei ole `versio-kotitehtavat`-kansiota, ja sen yhteiset assetit ja tuotantoskriptit ovat pelin kansion `extra-assets/`- ja `tools/`-alikansioissa. `solar2d-projects/demos/` sisältää demojen lähdekoodit (tällä hetkellä `feedback`, `animations`, `ball-prototype` ja `template-showcase`).
-- [`solar2d-projects/assignments/`](solar2d-projects/assignments/README.md) sisältää tehtäväpohjat eli lähes valmiit Solar2D-projektit, joita täydennetään oppituntien tehtävissä. Ne eivät ole demoja eikä niitä näytetä verkkosivustolla.
-- `site/` sisältää selaimessa pelattavan katselusivuston, joka julkaistaan sellaisenaan GitHub Pagesin kautta. Kukin pelin versio (`site/games/<peli>/versio-N/` ja `site/games/<peli>/versio-kotitehtavat/`) sekä demo (`site/demos/<demo>/`) saa oman sivunsa; sivun vieressä on `page.json`-sisältötiedosto ja `app/`-alikansio, johon kyseistä sivua vastaava HTML5-build pudotetaan. Pelin versioiden sivuilla on lisäksi `muutokset/`-alisivu, joka näyttää, mitä versiossa muuttui edelliseen versioon verrattuna. Sivusto generoidaan ja buildit viimeistellään ajamalla repositorion juuresta `python tools/build_website.py`.
-- `tools/` sisältää sivuston generaattorin, sen testit ja repositorion tarkistustyökalut (katso [`site/README.md`](site/README.md)).
+- [`homework/`](homework/README.md): kurssien 2-6 kotitehtävät ja niiden vastaukset sekä kurssin 2 oppituntien pienten harjoitusten vastaukset.
+- [`solar2d-projects/games/`](solar2d-projects/games/README.md): opetuspelit. Jokainen `versio-N`-kansio on kokonainen projekti, jonka voit avata Solar2D Simulatorissa siinä tilassa, jossa peli on oppitunnin lopussa. `versio-kotitehtavat` sisältää kurssin ohjelmointikotitehtävien malliratkaisun.
+- `solar2d-projects/demos/`: demojen lähdekoodit.
+- [`solar2d-projects/assignments/`](solar2d-projects/assignments/README.md): tehtäväpohjat eli lähes valmiit Solar2D-projektit, joita täydennetään oppituntien tehtävissä.
 
 ## Kotitehtävät ja vastaukset
 
 Kotitehtävät ovat vapaaehtoisia ja ne tehdään itsenäisesti omalla ajalla. Niitä ei käydä läpi viikkotapaamisissa, vaan vastaukset ovat täällä avoimesti itseopiskelua ja oman työn tarkistamista varten. Tee tehtävä ensin itse ja vertaa vasta sitten omaa ratkaisuasi vastaukseen: niin opit eniten.
 
 Sisältö täydentyy vaiheittain. Puuttuva mallivastaus tai pelin kehitysvaihe ei ole virhe, vaan se lisätään myöhemmin.
+
+## Muut Roso Games -materiaalit
+
+- [RG-Game-Templates](https://github.com/RosoTuotanto/RG-Game-Templates): Roso Games Templatejen lähdekoodit. Jokaisen ryhmän peli tehdään jonkin näistä templateista pohjalle.
+- [RG-Project-Template](https://github.com/RosoTuotanto/RG-Project-Template): pohja, josta jokaisen ryhmän GitHub-repositorio luodaan.
+
+## Tekijä
+
+[© 2025-2026 Eetu Rantanen](https://www.erantanen.com)
+
+Oppimateriaalit on tehty Roso-tuotannon Roso Games -projekteja varten.
+
+## Lisenssi
+
+[MIT](LICENSE)
+
+Roso Gamesia varten kirjoitetun koodin tekijänoikeudet kuuluvat Eetu Rantaselle ja Roso Gamesille (Kukunori ry). Muualta tulevat kirjastot, fontit, grafiikat ja äänet sekä niiden lisenssit on lueteltu [NOTICE.md](NOTICE.md)-tiedostossa. Roso Games -ryhmien omat peliprojektit ja niiden koodi eivät ole MIT-lisensoituja: ne kuuluvat ryhmille ja ovat vain ryhmien omassa käytössä.

@@ -27,4 +27,4 @@ Kansiot `versio-0` ... `versio-15` ovat pelin kehitysvaiheet oppituntien etenemi
 | 14 | Äänet seikkailussa |
 | 15 | Pelin viimeistely (myös kurssin viimeisen oppitunnin valmis peli) |
 
-Pelin kaikki grafiikka ja äänet ovat mukana jo `versio-0`-kansiossa, joten oppitunnit lisäävät peliin vain koodia sekä kartta- ja tarinamuutoksia. `extra-assets`-kansio sisältää pelin grafiikan ja äänien lähdemateriaalit ja niiden lisenssitiedot (katso `extra-assets/README.md`). `tools`-kansio sisältää skriptit, joilla tileset, kartat ja muut assetit tuotetaan, sekä pelin logiikkaa tarkistavat testiskriptit (katso `tools/README.md`).
+Pelin kaikki grafiikka ja äänet ovat mukana jo `versio-0`-kansiossa, joten oppitunnit lisäävät peliin vain koodia sekä kartta- ja tarinamuutoksia. Tilesetin Tiled-parametrit ja image sheetien framet löydät tiedostosta `extra-assets/README.md`.

@@ -1,0 +1,7 @@
+License
+
+well.png and four tiles of tileset-topdown.png (two potted plants and the two halves of a doormat) were made for the Roso Games learning materials by Eetu Rantanen. They are released under CC0 1.0 Universal: you may copy, change and use them for any purpose, without asking and without giving credit.
+
+The other tiles of tileset-topdown.png, characters.png and items.png are from the Roguelike/RPG pack and the Roguelike Characters pack by Kenney (www.kenney.nl), which are also released under CC0.
+
+https://creativecommons.org/publicdomain/zero/1.0/

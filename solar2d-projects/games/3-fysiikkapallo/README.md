@@ -8,4 +8,4 @@ Kansiot `versio-0` ... `versio-7` ovat pelin kehitysvaiheet oppituntien etenemis
 
 `versio-kotitehtavat` sisältää ohjelmointikotitehtävien malliratkaisun, joka on toteutettu pelin viimeisimmän version päälle.
 
-`extra-assets`-kansio sisältää pelin ääniefektit, jotka lisätään peliin vasta kurssin aikana (katso `extra-assets/README.md`).
+Myöhemmällä oppitunnilla peliin lisättävät ääniefektit ovat `extra-assets`-kansiossa (katso `extra-assets/README.md`).

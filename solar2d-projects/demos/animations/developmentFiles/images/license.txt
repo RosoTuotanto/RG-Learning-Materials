@@ -1,0 +1,5 @@
+License
+
+The files in this folder and its subfolders were made for the Roso Games learning materials by Eetu Rantanen. They are released under CC0 1.0 Universal: you may copy, change and use them for any purpose, without asking and without giving credit.
+
+https://creativecommons.org/publicdomain/zero/1.0/
